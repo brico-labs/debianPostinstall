@@ -1,0 +1,13 @@
+---
+title: Debian Post-install
+author:
+- Sergio Alvariño <salvari@gmail.com>
+tags: [Pandoc, Documentación, makefile, git]
+date: julio-2016
+lang: es-ES
+abstract: |
+  Instalación de Debian
+  
+  Solo para referencia rápida y personal.
+---
+
