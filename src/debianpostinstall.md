@@ -13,19 +13,197 @@ abstract: |
 
 # Introducción
 
+Mi portátil es un ordenador Acer 5755G con las siguientes
+características:
+
+* Core i5 2430M 2.4GHz
+
+* NVIDIA Geforce GT 540M
+
+* 8Gb RAM
+
+* 750Gb HD
+
+La gráfica es una Nvidia Optimus, es decir una tarjeta híbrida que
+funciona perfectamente en Ubuntu 14.04 usando Bumblebee.
+
+Para hacer la actualización del sistema opté por desinstalar el dvd y
+montar en su lugar un disco SSD en un Caddie para Acer. La instalación
+fué muy fácil, y aunque el portátil arranca perfectamente de
+cualquiera de los dos discos opté por instalar el SSD en la bahía del
+HD original y pasar el HD al caddie.
+
 Comentar los problemas con calentamiento en Ubuntu
 
 Comentar la creación de usb bootable
-Instalación
 
-Aptitude
-
+Lo primero fue la instalación del Bumblebee
 
 firmware-linux-nonfree
 Bumblebee-nvidia primus
 
-Instalado pandoc descargando paquete FALTA DESCARGAR PLANTILLAS
 
+
+Instalación
+
+# Gestión de paquetes
+
+Habilitar backports
+
+Aptitude
+
+Synaptic
+
+Instalado git desde aptitude
+
+Instalado terminator
+
+
+# Documentos
+
+## Pandoc
+
+Instalado el Pandoc descargando paquete _deb_ desde la página web del Pandoc.
+
+Descargamos las plantillas desde [el
+repo](https://github.com/jgm/pandoc-templates) ejecutando los
+siguientes comandos:
+
+~~~~{bash}
+cd ~/.pandoc
+git clone https://github.com/jgm/pandoc-templates templates
+~~~~
+
+## Vanilla LaTeX
+
+El LaTeX de Debian está un poquillo anticuado, si se quiere usar una
+versión reciente hay que aplicar [este truco](http://tex.stackexchange.com/questions/1092/how-to-install-vanilla-texlive-on-debian-or-ubuntu).
+
+~~~~{bash}
+cd ~
+mkdir tmp
+cd tmp
+wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+tar xzf install-tl-unx.tar.gz
+cd install-tl-xxxxxx                     
+~~~~
+
+La parte xxxxxx varía en función del estado de la última versión de
+LaTeX disponible.
+
+~~~~{bash}
+sudo ./install-tl
+~~~~
+
+Una vez lanzada la instalación podemos desmarcar las opciones que
+instalan la documentación y las fuentes. Eso nos obligará a consultar
+la documentación _on line_ pero ahorrará practicamente el 50% del
+espacio necesario. En mi caso sin _doc_ ni _src_ ocupa 2,3Gb
+
+~~~~{bash}
+mkdir -p /opt
+sudo ln -s /usr/local/texlive/2016/bin/* /opt/texbin
+~~~~
+
+Por último para acabar la instalación añadimos __/opt/texbin__ al _path_.
+
+### Falsificando paquetes
+
+Ya tenemos el __texlive__ instalado, ahora necesitamos que el gestor
+de paquetes sepa que ya lo tenemos instalado.
+
+~~~~{bash}
+sudo apt-get install equivs --no-install-recommends
+mkdir -p /tmp/tl-equivs && cd /tmp/tl-equivs
+equivs-control texlive-local
+~~~~
+
+Para hacerlo más fácil podemos descargarnos un fichero ya preparado,
+ejecutando:
+
+~~~~{bash}
+wget http://www.tug.org/texlive/files/debian-equivs-2015-ex.txt
+/bin/cp -f debian-equivs-2015-ex.txt texlive-local
+~~~~
+
+Editamos la versión y
+
+~~~~{bash}
+equivs-build texlive-local
+sudo dpkg -i texlive-local_2015-1_all.deb
+~~~~
+
+Todo listo, ahora podemos instalar cualquier paquete que dependa de
+texlive
+
+### Fuentes
+
+Para dejar disponibles las fuentes opentype y truetype que vienen con
+texlive para el resto de aplicaciones:
+
+~~~~{bash}
+sudo cp $(kpsewhich -var-value TEXMFSYSVAR)/fonts/conf/texlive-fontconfig.conf /etc/fonts/conf.d/09-texlive.conf
+gksudo gedit /etc/fonts/conf.d/09-texlive.conf
+~~~~
+
+Borramos la linea:
+
+~~~~{xml}
+<dir>/usr/local/texlive/2016/texmf-dist/fonts/type1</dir>
+~~~~
+
+Y ejecutamos:
+
+~~~~{bash}
+sudo fc-cache -fsv
+~~~~
+
+### Actualizaciones
+
+Para actualizar nuestro latex a la última versión de todos los paquetes:
+
+~~~~{bash}
+sudo /opt/texbin/tlmgr update --self
+sudo /opt/texbin/tlmgr update --all
+~~~~
+
+También podemos lanzar el instalador gráfico con:
+
+~~~~{bash}
+sudo /opt/texbin/tlmgr --gui
+~~~~
+
+Para usar el instalador gráfico hay que instalar previamente:
+
+~~~~{bash}
+sudo apt-get install perl-tk --no-install-recommends
+~~~~
+
+### Lanzador para el actualizador de texlive
+
+~~~~{bash}
+mkdir -p ~/.local/share/applications
+/bin/rm ~/.local/share/applications/tlmgr.desktop
+cat > ~/.local/share/applications/tlmgr.desktop << EOF
+[Desktop Entry]
+Version=1.0
+Name=TeX Live Manager
+Comment=Manage TeX Live packages
+GenericName=Package Manager
+Exec=gksu -d -S -D "TeX Live Manager" '/opt/texbin/tlmgr -gui'
+Terminal=false
+Type=Application
+Icon=system-software-update
+EOF
+~~~~
+
+Ojo que hay que dejar instalado el gksu:
+
+~~~~{bash}
+sudo aptitude install gksu
+~~~~
+
+## Emacs
 Instalado emacs desde aptitude emacs
 
 Instalado chrome añadiendo fuentes a aptitude, hay que borrar el fichero que sobra. chrome
@@ -36,7 +214,6 @@ Instalado keepass2
 
 Instalado terminator
 
-Instalado git desde aptitude
 
 configurado d-apt, instalados todos los programas incluidos
 
