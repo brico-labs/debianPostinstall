@@ -23,20 +23,118 @@ Lo primero fue la instalación del Bumblebee
 
 firmware-linux-nonfree Bumblebee-nvidia primus
 
-Instalación
-
 Gestión de paquetes
 ===================
 
-Habilitar backports
+Instalamos *aptitude* y *synaptic*
 
-Aptitude
+``` {bash}
+sudo apt-get install aptitude
+sudo apt-get install synaptic
+```
 
-Synaptic
+Cambiamos las opciones de *aptitude* para que **no instale** los paquetes recomendados.
+
+Quitamos el cdrom de los sources.list
+-------------------------------------
+
+Editamos el fichero */etc/apt/sources.list* y comentamos las lineas del cdrom.
+
+Habilitamos los backports y multimedia
+--------------------------------------
+
+Backports:
+
+``` {bash}
+sudo cat > /etc/apt/sources.list.d/backports.list << EOF
+# backports
+deb http://ftp.debian.org/debian/ jessie-backports main contrib non-free 
+EOF
+```
+
+Multimedia:
+
+``` {bash}
+sudo cat >> /etc/apt/sources.list.d/multimedia.list << EOF
+# multimedia
+deb http://www.deb-multimedia.org/ jessie main non-free 
+EOF
+
+sudo apt-get -y --allow-unauthenticated install --reinstall deb-multimedia-keyring
+```
+
+Y actualizamos
+
+``` {bash}
+sudo aptitude update
+```
+
+Instalación de varios paquetes sueltos
+======================================
 
 Instalado git desde aptitude
 
 Instalado terminator
+
+Instalado chrome añadiendo fuentes a aptitude, hay que borrar el fichero que sobra. chrome
+
+Instalado keepass2
+
+instalado gksu
+
+gimp ya estaba instalado, instalado el gimp data-extra
+
+Diskmanager:
+
+    sudo apt-get install ntfs-3g disk-manager
+
+Gnucash:
+
+    sudo apt-get -t jessie-backports install gnucash
+
+Herramientas *sync*:
+
+    sudo apt-get install rsync grsync
+
+Codecs
+------
+
+``` {bash}
+sudo apt-get install libav-tools
+
+sudo apt-get install faad gstreamer0.10-ffmpeg gstreamer0.10-x \
+gstreamer0.10-fluendo-mp3 gstreamer0.10-plugins-base \
+gstreamer0.10-plugins-good gstreamer0.10-plugins-bad \
+gstreamer0.10-plugins-ugly ffmpeg lame twolame vorbis-tools \
+libquicktime2 libfaac0 libmp3lame0 libxine2-all-plugins libdvdread4 \
+libdvdnav4 libmad0 sox libxvidcore4 libstdc++5
+
+sudo apt-get install w64codecs
+```
+
+Compresores et al
+-----------------
+
+``` {bash}
+sudo apt-get install rar unrar zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar
+```
+
+Gráficos
+--------
+
+``` {bash}
+apt-cache policy inkscape
+apt-get -t jessie-backports install inkscape
+
+apt-get install librecad
+
+apt-get -t jessie-backports install freecad
+```
+
+Calibre
+-------
+
+calibre
 
 Documentos
 ==========
@@ -168,7 +266,7 @@ Icon=system-software-update
 EOF
 ```
 
-Ojo que hay que dejar instalado el gksu:
+Ojo que hay que dejar instalado el gksu (aunque debería estar de antes si sigues este doc)
 
 ``` {bash}
 sudo aptitude install gksu
@@ -177,72 +275,177 @@ sudo aptitude install gksu
 Emacs
 -----
 
-Instalado emacs desde aptitude emacs
+Instalado emacs desde los repos:
 
-Instalado chrome añadiendo fuentes a aptitude, hay que borrar el fichero que sobra. chrome
+``` {bash}
+sudo aptitude install emacs
+```
 
-comentado cdrom en sources.list
+Configuramos el fichero *.emacs* definimos algunas preferencias, algunas funciones útiles y añadimos orígenes extra de paquetes.
 
-Instalado keepass2
+``` {lisp}
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(column-number-mode t)
+ '(show-paren-mode t))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Mensch" :foundry "bitstream" :slant normal :weight normal :height 128 :width normal)))))
+;;------------------------------------------------------------
+;; Some settings
+(setq inhibit-startup-message t) ; Eliminate FSF startup msg
+(setq frame-title-format "%b")   ; Put filename in titlebar
+;(setq visible-bell t)            ; Flash instead of beep
+(set-scroll-bar-mode 'right)     ; Scrollbar placement
+(show-paren-mode t)              ; Blinking cursor shows matching parentheses
+(setq column-number-mode t)  ; Show column number of current cursor location
+(mouse-wheel-mode t)         ; wheel-mouse support
 
-Instalado terminator
+(setq fill-column 78)
+(setq auto-fill-mode t)          ; Set line width to 78 columns...
 
-instalado gksu
+(setq-default indent-tabs-mode nil)       ; Insert spaces instead of tabs
+(global-set-key "\r" 'newline-and-indent) ; turn autoindenting on
+;(set-default 'truncate-lines t)           ; Truncate lines for all buffers
+(require 'iso-transl)
 
-instalado fish
+;;------------------------------------------------------------
+;; Some useful key definitions
+(define-key global-map [M-S-down-mouse-3] 'imenu)
+(global-set-key [C-tab] 'hippie-expand)                    ; expand
+(global-set-key [C-kp-subtract] 'undo)                     ; [Undo] 
+(global-set-key [C-kp-multiply] 'goto-line)                ; goto line
+(global-set-key [C-kp-add] 'toggle-truncate-lines)         ; goto line
+(global-set-key [C-kp-divide] 'delete-trailing-whitespace) ; delete trailing whitespace
+(global-set-key [C-kp-decimal] 'completion-at-point)       ; complete at point
+(global-set-key [C-M-prior] 'next-buffer)                  ; next-buffer
+(global-set-key [C-M-next] 'previous-buffer)               ; previous-buffer
+
+;;------------------------------------------------------------
+;; Set encoding
+(prefer-coding-system 'utf-8)
+(setq coding-system-for-read 'utf-8)
+(setq coding-system-for-write 'utf-8)
+
+;;------------------------------------------------------------
+;; Maximum colors
+(cond ((fboundp 'global-font-lock-mode)  ; Turn on font-lock (syntax highlighting)
+       (global-font-lock-mode t)               ; in all modes that support it
+       (setq font-lock-maximum-decoration t))) ; Maximum colors
+
+;;------------------------------------------------------------
+;; Use % to match various kinds of brackets...
+;; See: http://www.lifl.fr/~hodique/uploads/Perso/patches.el
+
+(global-set-key "%" 'match-paren)               ; % key match parents
+(defun match-paren (arg)
+  "Go to the matching paren if on a paren; otherwise insert %."
+  (interactive "p")
+  (let ((prev-char (char-to-string (preceding-char)))
+        (next-char (char-to-string (following-char))))
+    (cond ((string-match "[[{(<]" next-char) (forward-sexp 1))
+          ((string-match "[\]})>]" prev-char) (backward-sexp 1))
+          (t (self-insert-command (or arg 1))))))
+
+;;------------------------------------------------------------
+;; The wonderful bubble-buffer
+(defvar LIMIT 1)
+(defvar time 0)
+(defvar mylist nil)
+
+(defun time-now ()
+   (car (cdr (current-time))))
+
+(defun bubble-buffer ()
+   (interactive)
+   (if (or (> (- (time-now) time) LIMIT) (null mylist))
+       (progn (setq mylist (copy-alist (buffer-list)))
+          (delq (get-buffer " *Minibuf-0*") mylist)
+          (delq (get-buffer " *Minibuf-1*") mylist)))
+   (bury-buffer (car mylist))
+   (setq mylist (cdr mylist))
+   (setq newtop (car mylist))
+   (switch-to-buffer (car mylist))
+   (setq rest (cdr (copy-alist mylist)))
+   (while rest
+     (bury-buffer (car rest))
+     (setq rest (cdr rest)))
+   (setq time (time-now))) 
+
+(global-set-key [f8] 'bubble-buffer)    ; win-tab switch the buffer
+
+(defun geosoft-kill-buffer ()
+   ;; Kill default buffer without the extra emacs questions
+   (interactive)
+   (kill-buffer (buffer-name))
+   (set-name)) 
+(global-set-key [C-delete] 'geosoft-kill-buffer) 
+
+;;----------------------------------------------------------------------
+;; MELPA and others
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
+  (add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/") t)
+  )
+```
+
+Instalamos los paquetes *markdown-mode* y *pandoc-mode* desde el menú de gestión de paquetes de **emacs**.
+
+Desarrollo sw
+=============
+
+Paquetes esenciales
+-------------------
+
+    sudo apt-get install build-essential checkinstall make automake cmake autoconf git git-core dpkg wget
+
+Open Java
+---------
+
+    apt-get install openjdk-7-jre icedtea-7-plugin
+
+D-apt e instalación de programas
+================================
 
 configurado d-apt, instalados todos los programas incluidos
 
-gimp ya estaba instalado, instalado el gimp data-extra
+``` {bash}
+sudo wget http://master.dl.sourceforge.net/project/d-apt/files/d-apt.list -O /etc/apt/sources.list.d/d-apt.list
+sudo apt-get update && sudo apt-get -y --allow-unauthenticated install --reinstall d-apt-keyring && sudo apt-get update
+```
 
-solventado deb multimedia sudo apt-get -y --allow-unauthenticated install --reinstall deb-multimedia-keyring
-
-sudo apt-get install libav-tools
-
-sudo apt-get install faad gstreamer0.10-ffmpeg gstreamer0.10-x gstreamer0.10-fluendo-mp3 gstreamer0.10-plugins-base gstreamer0.10-plugins-good gstreamer0.10-plugins-bad gstreamer0.10-plugins-ugly ffmpeg lame twolame vorbis-tools libquicktime2 libfaac0 libmp3lame0 libxine2-all-plugins libdvdread4 libdvdnav4 libmad0 sox libxvidcore4 libstdc++5
-
-sudo apt-get install w64codecs
-
-sudo apt-get install rar unrar zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar
-
-Desarrollo sw
-
-sudo apt-get install build-essential checkinstall make automake cmake autoconf git git-core dpkg wget Instalado apt-d y todos los programas asociados
-
-Open Java
-
-apt-get install openjdk-7-jre icedtea-7-plugin
-
-compresores
-
-Disk manager apt-get install ntfs-3g disk-manager
-
-apt-get -t jessie-backports install gnucash
-
-apt-get install rsync grsync
+Instalamos todos los programas asociados.
 
 Docker
 ======
 
-apt-get install apt-transport-https ca-certificates apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D edit docker.list with deb https://apt.dockerproject.org/repo debian-jessie main
+``` {bash}
+apt-get install apt-transport-https ca-certificates
+apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+edit docker.list with
+deb https://apt.dockerproject.org/repo debian-jessie main
 
-apt-cache policy docker-engine -- comprobamos que todo está bien.
+apt-cache policy docker-engine   -- comprobamos que todo está bien.
 
-sudo apt-get install docker-engine -- da un error en makedev por udev activo
+
+sudo apt-get install docker-engine   -- da un error en makedev por udev activo
+
 
 sudo service docker start
 
-sudo docker run hello-world - todo bien
+sudo docker run hello-world   - todo bien
 
 sudo gpasswd -a salvari docker
-
-apt-cache policy inkscape apt-get -t jessie-backports install inkscape
-
-apt-get install librecad
-
-apt-get -t jessie-backports install freecad
-
-Instalado calibre
+```
 
 Shells alternativos: zsh y fish
 ===============================
