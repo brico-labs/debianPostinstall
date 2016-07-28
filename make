@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export SRCFILE="ubuntuTrustyPostInstall"
+export SRCFILE="debianpostinstall"
 export SRCDIR="src/"
 export OUTDIR="out/"
 
