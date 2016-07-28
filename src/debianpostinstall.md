@@ -214,6 +214,11 @@ Instalado keepass2
 
 Instalado terminator
 
+instalado gksu
+
+instalado fish
+
+
 
 configurado d-apt, instalados todos los programas incluidos
 
@@ -281,22 +286,113 @@ apt-get -t jessie-backports install freecad
 
 Instalado calibre
 
+# Shells alternativos: zsh y fish
 
-TODO
+## fish
 
-zsh
-krita
-mypaint
+Instalamos __fish__ desde aptitude con:
+
+~~~~{bash}
+sudo aptitude install fish
+~~~~
+
+## zsh
+
+Igualmente instalamos __zsh__:
+
+~~~~{bash}
+sudo aptitude install zsh
+~~~~
+
+Arrancamos __zsh__ desde un terminal:
+
+~~~~{bash}
+/usr/bin/zsh
+~~~~
+
+Vamos a usar antigen así que nos lo clonamos en _~/apps/
+
+~~~~{bash}
+cd ~/apps
+git clone https://github.com/zsh-users/antigen
+~~~~
+
+Y editamos el fichero _~/.zshrc_ para que contenga:
+
+~~~~
+source ~/apps/antigen/antigen.zsh
+
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle git
+antigen bundle command-not-found
+antigen bundle autojump
+antigen bundle extract
+# antigen bundle heroku
+# antigen bundle pip
+# antigen bundle lein
+
+
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# git
+antigen bundle arialdomartini/oh-my-git
+antigen theme arialdomartini/oh-my-git-themes oppa-lana-style
+
+# autosuggestions
+antigen bundle tarruda/zsh-autosuggestions
+
+#antigen theme agnoster
+
+# Tell antigen that you're done.
+antigen apply
+
+# append to path
+path+=('/home/salvari/apps/julia/current/bin/')
+# prepend
+# path=('/home/salvari/bin/' $path)
+# export PATH
+~~~~
+
+Antigen ya se encarga de descargar todo lo que queramos utilizar en
+zsh.
+
+Nos queda arreglar las fuentes para que funcione correctamente la
+linea de estado en los repos de git. Necesitamos una fuente _Awesome_
+
+# Cambiar las opciones de idioma
 
 Cambiar lenguaje
 /etc/locale-gen
 sudo locale-gen
 
+
+# Cuentas online abiertas
+
+* google
+* pocket (plugin de chrome) 
+
+# TODO
+
+* emacs
+* zsh
+* cinelerra
+* reprap
+* zotero
+* playonlinux
+* darktable
+* rawtherapee
+* krita
+* mypaint
+
+
 Inkscape
 https://elizsarobhasa.makes.org/thimble/MTMwNDIzMjE5Mg==/3d-printing-from-a-2d-drawing
 Instalar tb jessyink
 
-LaTeX Vanilla
 
 tor
 openframeworks
@@ -308,8 +404,11 @@ chibios
 
 
 
-Cuentas online abiertas
+# Links
 
-google
-pocket (plugin de chrome) 
-
+[Systemd](https://wiki.debian.org/systemd)
+[Gnome shortcuts](https://wiki.gnome.org/Design/OS/KeyboardShortcuts)
+[Gnome optimizaciones](https://www.linux.com/learn/easy-steps-make-gnome-3-more-efficient)
+[Instalación Debian](https://diversidadyunpocodetodo.blogspot.com.es/2015/03/sensores-temperatura-hardware-discos-cpu-debian-ubuntu.html)
+[zsh](http://joshldavis.com/2014/07/26/oh-my-zsh-is-a-disease-antigen-is-the-vaccine/)
+[zsh](http://blog.namangoel.com/zsh-with-antigen)
