@@ -424,8 +424,9 @@ algunas funciones útiles y añadimos orígenes extra de paquetes.
   )
 \end{verbatim}
 
-Instalamos los paquetes \emph{markdown-mode} y \emph{pandoc-mode} desde
-el menú de gestión de paquetes de \textbf{emacs}.
+Instalamos los paquetes \emph{markdown-mode}, \emph{mardown-plus} y
+\emph{pandoc-mode} desde el menú de gestión de paquetes de
+\textbf{emacs}.
 
 \section{Desarrollo sw}\label{desarrollo-sw}
 
@@ -493,12 +494,6 @@ Igualmente instalamos \textbf{zsh}:
 sudo aptitude install zsh
 \end{verbatim}
 
-Arrancamos \textbf{zsh} desde un terminal:
-
-\begin{verbatim}
-/usr/bin/zsh
-\end{verbatim}
-
 Vamos a usar antigen así que nos lo clonamos en
 \_\textasciitilde{}/apps/
 
@@ -555,7 +550,17 @@ de estado en los repos de git. Necesitamos una fuente \emph{Awesome}
 \section{Cambiar las opciones de
 idioma}\label{cambiar-las-opciones-de-idioma}
 
-Cambiar lenguaje /etc/locale-gen sudo locale-gen
+Ejecutamos:
+
+\begin{verbatim}
+sudo dpkg-reconfigure locales
+\end{verbatim}
+
+Y después solo tenemos que cambiar la selección del idioma en la
+configuración de Gnome.
+
+Nos pedirá rearrancar Gnome y renombrará todos los directorios de
+sistema.
 
 \section{Cuentas online abiertas}\label{cuentas-online-abiertas}
 
@@ -571,10 +576,6 @@ Cambiar lenguaje /etc/locale-gen sudo locale-gen
 
 \begin{itemize}
 \tightlist
-\item
-  emacs
-\item
-  zsh
 \item
   cinelerra
 \item
@@ -597,12 +598,18 @@ Inkscape
 https://elizsarobhasa.makes.org/thimble/MTMwNDIzMjE5Mg==/3d-printing-from-a-2d-drawing
 Instalar tb jessyink
 
-tor openframeworks
+tor openframeworks processing arduino
 
 chibios *
 http://wiki.chibios.org/dokuwiki/doku.php?id=chibios:community:setup:openocd\_chibios
 * http://www.josho.org/blog/blog/2014/11/30/nucleo-gcc/ *
 http://www.stevebate.net/chibios-rpi/GettingStarted.html
+
+rclone
+
+vmware
+
+sudo aptitude install chromium
 
 \section{Links}\label{links}
 

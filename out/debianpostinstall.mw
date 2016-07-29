@@ -307,7 +307,7 @@ Configuramos el fichero ''.emacs'' definimos algunas preferencias, algunas funci
   (add-to-list 'package-archives '(&quot;gnu&quot; . &quot;http://elpa.gnu.org/packages/&quot;) t)
   (add-to-list 'package-archives '(&quot;marmalade&quot; . &quot;https://marmalade-repo.org/packages/&quot;) t)
   )</pre>
-Instalamos los paquetes ''markdown-mode'' y ''pandoc-mode'' desde el menú de gestión de paquetes de '''emacs'''.
+Instalamos los paquetes ''markdown-mode'', ''mardown-plus'' y ''pandoc-mode'' desde el menú de gestión de paquetes de '''emacs'''.
 
 = Desarrollo sw =
 
@@ -355,9 +355,6 @@ Instalamos '''fish''' desde aptitude con:
 Igualmente instalamos '''zsh''':
 
 <pre class="{bash}">sudo aptitude install zsh</pre>
-Arrancamos '''zsh''' desde un terminal:
-
-<pre class="{bash}">/usr/bin/zsh</pre>
 Vamos a usar antigen así que nos lo clonamos en _~/apps/
 
 <pre class="{bash}">cd ~/apps
@@ -405,7 +402,12 @@ Nos queda arreglar las fuentes para que funcione correctamente la linea de estad
 
 = Cambiar las opciones de idioma =
 
-Cambiar lenguaje /etc/locale-gen sudo locale-gen
+Ejecutamos:
+
+<pre class="{bash}">sudo dpkg-reconfigure locales</pre>
+Y después solo tenemos que cambiar la selección del idioma en la configuración de Gnome.
+
+Nos pedirá rearrancar Gnome y renombrará todos los directorios de sistema.
 
 = Cuentas online abiertas =
 
@@ -414,8 +416,6 @@ Cambiar lenguaje /etc/locale-gen sudo locale-gen
 
 = TODO =
 
-* emacs
-* zsh
 * cinelerra
 * reprap
 * zotero
@@ -427,9 +427,15 @@ Cambiar lenguaje /etc/locale-gen sudo locale-gen
 
 Inkscape https://elizsarobhasa.makes.org/thimble/MTMwNDIzMjE5Mg==/3d-printing-from-a-2d-drawing Instalar tb jessyink
 
-tor openframeworks
+tor openframeworks processing arduino
 
 chibios * http://wiki.chibios.org/dokuwiki/doku.php?id=chibios:community:setup:openocd_chibios * http://www.josho.org/blog/blog/2014/11/30/nucleo-gcc/ * http://www.stevebate.net/chibios-rpi/GettingStarted.html
+
+rclone
+
+vmware
+
+sudo aptitude install chromium
 
 = Links =
 

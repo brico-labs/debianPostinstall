@@ -398,7 +398,7 @@ Configuramos el fichero *.emacs* definimos algunas preferencias, algunas funcion
   )
 ```
 
-Instalamos los paquetes *markdown-mode* y *pandoc-mode* desde el menú de gestión de paquetes de **emacs**.
+Instalamos los paquetes *markdown-mode*, *mardown-plus* y *pandoc-mode* desde el menú de gestión de paquetes de **emacs**.
 
 Desarrollo sw
 =============
@@ -468,12 +468,6 @@ Igualmente instalamos **zsh**:
 sudo aptitude install zsh
 ```
 
-Arrancamos **zsh** desde un terminal:
-
-``` {bash}
-/usr/bin/zsh
-```
-
 Vamos a usar antigen así que nos lo clonamos en \_~/apps/
 
 ``` {bash}
@@ -526,7 +520,15 @@ Nos queda arreglar las fuentes para que funcione correctamente la linea de estad
 Cambiar las opciones de idioma
 ==============================
 
-Cambiar lenguaje /etc/locale-gen sudo locale-gen
+Ejecutamos:
+
+``` {bash}
+sudo dpkg-reconfigure locales
+```
+
+Y después solo tenemos que cambiar la selección del idioma en la configuración de Gnome.
+
+Nos pedirá rearrancar Gnome y renombrará todos los directorios de sistema.
 
 Cuentas online abiertas
 =======================
@@ -537,8 +539,6 @@ Cuentas online abiertas
 TODO
 ====
 
--   emacs
--   zsh
 -   cinelerra
 -   reprap
 -   zotero
@@ -550,9 +550,15 @@ TODO
 
 Inkscape https://elizsarobhasa.makes.org/thimble/MTMwNDIzMjE5Mg==/3d-printing-from-a-2d-drawing Instalar tb jessyink
 
-tor openframeworks
+tor openframeworks processing arduino
 
 chibios \* http://wiki.chibios.org/dokuwiki/doku.php?id=chibios:community:setup:openocd\_chibios \* http://www.josho.org/blog/blog/2014/11/30/nucleo-gcc/ \* http://www.stevebate.net/chibios-rpi/GettingStarted.html
+
+rclone
+
+vmware
+
+sudo aptitude install chromium
 
 Links
 =====
