@@ -1,18 +1,16 @@
-\section{Introducción}\label{introducciuxf3n}
+Introducción
+============
 
 Mi portátil es un ordenador Acer 5755G con las siguientes
 características:
 
-\begin{itemize}
-\item
-  Core i5 2430M 2.4GHz
-\item
-  NVIDIA Geforce GT 540M
-\item
-  8Gb RAM
-\item
-  750Gb HD
-\end{itemize}
+-   Core i5 2430M 2.4GHz
+
+-   NVIDIA Geforce GT 540M
+
+-   8Gb RAM
+
+-   750Gb HD
 
 La gráfica es una Nvidia Optimus, es decir una tarjeta híbrida que
 funciona perfectamente en Ubuntu 14.04 usando Bumblebee.
@@ -31,72 +29,73 @@ Lo primero fue la instalación del Bumblebee
 
 firmware-linux-nonfree Bumblebee-nvidia primus
 
-\section{Gestión de paquetes}\label{gestiuxf3n-de-paquetes}
+Gestión de paquetes
+===================
 
-Instalamos \emph{aptitude} y \emph{synaptic}
+Instalamos *aptitude* y *synaptic*
 
-\begin{verbatim}
+``` {.{bash}}
 sudo apt-get install aptitude
 sudo apt-get install synaptic
-\end{verbatim}
+```
 
-Cambiamos las opciones de \emph{aptitude} para que \textbf{no instale}
-los paquetes recomendados.
+Cambiamos las opciones de *aptitude* para que **no instale** los
+paquetes recomendados.
 
-\subsection{Quitamos el cdrom de los
-sources.list}\label{quitamos-el-cdrom-de-los-sources.list}
+Quitamos el cdrom de los sources.list
+-------------------------------------
 
-Editamos el fichero \emph{/etc/apt/sources.list} y comentamos las lineas
-del cdrom.
+Editamos el fichero */etc/apt/sources.list* y comentamos las lineas del
+cdrom.
 
-\subsection{Habilitamos los backports y
-multimedia}\label{habilitamos-los-backports-y-multimedia}
+Habilitamos los backports y multimedia
+--------------------------------------
 
 Backports:
 
-\begin{verbatim}
+``` {.{bash}}
 sudo cat > /etc/apt/sources.list.d/backports.list << EOF
 # backports
 deb http://ftp.debian.org/debian/ jessie-backports main contrib non-free 
 EOF
-\end{verbatim}
+```
 
 Multimedia:
 
-\begin{verbatim}
+``` {.{bash}}
 sudo cat >> /etc/apt/sources.list.d/multimedia.list << EOF
 # multimedia
 deb http://www.deb-multimedia.org/ jessie main non-free 
 EOF
 
 sudo apt-get -y --allow-unauthenticated install --reinstall deb-multimedia-keyring
-\end{verbatim}
+```
 
 Y actualizamos
 
-\begin{verbatim}
+``` {.{bash}}
 sudo aptitude update
-\end{verbatim}
+```
 
-\section{Instalación de varios paquetes
-sueltos}\label{instalaciuxf3n-de-varios-paquetes-sueltos}
+Instalación de varios paquetes sueltos
+======================================
 
 Instalado git desde aptitude
 
-\begin{verbatim}
+``` {.{bash}}
 sudo aptitude install git
-\end{verbatim}
+```
 
-Configuración básica de \textbf{git}
+Configuración básica de **git**
 
-\begin{verbatim}
+``` {.{bash}}
 git config --global user.name "Sergio Alvariño"
 git config --global user.email "salvari@gmail.com"
 git config --global core.editor emacs
 git config --global color.ui true
 git config --global credential.helper cache
 git config --global credential.helper 'cache --timeout=7200'
-\end{verbatim}
+```
 
 Instalado terminator
 
@@ -111,37 +110,29 @@ gimp ya estaba instalado, instalado el gimp data-extra
 
 Diskmanager:
 
-\begin{verbatim}
-sudo apt-get install ntfs-3g disk-manager
-\end{verbatim}
+    sudo apt-get install ntfs-3g disk-manager
 
 Gnucash:
 
-\begin{verbatim}
-sudo apt-get -t jessie-backports install gnucash
-\end{verbatim}
+    sudo apt-get -t jessie-backports install gnucash
 
-Herramientas \emph{sync}:
+Herramientas *sync*:
 
-\begin{verbatim}
-sudo apt-get install rsync grsync
-\end{verbatim}
+    sudo apt-get install rsync grsync
 
 Menu Libre: Un editor de menús para Gnome
 
-\begin{verbatim}
-sudo apt-get install menulibre
-\end{verbatim}
+    sudo apt-get install menulibre
 
 Tor
 
-Bajado el comprimido desde la web y descomprimido en
-\emph{\textasciitilde{}/apps} copiado el fichero desktop a
-\emph{\textasciitilde{}/.local/share/applications}
+Bajado el comprimido desde la web y descomprimido en *\~/apps* copiado
+el fichero desktop a *\~/.local/share/applications*
 
-\subsection{Codecs}\label{codecs}
+Codecs
+------
 
-\begin{verbatim}
+``` {.{bash}}
 sudo apt-get install libav-tools
 
 sudo apt-get install faad gstreamer0.10-ffmpeg gstreamer0.10-x \
@@ -152,168 +143,170 @@ libquicktime2 libfaac0 libmp3lame0 libxine2-all-plugins libdvdread4 \
 libdvdnav4 libmad0 sox libxvidcore4 libstdc++5
 
 sudo apt-get install w64codecs
-\end{verbatim}
+```
 
-\subsection{Compresores et al}\label{compresores-et-al}
+Compresores et al
+-----------------
 
-\begin{verbatim}
+``` {.{bash}}
 sudo apt-get install rar unrar zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar
-\end{verbatim}
+```
 
-\subsection{Gráficos}\label{gruxe1ficos}
+Gráficos
+--------
 
-\subsubsection{Inkscape}\label{inkscape}
+### Inkscape
 
-\begin{verbatim}
+``` {.{bash}}
 apt-cache policy inkscape
 apt-get -t jessie-backports install inkscape
 
 apt-get install librecad
 
 apt-get -t jessie-backports install freecad
-\end{verbatim}
+```
 
-\subsubsection{Librecad}\label{librecad}
+### Librecad
 
 Instalado desde repos con aptitude
 
-\section{Documentos}\label{documentos}
+Documentos
+==========
 
-\subsection{Calibre}\label{calibre}
+Calibre
+-------
 
 Ejecutamos lo que manda la página web:
 
-\begin{verbatim}
-sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py \
-| sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
-\end{verbatim}
+    sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py \
+    | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
 
-\subsection{Pandoc}\label{pandoc}
+Pandoc
+------
 
-Instalado el Pandoc descargando paquete \emph{deb} desde la página web
-del Pandoc.
+Instalado el Pandoc descargando paquete *deb* desde la página web del
+Pandoc.
 
-Descargamos las plantillas desde
-\href{https://github.com/jgm/pandoc-templates}{el repo} ejecutando los
-siguientes comandos:
+Descargamos las plantillas desde [el
+repo](https://github.com/jgm/pandoc-templates) ejecutando los siguientes
+comandos:
 
-\begin{verbatim}
+``` {.{bash}}
 cd ~/.pandoc
 git clone https://github.com/jgm/pandoc-templates templates
-\end{verbatim}
+```
 
-\subsection{Vanilla LaTeX}\label{vanilla-latex}
+Vanilla LaTeX
+-------------
 
 El LaTeX de Debian está un poquillo anticuado, si se quiere usar una
-versión reciente hay que aplicar
-\href{http://tex.stackexchange.com/questions/1092/how-to-install-vanilla-texlive-on-debian-or-ubuntu}{este
-truco}.
+versión reciente hay que aplicar [este
+truco](http://tex.stackexchange.com/questions/1092/how-to-install-vanilla-texlive-on-debian-or-ubuntu).
 
-\begin{verbatim}
+``` {.{bash}}
 cd ~
 mkdir tmp
 cd tmp
 wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 tar xzf install-tl-unx.tar.gz
 cd install-tl-xxxxxx                     
-\end{verbatim}
+```
 
 La parte xxxxxx varía en función del estado de la última versión de
 LaTeX disponible.
 
-\begin{verbatim}
+``` {.{bash}}
 sudo ./install-tl
-\end{verbatim}
+```
 
 Una vez lanzada la instalación podemos desmarcar las opciones que
 instalan la documentación y las fuentes. Eso nos obligará a consultar la
-documentación \emph{on line} pero ahorrará practicamente el 50\% del
-espacio necesario. En mi caso sin \emph{doc} ni \emph{src} ocupa 2,3Gb
+documentación *on line* pero ahorrará practicamente el 50% del espacio
+necesario. En mi caso sin *doc* ni *src* ocupa 2,3Gb
 
-\begin{verbatim}
+``` {.{bash}}
 mkdir -p /opt
 sudo ln -s /usr/local/texlive/2016/bin/* /opt/texbin
-\end{verbatim}
+```
 
-Por último para acabar la instalación añadimos \textbf{/opt/texbin} al
-\emph{path}.
+Por último para acabar la instalación añadimos **/opt/texbin** al
+*path*.
 
-\subsubsection{Falsificando paquetes}\label{falsificando-paquetes}
+### Falsificando paquetes
 
-Ya tenemos el \textbf{texlive} instalado, ahora necesitamos que el
-gestor de paquetes sepa que ya lo tenemos instalado.
+Ya tenemos el **texlive** instalado, ahora necesitamos que el gestor de
+paquetes sepa que ya lo tenemos instalado.
 
-\begin{verbatim}
+``` {.{bash}}
 sudo apt-get install equivs --no-install-recommends
 mkdir -p /tmp/tl-equivs && cd /tmp/tl-equivs
 equivs-control texlive-local
-\end{verbatim}
+```
 
 Para hacerlo más fácil podemos descargarnos un fichero ya preparado,
 ejecutando:
 
-\begin{verbatim}
+``` {.{bash}}
 wget http://www.tug.org/texlive/files/debian-equivs-2015-ex.txt
 /bin/cp -f debian-equivs-2015-ex.txt texlive-local
-\end{verbatim}
+```
 
 Editamos la versión y
 
-\begin{verbatim}
+``` {.{bash}}
 equivs-build texlive-local
 sudo dpkg -i texlive-local_2015-1_all.deb
-\end{verbatim}
+```
 
 Todo listo, ahora podemos instalar cualquier paquete que dependa de
 texlive
 
-\subsubsection{Fuentes}\label{fuentes}
+### Fuentes
 
 Para dejar disponibles las fuentes opentype y truetype que vienen con
 texlive para el resto de aplicaciones:
 
-\begin{verbatim}
+``` {.{bash}}
 sudo cp $(kpsewhich -var-value TEXMFSYSVAR)/fonts/conf/texlive-fontconfig.conf /etc/fonts/conf.d/09-texlive.conf
 gksudo gedit /etc/fonts/conf.d/09-texlive.conf
-\end{verbatim}
+```
 
 Borramos la linea:
 
-\begin{verbatim}
+``` {.{xml}}
 <dir>/usr/local/texlive/2016/texmf-dist/fonts/type1</dir>
-\end{verbatim}
+```
 
 Y ejecutamos:
 
-\begin{verbatim}
+``` {.{bash}}
 sudo fc-cache -fsv
-\end{verbatim}
+```
 
-\subsubsection{Actualizaciones}\label{actualizaciones}
+### Actualizaciones
 
 Para actualizar nuestro latex a la última versión de todos los paquetes:
 
-\begin{verbatim}
+``` {.{bash}}
 sudo /opt/texbin/tlmgr update --self
 sudo /opt/texbin/tlmgr update --all
-\end{verbatim}
+```
 
 También podemos lanzar el instalador gráfico con:
 
-\begin{verbatim}
+``` {.{bash}}
 sudo /opt/texbin/tlmgr --gui
-\end{verbatim}
+```
 
 Para usar el instalador gráfico hay que instalar previamente:
 
-\begin{verbatim}
+``` {.{bash}}
 sudo apt-get install perl-tk --no-install-recommends
-\end{verbatim}
+```
 
-\subsubsection{Lanzador para el actualizador de
-texlive}\label{lanzador-para-el-actualizador-de-texlive}
+### Lanzador para el actualizador de texlive
 
-\begin{verbatim}
+``` {.{bash}}
 mkdir -p ~/.local/share/applications
 /bin/rm ~/.local/share/applications/tlmgr.desktop
 cat > ~/.local/share/applications/tlmgr.desktop << EOF
@@ -327,27 +320,28 @@ Terminal=false
 Type=Application
 Icon=system-software-update
 EOF
-\end{verbatim}
+```
 
 Ojo que hay que dejar instalado el gksu (aunque debería estar de antes
 si sigues este doc)
 
-\begin{verbatim}
+``` {.{bash}}
 sudo aptitude install gksu
-\end{verbatim}
+```
 
-\subsection{Emacs}\label{emacs}
+Emacs
+-----
 
 Instalado emacs desde los repos:
 
-\begin{verbatim}
+``` {.{bash}}
 sudo aptitude install emacs
-\end{verbatim}
+```
 
-Configuramos el fichero \emph{.emacs} definimos algunas preferencias,
-algunas funciones útiles y añadimos orígenes extra de paquetes.
+Configuramos el fichero *.emacs* definimos algunas preferencias, algunas
+funciones útiles y añadimos orígenes extra de paquetes.
 
-\begin{verbatim}
+``` {.{lisp}}
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -460,79 +454,74 @@ algunas funciones útiles y añadimos orígenes extra de paquetes.
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
   (add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/") t)
   )
-\end{verbatim}
+```
 
-Instalamos los paquetes \emph{markdown-mode}, \emph{mardown-plus} y
-\emph{pandoc-mode} desde el menú de gestión de paquetes de
-\textbf{emacs}.
+Instalamos los paquetes *markdown-mode*, *mardown-plus* y *pandoc-mode*
+desde el menú de gestión de paquetes de **emacs**.
 
-\section{Desarrollo sw}\label{desarrollo-sw}
+Desarrollo sw
+=============
 
-\subsection{Paquetes esenciales}\label{paquetes-esenciales}
+Paquetes esenciales
+-------------------
 
-\begin{verbatim}
-sudo apt-get install build-essential checkinstall make automake cmake autoconf git git-core dpkg wget
-\end{verbatim}
+    sudo apt-get install build-essential checkinstall make automake cmake autoconf git git-core dpkg wget
 
-\subsection{Open Java}\label{open-java}
+Open Java
+---------
 
-\begin{verbatim}
-apt-get install openjdk-7-jre icedtea-7-plugin
-\end{verbatim}
+    apt-get install openjdk-7-jre icedtea-7-plugin
 
-\subsection{D-apt e instalación de
-programas}\label{d-apt-e-instalaciuxf3n-de-programas}
+D-apt e instalación de programas
+--------------------------------
 
 configurado d-apt, instalados todos los programas incluidos
 
-\begin{verbatim}
+``` {.{bash}}
 sudo wget http://master.dl.sourceforge.net/project/d-apt/files/d-apt.list -O /etc/apt/sources.list.d/d-apt.list
 sudo apt-get update && sudo apt-get -y --allow-unauthenticated install --reinstall d-apt-keyring && sudo apt-get update
-\end{verbatim}
+```
 
 Instalamos todos los programas asociados.
 
-\subsection{Arduino y Processing}\label{arduino-y-processing}
+Arduino y Processing
+--------------------
 
 Bajamos los paquetes de las respectivas páginas web, descomprimimimos en
-\emph{\textasciitilde{}/apps/} y creamos los desktop file con
-\textbf{Menulibre}
+*\~/apps/* y creamos los desktop file con **Menulibre**
 
-\subsection{Openframeworks}\label{openframeworks}
+Openframeworks
+--------------
 
 Bajamos el paquete comprimido de la página web del proyecto.
 
-Descomprimimos en \emph{\textasciitilde{}/apps}
+Descomprimimos en *\~/apps*
 
 Bajamos al directorio de la aplicación y ejecutamos:
 
-\begin{verbatim}
-sudo  scripts/linux/debian/install_dependencies.sh
-sudo  scripts/linux/debian/install_codecs.sh
+    sudo  scripts/linux/debian/install_dependencies.sh
+    sudo  scripts/linux/debian/install_codecs.sh
 
-cd scripts/linux
-./compileOF.sh -j2
+    cd scripts/linux
+    ./compileOF.sh -j2
 
-cd OF/examples/graphics/polygonExample
-make
-make Run
+    cd OF/examples/graphics/polygonExample
+    make
+    make Run
 
-cd OF/scripts/linux
-./compilePG.sh
-\end{verbatim}
+    cd OF/scripts/linux
+    ./compilePG.sh
 
 Va a instalar un montón de dependencias, hay que tomarlo con calma.
 
-Al final también va a añadir una linea al fichero
-\emph{\textasciitilde{}/.profile}
+Al final también va a añadir una linea al fichero *\~/.profile*
 
-\begin{verbatim}
-export PG_OF_PATH=/home/salvari/apps/of/of_v0.9.3_linux64_release
-\end{verbatim}
+    export PG_OF_PATH=/home/salvari/apps/of/of_v0.9.3_linux64_release
 
-\section{Docker}\label{docker}
+Docker
+======
 
-\begin{verbatim}
+``` {.{bash}}
 apt-get install apt-transport-https ca-certificates
 apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 edit docker.list with
@@ -549,104 +538,103 @@ sudo service docker start
 sudo docker run hello-world   - todo bien
 
 sudo gpasswd -a salvari docker
-\end{verbatim}
+```
 
-\section{Shells alternativos: zsh y
-fish}\label{shells-alternativos-zsh-y-fish}
+Shells alternativos: zsh y fish
+===============================
 
 Los dos son muy interesantes. He usado zsh casi un año, ahora voy a
-probar \textbf{fish}.
+probar **fish**.
 
-\subsection{fish}\label{fish}
+fish
+----
 
-Instalamos \textbf{fish} desde aptitude con:
+Instalamos **fish** desde aptitude con:
 
-\begin{verbatim}
+``` {.{bash}}
 sudo aptitude install fish
-\end{verbatim}
+```
 
 Instalamos oh-my-fish
 
-\begin{verbatim}
+``` {.{bash}}
 curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install > install
 fish install
 rm install
 
 chsh -s `which fish`
-\end{verbatim}
+```
 
-\subsection{zsh}\label{zsh}
+zsh
+---
 
-Igualmente instalamos \textbf{zsh}:
+Igualmente instalamos **zsh**:
 
-\begin{verbatim}
+``` {.{bash}}
 sudo aptitude install zsh
-\end{verbatim}
+```
 
-Vamos a usar antigen así que nos lo clonamos en
-\_\textasciitilde{}/apps/
+Vamos a usar antigen así que nos lo clonamos en \_\~/apps/
 
-\begin{verbatim}
+``` {.{bash}}
 cd ~/apps
 git clone https://github.com/zsh-users/antigen
-\end{verbatim}
+```
 
-Y editamos el fichero \emph{\textasciitilde{}/.zshrc} para que contenga:
+Y editamos el fichero *\~/.zshrc* para que contenga:
 
-\begin{verbatim}
-source ~/apps/antigen/antigen.zsh
+    source ~/apps/antigen/antigen.zsh
 
-# Load the oh-my-zsh's library.
-antigen use oh-my-zsh
+    # Load the oh-my-zsh's library.
+    antigen use oh-my-zsh
 
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
-antigen bundle git
-antigen bundle command-not-found
-antigen bundle autojump
-antigen bundle extract
-# antigen bundle heroku
-# antigen bundle pip
-# antigen bundle lein
+    # Bundles from the default repo (robbyrussell's oh-my-zsh).
+    antigen bundle git
+    antigen bundle command-not-found
+    antigen bundle autojump
+    antigen bundle extract
+    # antigen bundle heroku
+    # antigen bundle pip
+    # antigen bundle lein
 
 
-# Syntax highlighting bundle.
-antigen bundle zsh-users/zsh-syntax-highlighting
+    # Syntax highlighting bundle.
+    antigen bundle zsh-users/zsh-syntax-highlighting
 
-# git
-antigen bundle arialdomartini/oh-my-git
-antigen theme arialdomartini/oh-my-git-themes oppa-lana-style
+    # git
+    antigen bundle arialdomartini/oh-my-git
+    antigen theme arialdomartini/oh-my-git-themes oppa-lana-style
 
-# autosuggestions
-antigen bundle tarruda/zsh-autosuggestions
+    # autosuggestions
+    antigen bundle tarruda/zsh-autosuggestions
 
-#antigen theme agnoster
+    #antigen theme agnoster
 
-# Tell antigen that you're done.
-antigen apply
+    # Tell antigen that you're done.
+    antigen apply
 
-# append to path
-path+=('/home/salvari/apps/julia/current/bin/')
-# prepend
-# path=('/home/salvari/bin/' $path)
-# export PATH
-\end{verbatim}
+    # append to path
+    path+=('/home/salvari/apps/julia/current/bin/')
+    # prepend
+    # path=('/home/salvari/bin/' $path)
+    # export PATH
 
 Antigen ya se encarga de descargar todo lo que queramos utilizar en zsh.
 
 Nos queda arreglar las fuentes para que funcione correctamente la linea
-de estado en los repos de git. Necesitamos una fuente \emph{Awesome}
+de estado en los repos de git. Necesitamos una fuente *Awesome*
 
-\subsection{Instalación de fuentes
-adicionales}\label{instalaciuxf3n-de-fuentes-adicionales}
+Instalación de fuentes adicionales
+----------------------------------
 
-\section{Cambiar las opciones de
-idioma}\label{cambiar-las-opciones-de-idioma}
+Cambiar las opciones de idioma
+==============================
 
 Ejecutamos:
 
-\begin{verbatim}
+``` {.{bash}}
 sudo dpkg-reconfigure locales
-\end{verbatim}
+```
 
 Y después solo tenemos que cambiar la selección del idioma en la
 configuración de Gnome.
@@ -654,90 +642,74 @@ configuración de Gnome.
 Nos pedirá rearrancar Gnome y renombrará todos los directorios de
 sistema.
 
-\section{Reprap}\label{reprap}
+Reprap
+======
 
-\subsection{Sl1c3r}\label{sl1c3r}
+Sl1c3r
+------
 
 Descargamos el paquete binario desde la página web.
 
-\begin{itemize}
-\tightlist
-\item
-  Cambiar permisos en directorio \emph{/lib/vrt/}
-\item
-  Instalado \emph{lib-canberra-module} desde aptitude
-\item
-  Es necesario instalar \emph{freeglut}
-\end{itemize}
+-   Cambiar permisos en directorio */lib/vrt/*
+-   Instalado *lib-canberra-module* desde aptitude
+-   Es necesario instalar *freeglut*
 
-\subsection{OpenScad}\label{openscad}
+OpenScad
+--------
 
 Instalado desde aptitude.
 
-\subsection{Printrun}\label{printrun}
+Printrun
+--------
 
 Descargamos desde github
 
-\begin{verbatim}
+``` {.{bash}}
 sudo apt-get install python-serial python-wxgtk2.8 python-pyglet python-numpy \
 cython python-libxml2 python-gobject python-dbus python-psutil python-cairosvg git
 
 python setup.py build_ext --inplace
-\end{verbatim}
+```
 
-\section{Cuentas online abiertas}\label{cuentas-online-abiertas}
+Cuentas online abiertas
+=======================
 
-\begin{itemize}
-\tightlist
-\item
-  google
-\item
-  pocket (plugin de chrome)
-\end{itemize}
+-   google
+-   pocket (plugin de chrome)
 
-\section{TODO}\label{todo}
+TODO
+====
 
-\begin{itemize}
-\tightlist
-\item
-  cinelerra
-\item
-  zotero
-\item
-  playonlinux
-\item
-  darktable
-\item
-  rawtherapee
-\item
-  krita
-\item
-  mypaint
-\end{itemize}
+-   cinelerra
+-   zotero
+-   playonlinux
+-   darktable
+-   rawtherapee
+-   krita
+-   mypaint
 
 Inkscape
 https://elizsarobhasa.makes.org/thimble/MTMwNDIzMjE5Mg==/3d-printing-from-a-2d-drawing
 Instalar tb jessyink
 
-chibios *
+chibios \*
 http://wiki.chibios.org/dokuwiki/doku.php?id=chibios:community:setup:openocd\_chibios
-* http://www.josho.org/blog/blog/2014/11/30/nucleo-gcc/ *
+\* http://www.josho.org/blog/blog/2014/11/30/nucleo-gcc/ \*
 http://www.stevebate.net/chibios-rpi/GettingStarted.html
 
-rclone {[}https://syncthing.net/{]}
+rclone \[https://syncthing.net/\]
 
 vmware
 
 sudo aptitude install chromium
 
-\section{Links}\label{links}
+Links
+=====
 
-\href{https://wiki.debian.org/systemd}{Systemd}
-\href{https://wiki.gnome.org/Design/OS/KeyboardShortcuts}{Gnome
-shortcuts}
-\href{https://www.linux.com/learn/easy-steps-make-gnome-3-more-efficient}{Gnome
-optimizaciones}
-\href{https://diversidadyunpocodetodo.blogspot.com.es/2015/03/sensores-temperatura-hardware-discos-cpu-debian-ubuntu.html}{Instalación
-Debian}
-\href{http://joshldavis.com/2014/07/26/oh-my-zsh-is-a-disease-antigen-is-the-vaccine/}{zsh}
-\href{http://blog.namangoel.com/zsh-with-antigen}{zsh}
+[Systemd](https://wiki.debian.org/systemd) [Gnome
+shortcuts](https://wiki.gnome.org/Design/OS/KeyboardShortcuts) [Gnome
+optimizaciones](https://www.linux.com/learn/easy-steps-make-gnome-3-more-efficient)
+[Instalación
+Debian](https://diversidadyunpocodetodo.blogspot.com.es/2015/03/sensores-temperatura-hardware-discos-cpu-debian-ubuntu.html)
+[zsh](http://joshldavis.com/2014/07/26/oh-my-zsh-is-a-disease-antigen-is-the-vaccine/)
+[zsh](http://blog.namangoel.com/zsh-with-antigen)

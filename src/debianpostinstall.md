@@ -93,6 +93,22 @@ sudo aptitude update
 
 Instalado git desde aptitude
 
+~~~~{bash}
+sudo aptitude install git
+~~~~
+
+Configuración básica de __git__
+
+~~~~{bash}
+git config --global user.name "Sergio Alvariño"
+git config --global user.email "salvari@gmail.com"
+git config --global core.editor emacs
+git config --global color.ui true
+git config --global credential.helper cache
+git config --global credential.helper 'cache --timeout=7200'
+~~~~
+
+
 Instalado terminator
 
 Instalado chrome añadiendo fuentes a aptitude, hay que borrar el fichero que sobra. chrome
@@ -121,6 +137,18 @@ Herramientas _sync_:
 sudo apt-get install rsync grsync
 ~~~~
 
+Menu Libre: Un editor de menús para Gnome
+
+~~~~
+sudo apt-get install menulibre
+~~~~
+
+
+Tor
+
+Bajado el comprimido desde la web y descomprimido en _~/apps_ copiado
+el fichero desktop a _~/.local/share/applications_
+
 
 ## Codecs
 
@@ -145,6 +173,8 @@ sudo apt-get install rar unrar zip unzip unace bzip2 lzop p7zip p7zip-full p7zip
 
 ## Gráficos
 
+### Inkscape
+
 ~~~~{bash}
 apt-cache policy inkscape
 apt-get -t jessie-backports install inkscape
@@ -154,12 +184,22 @@ apt-get install librecad
 apt-get -t jessie-backports install freecad
 ~~~~
 
-## Calibre
+### Librecad
 
-calibre
+Instalado desde repos con aptitude
 
 
 # Documentos
+
+## Calibre
+
+Ejecutamos lo que manda la página web:
+
+~~~~
+sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py \
+| sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
+~~~~
+
 
 ## Pandoc
 
@@ -434,9 +474,6 @@ Instalamos los paquetes _markdown-mode_, _mardown-plus_ y _pandoc-mode_ desde el
 de gestión de paquetes de __emacs__.
 
 
-
-
-
 # Desarrollo sw
 
 ## Paquetes esenciales
@@ -451,7 +488,7 @@ sudo apt-get install build-essential checkinstall make automake cmake autoconf g
 apt-get install openjdk-7-jre icedtea-7-plugin
 ~~~~
 
-# D-apt e instalación de programas
+## D-apt e instalación de programas
 
 configurado d-apt, instalados todos los programas incluidos
 
@@ -462,7 +499,41 @@ sudo apt-get update && sudo apt-get -y --allow-unauthenticated install --reinsta
 
 Instalamos todos los programas asociados.
 
+## Arduino y Processing
 
+Bajamos los paquetes de las respectivas páginas web, descomprimimimos
+en _~/apps/_ y creamos los desktop file con __Menulibre__
+
+## Openframeworks
+
+Bajamos el paquete comprimido de la página web del proyecto.
+
+Descomprimimos en _~/apps_
+
+Bajamos al directorio de la aplicación y ejecutamos:
+
+~~~~
+sudo  scripts/linux/debian/install_dependencies.sh
+sudo  scripts/linux/debian/install_codecs.sh
+
+cd scripts/linux
+./compileOF.sh -j2
+
+cd OF/examples/graphics/polygonExample
+make
+make Run
+
+cd OF/scripts/linux
+./compilePG.sh
+~~~~
+
+Va a instalar un montón de dependencias, hay que tomarlo con calma.
+
+Al final también va a añadir una linea al fichero _~/.profile_
+
+~~~~
+export PG_OF_PATH=/home/salvari/apps/of/of_v0.9.3_linux64_release
+~~~~
 
 # Docker
 
@@ -488,12 +559,26 @@ sudo gpasswd -a salvari docker
 
 # Shells alternativos: zsh y fish
 
+Los dos son muy interesantes. He usado zsh casi un año, ahora voy a
+probar __fish__.
+
 ## fish
 
 Instalamos __fish__ desde aptitude con:
 
 ~~~~{bash}
 sudo aptitude install fish
+~~~~
+
+Instalamos oh-my-fish
+
+~~~~{bash}
+curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install > install
+fish install
+rm install
+
+chsh -s `which fish`
+
 ~~~~
 
 ## zsh
@@ -557,6 +642,20 @@ zsh.
 Nos queda arreglar las fuentes para que funcione correctamente la
 linea de estado en los repos de git. Necesitamos una fuente _Awesome_
 
+## Instalación de fuentes adicionales
+
+Nos bajamos unas cuantas fuentes que soporten los iconos _Awesome_.
+
+~~~~{bash}
+cd ~/tmp
+git clone https://github.com/abertsch/Menlo-for-Powerline
+git clone https://github.com/powerline/fonts
+
+mkdir ~/.fonts
+cp someFontFile ~/.fonts/
+fc-cache -vf ~/.fonts/
+~~~~
+
 # Cambiar las opciones de idioma
 
 Ejecutamos:
@@ -570,6 +669,32 @@ configuración de Gnome.
 
 Nos pedirá rearrancar Gnome y renombrará todos los directorios de sistema.
 
+# Reprap
+
+## Sl1c3r
+
+Descargamos el paquete binario desde la página web.
+
+* Cambiar permisos en directorio _/lib/vrt/_
+* Instalado _lib-canberra-module_ desde aptitude
+* Es necesario instalar _freeglut_
+
+## OpenScad
+
+Instalado desde aptitude.
+
+## Printrun
+
+Descargamos desde github
+
+~~~~{bash}
+sudo apt-get install python-serial python-wxgtk2.8 python-pyglet python-numpy \
+cython python-libxml2 python-gobject python-dbus python-psutil python-cairosvg git
+
+python setup.py build_ext --inplace
+~~~~
+
+
 
 # Cuentas online abiertas
 
@@ -579,7 +704,6 @@ Nos pedirá rearrancar Gnome y renombrará todos los directorios de sistema.
 # TODO
 
 * cinelerra
-* reprap
 * zotero
 * playonlinux
 * darktable
@@ -593,10 +717,6 @@ https://elizsarobhasa.makes.org/thimble/MTMwNDIzMjE5Mg==/3d-printing-from-a-2d-d
 Instalar tb jessyink
 
 
-tor
-openframeworks
-processing
-arduino
 
 
 chibios
@@ -605,6 +725,7 @@ chibios
 * http://www.stevebate.net/chibios-rpi/GettingStarted.html
 
 rclone
+[https://syncthing.net/]
 
 vmware
 

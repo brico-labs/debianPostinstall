@@ -74,6 +74,21 @@ Instalación de varios paquetes sueltos
 
 Instalado git desde aptitude
 
+``` {bash}
+sudo aptitude install git
+```
+
+Configuración básica de **git**
+
+``` {bash}
+git config --global user.name "Sergio Alvariño"
+git config --global user.email "salvari@gmail.com"
+git config --global core.editor emacs
+git config --global color.ui true
+git config --global credential.helper cache
+git config --global credential.helper 'cache --timeout=7200'
+```
+
 Instalado terminator
 
 Instalado chrome añadiendo fuentes a aptitude, hay que borrar el fichero que sobra. chrome
@@ -95,6 +110,14 @@ Gnucash:
 Herramientas *sync*:
 
     sudo apt-get install rsync grsync
+
+Menu Libre: Un editor de menús para Gnome
+
+    sudo apt-get install menulibre
+
+Tor
+
+Bajado el comprimido desde la web y descomprimido en *~/apps* copiado el fichero desktop a *~/.local/share/applications*
 
 Codecs
 ------
@@ -122,6 +145,8 @@ sudo apt-get install rar unrar zip unzip unace bzip2 lzop p7zip p7zip-full p7zip
 Gráficos
 --------
 
+### Inkscape
+
 ``` {bash}
 apt-cache policy inkscape
 apt-get -t jessie-backports install inkscape
@@ -131,13 +156,20 @@ apt-get install librecad
 apt-get -t jessie-backports install freecad
 ```
 
-Calibre
--------
+### Librecad
 
-calibre
+Instalado desde repos con aptitude
 
 Documentos
 ==========
+
+Calibre
+-------
+
+Ejecutamos lo que manda la página web:
+
+    sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py \
+    | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
 
 Pandoc
 ------
@@ -414,7 +446,7 @@ Open Java
     apt-get install openjdk-7-jre icedtea-7-plugin
 
 D-apt e instalación de programas
-================================
+--------------------------------
 
 configurado d-apt, instalados todos los programas incluidos
 
@@ -424,6 +456,39 @@ sudo apt-get update && sudo apt-get -y --allow-unauthenticated install --reinsta
 ```
 
 Instalamos todos los programas asociados.
+
+Arduino y Processing
+--------------------
+
+Bajamos los paquetes de las respectivas páginas web, descomprimimimos en *~/apps/* y creamos los desktop file con **Menulibre**
+
+Openframeworks
+--------------
+
+Bajamos el paquete comprimido de la página web del proyecto.
+
+Descomprimimos en *~/apps*
+
+Bajamos al directorio de la aplicación y ejecutamos:
+
+    sudo  scripts/linux/debian/install_dependencies.sh
+    sudo  scripts/linux/debian/install_codecs.sh
+
+    cd scripts/linux
+    ./compileOF.sh -j2
+
+    cd OF/examples/graphics/polygonExample
+    make
+    make Run
+
+    cd OF/scripts/linux
+    ./compilePG.sh
+
+Va a instalar un montón de dependencias, hay que tomarlo con calma.
+
+Al final también va a añadir una linea al fichero *~/.profile*
+
+    export PG_OF_PATH=/home/salvari/apps/of/of_v0.9.3_linux64_release
 
 Docker
 ======
@@ -450,6 +515,8 @@ sudo gpasswd -a salvari docker
 Shells alternativos: zsh y fish
 ===============================
 
+Los dos son muy interesantes. He usado zsh casi un año, ahora voy a probar **fish**.
+
 fish
 ----
 
@@ -457,6 +524,16 @@ Instalamos **fish** desde aptitude con:
 
 ``` {bash}
 sudo aptitude install fish
+```
+
+Instalamos oh-my-fish
+
+``` {bash}
+curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install > install
+fish install
+rm install
+
+chsh -s `which fish`
 ```
 
 zsh
@@ -517,6 +594,9 @@ Antigen ya se encarga de descargar todo lo que queramos utilizar en zsh.
 
 Nos queda arreglar las fuentes para que funcione correctamente la linea de estado en los repos de git. Necesitamos una fuente *Awesome*
 
+Instalación de fuentes adicionales
+----------------------------------
+
 Cambiar las opciones de idioma
 ==============================
 
@@ -530,6 +610,35 @@ Y después solo tenemos que cambiar la selección del idioma en la configuració
 
 Nos pedirá rearrancar Gnome y renombrará todos los directorios de sistema.
 
+Reprap
+======
+
+Sl1c3r
+------
+
+Descargamos el paquete binario desde la página web.
+
+-   Cambiar permisos en directorio */lib/vrt/*
+-   Instalado *lib-canberra-module* desde aptitude
+-   Es necesario instalar *freeglut*
+
+OpenScad
+--------
+
+Instalado desde aptitude.
+
+Printrun
+--------
+
+Descargamos desde github
+
+``` {bash}
+sudo apt-get install python-serial python-wxgtk2.8 python-pyglet python-numpy \
+cython python-libxml2 python-gobject python-dbus python-psutil python-cairosvg git
+
+python setup.py build_ext --inplace
+```
+
 Cuentas online abiertas
 =======================
 
@@ -540,7 +649,6 @@ TODO
 ====
 
 -   cinelerra
--   reprap
 -   zotero
 -   playonlinux
 -   darktable
@@ -550,11 +658,9 @@ TODO
 
 Inkscape https://elizsarobhasa.makes.org/thimble/MTMwNDIzMjE5Mg==/3d-printing-from-a-2d-drawing Instalar tb jessyink
 
-tor openframeworks processing arduino
-
 chibios \* http://wiki.chibios.org/dokuwiki/doku.php?id=chibios:community:setup:openocd\_chibios \* http://www.josho.org/blog/blog/2014/11/30/nucleo-gcc/ \* http://www.stevebate.net/chibios-rpi/GettingStarted.html
 
-rclone
+rclone \[https://syncthing.net/\]
 
 vmware
 
