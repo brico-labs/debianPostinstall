@@ -106,6 +106,12 @@ git config --global core.editor emacs
 git config --global color.ui true
 git config --global credential.helper cache
 git config --global credential.helper 'cache --timeout=7200'
+
+git config --global alias.sla 'log --oneline --decorate --graph --all'
+git config --global alias.car 'commit --amend --no-edit'
+git config --global alias.unstage reset
+git config --global alias.st status
+git config --global alias.last  'log -1 HEAD'
 ~~~~
 
 
@@ -694,7 +700,9 @@ cython python-libxml2 python-gobject python-dbus python-psutil python-cairosvg g
 python setup.py build_ext --inplace
 ~~~~
 
+# Python
 
+Instalado python-pip y python-virtualenv desde aptitude.
 
 # Cuentas online abiertas
 
@@ -740,3 +748,6 @@ sudo aptitude install chromium
 [Instalación Debian](https://diversidadyunpocodetodo.blogspot.com.es/2015/03/sensores-temperatura-hardware-discos-cpu-debian-ubuntu.html)
 [zsh](http://joshldavis.com/2014/07/26/oh-my-zsh-is-a-disease-antigen-is-the-vaccine/)
 [zsh](http://blog.namangoel.com/zsh-with-antigen)
+
+https://www.roaringpenguin.com/products/remind
+http://taskwarrior.org/
