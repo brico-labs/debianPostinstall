@@ -106,12 +106,13 @@ git config --global core.editor emacs
 git config --global color.ui true
 git config --global credential.helper cache
 git config --global credential.helper 'cache --timeout=7200'
-
+git config --global push.default simple
 git config --global alias.sla 'log --oneline --decorate --graph --all'
 git config --global alias.car 'commit --amend --no-edit'
 git config --global alias.unstage reset
 git config --global alias.st status
 git config --global alias.last  'log -1 HEAD'
+git config --global alias.ca 'commit -a'
 ~~~~
 
 
