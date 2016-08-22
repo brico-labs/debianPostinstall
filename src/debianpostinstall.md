@@ -7,7 +7,7 @@ date: julio-2016
 lang: es-ES
 abstract: |
   Instalación de Debian
-  
+
   Solo para referencia rápida y personal.
 ---
 
@@ -68,7 +68,7 @@ Backports:
 ~~~~{bash}
 sudo cat > /etc/apt/sources.list.d/backports.list << EOF
 # backports
-deb http://ftp.debian.org/debian/ jessie-backports main contrib non-free 
+deb http://ftp.debian.org/debian/ jessie-backports main contrib non-free
 EOF
 ~~~~
 
@@ -77,7 +77,7 @@ Multimedia:
 ~~~~{bash}
 sudo cat >> /etc/apt/sources.list.d/multimedia.list << EOF
 # multimedia
-deb http://www.deb-multimedia.org/ jessie main non-free 
+deb http://www.deb-multimedia.org/ jessie main non-free
 EOF
 
 sudo apt-get -y --allow-unauthenticated install --reinstall deb-multimedia-keyring
@@ -124,7 +124,6 @@ Instalado keepass2
 
 instalado gksu
 
-gimp ya estaba instalado, instalado el gimp data-extra
 
 Diskmanager:
 
@@ -185,16 +184,49 @@ sudo apt-get install rar unrar zip unzip unace bzip2 lzop p7zip p7zip-full p7zip
 ~~~~{bash}
 apt-cache policy inkscape
 apt-get -t jessie-backports install inkscape
-
-apt-get install librecad
-
-apt-get -t jessie-backports install freecad
+aptitude install ink-generator
 ~~~~
 
 ### Librecad
 
 Instalado desde repos con aptitude
 
+~~~~
+apt-get install librecad
+
+apt-get -t jessie-backports install freecad
+~~~~
+
+### Gimp
+
+Gimp ya estaba instalado, adicionalmente instalado el gimp data-extra
+
+~~~~
+sudo aptitude install gimp-plugin-registry gimp-texturize gimp-data-extras gimp-gap
+
+~~~~
+
+## Fotografía
+
+Rawtherapee y Darktable:
+
+~~~~
+sudo aptitude install icc-profiles icc-profiles-free
+sudo aptitude install rawtherapee darktable
+~~~~
+
+## Música
+
+Clementine, decibel, audacity, soundconverter
+
+~~~~
+sudo aptitude install clementine gstreamer0.10-plugins-bad
+sudo aptitude install decibel-audio-player audacity soundconverter
+
+
+sudo aptitude install recordmydesktop gtk-recordmydesktop
+sudo aptitude install handbrake handbrake-cli handbrake-gtk
+~~~~
 
 # Documentos
 
@@ -232,7 +264,7 @@ mkdir tmp
 cd tmp
 wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 tar xzf install-tl-unx.tar.gz
-cd install-tl-xxxxxx                     
+cd install-tl-xxxxxx
 ~~~~
 
 La parte xxxxxx varía en función del estado de la última versión de
@@ -359,6 +391,12 @@ Instalado emacs desde los repos:
 sudo aptitude install emacs
 ~~~~
 
+Instalamos los paquetes _markdown-mode_, _mardown-plus_ y _pandoc-mode_ desde el menú
+de gestión de paquetes de __emacs__.
+
+También instalamos _d-mde_ y _flymake-d_. Hay una sección de configuración en el fichero _.emacs_.
+
+
 Configuramos el fichero _.emacs_ definimos algunas preferencias,
 algunas funciones útiles y añadimos orígenes extra de paquetes.
 
@@ -398,7 +436,7 @@ algunas funciones útiles y añadimos orígenes extra de paquetes.
 ;; Some useful key definitions
 (define-key global-map [M-S-down-mouse-3] 'imenu)
 (global-set-key [C-tab] 'hippie-expand)                    ; expand
-(global-set-key [C-kp-subtract] 'undo)                     ; [Undo] 
+(global-set-key [C-kp-subtract] 'undo)                     ; [Undo]
 (global-set-key [C-kp-multiply] 'goto-line)                ; goto line
 (global-set-key [C-kp-add] 'toggle-truncate-lines)         ; goto line
 (global-set-key [C-kp-divide] 'delete-trailing-whitespace) ; delete trailing whitespace
@@ -455,7 +493,7 @@ algunas funciones útiles y añadimos orígenes extra de paquetes.
    (while rest
      (bury-buffer (car rest))
      (setq rest (cdr rest)))
-   (setq time (time-now))) 
+   (setq time (time-now)))
 
 (global-set-key [f8] 'bubble-buffer)    ; win-tab switch the buffer
 
@@ -463,8 +501,8 @@ algunas funciones útiles y añadimos orígenes extra de paquetes.
    ;; Kill default buffer without the extra emacs questions
    (interactive)
    (kill-buffer (buffer-name))
-   (set-name)) 
-(global-set-key [C-delete] 'geosoft-kill-buffer) 
+   (set-name))
+(global-set-key [C-delete] 'geosoft-kill-buffer)
 
 ;;----------------------------------------------------------------------
 ;; MELPA and others
@@ -475,10 +513,27 @@ algunas funciones útiles y añadimos orígenes extra de paquetes.
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
   (add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/") t)
   )
+
+;;----------------------------------------------------------------------
+;; flymake installed from package
+
+(require 'flymake)
+(global-set-key (kbd "C-c d") 'flymake-display-err-menu-for-current-line)
+(global-set-key (kbd "C-c n") 'flymake-goto-next-error)
+(global-set-key (kbd "C-c p") 'flymake-goto-prev-error)
+
+;; Activate flymake for D
+(add-hook 'd-mode-hook 'flymake-d-load)
+
 ~~~~
 
-Instalamos los paquetes _markdown-mode_, _mardown-plus_ y _pandoc-mode_ desde el menú
-de gestión de paquetes de __emacs__.
+## Scribus
+
+Instalado con aptitude
+
+~~~~
+sudo aptitude install scribus
+~~~~
 
 
 # Desarrollo sw
@@ -708,7 +763,7 @@ Instalado python-pip y python-virtualenv desde aptitude.
 # Cuentas online abiertas
 
 * google
-* pocket (plugin de chrome) 
+* pocket (plugin de chrome)
 
 # TODO
 

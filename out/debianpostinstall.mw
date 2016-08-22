@@ -37,13 +37,13 @@ Backports:
 
 <pre class="{bash}">sudo cat &gt; /etc/apt/sources.list.d/backports.list &lt;&lt; EOF
 # backports
-deb http://ftp.debian.org/debian/ jessie-backports main contrib non-free 
+deb http://ftp.debian.org/debian/ jessie-backports main contrib non-free
 EOF</pre>
 Multimedia:
 
 <pre class="{bash}">sudo cat &gt;&gt; /etc/apt/sources.list.d/multimedia.list &lt;&lt; EOF
 # multimedia
-deb http://www.deb-multimedia.org/ jessie main non-free 
+deb http://www.deb-multimedia.org/ jessie main non-free
 EOF
 
 sudo apt-get -y --allow-unauthenticated install --reinstall deb-multimedia-keyring</pre>
@@ -62,7 +62,14 @@ git config --global user.email &quot;salvari@gmail.com&quot;
 git config --global core.editor emacs
 git config --global color.ui true
 git config --global credential.helper cache
-git config --global credential.helper 'cache --timeout=7200'</pre>
+git config --global credential.helper 'cache --timeout=7200'
+git config --global push.default simple
+git config --global alias.sla 'log --oneline --decorate --graph --all'
+git config --global alias.car 'commit --amend --no-edit'
+git config --global alias.unstage reset
+git config --global alias.st status
+git config --global alias.last  'log -1 HEAD'
+git config --global alias.ca 'commit -a'</pre>
 Instalado terminator
 
 Instalado chrome añadiendo fuentes a aptitude, hay que borrar el fichero que sobra. chrome
@@ -70,8 +77,6 @@ Instalado chrome añadiendo fuentes a aptitude, hay que borrar el fichero que so
 Instalado keepass2
 
 instalado gksu
-
-gimp ya estaba instalado, instalado el gimp data-extra
 
 Diskmanager:
 
@@ -110,14 +115,36 @@ sudo apt-get install w64codecs</pre>
 
 <pre class="{bash}">apt-cache policy inkscape
 apt-get -t jessie-backports install inkscape
-
-apt-get install librecad
-
-apt-get -t jessie-backports install freecad</pre>
+aptitude install ink-generator</pre>
 === Librecad ===
 
 Instalado desde repos con aptitude
 
+<pre>apt-get install librecad
+
+apt-get -t jessie-backports install freecad</pre>
+=== Gimp ===
+
+Gimp ya estaba instalado, adicionalmente instalado el gimp data-extra
+
+<pre>sudo aptitude install gimp-plugin-registry gimp-texturize gimp-data-extras gimp-gap
+</pre>
+== Fotografía ==
+
+Rawtherapee y Darktable:
+
+<pre>sudo aptitude install icc-profiles icc-profiles-free
+sudo aptitude install rawtherapee darktable</pre>
+== Música ==
+
+Clementine, decibel, audacity, soundconverter
+
+<pre>sudo aptitude install clementine gstreamer0.10-plugins-bad
+sudo aptitude install decibel-audio-player audacity soundconverter
+
+
+sudo aptitude install recordmydesktop gtk-recordmydesktop
+sudo aptitude install handbrake handbrake-cli handbrake-gtk</pre>
 = Documentos =
 
 == Calibre ==
@@ -143,7 +170,7 @@ mkdir tmp
 cd tmp
 wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 tar xzf install-tl-unx.tar.gz
-cd install-tl-xxxxxx                     </pre>
+cd install-tl-xxxxxx</pre>
 La parte xxxxxx varía en función del estado de la última versión de LaTeX disponible.
 
 <pre class="{bash}">sudo ./install-tl</pre>
@@ -217,6 +244,10 @@ Ojo que hay que dejar instalado el gksu (aunque debería estar de antes si sigue
 Instalado emacs desde los repos:
 
 <pre class="{bash}">sudo aptitude install emacs</pre>
+Instalamos los paquetes ''markdown-mode'', ''mardown-plus'' y ''pandoc-mode'' desde el menú de gestión de paquetes de '''emacs'''.
+
+También instalamos ''d-mde'' y ''flymake-d''. Hay una sección de configuración en el fichero ''.emacs''.
+
 Configuramos el fichero ''.emacs'' definimos algunas preferencias, algunas funciones útiles y añadimos orígenes extra de paquetes.
 
 <pre class="{lisp}">(custom-set-variables
@@ -254,7 +285,7 @@ Configuramos el fichero ''.emacs'' definimos algunas preferencias, algunas funci
 ;; Some useful key definitions
 (define-key global-map [M-S-down-mouse-3] 'imenu)
 (global-set-key [C-tab] 'hippie-expand)                    ; expand
-(global-set-key [C-kp-subtract] 'undo)                     ; [Undo] 
+(global-set-key [C-kp-subtract] 'undo)                     ; [Undo]
 (global-set-key [C-kp-multiply] 'goto-line)                ; goto line
 (global-set-key [C-kp-add] 'toggle-truncate-lines)         ; goto line
 (global-set-key [C-kp-divide] 'delete-trailing-whitespace) ; delete trailing whitespace
@@ -311,7 +342,7 @@ Configuramos el fichero ''.emacs'' definimos algunas preferencias, algunas funci
    (while rest
      (bury-buffer (car rest))
      (setq rest (cdr rest)))
-   (setq time (time-now))) 
+   (setq time (time-now)))
 
 (global-set-key [f8] 'bubble-buffer)    ; win-tab switch the buffer
 
@@ -319,8 +350,8 @@ Configuramos el fichero ''.emacs'' definimos algunas preferencias, algunas funci
    ;; Kill default buffer without the extra emacs questions
    (interactive)
    (kill-buffer (buffer-name))
-   (set-name)) 
-(global-set-key [C-delete] 'geosoft-kill-buffer) 
+   (set-name))
+(global-set-key [C-delete] 'geosoft-kill-buffer)
 
 ;;----------------------------------------------------------------------
 ;; MELPA and others
@@ -330,9 +361,24 @@ Configuramos el fichero ''.emacs'' definimos algunas preferencias, algunas funci
   (add-to-list 'package-archives '(&quot;melpa&quot; . &quot;http://melpa.org/packages/&quot;) t)
   (add-to-list 'package-archives '(&quot;gnu&quot; . &quot;http://elpa.gnu.org/packages/&quot;) t)
   (add-to-list 'package-archives '(&quot;marmalade&quot; . &quot;https://marmalade-repo.org/packages/&quot;) t)
-  )</pre>
-Instalamos los paquetes ''markdown-mode'', ''mardown-plus'' y ''pandoc-mode'' desde el menú de gestión de paquetes de '''emacs'''.
+  )
 
+;;----------------------------------------------------------------------
+;; flymake installed from package
+
+(require 'flymake)
+(global-set-key (kbd &quot;C-c d&quot;) 'flymake-display-err-menu-for-current-line)
+(global-set-key (kbd &quot;C-c n&quot;) 'flymake-goto-next-error)
+(global-set-key (kbd &quot;C-c p&quot;) 'flymake-goto-prev-error)
+
+;; Activate flymake for D
+(add-hook 'd-mode-hook 'flymake-d-load)
+</pre>
+== Scribus ==
+
+Instalado con aptitude
+
+<pre>sudo aptitude install scribus</pre>
 = Desarrollo sw =
 
 == Paquetes esenciales ==
@@ -465,6 +511,15 @@ Nos queda arreglar las fuentes para que funcione correctamente la linea de estad
 
 == Instalación de fuentes adicionales ==
 
+Nos bajamos unas cuantas fuentes que soporten los iconos ''Awesome''.
+
+<pre class="{bash}">cd ~/tmp
+git clone https://github.com/abertsch/Menlo-for-Powerline
+git clone https://github.com/powerline/fonts
+
+mkdir ~/.fonts
+cp someFontFile ~/.fonts/
+fc-cache -vf ~/.fonts/</pre>
 = Cambiar las opciones de idioma =
 
 Ejecutamos:
@@ -496,6 +551,10 @@ Descargamos desde github
 cython python-libxml2 python-gobject python-dbus python-psutil python-cairosvg git
 
 python setup.py build_ext --inplace</pre>
+= Python =
+
+Instalado python-pip y python-virtualenv desde aptitude.
+
 = Cuentas online abiertas =
 
 * google
@@ -524,4 +583,6 @@ sudo aptitude install chromium
 = Links =
 
 [https://wiki.debian.org/systemd Systemd] [https://wiki.gnome.org/Design/OS/KeyboardShortcuts Gnome shortcuts] [https://www.linux.com/learn/easy-steps-make-gnome-3-more-efficient Gnome optimizaciones] [https://diversidadyunpocodetodo.blogspot.com.es/2015/03/sensores-temperatura-hardware-discos-cpu-debian-ubuntu.html Instalación Debian] [http://joshldavis.com/2014/07/26/oh-my-zsh-is-a-disease-antigen-is-the-vaccine/ zsh] [http://blog.namangoel.com/zsh-with-antigen zsh]
+
+https://www.roaringpenguin.com/products/remind http://taskwarrior.org/
 

@@ -56,7 +56,7 @@ Backports:
 ``` {.{bash}}
 sudo cat > /etc/apt/sources.list.d/backports.list << EOF
 # backports
-deb http://ftp.debian.org/debian/ jessie-backports main contrib non-free 
+deb http://ftp.debian.org/debian/ jessie-backports main contrib non-free
 EOF
 ```
 
@@ -65,7 +65,7 @@ Multimedia:
 ``` {.{bash}}
 sudo cat >> /etc/apt/sources.list.d/multimedia.list << EOF
 # multimedia
-deb http://www.deb-multimedia.org/ jessie main non-free 
+deb http://www.deb-multimedia.org/ jessie main non-free
 EOF
 
 sudo apt-get -y --allow-unauthenticated install --reinstall deb-multimedia-keyring
@@ -95,6 +95,13 @@ git config --global core.editor emacs
 git config --global color.ui true
 git config --global credential.helper cache
 git config --global credential.helper 'cache --timeout=7200'
+git config --global push.default simple
+git config --global alias.sla 'log --oneline --decorate --graph --all'
+git config --global alias.car 'commit --amend --no-edit'
+git config --global alias.unstage reset
+git config --global alias.st status
+git config --global alias.last  'log -1 HEAD'
+git config --global alias.ca 'commit -a'
 ```
 
 Instalado terminator
@@ -105,8 +112,6 @@ que sobra. chrome
 Instalado keepass2
 
 instalado gksu
-
-gimp ya estaba instalado, instalado el gimp data-extra
 
 Diskmanager:
 
@@ -160,15 +165,42 @@ Gráficos
 ``` {.{bash}}
 apt-cache policy inkscape
 apt-get -t jessie-backports install inkscape
-
-apt-get install librecad
-
-apt-get -t jessie-backports install freecad
+aptitude install ink-generator
 ```
 
 ### Librecad
 
 Instalado desde repos con aptitude
+
+    apt-get install librecad
+
+    apt-get -t jessie-backports install freecad
+
+### Gimp
+
+Gimp ya estaba instalado, adicionalmente instalado el gimp data-extra
+
+    sudo aptitude install gimp-plugin-registry gimp-texturize gimp-data-extras gimp-gap
+
+Fotografía
+----------
+
+Rawtherapee y Darktable:
+
+    sudo aptitude install icc-profiles icc-profiles-free
+    sudo aptitude install rawtherapee darktable
+
+Música
+------
+
+Clementine, decibel, audacity, soundconverter
+
+    sudo aptitude install clementine gstreamer0.10-plugins-bad
+    sudo aptitude install decibel-audio-player audacity soundconverter
+
+
+    sudo aptitude install recordmydesktop gtk-recordmydesktop
+    sudo aptitude install handbrake handbrake-cli handbrake-gtk
 
 Documentos
 ==========
@@ -209,7 +241,7 @@ mkdir tmp
 cd tmp
 wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 tar xzf install-tl-unx.tar.gz
-cd install-tl-xxxxxx                     
+cd install-tl-xxxxxx
 ```
 
 La parte xxxxxx varía en función del estado de la última versión de
@@ -338,6 +370,12 @@ Instalado emacs desde los repos:
 sudo aptitude install emacs
 ```
 
+Instalamos los paquetes *markdown-mode*, *mardown-plus* y *pandoc-mode*
+desde el menú de gestión de paquetes de **emacs**.
+
+También instalamos *d-mde* y *flymake-d*. Hay una sección de
+configuración en el fichero *.emacs*.
+
 Configuramos el fichero *.emacs* definimos algunas preferencias, algunas
 funciones útiles y añadimos orígenes extra de paquetes.
 
@@ -377,7 +415,7 @@ funciones útiles y añadimos orígenes extra de paquetes.
 ;; Some useful key definitions
 (define-key global-map [M-S-down-mouse-3] 'imenu)
 (global-set-key [C-tab] 'hippie-expand)                    ; expand
-(global-set-key [C-kp-subtract] 'undo)                     ; [Undo] 
+(global-set-key [C-kp-subtract] 'undo)                     ; [Undo]
 (global-set-key [C-kp-multiply] 'goto-line)                ; goto line
 (global-set-key [C-kp-add] 'toggle-truncate-lines)         ; goto line
 (global-set-key [C-kp-divide] 'delete-trailing-whitespace) ; delete trailing whitespace
@@ -434,7 +472,7 @@ funciones útiles y añadimos orígenes extra de paquetes.
    (while rest
      (bury-buffer (car rest))
      (setq rest (cdr rest)))
-   (setq time (time-now))) 
+   (setq time (time-now)))
 
 (global-set-key [f8] 'bubble-buffer)    ; win-tab switch the buffer
 
@@ -442,8 +480,8 @@ funciones útiles y añadimos orígenes extra de paquetes.
    ;; Kill default buffer without the extra emacs questions
    (interactive)
    (kill-buffer (buffer-name))
-   (set-name)) 
-(global-set-key [C-delete] 'geosoft-kill-buffer) 
+   (set-name))
+(global-set-key [C-delete] 'geosoft-kill-buffer)
 
 ;;----------------------------------------------------------------------
 ;; MELPA and others
@@ -454,10 +492,25 @@ funciones útiles y añadimos orígenes extra de paquetes.
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
   (add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/") t)
   )
+
+;;----------------------------------------------------------------------
+;; flymake installed from package
+
+(require 'flymake)
+(global-set-key (kbd "C-c d") 'flymake-display-err-menu-for-current-line)
+(global-set-key (kbd "C-c n") 'flymake-goto-next-error)
+(global-set-key (kbd "C-c p") 'flymake-goto-prev-error)
+
+;; Activate flymake for D
+(add-hook 'd-mode-hook 'flymake-d-load)
 ```
 
-Instalamos los paquetes *markdown-mode*, *mardown-plus* y *pandoc-mode*
-desde el menú de gestión de paquetes de **emacs**.
+Scribus
+-------
+
+Instalado con aptitude
+
+    sudo aptitude install scribus
 
 Desarrollo sw
 =============
@@ -627,6 +680,18 @@ de estado en los repos de git. Necesitamos una fuente *Awesome*
 Instalación de fuentes adicionales
 ----------------------------------
 
+Nos bajamos unas cuantas fuentes que soporten los iconos *Awesome*.
+
+``` {.{bash}}
+cd ~/tmp
+git clone https://github.com/abertsch/Menlo-for-Powerline
+git clone https://github.com/powerline/fonts
+
+mkdir ~/.fonts
+cp someFontFile ~/.fonts/
+fc-cache -vf ~/.fonts/
+```
+
 Cambiar las opciones de idioma
 ==============================
 
@@ -671,6 +736,11 @@ cython python-libxml2 python-gobject python-dbus python-psutil python-cairosvg g
 python setup.py build_ext --inplace
 ```
 
+Python
+======
+
+Instalado python-pip y python-virtualenv desde aptitude.
+
 Cuentas online abiertas
 =======================
 
@@ -713,3 +783,5 @@ optimizaciones](https://www.linux.com/learn/easy-steps-make-gnome-3-more-efficie
 Debian](https://diversidadyunpocodetodo.blogspot.com.es/2015/03/sensores-temperatura-hardware-discos-cpu-debian-ubuntu.html)
 [zsh](http://joshldavis.com/2014/07/26/oh-my-zsh-is-a-disease-antigen-is-the-vaccine/)
 [zsh](http://blog.namangoel.com/zsh-with-antigen)
+
+https://www.roaringpenguin.com/products/remind http://taskwarrior.org/
