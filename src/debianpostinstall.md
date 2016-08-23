@@ -749,6 +749,15 @@ Instalado desde aptitude.
 
 Descargamos desde github
 
+## Cura
+
+Descargamos desde la pagina web
+
+~~~~
+sudo aptitude install python3-pyqt5
+sudo dpkg -i Cura-2.1.3-Linux.deb
+~~~~
+
 ~~~~{bash}
 sudo apt-get install python-serial python-wxgtk2.8 python-pyglet python-numpy \
 cython python-libxml2 python-gobject python-dbus python-psutil python-cairosvg git
