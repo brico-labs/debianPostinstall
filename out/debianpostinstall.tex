@@ -132,7 +132,9 @@ Herramientas \emph{sync}:
 sudo apt-get install rsync grsync
 \end{verbatim}
 
-Menu Libre: Un editor de menús para Gnome
+Menu Libre: Un editor de menús para Gnome, nos permite generar los
+archivos desktop para cualquier aplicación. Mucho más completo que
+\emph{alacarte} la otra alternativa.
 
 \begin{verbatim}
 sudo apt-get install menulibre
@@ -225,6 +227,10 @@ Ejecutamos lo que manda la página web:
 sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py \
 | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
 \end{verbatim}
+
+(https://github.com/jgoguen/calibre-kobo-driver)
+(http://www.lectoreselectronicos.com/foro/showthread.php?15116-Manual-de-instalaci\%C3\%B3n-y-uso-del-plugin-Kobo-Touch-Extended-para-Calibre)
+(http://www.redelijkheid.com/blog/2013/7/25/kobo-glo-ebook-library-management-with-calibre)
 
 \subsection{Pandoc}\label{pandoc}
 
@@ -558,6 +564,8 @@ Bajamos los paquetes de las respectivas páginas web, descomprimimimos en
 \emph{\textasciitilde{}/apps/} y creamos los desktop file con
 \textbf{Menulibre}
 
+Añadimos los lanzadores con \emph{MenuLibre}
+
 \subsection{Openframeworks}\label{openframeworks}
 
 Bajamos el paquete comprimido de la página web del proyecto.
@@ -769,6 +777,22 @@ python setup.py build_ext --inplace
 \section{Python}\label{python}
 
 Instalado python-pip y python-virtualenv desde aptitude.
+
+Tenemos instalado python python3.
+
+Instalamos a mayores \emph{Ananconda}
+
+\section{Bases de datos}\label{bases-de-datos}
+
+\subsection{MySQL}\label{mysql}
+
+Instalamos desde aptitude \emph{mysql-server.5.6}
+
+Opcionalmente (y muy recomendable)
+
+\begin{verbatim}
+mysql_secure_instalallation
+\end{verbatim}
 
 \section{Cuentas online abiertas}\label{cuentas-online-abiertas}
 

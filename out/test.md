@@ -125,7 +125,9 @@ Herramientas *sync*:
 
     sudo apt-get install rsync grsync
 
-Menu Libre: Un editor de menús para Gnome
+Menu Libre: Un editor de menús para Gnome, nos permite generar los
+archivos desktop para cualquier aplicación. Mucho más completo que
+*alacarte* la otra alternativa.
 
     sudo apt-get install menulibre
 
@@ -212,6 +214,10 @@ Ejecutamos lo que manda la página web:
 
     sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py \
     | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
+
+(https://github.com/jgoguen/calibre-kobo-driver)
+(http://www.lectoreselectronicos.com/foro/showthread.php?15116-Manual-de-instalaci%C3%B3n-y-uso-del-plugin-Kobo-Touch-Extended-para-Calibre)
+(http://www.redelijkheid.com/blog/2013/7/25/kobo-glo-ebook-library-management-with-calibre)
 
 Pandoc
 ------
@@ -543,6 +549,8 @@ Arduino y Processing
 Bajamos los paquetes de las respectivas páginas web, descomprimimimos en
 *\~/apps/* y creamos los desktop file con **Menulibre**
 
+Añadimos los lanzadores con *MenuLibre*
+
 Openframeworks
 --------------
 
@@ -748,6 +756,22 @@ Python
 ======
 
 Instalado python-pip y python-virtualenv desde aptitude.
+
+Tenemos instalado python python3.
+
+Instalamos a mayores *Ananconda*
+
+Bases de datos
+==============
+
+MySQL
+-----
+
+Instalamos desde aptitude *mysql-server.5.6*
+
+Opcionalmente (y muy recomendable)
+
+    mysql_secure_instalallation
 
 Cuentas online abiertas
 =======================
