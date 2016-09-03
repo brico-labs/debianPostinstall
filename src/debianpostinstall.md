@@ -234,6 +234,15 @@ sudo aptitude install recordmydesktop gtk-recordmydesktop
 sudo aptitude install handbrake handbrake-cli handbrake-gtk
 ~~~~
 
+## Deluge
+
+Instalamos desde aptitude
+
+~~~~
+sudo aptitude install deluge
+xdg-mime default deluge.desktop x-scheme-handler/magnet 
+~~~~
+
 # Documentos
 
 ## Calibre
@@ -251,8 +260,9 @@ Para usar el calibre con el Kobo Glo:
 * Creamos una columna _MyShelves_ con identificativo _#myshelves_
 * En las opciones del plugin:
 
-    *    En la opción _Collection columns_ añadimos las columnas _series,#myshelves_
-    *    Marcamos las opciones _Create collections_ y _Delete empy collections_
+    * En la opción _Collection columns_ añadimos las columnas _series,#myshelves_
+    * Marcamos las opciones _Create collections_ y _Delete empy collections_
+    * _Update metadata on device_ y _Set series information_
 
 Algunos enlaces útiles:
 
