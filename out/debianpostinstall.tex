@@ -1,3 +1,84 @@
+\documentclass[12pt,spanish,]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+    \setmainfont[]{Ubuntu}
+    \setmonofont[Mapping=tex-ansi]{Ubuntu Mono}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[a4paper]{geometry}
+\usepackage[unicode=true]{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+\hypersetup{
+            pdftitle={Debian Post-install},
+            pdfauthor={Sergio Alvariño salvari@gmail.com},
+            colorlinks=true,
+            linkcolor=Maroon,
+            citecolor=Blue,
+            urlcolor=Blue,
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[shorthands=off,main=spanish]{babel}
+\else
+  \usepackage{polyglossia}
+  \setmainlanguage[]{spanish}
+\fi
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\title{Debian Post-install}
+\author{Sergio Alvariño
+\href{mailto:salvari@gmail.com}{\nolinkurl{salvari@gmail.com}}}
+\date{julio-2016}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Instalación de Debian
+
+Solo para referencia rápida y personal.
+\end{abstract}
+
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
 \section{Introducción}\label{introducciuxf3n}
 
 Mi portátil es un ordenador Acer 5755G con las siguientes
@@ -81,6 +162,8 @@ sudo aptitude update
 \section{Instalación de varios paquetes
 sueltos}\label{instalaciuxf3n-de-varios-paquetes-sueltos}
 
+\subsection{Git}\label{git}
+
 Instalado git desde aptitude
 
 \begin{verbatim}
@@ -105,7 +188,10 @@ git config --global alias.last  'log -1 HEAD'
 git config --global alias.ca 'commit -a'
 \end{verbatim}
 
-Instalado terminator
+\subsection{Terminator}\label{terminator}
+
+Instalado terminator desde aptitude, también es necesario
+python-keybindings
 
 Instalado chrome añadiendo fuentes a aptitude, hay que borrar el fichero
 que sobra. chrome
@@ -228,9 +314,42 @@ sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/mas
 | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
 \end{verbatim}
 
-(https://github.com/jgoguen/calibre-kobo-driver)
-(http://www.lectoreselectronicos.com/foro/showthread.php?15116-Manual-de-instalaci\%C3\%B3n-y-uso-del-plugin-Kobo-Touch-Extended-para-Calibre)
-(http://www.redelijkheid.com/blog/2013/7/25/kobo-glo-ebook-library-management-with-calibre)
+Para usar el calibre con el Kobo Glo:
+
+\begin{itemize}
+\item
+  Desactivamos todos los plugin de Kobo menos el \emph{Kobo Touch
+  Extended}
+\item
+  Creamos una columna \emph{MyShelves} con identificativo
+  \emph{\#myshelves}
+\item
+  En las opciones del plugin:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    En la opción \emph{Collection columns} añadimos las columnas
+    \emph{series,\#myshelves}
+  \item
+    Marcamos las opciones \emph{Create collections} y \emph{Delete empy
+    collections}
+  \end{itemize}
+\end{itemize}
+
+Algunos enlaces útiles:
+
+\begin{itemize}
+\tightlist
+\item
+  \url{https://github.com/jgoguen/calibre-kobo-driver}
+\item
+  \url{http://www.lectoreselectronicos.com/foro/showthread.php?15116-Manual-de-instalaci\%C3\%B3n-y-uso-del-plugin-Kobo-Touch-Extended-para-Calibre}
+\item
+  \url{http://www.redelijkheid.com/blog/2013/7/25/kobo-glo-ebook-library-management-with-calibre}
+\item
+  \url{https://www.netogram.com/kobo.htm}
+\end{itemize}
 
 \subsection{Pandoc}\label{pandoc}
 
@@ -852,3 +971,5 @@ Debian}
 \href{http://blog.namangoel.com/zsh-with-antigen}{zsh}
 
 https://www.roaringpenguin.com/products/remind http://taskwarrior.org/
+
+\end{document}

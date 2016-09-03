@@ -72,6 +72,9 @@ sudo aptitude update
 Instalación de varios paquetes sueltos
 ======================================
 
+Git
+---
+
 Instalado git desde aptitude
 
 ``` {bash}
@@ -96,7 +99,10 @@ git config --global alias.last  'log -1 HEAD'
 git config --global alias.ca 'commit -a'
 ```
 
-Instalado terminator
+Terminator
+----------
+
+Instalado terminator desde aptitude, también es necesario python-keybindings
 
 Instalado chrome añadiendo fuentes a aptitude, hay que borrar el fichero que sobra. chrome
 
@@ -203,7 +209,21 @@ Ejecutamos lo que manda la página web:
     sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py \
     | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
 
-(https://github.com/jgoguen/calibre-kobo-driver) (http://www.lectoreselectronicos.com/foro/showthread.php?15116-Manual-de-instalaci%C3%B3n-y-uso-del-plugin-Kobo-Touch-Extended-para-Calibre) (http://www.redelijkheid.com/blog/2013/7/25/kobo-glo-ebook-library-management-with-calibre)
+Para usar el calibre con el Kobo Glo:
+
+-   Desactivamos todos los plugin de Kobo menos el *Kobo Touch Extended*
+-   Creamos una columna *MyShelves* con identificativo *\#myshelves*
+-   En las opciones del plugin:
+
+    -   En la opción *Collection columns* añadimos las columnas *series,\#myshelves*
+    -   Marcamos las opciones *Create collections* y *Delete empy collections*
+
+Algunos enlaces útiles:
+
+-   <https://github.com/jgoguen/calibre-kobo-driver>
+-   <http://www.lectoreselectronicos.com/foro/showthread.php?15116-Manual-de-instalaci%C3%B3n-y-uso-del-plugin-Kobo-Touch-Extended-para-Calibre>
+-   <http://www.redelijkheid.com/blog/2013/7/25/kobo-glo-ebook-library-management-with-calibre>
+-   <https://www.netogram.com/kobo.htm>
 
 Pandoc
 ------
