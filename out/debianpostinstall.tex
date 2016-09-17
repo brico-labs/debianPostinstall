@@ -283,12 +283,21 @@ sudo aptitude install gimp-plugin-registry gimp-texturize gimp-data-extras gimp-
 
 \subsection{Fotografía}\label{fotografuxeda}
 
-Rawtherapee y Darktable:
+\subsubsection{Rawtherapee y Darktable: Tratamiento de imágenes
+fotogŕaficas}\label{rawtherapee-y-darktable-tratamiento-de-imuxe1genes-fotogux155aficas}
 
 \begin{verbatim}
 sudo aptitude install icc-profiles icc-profiles-free
 sudo aptitude install rawtherapee darktable
 \end{verbatim}
+
+\subsubsection{Stopmotion}\label{stopmotion}
+
+\begin{verbatim}
+sudo aptitude install stopmotion vgrabbj dvgrab
+\end{verbatim}
+
+TODO: Probar qStopmotion
 
 \subsection{Música}\label{muxfasica}
 
@@ -301,6 +310,15 @@ sudo aptitude install decibel-audio-player audacity soundconverter
 
 sudo aptitude install recordmydesktop gtk-recordmydesktop
 sudo aptitude install handbrake handbrake-cli handbrake-gtk
+\end{verbatim}
+
+\subsection{Deluge}\label{deluge}
+
+Instalamos desde aptitude
+
+\begin{verbatim}
+sudo aptitude install deluge
+xdg-mime default deluge.desktop x-scheme-handler/magnet 
 \end{verbatim}
 
 \section{Documentos}\label{documentos}
@@ -334,6 +352,8 @@ Para usar el calibre con el Kobo Glo:
   \item
     Marcamos las opciones \emph{Create collections} y \emph{Delete empy
     collections}
+  \item
+    \emph{Update metadata on device} y \emph{Set series information}
   \end{itemize}
 \end{itemize}
 

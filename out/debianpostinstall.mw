@@ -135,10 +135,15 @@ Gimp ya estaba instalado, adicionalmente instalado el gimp data-extra
 </pre>
 == Fotografía ==
 
-Rawtherapee y Darktable:
+=== Rawtherapee y Darktable: Tratamiento de imágenes fotogŕaficas ===
 
 <pre>sudo aptitude install icc-profiles icc-profiles-free
 sudo aptitude install rawtherapee darktable</pre>
+=== Stopmotion ===
+
+<pre>sudo aptitude install stopmotion vgrabbj dvgrab</pre>
+TODO: Probar qStopmotion
+
 == Música ==
 
 Clementine, decibel, audacity, soundconverter
@@ -149,6 +154,12 @@ sudo aptitude install decibel-audio-player audacity soundconverter
 
 sudo aptitude install recordmydesktop gtk-recordmydesktop
 sudo aptitude install handbrake handbrake-cli handbrake-gtk</pre>
+== Deluge ==
+
+Instalamos desde aptitude
+
+<pre>sudo aptitude install deluge
+xdg-mime default deluge.desktop x-scheme-handler/magnet </pre>
 = Documentos =
 
 == Calibre ==
@@ -164,6 +175,7 @@ Para usar el calibre con el Kobo Glo:
 * En las opciones del plugin:
 ** En la opción ''Collection columns'' añadimos las columnas ''series,#myshelves''
 ** Marcamos las opciones ''Create collections'' y ''Delete empy collections''
+** ''Update metadata on device'' y ''Set series information''
 
 Algunos enlaces útiles:
 

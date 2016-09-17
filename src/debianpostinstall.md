@@ -214,12 +214,21 @@ sudo aptitude install gimp-plugin-registry gimp-texturize gimp-data-extras gimp-
 
 ## Fotografía
 
-Rawtherapee y Darktable:
+### Rawtherapee y Darktable: Tratamiento de imágenes fotogŕaficas
 
 ~~~~
 sudo aptitude install icc-profiles icc-profiles-free
 sudo aptitude install rawtherapee darktable
 ~~~~
+
+### Stopmotion
+
+~~~~
+sudo aptitude install stopmotion vgrabbj dvgrab
+~~~~
+
+TODO: Probar qStopmotion
+
 
 ## Música
 
