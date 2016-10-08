@@ -46,11 +46,12 @@ Bumblebee-nvidia primus
 
 # Gestión de paquetes
 
-Instalamos _aptitude_ y _synaptic_
+Instalamos _aptitude_, _synaptic_ y _gdebi_
 
 ~~~~{bash}
 sudo apt-get install aptitude
 sudo apt-get install synaptic
+sudo apt-get install gdebi
 ~~~~
 
 Cambiamos las opciones de _aptitude_ para que __no instale__ los paquetes
@@ -63,7 +64,7 @@ del cdrom.
 
 ## Habilitamos los backports y multimedia
 
-Backports:
+### Backports:
 
 ~~~~{bash}
 sudo cat > /etc/apt/sources.list.d/backports.list << EOF
@@ -72,7 +73,7 @@ deb http://ftp.debian.org/debian/ jessie-backports main contrib non-free
 EOF
 ~~~~
 
-Multimedia:
+### Multimedia:
 
 ~~~~{bash}
 sudo cat >> /etc/apt/sources.list.d/multimedia.list << EOF
@@ -91,72 +92,81 @@ sudo aptitude update
 
 # Instalación de varios paquetes sueltos
 
-
-## Git
-
-Instalado git desde aptitude
-
-~~~~{bash}
-sudo aptitude install git
-~~~~
-
-Configuración básica de __git__
-
-~~~~{bash}
-git config --global user.name "Sergio Alvariño"
-git config --global user.email "salvari@gmail.com"
-git config --global core.editor emacs
-git config --global color.ui true
-git config --global credential.helper cache
-git config --global credential.helper 'cache --timeout=7200'
-git config --global push.default simple
-git config --global alias.sla 'log --oneline --decorate --graph --all'
-git config --global alias.car 'commit --amend --no-edit'
-git config --global alias.unstage reset
-git config --global alias.st status
-git config --global alias.last  'log -1 HEAD'
-git config --global alias.ca 'commit -a'
-~~~~
-
 ## Terminator
 
-Instalado terminator desde aptitude, también es necesario python-keybindings
+Terminator es un emulador de terminal muy completo. Los instalamos desde _aptitude_
 
-Instalado chrome añadiendo fuentes a aptitude, hay que borrar el fichero que sobra. chrome
+~~~~{bash}
+sudo aptitude install terminator python-keybinder
+~~~~
 
-Instalado keepass2
+## Chrome
 
-instalado gksu
+Instalado chrome añadiendo fuentes a aptitude. No recuerdo como las
+añadí, en el fichero _/etc/apt/sources.list.d/google-chrome.list_,
+tengo los siguientes contenidos:
+
+~~~~
+###
+###
+###
+###
+### THIS FILE IS AUTOMATICALLY CONFIGURED ###
+# You may comment out this entry, but any other modifications may be lost.
+deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main 
+~~~~
+
+~~~~{bash}
+sudo aptitude install google-chrome-stable
+sudo aptitude install chromium
+~~~~
 
 
-Diskmanager:
+## Keepass2
+
+Instalado _keepass2_ desde Debian
+
+~~~~
+sudo aptitude install keepass2
+~~~~
+
+## gksu
+
+~~~~
+sudo aptitude install gksu
+~~~~
+
+
+## Diskmanager
 
 ~~~~
 sudo apt-get install ntfs-3g disk-manager
 ~~~~
 
-Gnucash:
+## Gnucash
 
 ~~~~
 sudo apt-get -t jessie-backports install gnucash
 ~~~~
 
-Herramientas _sync_:
+## Herramientas _sync_
 
 ~~~~
 sudo apt-get install rsync grsync
 ~~~~
 
-Menu Libre: Un editor de menús para Gnome, nos permite generar los
-archivos desktop para cualquier aplicación. Mucho más completo que
-_alacarte_ la otra alternativa.
+## Menulibre
+
+Un editor de menús para Gnome, nos permite generar los archivos
+desktop para cualquier aplicación. Mucho más completo que _alacarte_
+la otra alternativa.
 
 ~~~~
 sudo apt-get install menulibre
 ~~~~
 
 
-Tor
+## Tor
 
 Bajado el comprimido desde la web y descomprimido en _~/apps_ copiado
 el fichero desktop a _~/.local/share/applications_
@@ -183,6 +193,13 @@ sudo apt-get install w64codecs
 sudo apt-get install rar unrar zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar
 ~~~~
 
+## Dropbox
+
+Bajado el paquete Debian desde la página
+[web de Dropbox](https://www.dropbox.com/install-linux), instalado el
+paquete con _packageinstall_, es decir, simplemente pinchando desde el
+gestor de ficheros.
+
 ## Gráficos
 
 ### Inkscape
@@ -193,7 +210,7 @@ apt-get -t jessie-backports install inkscape
 aptitude install ink-generator
 ~~~~
 
-### Librecad
+### LibreCAD y FreeCAD
 
 Instalado desde repos con aptitude
 
@@ -578,8 +595,42 @@ Instalado con aptitude
 sudo aptitude install scribus
 ~~~~
 
+## Comix
+
+Instalado con aptitude 
+
+~~~~
+sudo aptitude install comix
+~~~~
+
 
 # Desarrollo sw
+
+## Git
+
+Instalado git desde aptitude
+
+~~~~{bash}
+sudo aptitude install git
+~~~~
+
+Configuración básica de __git__
+
+~~~~{bash}
+git config --global user.name "Sergio Alvariño"
+git config --global user.email "salvari@gmail.com"
+git config --global core.editor emacs
+git config --global color.ui true
+git config --global credential.helper cache
+git config --global credential.helper 'cache --timeout=7200'
+git config --global push.default simple
+git config --global alias.sla 'log --oneline --decorate --graph --all'
+git config --global alias.car 'commit --amend --no-edit'
+git config --global alias.unstage reset
+git config --global alias.st status
+git config --global alias.last  'log -1 HEAD'
+git config --global alias.ca 'commit -a'
+~~~~
 
 ## Paquetes esenciales
 
@@ -604,12 +655,10 @@ sudo apt-get update && sudo apt-get -y --allow-unauthenticated install --reinsta
 
 Instalamos todos los programas asociados.
 
-## Arduino y Processing
+## Processing
 
 Bajamos los paquetes de las respectivas páginas web, descomprimimimos
 en _~/apps/_ y creamos los desktop file con __Menulibre__
-
-Añadimos los lanzadores con _MenuLibre_
 
 ## Openframeworks
 
@@ -640,6 +689,43 @@ Al final también va a añadir una linea al fichero _~/.profile_
 
 ~~~~
 export PG_OF_PATH=/home/salvari/apps/of/of_v0.9.3_linux64_release
+~~~~
+
+# Desarrollo hardware
+
+## Arduino IDE
+
+Bajamos los paquetes de la página [web](https://www.arduino.cc) ,
+descomprimimimos en _~/apps/arduino_.
+
+Creamos un link al directorio del software que hemos descargado:
+
+~~~~
+cd ~/apps/arduino
+ln -s arduino-x.y.z current
+~~~~
+
+La primera ves que instalamos será necesario crear el desktop file con
+__Menulibre__ con las actulizaciones no será necesario, siempre y
+cuando apunte a _~/apps/arduino/current_
+
+
+## Pinguino IDE
+
+Tenemos el paquete de instalación disponible en su página [web](http://pinguino.cc/download.php)
+
+Ejecutamos el programa de instalación y nos aseguramos de crear el
+directorio _~/Pinguino/v11_, parece que hay algún problema con el
+programa y no lo crea automáticamente.
+
+El programa queda correctamente instalado en _/opt_
+
+## KiCAD
+
+Instalamos desde _backports_:
+
+~~~~{bash}
+sudo aptitude install -t jessie-backports kicad
 ~~~~
 
 # Docker
@@ -812,11 +898,28 @@ python setup.py build_ext --inplace
 
 # Python
 
+De partida tenemos instalado dos versiones: _python_ y _python3_
+
+~~~~{bash}
+python -V
+Python 2.7.9
+
+python3 -V
+Python 3.4.2
+~~~~
+
 Instalado python-pip y python-virtualenv desde aptitude.
 
-Tenemos instalado python python3.
+~~~~{bash}
+sudo aptitude install python-pip python-virtualenv
+~~~~
 
-Instalamos a mayores _Ananconda_
+Instalamos a mayores _Ananconda_, es la forma fácil de poder usar
+_ipython notebook_. De hecho me he instalado dos versiones la que
+incluye el python2 y la que incluye el python3.
+
+TODO: Describir la instalación de las dos versiones de Anaconda y como
+lanzar iPython.
 
 # Bases de datos
 
@@ -830,6 +933,32 @@ Opcionalmente (y muy recomendable)
 mysql_secure_instalallation
 ~~~~
 
+### Actualización
+
+Cambiamos el fichero _mysql.conf.d/mysqld.cnf_
+
+~~~~
+# max_allowed_packet      = 16M
+max_allowed_packet	= 500M
+~~~~
+
+Reiniciamos el servicio:
+
+~~~~
+/etc/init.d/mysql restart
+~~~~
+
+## Cliente SQL SQuirreL SQL
+
+Descargamos el paquete desde la página
+[web](http://squirrel-sql.sourceforge.net/) y lo descomprimimos en
+_~/apps_, también tendremos que descargar el conector de mysql para
+java, por ejemplo desde
+[aquí](http://dev.mysql.com/downloads/connector/j/3.0.html)
+
+Una vez instalado, creamos el desktop-file con _MenuLibre_ y
+configuramos el driver _MySQL_ añadiendo el path a donde hayamos
+dejado el conector java.
 
 # Cuentas online abiertas
 
@@ -845,7 +974,7 @@ mysql_secure_instalallation
 * rawtherapee
 * krita
 * mypaint
-
+* qStopmotion
 
 Inkscape
 https://elizsarobhasa.makes.org/thimble/MTMwNDIzMjE5Mg==/3d-printing-from-a-2d-drawing
@@ -869,12 +998,11 @@ sudo aptitude install chromium
 
 # Links
 
-[Systemd](https://wiki.debian.org/systemd)
-[Gnome shortcuts](https://wiki.gnome.org/Design/OS/KeyboardShortcuts)
-[Gnome optimizaciones](https://www.linux.com/learn/easy-steps-make-gnome-3-more-efficient)
-[Instalación Debian](https://diversidadyunpocodetodo.blogspot.com.es/2015/03/sensores-temperatura-hardware-discos-cpu-debian-ubuntu.html)
-[zsh](http://joshldavis.com/2014/07/26/oh-my-zsh-is-a-disease-antigen-is-the-vaccine/)
-[zsh](http://blog.namangoel.com/zsh-with-antigen)
-
-https://www.roaringpenguin.com/products/remind
-http://taskwarrior.org/
+* [Systemd](https://wiki.debian.org/systemd)
+* [Gnome shortcuts](https://wiki.gnome.org/Design/OS/KeyboardShortcuts)
+* [Gnome optimizaciones](https://www.linux.com/learn/easy-steps-make-gnome-3-more-efficient)
+* [Instalación Debian](https://diversidadyunpocodetodo.blogspot.com.es/2015/03/sensores-temperatura-hardware-discos-cpu-debian-ubuntu.html)
+* [zsh](http://joshldavis.com/2014/07/26/oh-my-zsh-is-a-disease-antigen-is-the-vaccine/)
+* [zsh](http://blog.namangoel.com/zsh-with-antigen)
+* <https://www.roaringpenguin.com/products/remind>
+* <http://taskwarrior.org/>

@@ -114,11 +114,12 @@ firmware-linux-nonfree Bumblebee-nvidia primus
 
 \section{Gestión de paquetes}\label{gestiuxf3n-de-paquetes}
 
-Instalamos \emph{aptitude} y \emph{synaptic}
+Instalamos \emph{aptitude}, \emph{synaptic} y \emph{gdebi}
 
 \begin{verbatim}
 sudo apt-get install aptitude
 sudo apt-get install synaptic
+sudo apt-get install gdebi
 \end{verbatim}
 
 Cambiamos las opciones de \emph{aptitude} para que \textbf{no instale}
@@ -133,7 +134,7 @@ del cdrom.
 \subsection{Habilitamos los backports y
 multimedia}\label{habilitamos-los-backports-y-multimedia}
 
-Backports:
+\subsubsection{Backports:}\label{backports}
 
 \begin{verbatim}
 sudo cat > /etc/apt/sources.list.d/backports.list << EOF
@@ -142,7 +143,7 @@ deb http://ftp.debian.org/debian/ jessie-backports main contrib non-free
 EOF
 \end{verbatim}
 
-Multimedia:
+\subsubsection{Multimedia:}\label{multimedia}
 
 \begin{verbatim}
 sudo cat >> /etc/apt/sources.list.d/multimedia.list << EOF
@@ -162,71 +163,80 @@ sudo aptitude update
 \section{Instalación de varios paquetes
 sueltos}\label{instalaciuxf3n-de-varios-paquetes-sueltos}
 
-\subsection{Git}\label{git}
-
-Instalado git desde aptitude
-
-\begin{verbatim}
-sudo aptitude install git
-\end{verbatim}
-
-Configuración básica de \textbf{git}
-
-\begin{verbatim}
-git config --global user.name "Sergio Alvariño"
-git config --global user.email "salvari@gmail.com"
-git config --global core.editor emacs
-git config --global color.ui true
-git config --global credential.helper cache
-git config --global credential.helper 'cache --timeout=7200'
-git config --global push.default simple
-git config --global alias.sla 'log --oneline --decorate --graph --all'
-git config --global alias.car 'commit --amend --no-edit'
-git config --global alias.unstage reset
-git config --global alias.st status
-git config --global alias.last  'log -1 HEAD'
-git config --global alias.ca 'commit -a'
-\end{verbatim}
-
 \subsection{Terminator}\label{terminator}
 
-Instalado terminator desde aptitude, también es necesario
-python-keybindings
+Terminator es un emulador de terminal muy completo. Los instalamos desde
+\emph{aptitude}
 
-Instalado chrome añadiendo fuentes a aptitude, hay que borrar el fichero
-que sobra. chrome
+\begin{verbatim}
+sudo aptitude install terminator python-keybinder
+\end{verbatim}
 
-Instalado keepass2
+\subsection{Chrome}\label{chrome}
 
-instalado gksu
+Instalado chrome añadiendo fuentes a aptitude. No recuerdo como las
+añadí, en el fichero \emph{/etc/apt/sources.list.d/google-chrome.list},
+tengo los siguientes contenidos:
 
-Diskmanager:
+\begin{verbatim}
+###
+###
+###
+###
+### THIS FILE IS AUTOMATICALLY CONFIGURED ###
+# You may comment out this entry, but any other modifications may be lost.
+deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main 
+\end{verbatim}
+
+\begin{verbatim}
+sudo aptitude install google-chrome-stable
+sudo aptitude install chromium
+\end{verbatim}
+
+\subsection{Keepass2}\label{keepass2}
+
+Instalado \emph{keepass2} desde Debian
+
+\begin{verbatim}
+sudo aptitude install keepass2
+\end{verbatim}
+
+\subsection{gksu}\label{gksu}
+
+\begin{verbatim}
+sudo aptitude install gksu
+\end{verbatim}
+
+\subsection{Diskmanager}\label{diskmanager}
 
 \begin{verbatim}
 sudo apt-get install ntfs-3g disk-manager
 \end{verbatim}
 
-Gnucash:
+\subsection{Gnucash}\label{gnucash}
 
 \begin{verbatim}
 sudo apt-get -t jessie-backports install gnucash
 \end{verbatim}
 
-Herramientas \emph{sync}:
+\subsection{\texorpdfstring{Herramientas
+\emph{sync}}{Herramientas sync}}\label{herramientas-sync}
 
 \begin{verbatim}
 sudo apt-get install rsync grsync
 \end{verbatim}
 
-Menu Libre: Un editor de menús para Gnome, nos permite generar los
-archivos desktop para cualquier aplicación. Mucho más completo que
-\emph{alacarte} la otra alternativa.
+\subsection{Menulibre}\label{menulibre}
+
+Un editor de menús para Gnome, nos permite generar los archivos desktop
+para cualquier aplicación. Mucho más completo que \emph{alacarte} la
+otra alternativa.
 
 \begin{verbatim}
 sudo apt-get install menulibre
 \end{verbatim}
 
-Tor
+\subsection{Tor}\label{tor}
 
 Bajado el comprimido desde la web y descomprimido en
 \emph{\textasciitilde{}/apps} copiado el fichero desktop a
@@ -253,6 +263,13 @@ sudo apt-get install w64codecs
 sudo apt-get install rar unrar zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar
 \end{verbatim}
 
+\subsection{Dropbox}\label{dropbox}
+
+Bajado el paquete Debian desde la página
+\href{https://www.dropbox.com/install-linux}{web de Dropbox}, instalado
+el paquete con \emph{packageinstall}, es decir, simplemente pinchando
+desde el gestor de ficheros.
+
 \subsection{Gráficos}\label{gruxe1ficos}
 
 \subsubsection{Inkscape}\label{inkscape}
@@ -263,7 +280,7 @@ apt-get -t jessie-backports install inkscape
 aptitude install ink-generator
 \end{verbatim}
 
-\subsubsection{Librecad}\label{librecad}
+\subsubsection{LibreCAD y FreeCAD}\label{librecad-y-freecad}
 
 Instalado desde repos con aptitude
 
@@ -671,7 +688,41 @@ Instalado con aptitude
 sudo aptitude install scribus
 \end{verbatim}
 
+\subsection{Comix}\label{comix}
+
+Instalado con aptitude
+
+\begin{verbatim}
+sudo aptitude install comix
+\end{verbatim}
+
 \section{Desarrollo sw}\label{desarrollo-sw}
+
+\subsection{Git}\label{git}
+
+Instalado git desde aptitude
+
+\begin{verbatim}
+sudo aptitude install git
+\end{verbatim}
+
+Configuración básica de \textbf{git}
+
+\begin{verbatim}
+git config --global user.name "Sergio Alvariño"
+git config --global user.email "salvari@gmail.com"
+git config --global core.editor emacs
+git config --global color.ui true
+git config --global credential.helper cache
+git config --global credential.helper 'cache --timeout=7200'
+git config --global push.default simple
+git config --global alias.sla 'log --oneline --decorate --graph --all'
+git config --global alias.car 'commit --amend --no-edit'
+git config --global alias.unstage reset
+git config --global alias.st status
+git config --global alias.last  'log -1 HEAD'
+git config --global alias.ca 'commit -a'
+\end{verbatim}
 
 \subsection{Paquetes esenciales}\label{paquetes-esenciales}
 
@@ -697,13 +748,11 @@ sudo apt-get update && sudo apt-get -y --allow-unauthenticated install --reinsta
 
 Instalamos todos los programas asociados.
 
-\subsection{Arduino y Processing}\label{arduino-y-processing}
+\subsection{Processing}\label{processing}
 
 Bajamos los paquetes de las respectivas páginas web, descomprimimimos en
 \emph{\textasciitilde{}/apps/} y creamos los desktop file con
 \textbf{Menulibre}
-
-Añadimos los lanzadores con \emph{MenuLibre}
 
 \subsection{Openframeworks}\label{openframeworks}
 
@@ -735,6 +784,43 @@ Al final también va a añadir una linea al fichero
 
 \begin{verbatim}
 export PG_OF_PATH=/home/salvari/apps/of/of_v0.9.3_linux64_release
+\end{verbatim}
+
+\section{Desarrollo hardware}\label{desarrollo-hardware}
+
+\subsection{Arduino IDE}\label{arduino-ide}
+
+Bajamos los paquetes de la página \href{https://www.arduino.cc}{web} ,
+descomprimimimos en \emph{\textasciitilde{}/apps/arduino}.
+
+Creamos un link al directorio del software que hemos descargado:
+
+\begin{verbatim}
+cd ~/apps/arduino
+ln -s arduino-x.y.z current
+\end{verbatim}
+
+La primera ves que instalamos será necesario crear el desktop file con
+\textbf{Menulibre} con las actulizaciones no será necesario, siempre y
+cuando apunte a \emph{\textasciitilde{}/apps/arduino/current}
+
+\subsection{Pinguino IDE}\label{pinguino-ide}
+
+Tenemos el paquete de instalación disponible en su página
+\href{http://pinguino.cc/download.php}{web}
+
+Ejecutamos el programa de instalación y nos aseguramos de crear el
+directorio \emph{\textasciitilde{}/Pinguino/v11}, parece que hay algún
+problema con el programa y no lo crea automáticamente.
+
+El programa queda correctamente instalado en \emph{/opt}
+
+\subsection{KiCAD}\label{kicad}
+
+Instalamos desde \emph{backports}:
+
+\begin{verbatim}
+sudo aptitude install -t jessie-backports kicad
 \end{verbatim}
 
 \section{Docker}\label{docker}
@@ -915,11 +1001,29 @@ python setup.py build_ext --inplace
 
 \section{Python}\label{python}
 
+De partida tenemos instalado dos versiones: \emph{python} y
+\emph{python3}
+
+\begin{verbatim}
+python -V
+Python 2.7.9
+
+python3 -V
+Python 3.4.2
+\end{verbatim}
+
 Instalado python-pip y python-virtualenv desde aptitude.
 
-Tenemos instalado python python3.
+\begin{verbatim}
+sudo aptitude install python-pip python-virtualenv
+\end{verbatim}
 
-Instalamos a mayores \emph{Ananconda}
+Instalamos a mayores \emph{Ananconda}, es la forma fácil de poder usar
+\emph{ipython notebook}. De hecho me he instalado dos versiones la que
+incluye el python2 y la que incluye el python3.
+
+TODO: Describir la instalación de las dos versiones de Anaconda y como
+lanzar iPython.
 
 \section{Bases de datos}\label{bases-de-datos}
 
@@ -932,6 +1036,33 @@ Opcionalmente (y muy recomendable)
 \begin{verbatim}
 mysql_secure_instalallation
 \end{verbatim}
+
+\subsubsection{Actualización}\label{actualizaciuxf3n}
+
+Cambiamos el fichero \emph{mysql.conf.d/mysqld.cnf}
+
+\begin{verbatim}
+# max_allowed_packet      = 16M
+max_allowed_packet  = 500M
+\end{verbatim}
+
+Reiniciamos el servicio:
+
+\begin{verbatim}
+/etc/init.d/mysql restart
+\end{verbatim}
+
+\subsection{Cliente SQL SQuirreL SQL}\label{cliente-sql-squirrel-sql}
+
+Descargamos el paquete desde la página
+\href{http://squirrel-sql.sourceforge.net/}{web} y lo descomprimimos en
+\emph{\textasciitilde{}/apps}, también tendremos que descargar el
+conector de mysql para java, por ejemplo desde
+\href{http://dev.mysql.com/downloads/connector/j/3.0.html}{aquí}
+
+Una vez instalado, creamos el desktop-file con \emph{MenuLibre} y
+configuramos el driver \emph{MySQL} añadiendo el path a donde hayamos
+dejado el conector java.
 
 \section{Cuentas online abiertas}\label{cuentas-online-abiertas}
 
@@ -961,6 +1092,8 @@ mysql_secure_instalallation
   krita
 \item
   mypaint
+\item
+  qStopmotion
 \end{itemize}
 
 Inkscape
@@ -980,16 +1113,27 @@ sudo aptitude install chromium
 
 \section{Links}\label{links}
 
-\href{https://wiki.debian.org/systemd}{Systemd}
-\href{https://wiki.gnome.org/Design/OS/KeyboardShortcuts}{Gnome
-shortcuts}
-\href{https://www.linux.com/learn/easy-steps-make-gnome-3-more-efficient}{Gnome
-optimizaciones}
-\href{https://diversidadyunpocodetodo.blogspot.com.es/2015/03/sensores-temperatura-hardware-discos-cpu-debian-ubuntu.html}{Instalación
-Debian}
-\href{http://joshldavis.com/2014/07/26/oh-my-zsh-is-a-disease-antigen-is-the-vaccine/}{zsh}
-\href{http://blog.namangoel.com/zsh-with-antigen}{zsh}
-
-https://www.roaringpenguin.com/products/remind http://taskwarrior.org/
+\begin{itemize}
+\tightlist
+\item
+  \href{https://wiki.debian.org/systemd}{Systemd}
+\item
+  \href{https://wiki.gnome.org/Design/OS/KeyboardShortcuts}{Gnome
+  shortcuts}
+\item
+  \href{https://www.linux.com/learn/easy-steps-make-gnome-3-more-efficient}{Gnome
+  optimizaciones}
+\item
+  \href{https://diversidadyunpocodetodo.blogspot.com.es/2015/03/sensores-temperatura-hardware-discos-cpu-debian-ubuntu.html}{Instalación
+  Debian}
+\item
+  \href{http://joshldavis.com/2014/07/26/oh-my-zsh-is-a-disease-antigen-is-the-vaccine/}{zsh}
+\item
+  \href{http://blog.namangoel.com/zsh-with-antigen}{zsh}
+\item
+  \url{https://www.roaringpenguin.com/products/remind}
+\item
+  \url{http://taskwarrior.org/}
+\end{itemize}
 
 \end{document}
