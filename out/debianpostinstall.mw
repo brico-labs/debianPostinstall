@@ -68,7 +68,7 @@ Instalado chrome añadiendo fuentes a aptitude. No recuerdo como las añadí, en
 ###
 ### THIS FILE IS AUTOMATICALLY CONFIGURED ###
 # You may comment out this entry, but any other modifications may be lost.
-deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main </pre>
+deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main</pre>
 <pre class="{bash}">sudo aptitude install google-chrome-stable
 sudo aptitude install chromium</pre>
 == Keepass2 ==
@@ -162,7 +162,7 @@ sudo aptitude install handbrake handbrake-cli handbrake-gtk</pre>
 Instalamos desde aptitude
 
 <pre>sudo aptitude install deluge
-xdg-mime default deluge.desktop x-scheme-handler/magnet </pre>
+xdg-mime default deluge.desktop x-scheme-handler/magnet</pre>
 = Documentos =
 
 == Calibre ==
@@ -499,15 +499,22 @@ La primera ves que instalamos será necesario crear el desktop file con '''Menul
 
 Tenemos el paquete de instalación disponible en su página [http://pinguino.cc/download.php web]
 
-Ejecutamos el programa de instalación y nos aseguramos de crear el directorio ''~/Pinguino/v11'', parece que hay algún problema con el programa y no lo crea automáticamente.
+Ejecutamos el programa de instalación. El programa descargará los paquetes Debian necesarios para dejar el IDE y los compiladores instalados.
 
-El programa queda correctamente instalado en ''/opt''
+Al acabar la instalación he tenido que crear el directorio ''~/Pinguino/v11'', parece que hay algún problema con el programa de instalación y no lo crea automáticamente.
+
+El programa queda correctamente instalado en ''/opt'' y arranca correctamente, habrá que probarlo con los micros.
 
 == KiCAD ==
 
 Instalamos desde ''backports'':
 
 <pre class="{bash}">sudo aptitude install -t jessie-backports kicad</pre>
+Vamos a instalar a mayores algunas librerias de KiCAD, para poder crear Shields de Arduino.
+
+* [https://github.com/freetronics/freetronics_kicad_library Freetronics] una libreria que no solo incluye Shield para Arduino sino una completa colección de componentes que nos permitirá hacer proyectos completos. [http://www.freetronics.com Freetronics] es una especie de BricoGeek australiano, publica tutoriales, vende componentes, y al parecer mantiene una biblioteca para KiCAD. La biblioteca de Freetronics se mantiene en un repo de github. Lo suyo es incorporarla a cada proyecto, por que si la actualizas se pueden romper los proyectos que estes haciendo.
+* [http://meta-blog.eklablog.com/kicad-librairie-arduino-pretty-p930786 eklablog] Esta biblioteca de componentes está incluida en el github de KiCAD, así que teoricamente no habría que instalarla en nuestro disco duro.
+
 = Docker =
 
 <pre class="{bash}">apt-get install apt-transport-https ca-certificates
@@ -655,8 +662,71 @@ Instalado python-pip y python-virtualenv desde aptitude.
 <pre class="{bash}">sudo aptitude install python-pip python-virtualenv</pre>
 Instalamos a mayores ''Ananconda'', es la forma fácil de poder usar ''ipython notebook''. De hecho me he instalado dos versiones la que incluye el python2 y la que incluye el python3.
 
-TODO: Describir la instalación de las dos versiones de Anaconda y como lanzar iPython.
+Las instalaciones de ''Anaconda'' son redundantes, basta con instalar uno de ellos. En cualquier caso para realizar la instalación basta con descargar los scripts de instalación desde la página web de Anaconda.
 
+<pre class="{bash}">bash Anaconda3-4.2.0-Linux-x86_64.sh
+bash Anaconda2-4.2.0-Linux-x86_64.sh</pre>
+Los he dejado instalados en ''~/apps/anaconda2'' y ''~/apps/anaconda3''
+
+Cada una de estas instalaciones incorpora su propia versión de Python. Para usarlas tenemos que cambiar nuestro PATH para que el Python deseado sea el primero que se selecciona.
+
+Por ejemplo para activar anaconda3 en bash:
+
+<pre class="{bash}">export PATH=&quot;~/apps/anaconda3/bin:$PATH&quot;</pre>
+Para hacer lo mismo en fish:
+
+<pre class="{fish}">set -x PATH ~/apps/anaconda3/bin $PATH</pre>
+== iPython y GraphLab ==
+
+Creamos un entorno conda con Python 2.7.x
+
+<pre>conda create -n gl-env python=2.7 anaconda </pre>
+Activamos el nuevo entorno (todo esto lo hice en bash, en fish hay un problemilla con el entorno conda [https://penandpants.com/2014/02/28/using-conda-environments-and-the-fish-shell/ mas info])
+
+<pre>bash
+source activate gl-env</pre>
+En el futuro esto es todo lo que tendremos que hacer activar el entorno conda donde estamos instalando el iPython.
+
+Nos aseguramos de tener ''pip'' al dia:
+
+<pre>conda update pip</pre>
+Instalamos la biblioteca [https://turi.com/products/create/ GraphLab Create]. Esta biblioteca se supone que es fácil de usar pero está sujeta a licencia. <ref>TODO: Pasarme a ''scikit-learn''
+</ref>
+
+Una vez registrado en la página web te pasan un número de registro que tienes que usar para instalar la biblioteca.
+
+<pre>pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz</pre>
+Y para terminar instalamos iPython <ref>TODO: conda install jupyter
+</ref>:
+
+<pre>conda install ipython-notebook</pre>
+Desde ahora basta con activar el entorno que hemos creado para tener acceso al iPython.
+
+<pre>source activate gl-env
+
+ipython notebook
+
+source deactivate gl-env</pre>
+=== Instalación alternativa con virtualenv ===
+
+<pre># Create a virtual environment named e.g. gl-env
+virtualenv gl-env
+
+# Activate the virtual environment
+source gl-env/bin/activate
+
+# Make sure pip is up to date
+pip install --upgrade pip
+
+# Install IPython Notebook (optional)
+pip install &quot;ipython[notebook]&quot;
+
+# Install Jupyter Notebook (optional)
+pip install &quot;jupyter&quot;
+
+
+# Install your licensed copy of GraphLab Create
+pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz</pre>
 = Bases de datos =
 
 == MySQL ==
@@ -718,3 +788,4 @@ sudo aptitude install chromium
 * https://www.roaringpenguin.com/products/remind
 * http://taskwarrior.org/
 
+<references />

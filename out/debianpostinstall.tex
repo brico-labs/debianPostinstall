@@ -185,7 +185,7 @@ tengo los siguientes contenidos:
 ###
 ### THIS FILE IS AUTOMATICALLY CONFIGURED ###
 # You may comment out this entry, but any other modifications may be lost.
-deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main 
+deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
 \end{verbatim}
 
 \begin{verbatim}
@@ -335,7 +335,7 @@ Instalamos desde aptitude
 
 \begin{verbatim}
 sudo aptitude install deluge
-xdg-mime default deluge.desktop x-scheme-handler/magnet 
+xdg-mime default deluge.desktop x-scheme-handler/magnet
 \end{verbatim}
 
 \section{Documentos}\label{documentos}
@@ -809,11 +809,16 @@ cuando apunte a \emph{\textasciitilde{}/apps/arduino/current}
 Tenemos el paquete de instalación disponible en su página
 \href{http://pinguino.cc/download.php}{web}
 
-Ejecutamos el programa de instalación y nos aseguramos de crear el
-directorio \emph{\textasciitilde{}/Pinguino/v11}, parece que hay algún
-problema con el programa y no lo crea automáticamente.
+Ejecutamos el programa de instalación. El programa descargará los
+paquetes Debian necesarios para dejar el IDE y los compiladores
+instalados.
 
-El programa queda correctamente instalado en \emph{/opt}
+Al acabar la instalación he tenido que crear el directorio
+\emph{\textasciitilde{}/Pinguino/v11}, parece que hay algún problema con
+el programa de instalación y no lo crea automáticamente.
+
+El programa queda correctamente instalado en \emph{/opt} y arranca
+correctamente, habrá que probarlo con los micros.
 
 \subsection{KiCAD}\label{kicad}
 
@@ -822,6 +827,27 @@ Instalamos desde \emph{backports}:
 \begin{verbatim}
 sudo aptitude install -t jessie-backports kicad
 \end{verbatim}
+
+Vamos a instalar a mayores algunas librerias de KiCAD, para poder crear
+Shields de Arduino.
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://github.com/freetronics/freetronics_kicad_library}{Freetronics}
+  una libreria que no solo incluye Shield para Arduino sino una completa
+  colección de componentes que nos permitirá hacer proyectos completos.
+  \href{http://www.freetronics.com}{Freetronics} es una especie de
+  BricoGeek australiano, publica tutoriales, vende componentes, y al
+  parecer mantiene una biblioteca para KiCAD. La biblioteca de
+  Freetronics se mantiene en un repo de github. Lo suyo es incorporarla
+  a cada proyecto, por que si la actualizas se pueden romper los
+  proyectos que estes haciendo.
+\item
+  \href{http://meta-blog.eklablog.com/kicad-librairie-arduino-pretty-p930786}{eklablog}
+  Esta biblioteca de componentes está incluida en el github de KiCAD,
+  así que teoricamente no habría que instalarla en nuestro disco duro.
+\end{itemize}
 
 \section{Docker}\label{docker}
 
@@ -1022,8 +1048,113 @@ Instalamos a mayores \emph{Ananconda}, es la forma fácil de poder usar
 \emph{ipython notebook}. De hecho me he instalado dos versiones la que
 incluye el python2 y la que incluye el python3.
 
-TODO: Describir la instalación de las dos versiones de Anaconda y como
-lanzar iPython.
+Las instalaciones de \emph{Anaconda} son redundantes, basta con instalar
+uno de ellos. En cualquier caso para realizar la instalación basta con
+descargar los scripts de instalación desde la página web de Anaconda.
+
+\begin{verbatim}
+bash Anaconda3-4.2.0-Linux-x86_64.sh
+bash Anaconda2-4.2.0-Linux-x86_64.sh
+\end{verbatim}
+
+Los he dejado instalados en \emph{\textasciitilde{}/apps/anaconda2} y
+\emph{\textasciitilde{}/apps/anaconda3}
+
+Cada una de estas instalaciones incorpora su propia versión de Python.
+Para usarlas tenemos que cambiar nuestro PATH para que el Python deseado
+sea el primero que se selecciona.
+
+Por ejemplo para activar anaconda3 en bash:
+
+\begin{verbatim}
+export PATH="~/apps/anaconda3/bin:$PATH"
+\end{verbatim}
+
+Para hacer lo mismo en fish:
+
+\begin{verbatim}
+set -x PATH ~/apps/anaconda3/bin $PATH
+\end{verbatim}
+
+\subsection{iPython y GraphLab}\label{ipython-y-graphlab}
+
+Creamos un entorno conda con Python 2.7.x
+
+\begin{verbatim}
+conda create -n gl-env python=2.7 anaconda 
+\end{verbatim}
+
+Activamos el nuevo entorno (todo esto lo hice en bash, en fish hay un
+problemilla con el entorno conda
+\href{https://penandpants.com/2014/02/28/using-conda-environments-and-the-fish-shell/}{mas
+info})
+
+\begin{verbatim}
+bash
+source activate gl-env
+\end{verbatim}
+
+En el futuro esto es todo lo que tendremos que hacer activar el entorno
+conda donde estamos instalando el iPython.
+
+Nos aseguramos de tener \emph{pip} al dia:
+
+\begin{verbatim}
+conda update pip
+\end{verbatim}
+
+Instalamos la biblioteca
+\href{https://turi.com/products/create/}{GraphLab Create}. Esta
+biblioteca se supone que es fácil de usar pero está sujeta a licencia.
+\footnote{TODO: Pasarme a \emph{scikit-learn}}
+
+Una vez registrado en la página web te pasan un número de registro que
+tienes que usar para instalar la biblioteca.
+
+\begin{verbatim}
+pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
+\end{verbatim}
+
+Y para terminar instalamos iPython \footnote{TODO: conda install jupyter}:
+
+\begin{verbatim}
+conda install ipython-notebook
+\end{verbatim}
+
+Desde ahora basta con activar el entorno que hemos creado para tener
+acceso al iPython.
+
+\begin{verbatim}
+source activate gl-env
+
+ipython notebook
+
+source deactivate gl-env
+\end{verbatim}
+
+\subsubsection{Instalación alternativa con
+virtualenv}\label{instalaciuxf3n-alternativa-con-virtualenv}
+
+\begin{verbatim}
+# Create a virtual environment named e.g. gl-env
+virtualenv gl-env
+
+# Activate the virtual environment
+source gl-env/bin/activate
+
+# Make sure pip is up to date
+pip install --upgrade pip
+
+# Install IPython Notebook (optional)
+pip install "ipython[notebook]"
+
+# Install Jupyter Notebook (optional)
+pip install "jupyter"
+
+
+# Install your licensed copy of GraphLab Create
+pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
+\end{verbatim}
 
 \section{Bases de datos}\label{bases-de-datos}
 

@@ -113,7 +113,7 @@ tengo los siguientes contenidos:
 ###
 ### THIS FILE IS AUTOMATICALLY CONFIGURED ###
 # You may comment out this entry, but any other modifications may be lost.
-deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main 
+deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
 ~~~~
 
 ~~~~{bash}
@@ -266,7 +266,7 @@ Instalamos desde aptitude
 
 ~~~~
 sudo aptitude install deluge
-xdg-mime default deluge.desktop x-scheme-handler/magnet 
+xdg-mime default deluge.desktop x-scheme-handler/magnet
 ~~~~
 
 # Documentos
@@ -597,7 +597,7 @@ sudo aptitude install scribus
 
 ## Comix
 
-Instalado con aptitude 
+Instalado con aptitude
 
 ~~~~
 sudo aptitude install comix
@@ -712,13 +712,19 @@ cuando apunte a _~/apps/arduino/current_
 
 ## Pinguino IDE
 
-Tenemos el paquete de instalación disponible en su página [web](http://pinguino.cc/download.php)
+Tenemos el paquete de instalación disponible en su página
+[web](http://pinguino.cc/download.php)
 
-Ejecutamos el programa de instalación y nos aseguramos de crear el
-directorio _~/Pinguino/v11_, parece que hay algún problema con el
-programa y no lo crea automáticamente.
+Ejecutamos el programa de instalación. El programa descargará los
+paquetes Debian necesarios para dejar el IDE y los compiladores
+instalados.
 
-El programa queda correctamente instalado en _/opt_
+Al acabar la instalación he tenido que crear el directorio
+_~/Pinguino/v11_, parece que hay algún problema con el programa de
+instalación y no lo crea automáticamente.
+
+El programa queda correctamente instalado en _/opt_ y arranca
+correctamente, habrá que probarlo con los micros.
 
 ## KiCAD
 
@@ -727,6 +733,22 @@ Instalamos desde _backports_:
 ~~~~{bash}
 sudo aptitude install -t jessie-backports kicad
 ~~~~
+
+Vamos a instalar a mayores algunas librerias de KiCAD, para poder
+crear Shields de Arduino.
+
+* [Freetronics](https://github.com/freetronics/freetronics_kicad_library)
+  una libreria que no solo incluye Shield para Arduino sino una
+  completa colección de componentes que nos permitirá hacer proyectos
+  completos. [Freetronics](http://www.freetronics.com) es una especie
+  de BricoGeek australiano, publica tutoriales, vende componentes, y
+  al parecer mantiene una biblioteca para KiCAD. La biblioteca de
+  Freetronics se mantiene en un repo de github. Lo suyo es
+  incorporarla a cada proyecto, por que si la actualizas se pueden
+  romper los proyectos que estes haciendo.
+* [eklablog](http://meta-blog.eklablog.com/kicad-librairie-arduino-pretty-p930786)
+  Esta biblioteca de componentes está incluida en el github de KiCAD, así que
+  teoricamente no habría que instalarla en nuestro disco duro.
 
 # Docker
 
@@ -918,8 +940,108 @@ Instalamos a mayores _Ananconda_, es la forma fácil de poder usar
 _ipython notebook_. De hecho me he instalado dos versiones la que
 incluye el python2 y la que incluye el python3.
 
-TODO: Describir la instalación de las dos versiones de Anaconda y como
-lanzar iPython.
+Las instalaciones de _Anaconda_ son redundantes, basta con instalar
+uno de ellos. En cualquier caso para realizar la instalación basta con
+descargar los scripts de instalación desde la página web de Anaconda.
+
+~~~~{bash}
+bash Anaconda3-4.2.0-Linux-x86_64.sh
+bash Anaconda2-4.2.0-Linux-x86_64.sh
+~~~~
+
+Los he dejado instalados en _~/apps/anaconda2_ y _~/apps/anaconda3_
+
+Cada una de estas instalaciones incorpora su propia versión de
+Python. Para usarlas tenemos que cambiar nuestro PATH para que el
+Python deseado sea el primero que se selecciona.
+
+Por ejemplo para activar anaconda3 en bash:
+
+~~~~{bash}
+export PATH="~/apps/anaconda3/bin:$PATH"
+~~~~
+
+Para hacer lo mismo en fish:
+
+~~~~{fish}
+set -x PATH ~/apps/anaconda3/bin $PATH
+~~~~
+
+## iPython y GraphLab 
+
+Creamos un entorno conda con Python 2.7.x
+
+~~~~
+conda create -n gl-env python=2.7 anaconda 
+~~~~
+
+Activamos el nuevo entorno (todo esto lo hice en bash, en fish hay un
+problemilla con el entorno conda
+[mas info](https://penandpants.com/2014/02/28/using-conda-environments-and-the-fish-shell/))
+
+~~~~
+bash
+source activate gl-env
+~~~~
+
+En el futuro esto es todo lo que tendremos que hacer activar el
+entorno conda donde estamos instalando el iPython.
+
+Nos aseguramos de tener _pip_ al dia:
+
+~~~~
+conda update pip
+~~~~
+
+Instalamos la biblioteca
+[GraphLab Create](https://turi.com/products/create/). Esta biblioteca
+se supone que es fácil de usar pero está sujeta a licencia. ^[TODO: Pasarme a _scikit-learn_]
+
+Una vez registrado en la página web te pasan un número de registro que
+tienes que usar para instalar la biblioteca.
+
+~~~~
+pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
+~~~~
+
+Y para terminar instalamos iPython ^[TODO: conda install jupyter]:
+
+~~~~
+conda install ipython-notebook
+~~~~
+
+Desde ahora basta con activar el entorno que hemos creado para tener acceso al iPython.
+
+~~~~
+source activate gl-env
+
+ipython notebook
+
+source deactivate gl-env
+~~~~
+
+### Instalación alternativa con virtualenv
+
+~~~~
+# Create a virtual environment named e.g. gl-env
+virtualenv gl-env
+
+# Activate the virtual environment
+source gl-env/bin/activate
+
+# Make sure pip is up to date
+pip install --upgrade pip
+
+# Install IPython Notebook (optional)
+pip install "ipython[notebook]"
+
+# Install Jupyter Notebook (optional)
+pip install "jupyter"
+
+
+# Install your licensed copy of GraphLab Create
+pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
+~~~~
 
 # Bases de datos
 
