@@ -163,16 +163,85 @@ sudo aptitude update
 \section{Instalación de varios paquetes
 sueltos}\label{instalaciuxf3n-de-varios-paquetes-sueltos}
 
-\subsection{Terminator}\label{terminator}
+\subsection{Programas de utilidad y uso
+frecuente}\label{programas-de-utilidad-y-uso-frecuente}
 
-Terminator es un emulador de terminal muy completo. Los instalamos desde
-\emph{aptitude}
+\subsubsection{Menulibre}\label{menulibre}
+
+Un editor de menús para Gnome, nos permite generar los archivos desktop
+para cualquier aplicación. Mucho más completo que \emph{alacarte} la
+otra alternativa.
+
+\begin{verbatim}
+sudo apt-get install menulibre
+\end{verbatim}
+
+\subsubsection{Terminator}\label{terminator}
+
+Terminator es un emulador de terminal muy completo y muy flexible. Los
+instalamos desde \emph{aptitude}
 
 \begin{verbatim}
 sudo aptitude install terminator python-keybinder
 \end{verbatim}
 
-\subsection{Chrome}\label{chrome}
+\subsubsection{Keepass2}\label{keepass2}
+
+Instalado \emph{keepass2} desde Debian
+
+\begin{verbatim}
+sudo aptitude install keepass2
+\end{verbatim}
+
+\subsubsection{gksu}\label{gksu}
+
+Un \emph{sudo} en modo gráfico:
+
+\begin{verbatim}
+sudo aptitude install gksu
+\end{verbatim}
+
+\subsubsection{Diskmanager}\label{diskmanager}
+
+Para gestionar discos portátiles
+
+\begin{verbatim}
+sudo apt-get install ntfs-3g disk-manager
+\end{verbatim}
+
+\subsubsection{Gnucash}\label{gnucash}
+
+Finanzas en linux
+
+\begin{verbatim}
+sudo apt-get -t jessie-backports install gnucash
+\end{verbatim}
+
+\subsubsection{\texorpdfstring{Herramientas
+\emph{sync}}{Herramientas sync}}\label{herramientas-sync}
+
+No sin mis \emph{backups}
+
+\begin{verbatim}
+sudo apt-get install rsync grsync
+\end{verbatim}
+
+\subsubsection{Dropbox}\label{dropbox}
+
+Bajado el paquete Debian desde la página
+\href{https://www.dropbox.com/install-linux}{web de Dropbox}, instalado
+el paquete con \emph{packageinstall}, es decir, simplemente pinchando
+desde el gestor de ficheros.
+
+\subsubsection{Compresores et al}\label{compresores-et-al}
+
+\begin{verbatim}
+sudo apt-get install rar unrar zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar
+\end{verbatim}
+
+\subsection{Internet}\label{internet}
+
+\subsubsection{Chrome}\label{chrome}
 
 Instalado chrome añadiendo fuentes a aptitude. No recuerdo como las
 añadí, en el fichero \emph{/etc/apt/sources.list.d/google-chrome.list},
@@ -188,87 +257,27 @@ tengo los siguientes contenidos:
 deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
 \end{verbatim}
 
+Ejecutamos:
+
 \begin{verbatim}
 sudo aptitude install google-chrome-stable
 sudo aptitude install chromium
 \end{verbatim}
 
-\subsection{Keepass2}\label{keepass2}
-
-Instalado \emph{keepass2} desde Debian
-
-\begin{verbatim}
-sudo aptitude install keepass2
-\end{verbatim}
-
-\subsection{gksu}\label{gksu}
-
-\begin{verbatim}
-sudo aptitude install gksu
-\end{verbatim}
-
-\subsection{Diskmanager}\label{diskmanager}
-
-\begin{verbatim}
-sudo apt-get install ntfs-3g disk-manager
-\end{verbatim}
-
-\subsection{Gnucash}\label{gnucash}
-
-\begin{verbatim}
-sudo apt-get -t jessie-backports install gnucash
-\end{verbatim}
-
-\subsection{\texorpdfstring{Herramientas
-\emph{sync}}{Herramientas sync}}\label{herramientas-sync}
-
-\begin{verbatim}
-sudo apt-get install rsync grsync
-\end{verbatim}
-
-\subsection{Menulibre}\label{menulibre}
-
-Un editor de menús para Gnome, nos permite generar los archivos desktop
-para cualquier aplicación. Mucho más completo que \emph{alacarte} la
-otra alternativa.
-
-\begin{verbatim}
-sudo apt-get install menulibre
-\end{verbatim}
-
-\subsection{Tor}\label{tor}
+\subsubsection{Tor}\label{tor}
 
 Bajado el comprimido desde la web y descomprimido en
 \emph{\textasciitilde{}/apps} copiado el fichero desktop a
 \emph{\textasciitilde{}/.local/share/applications}
 
-\subsection{Codecs}\label{codecs}
+\subsubsection{Deluge}\label{deluge}
+
+Instalamos desde aptitude
 
 \begin{verbatim}
-sudo apt-get install libav-tools
-
-sudo apt-get install faad gstreamer0.10-ffmpeg gstreamer0.10-x \
-gstreamer0.10-fluendo-mp3 gstreamer0.10-plugins-base \
-gstreamer0.10-plugins-good gstreamer0.10-plugins-bad \
-gstreamer0.10-plugins-ugly ffmpeg lame twolame vorbis-tools \
-libquicktime2 libfaac0 libmp3lame0 libxine2-all-plugins libdvdread4 \
-libdvdnav4 libmad0 sox libxvidcore4 libstdc++5
-
-sudo apt-get install w64codecs
+sudo aptitude install deluge
+xdg-mime default deluge.desktop x-scheme-handler/magnet
 \end{verbatim}
-
-\subsection{Compresores et al}\label{compresores-et-al}
-
-\begin{verbatim}
-sudo apt-get install rar unrar zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar
-\end{verbatim}
-
-\subsection{Dropbox}\label{dropbox}
-
-Bajado el paquete Debian desde la página
-\href{https://www.dropbox.com/install-linux}{web de Dropbox}, instalado
-el paquete con \emph{packageinstall}, es decir, simplemente pinchando
-desde el gestor de ficheros.
 
 \subsection{Gráficos}\label{gruxe1ficos}
 
@@ -316,24 +325,46 @@ sudo aptitude install stopmotion vgrabbj dvgrab
 
 TODO: Probar qStopmotion
 
-\subsection{Música}\label{muxfasica}
+\subsection{Audio y video}\label{audio-y-video}
 
-Clementine, decibel, audacity, soundconverter
+\subsubsection{Codecs}\label{codecs}
+
+Instalamos los codecs
+
+\begin{verbatim}
+sudo apt-get install libav-tools
+
+sudo apt-get install faad gstreamer0.10-ffmpeg gstreamer0.10-x \
+gstreamer0.10-fluendo-mp3 gstreamer0.10-plugins-base \
+gstreamer0.10-plugins-good gstreamer0.10-plugins-bad \
+gstreamer0.10-plugins-ugly ffmpeg lame twolame vorbis-tools \
+libquicktime2 libfaac0 libmp3lame0 libxine2-all-plugins libdvdread4 \
+libdvdnav4 libmad0 sox libxvidcore4 libstdc++5
+
+sudo apt-get install w64codecs
+\end{verbatim}
+
+\subsubsection{Reproductores de
+música}\label{reproductores-de-muxfasica}
+
+Instalamos \emph{Clementine}, \emph{decibel}, \emph{audacity},
+\emph{soundconverter}:
 
 \begin{verbatim}
 sudo aptitude install clementine gstreamer0.10-plugins-bad
 sudo aptitude install decibel-audio-player audacity soundconverter
-
-
-sudo aptitude install recordmydesktop gtk-recordmydesktop
-sudo aptitude install handbrake handbrake-cli handbrake-gtk
 \end{verbatim}
 
-Instalamos \emph{gpodder} para podcast
+\subsubsection{Gpodder}\label{gpodder}
+
+Instalamos \emph{gpodder} para gestionar nuestros podcast, aunque
+\emph{Clementine} también nos vale.
 
 \begin{verbatim}
 sudo aptitude install gpodder
 \end{verbatim}
+
+\subsubsection{Spotify}\label{spotify}
 
 Cliente de \emph{Spotify}
 
@@ -344,13 +375,14 @@ sudo aptitude update
 sudo aptitude install spotify-client
 \end{verbatim}
 
-\subsection{Deluge}\label{deluge}
+\subsubsection{Video}\label{video}
 
-Instalamos desde aptitude
+Instalamos también utilidades de video:
 
 \begin{verbatim}
-sudo aptitude install deluge
-xdg-mime default deluge.desktop x-scheme-handler/magnet
+sudo aptitude install vlc browser-plugin-vlc
+sudo aptitude install recordmydesktop gtk-recordmydesktop
+sudo aptitude install handbrake handbrake-cli handbrake-gtk
 \end{verbatim}
 
 \section{Documentos}\label{documentos}
@@ -763,6 +795,34 @@ sudo apt-get update && sudo apt-get -y --allow-unauthenticated install --reinsta
 
 Instalamos todos los programas asociados.
 
+\subsection{DCD}\label{dcd}
+
+Configuración de DCD
+
+\subsection{Emacs para editar D}\label{emacs-para-editar-d}
+
+Instalados los siguientes paquetes desde \emph{marmalade}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{d-mode}
+\item
+  \emph{flymake-d}
+\end{itemize}
+
+Se configura en el fichero \textbf{\textasciitilde{}/.emacs}:
+
+\begin{verbatim}
+(require 'flymake)
+(global-set-key (kbd "C-c d") 'flymake-display-err-menu-for-current-line)
+(global-set-key (kbd "C-c n") 'flymake-goto-next-error)
+(global-set-key (kbd "C-c p") 'flymake-goto-prev-error)
+
+;; Activate flymake for D
+(add-hook 'd-mode-hook 'flymake-d-load)
+\end{verbatim}
+
 \subsection{Processing}\label{processing}
 
 Bajamos los paquetes de las respectivas páginas web, descomprimimimos en
@@ -800,6 +860,154 @@ Al final también va a añadir una linea al fichero
 \begin{verbatim}
 export PG_OF_PATH=/home/salvari/apps/of/of_v0.9.3_linux64_release
 \end{verbatim}
+
+\subsection{Python}\label{python}
+
+De partida tenemos instalado dos versiones: \emph{python} y
+\emph{python3}
+
+\begin{verbatim}
+python -V
+Python 2.7.9
+
+python3 -V
+Python 3.4.2
+\end{verbatim}
+
+Instalado python-pip y python-virtualenv desde aptitude.
+
+\begin{verbatim}
+sudo aptitude install python-pip python-virtualenv
+\end{verbatim}
+
+Instalamos a mayores \emph{Ananconda}, es la forma fácil de poder usar
+\emph{ipython notebook}. De hecho me he instalado dos versiones la que
+incluye el python2 y la que incluye el python3.
+
+Las instalaciones de \emph{Anaconda} son redundantes, basta con instalar
+uno de ellos. En cualquier caso para realizar la instalación basta con
+descargar los scripts de instalación desde la página web de Anaconda.
+
+\begin{verbatim}
+bash Anaconda3-4.2.0-Linux-x86_64.sh
+bash Anaconda2-4.2.0-Linux-x86_64.sh
+\end{verbatim}
+
+Los he dejado instalados en \emph{\textasciitilde{}/apps/anaconda2} y
+\emph{\textasciitilde{}/apps/anaconda3}
+
+Cada una de estas instalaciones incorpora su propia versión de Python.
+Para usarlas tenemos que cambiar nuestro PATH para que el Python deseado
+sea el primero que se selecciona.
+
+Por ejemplo para activar anaconda3 en bash:
+
+\begin{verbatim}
+export PATH="~/apps/anaconda3/bin:$PATH"
+\end{verbatim}
+
+Para hacer lo mismo en fish:
+
+\begin{verbatim}
+set -x PATH ~/apps/anaconda3/bin $PATH
+\end{verbatim}
+
+\subsubsection{iPython y GraphLab}\label{ipython-y-graphlab}
+
+Creamos un entorno conda con Python 2.7.x
+
+\begin{verbatim}
+conda create -n gl-env python=2.7 anaconda 
+\end{verbatim}
+
+Activamos el nuevo entorno (todo esto lo hice en bash, en fish hay un
+problemilla con el entorno conda
+\href{https://penandpants.com/2014/02/28/using-conda-environments-and-the-fish-shell/}{mas
+info})
+
+\begin{verbatim}
+bash
+source activate gl-env
+\end{verbatim}
+
+En el futuro esto es todo lo que tendremos que hacer activar el entorno
+conda donde estamos instalando el iPython.
+
+Nos aseguramos de tener \emph{pip} al dia:
+
+\begin{verbatim}
+conda update pip
+\end{verbatim}
+
+Instalamos la biblioteca
+\href{https://turi.com/products/create/}{GraphLab Create}. Esta
+biblioteca se supone que es fácil de usar pero está sujeta a licencia.
+\footnote{TODO: Pasarme a \emph{scikit-learn}}
+
+Una vez registrado en la página web te pasan un número de registro que
+tienes que usar para instalar la biblioteca.
+
+\begin{verbatim}
+pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
+\end{verbatim}
+
+Y para terminar instalamos iPython \footnote{TODO: conda install jupyter}:
+
+\begin{verbatim}
+conda install ipython-notebook
+\end{verbatim}
+
+Desde ahora basta con activar el entorno que hemos creado para tener
+acceso al iPython.
+
+\begin{verbatim}
+source activate gl-env
+
+ipython notebook
+
+source deactivate gl-env
+\end{verbatim}
+
+\paragraph{Instalación alternativa con
+virtualenv}\label{instalaciuxf3n-alternativa-con-virtualenv}
+
+\begin{verbatim}
+# Create a virtual environment named e.g. gl-env
+virtualenv gl-env
+
+# Activate the virtual environment
+source gl-env/bin/activate
+
+# Make sure pip is up to date
+pip install --upgrade pip
+
+# Install IPython Notebook (optional)
+pip install "ipython[notebook]"
+
+# Install Jupyter Notebook (optional)
+pip install "jupyter"
+
+
+# Install your licensed copy of GraphLab Create
+pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
+\end{verbatim}
+
+\subsubsection{Usar Emacs para editar
+Python}\label{usar-emacs-para-editar-python}
+
+Instalamos \emph{elpy} desde el gestor de paquetes de Emacs,
+concretamente desde el repo \emph{marmalade}
+
+Hay que habilitar \emph{elpy} en el fichero
+\textbf{\textasciitilde{}/.emacs} para ello añadimos la linea
+
+\begin{verbatim}
+(elpy enable)
+\end{verbatim}
+
+\paragraph{TODO}\label{todo}
+
+Estudiar esto con calma \url{https://elpy.readthedocs.io/en/latest}
 
 \section{Desarrollo hardware}\label{desarrollo-hardware}
 
@@ -1039,154 +1247,6 @@ cython python-libxml2 python-gobject python-dbus python-psutil python-cairosvg g
 
 python setup.py build_ext --inplace
 \end{verbatim}
-
-\section{Python}\label{python}
-
-De partida tenemos instalado dos versiones: \emph{python} y
-\emph{python3}
-
-\begin{verbatim}
-python -V
-Python 2.7.9
-
-python3 -V
-Python 3.4.2
-\end{verbatim}
-
-Instalado python-pip y python-virtualenv desde aptitude.
-
-\begin{verbatim}
-sudo aptitude install python-pip python-virtualenv
-\end{verbatim}
-
-Instalamos a mayores \emph{Ananconda}, es la forma fácil de poder usar
-\emph{ipython notebook}. De hecho me he instalado dos versiones la que
-incluye el python2 y la que incluye el python3.
-
-Las instalaciones de \emph{Anaconda} son redundantes, basta con instalar
-uno de ellos. En cualquier caso para realizar la instalación basta con
-descargar los scripts de instalación desde la página web de Anaconda.
-
-\begin{verbatim}
-bash Anaconda3-4.2.0-Linux-x86_64.sh
-bash Anaconda2-4.2.0-Linux-x86_64.sh
-\end{verbatim}
-
-Los he dejado instalados en \emph{\textasciitilde{}/apps/anaconda2} y
-\emph{\textasciitilde{}/apps/anaconda3}
-
-Cada una de estas instalaciones incorpora su propia versión de Python.
-Para usarlas tenemos que cambiar nuestro PATH para que el Python deseado
-sea el primero que se selecciona.
-
-Por ejemplo para activar anaconda3 en bash:
-
-\begin{verbatim}
-export PATH="~/apps/anaconda3/bin:$PATH"
-\end{verbatim}
-
-Para hacer lo mismo en fish:
-
-\begin{verbatim}
-set -x PATH ~/apps/anaconda3/bin $PATH
-\end{verbatim}
-
-\subsection{iPython y GraphLab}\label{ipython-y-graphlab}
-
-Creamos un entorno conda con Python 2.7.x
-
-\begin{verbatim}
-conda create -n gl-env python=2.7 anaconda 
-\end{verbatim}
-
-Activamos el nuevo entorno (todo esto lo hice en bash, en fish hay un
-problemilla con el entorno conda
-\href{https://penandpants.com/2014/02/28/using-conda-environments-and-the-fish-shell/}{mas
-info})
-
-\begin{verbatim}
-bash
-source activate gl-env
-\end{verbatim}
-
-En el futuro esto es todo lo que tendremos que hacer activar el entorno
-conda donde estamos instalando el iPython.
-
-Nos aseguramos de tener \emph{pip} al dia:
-
-\begin{verbatim}
-conda update pip
-\end{verbatim}
-
-Instalamos la biblioteca
-\href{https://turi.com/products/create/}{GraphLab Create}. Esta
-biblioteca se supone que es fácil de usar pero está sujeta a licencia.
-\footnote{TODO: Pasarme a \emph{scikit-learn}}
-
-Una vez registrado en la página web te pasan un número de registro que
-tienes que usar para instalar la biblioteca.
-
-\begin{verbatim}
-pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
-\end{verbatim}
-
-Y para terminar instalamos iPython \footnote{TODO: conda install jupyter}:
-
-\begin{verbatim}
-conda install ipython-notebook
-\end{verbatim}
-
-Desde ahora basta con activar el entorno que hemos creado para tener
-acceso al iPython.
-
-\begin{verbatim}
-source activate gl-env
-
-ipython notebook
-
-source deactivate gl-env
-\end{verbatim}
-
-\subsubsection{Instalación alternativa con
-virtualenv}\label{instalaciuxf3n-alternativa-con-virtualenv}
-
-\begin{verbatim}
-# Create a virtual environment named e.g. gl-env
-virtualenv gl-env
-
-# Activate the virtual environment
-source gl-env/bin/activate
-
-# Make sure pip is up to date
-pip install --upgrade pip
-
-# Install IPython Notebook (optional)
-pip install "ipython[notebook]"
-
-# Install Jupyter Notebook (optional)
-pip install "jupyter"
-
-
-# Install your licensed copy of GraphLab Create
-pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
-\end{verbatim}
-
-\subsection{Usar Emacs para editar
-Python}\label{usar-emacs-para-editar-python}
-
-Instalamos \emph{elpy} desde el gestor de paquetes de Emacs,
-concretamente desde el repo \emph{marmalade}
-
-Hay que habilitar \emph{elpy} en el fichero
-\textbf{\textasciitilde{}/.emacs} para ello añadimos la linea
-
-\begin{verbatim}
-(elpy enable)
-\end{verbatim}
-
-\subsubsection{TODO}\label{todo}
-
-Estudiar esto con calma \url{https://elpy.readthedocs.io/en/latest}
 
 \section{Bases de datos}\label{bases-de-datos}
 

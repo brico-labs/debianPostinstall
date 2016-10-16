@@ -73,17 +73,67 @@ sudo aptitude update
 Instalación de varios paquetes sueltos
 ======================================
 
-Terminator
-----------
+Programas de utilidad y uso frecuente
+-------------------------------------
 
-Terminator es un emulador de terminal muy completo. Los instalamos desde *aptitude*
+### Menulibre
+
+Un editor de menús para Gnome, nos permite generar los archivos desktop para cualquier aplicación. Mucho más completo que *alacarte* la otra alternativa.
+
+    sudo apt-get install menulibre
+
+### Terminator
+
+Terminator es un emulador de terminal muy completo y muy flexible. Los instalamos desde *aptitude*
 
 ``` {bash}
 sudo aptitude install terminator python-keybinder
 ```
 
-Chrome
-------
+### Keepass2
+
+Instalado *keepass2* desde Debian
+
+    sudo aptitude install keepass2
+
+### gksu
+
+Un *sudo* en modo gráfico:
+
+    sudo aptitude install gksu
+
+### Diskmanager
+
+Para gestionar discos portátiles
+
+    sudo apt-get install ntfs-3g disk-manager
+
+### Gnucash
+
+Finanzas en linux
+
+    sudo apt-get -t jessie-backports install gnucash
+
+### Herramientas *sync*
+
+No sin mis *backups*
+
+    sudo apt-get install rsync grsync
+
+### Dropbox
+
+Bajado el paquete Debian desde la página [web de Dropbox](https://www.dropbox.com/install-linux), instalado el paquete con *packageinstall*, es decir, simplemente pinchando desde el gestor de ficheros.
+
+### Compresores et al
+
+``` {bash}
+sudo apt-get install rar unrar zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar
+```
+
+Internet
+--------
+
+### Chrome
 
 Instalado chrome añadiendo fuentes a aptitude. No recuerdo como las añadí, en el fichero */etc/apt/sources.list.d/google-chrome.list*, tengo los siguientes contenidos:
 
@@ -95,77 +145,23 @@ Instalado chrome añadiendo fuentes a aptitude. No recuerdo como las añadí, en
     # You may comment out this entry, but any other modifications may be lost.
     deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
 
+Ejecutamos:
+
 ``` {bash}
 sudo aptitude install google-chrome-stable
 sudo aptitude install chromium
 ```
 
-Keepass2
---------
-
-Instalado *keepass2* desde Debian
-
-    sudo aptitude install keepass2
-
-gksu
-----
-
-    sudo aptitude install gksu
-
-Diskmanager
------------
-
-    sudo apt-get install ntfs-3g disk-manager
-
-Gnucash
--------
-
-    sudo apt-get -t jessie-backports install gnucash
-
-Herramientas *sync*
--------------------
-
-    sudo apt-get install rsync grsync
-
-Menulibre
----------
-
-Un editor de menús para Gnome, nos permite generar los archivos desktop para cualquier aplicación. Mucho más completo que *alacarte* la otra alternativa.
-
-    sudo apt-get install menulibre
-
-Tor
----
+### Tor
 
 Bajado el comprimido desde la web y descomprimido en *~/apps* copiado el fichero desktop a *~/.local/share/applications*
 
-Codecs
-------
+### Deluge
 
-``` {bash}
-sudo apt-get install libav-tools
+Instalamos desde aptitude
 
-sudo apt-get install faad gstreamer0.10-ffmpeg gstreamer0.10-x \
-gstreamer0.10-fluendo-mp3 gstreamer0.10-plugins-base \
-gstreamer0.10-plugins-good gstreamer0.10-plugins-bad \
-gstreamer0.10-plugins-ugly ffmpeg lame twolame vorbis-tools \
-libquicktime2 libfaac0 libmp3lame0 libxine2-all-plugins libdvdread4 \
-libdvdnav4 libmad0 sox libxvidcore4 libstdc++5
-
-sudo apt-get install w64codecs
-```
-
-Compresores et al
------------------
-
-``` {bash}
-sudo apt-get install rar unrar zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar
-```
-
-Dropbox
--------
-
-Bajado el paquete Debian desde la página [web de Dropbox](https://www.dropbox.com/install-linux), instalado el paquete con *packageinstall*, es decir, simplemente pinchando desde el gestor de ficheros.
+    sudo aptitude install deluge
+    xdg-mime default deluge.desktop x-scheme-handler/magnet
 
 Gráficos
 --------
@@ -206,21 +202,42 @@ Fotografía
 
 TODO: Probar qStopmotion
 
-Música
-------
+Audio y video
+-------------
 
-Clementine, decibel, audacity, soundconverter
+### Codecs
 
-    sudo aptitude install clementine gstreamer0.10-plugins-bad
-    sudo aptitude install decibel-audio-player audacity soundconverter
+Instalamos los codecs
 
+``` {bash}
+sudo apt-get install libav-tools
 
-    sudo aptitude install recordmydesktop gtk-recordmydesktop
-    sudo aptitude install handbrake handbrake-cli handbrake-gtk
+sudo apt-get install faad gstreamer0.10-ffmpeg gstreamer0.10-x \
+gstreamer0.10-fluendo-mp3 gstreamer0.10-plugins-base \
+gstreamer0.10-plugins-good gstreamer0.10-plugins-bad \
+gstreamer0.10-plugins-ugly ffmpeg lame twolame vorbis-tools \
+libquicktime2 libfaac0 libmp3lame0 libxine2-all-plugins libdvdread4 \
+libdvdnav4 libmad0 sox libxvidcore4 libstdc++5
 
-Instalamos *gpodder* para podcast
+sudo apt-get install w64codecs
+```
+
+### Reproductores de música
+
+Instalamos *Clementine*, *decibel*, *audacity*, *soundconverter*:
+
+``` {bash}
+sudo aptitude install clementine gstreamer0.10-plugins-bad
+sudo aptitude install decibel-audio-player audacity soundconverter
+```
+
+### Gpodder
+
+Instalamos *gpodder* para gestionar nuestros podcast, aunque *Clementine* también nos vale.
 
     sudo aptitude install gpodder
+
+### Spotify
 
 Cliente de *Spotify*
 
@@ -229,13 +246,15 @@ Cliente de *Spotify*
     sudo aptitude update
     sudo aptitude install spotify-client
 
-Deluge
-------
+### Video
 
-Instalamos desde aptitude
+Instalamos también utilidades de video:
 
-    sudo aptitude install deluge
-    xdg-mime default deluge.desktop x-scheme-handler/magnet
+``` {bash}
+sudo aptitude install vlc browser-plugin-vlc
+sudo aptitude install recordmydesktop gtk-recordmydesktop
+sudo aptitude install handbrake handbrake-cli handbrake-gtk
+```
 
 Documentos
 ==========
@@ -605,6 +624,31 @@ sudo apt-get update && sudo apt-get -y --allow-unauthenticated install --reinsta
 
 Instalamos todos los programas asociados.
 
+DCD
+---
+
+Configuración de DCD
+
+Emacs para editar D
+-------------------
+
+Instalados los siguientes paquetes desde *marmalade*
+
+-   *d-mode*
+-   *flymake-d*
+
+Se configura en el fichero **~/.emacs**:
+
+``` {lisp}
+(require 'flymake)
+(global-set-key (kbd "C-c d") 'flymake-display-err-menu-for-current-line)
+(global-set-key (kbd "C-c n") 'flymake-goto-next-error)
+(global-set-key (kbd "C-c p") 'flymake-goto-prev-error)
+
+;; Activate flymake for D
+(add-hook 'd-mode-hook 'flymake-d-load)
+```
+
 Processing
 ----------
 
@@ -637,6 +681,120 @@ Va a instalar un montón de dependencias, hay que tomarlo con calma.
 Al final también va a añadir una linea al fichero *~/.profile*
 
     export PG_OF_PATH=/home/salvari/apps/of/of_v0.9.3_linux64_release
+
+Python
+------
+
+De partida tenemos instalado dos versiones: *python* y *python3*
+
+``` {bash}
+python -V
+Python 2.7.9
+
+python3 -V
+Python 3.4.2
+```
+
+Instalado python-pip y python-virtualenv desde aptitude.
+
+``` {bash}
+sudo aptitude install python-pip python-virtualenv
+```
+
+Instalamos a mayores *Ananconda*, es la forma fácil de poder usar *ipython notebook*. De hecho me he instalado dos versiones la que incluye el python2 y la que incluye el python3.
+
+Las instalaciones de *Anaconda* son redundantes, basta con instalar uno de ellos. En cualquier caso para realizar la instalación basta con descargar los scripts de instalación desde la página web de Anaconda.
+
+``` {bash}
+bash Anaconda3-4.2.0-Linux-x86_64.sh
+bash Anaconda2-4.2.0-Linux-x86_64.sh
+```
+
+Los he dejado instalados en *~/apps/anaconda2* y *~/apps/anaconda3*
+
+Cada una de estas instalaciones incorpora su propia versión de Python. Para usarlas tenemos que cambiar nuestro PATH para que el Python deseado sea el primero que se selecciona.
+
+Por ejemplo para activar anaconda3 en bash:
+
+``` {bash}
+export PATH="~/apps/anaconda3/bin:$PATH"
+```
+
+Para hacer lo mismo en fish:
+
+``` {fish}
+set -x PATH ~/apps/anaconda3/bin $PATH
+```
+
+### iPython y GraphLab
+
+Creamos un entorno conda con Python 2.7.x
+
+    conda create -n gl-env python=2.7 anaconda 
+
+Activamos el nuevo entorno (todo esto lo hice en bash, en fish hay un problemilla con el entorno conda [mas info](https://penandpants.com/2014/02/28/using-conda-environments-and-the-fish-shell/))
+
+    bash
+    source activate gl-env
+
+En el futuro esto es todo lo que tendremos que hacer activar el entorno conda donde estamos instalando el iPython.
+
+Nos aseguramos de tener *pip* al dia:
+
+    conda update pip
+
+Instalamos la biblioteca [GraphLab Create](https://turi.com/products/create/). Esta biblioteca se supone que es fácil de usar pero está sujeta a licencia. [1]
+
+Una vez registrado en la página web te pasan un número de registro que tienes que usar para instalar la biblioteca.
+
+    pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
+
+Y para terminar instalamos iPython [2]:
+
+    conda install ipython-notebook
+
+Desde ahora basta con activar el entorno que hemos creado para tener acceso al iPython.
+
+    source activate gl-env
+
+    ipython notebook
+
+    source deactivate gl-env
+
+#### Instalación alternativa con virtualenv
+
+    # Create a virtual environment named e.g. gl-env
+    virtualenv gl-env
+
+    # Activate the virtual environment
+    source gl-env/bin/activate
+
+    # Make sure pip is up to date
+    pip install --upgrade pip
+
+    # Install IPython Notebook (optional)
+    pip install "ipython[notebook]"
+
+    # Install Jupyter Notebook (optional)
+    pip install "jupyter"
+
+
+    # Install your licensed copy of GraphLab Create
+    pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
+
+### Usar Emacs para editar Python
+
+Instalamos *elpy* desde el gestor de paquetes de Emacs, concretamente desde el repo *marmalade*
+
+Hay que habilitar *elpy* en el fichero **~/.emacs** para ello añadimos la linea
+
+``` {lisp}
+(elpy enable)
+```
+
+#### TODO
+
+Estudiar esto con calma <https://elpy.readthedocs.io/en/latest>
 
 Desarrollo hardware
 ===================
@@ -846,122 +1004,6 @@ cython python-libxml2 python-gobject python-dbus python-psutil python-cairosvg g
 
 python setup.py build_ext --inplace
 ```
-
-Python
-======
-
-De partida tenemos instalado dos versiones: *python* y *python3*
-
-``` {bash}
-python -V
-Python 2.7.9
-
-python3 -V
-Python 3.4.2
-```
-
-Instalado python-pip y python-virtualenv desde aptitude.
-
-``` {bash}
-sudo aptitude install python-pip python-virtualenv
-```
-
-Instalamos a mayores *Ananconda*, es la forma fácil de poder usar *ipython notebook*. De hecho me he instalado dos versiones la que incluye el python2 y la que incluye el python3.
-
-Las instalaciones de *Anaconda* son redundantes, basta con instalar uno de ellos. En cualquier caso para realizar la instalación basta con descargar los scripts de instalación desde la página web de Anaconda.
-
-``` {bash}
-bash Anaconda3-4.2.0-Linux-x86_64.sh
-bash Anaconda2-4.2.0-Linux-x86_64.sh
-```
-
-Los he dejado instalados en *~/apps/anaconda2* y *~/apps/anaconda3*
-
-Cada una de estas instalaciones incorpora su propia versión de Python. Para usarlas tenemos que cambiar nuestro PATH para que el Python deseado sea el primero que se selecciona.
-
-Por ejemplo para activar anaconda3 en bash:
-
-``` {bash}
-export PATH="~/apps/anaconda3/bin:$PATH"
-```
-
-Para hacer lo mismo en fish:
-
-``` {fish}
-set -x PATH ~/apps/anaconda3/bin $PATH
-```
-
-iPython y GraphLab
-------------------
-
-Creamos un entorno conda con Python 2.7.x
-
-    conda create -n gl-env python=2.7 anaconda 
-
-Activamos el nuevo entorno (todo esto lo hice en bash, en fish hay un problemilla con el entorno conda [mas info](https://penandpants.com/2014/02/28/using-conda-environments-and-the-fish-shell/))
-
-    bash
-    source activate gl-env
-
-En el futuro esto es todo lo que tendremos que hacer activar el entorno conda donde estamos instalando el iPython.
-
-Nos aseguramos de tener *pip* al dia:
-
-    conda update pip
-
-Instalamos la biblioteca [GraphLab Create](https://turi.com/products/create/). Esta biblioteca se supone que es fácil de usar pero está sujeta a licencia. [1]
-
-Una vez registrado en la página web te pasan un número de registro que tienes que usar para instalar la biblioteca.
-
-    pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
-
-Y para terminar instalamos iPython [2]:
-
-    conda install ipython-notebook
-
-Desde ahora basta con activar el entorno que hemos creado para tener acceso al iPython.
-
-    source activate gl-env
-
-    ipython notebook
-
-    source deactivate gl-env
-
-### Instalación alternativa con virtualenv
-
-    # Create a virtual environment named e.g. gl-env
-    virtualenv gl-env
-
-    # Activate the virtual environment
-    source gl-env/bin/activate
-
-    # Make sure pip is up to date
-    pip install --upgrade pip
-
-    # Install IPython Notebook (optional)
-    pip install "ipython[notebook]"
-
-    # Install Jupyter Notebook (optional)
-    pip install "jupyter"
-
-
-    # Install your licensed copy of GraphLab Create
-    pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
-
-Usar Emacs para editar Python
------------------------------
-
-Instalamos *elpy* desde el gestor de paquetes de Emacs, concretamente desde el repo *marmalade*
-
-Hay que habilitar *elpy* en el fichero **~/.emacs** para ello añadimos la linea
-
-``` {lisp}
-(elpy enable)
-```
-
-### TODO
-
-Estudiar esto con calma <https://elpy.readthedocs.io/en/latest>
 
 Bases de datos
 ==============
