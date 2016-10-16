@@ -163,6 +163,22 @@ Instalamos desde aptitude
     sudo aptitude install deluge
     xdg-mime default deluge.desktop x-scheme-handler/magnet
 
+### TiddlyDesktop
+
+*Tiddly* es una wiki auto-contenida y muy flexible, tiene un sinfin de versiones adaptadas para diferentes usos. Hace años que la uso como cuaderno de bitácora personal, pero no había seguido su evolución.
+
+Me he descargado:
+
+-   [Tiddlywiki](http://tiddlywiki.com/) y le he instalado los plugins de *FontAwesome* y *WikiMap*, este será mi nuevo cuaderno de bitácora.
+-   [GSD5](http://gsd5.tiddlyspot.com/) un *TiddlyWiki* adaptado a *GTD*
+
+A mayores me he instalado la aplicación [TiddlyDesktop](https://github.com/Jermolene/TiddlyDesktop), basada en *node webkit* que simplifica el tema de backups (en teoría).
+
+Como siempre la instalamos en *~/apps* y creamos un lanzador con *MenuLibre*.
+
+``` {bash}
+```
+
 Gráficos
 --------
 
