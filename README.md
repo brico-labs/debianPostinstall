@@ -948,6 +948,21 @@ Desde ahora basta con activar el entorno que hemos creado para tener acceso al i
     # Install your licensed copy of GraphLab Create
     pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
 
+Usar Emacs para editar Python
+-----------------------------
+
+Instalamos *elpy* desde el gestor de paquetes de Emacs, concretamente desde el repo *marmalade*
+
+Hay que habilitar *elpy* en el fichero **~/.emacs** para ello añadimos la linea
+
+``` {lisp}
+(elpy enable)
+```
+
+### TODO
+
+Estudiar esto con calma <https://elpy.readthedocs.io/en/latest>
+
 Bases de datos
 ==============
 

@@ -1058,6 +1058,21 @@ pip install "jupyter"
 pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
 ~~~~
 
+## Usar Emacs para editar Python
+
+Instalamos _elpy_ desde el gestor de paquetes de Emacs, concretamente desde el repo _marmalade_
+
+Hay que habilitar _elpy_ en el fichero __~/.emacs__ para ello añadimos la linea
+
+~~~~{lisp}
+(elpy enable)
+~~~~
+
+### TODO
+
+Estudiar esto con calma <https://elpy.readthedocs.io/en/latest>
+
+
 # Bases de datos
 
 ## MySQL
