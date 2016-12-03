@@ -312,6 +312,13 @@ cd ~/.pandoc
 git clone https://github.com/jgm/pandoc-templates templates
 ```
 
+Zotero
+------
+
+Zotero es un programa que te permite guardar una o varias bibliografías con referencias a libros, páginas web o documentos electrónicos.
+
+Instalado el Zotero Standalone desde la [página web del programa](https://www.zotero.org/)
+
 Vanilla LaTeX
 -------------
 
@@ -1057,11 +1064,61 @@ Cuentas online abiertas
 -   google
 -   pocket (plugin de chrome)
 
+Recetas varias
+==============
+
+Orange Pi Zero
+--------------
+
+Para usar la Orange Pi Zero tendremos que crear imágenes arrancables en tarjetas micro SD.
+
+### Crear una SD arrancable
+
+Dependiendo de donde conectemos la tarjeta tendremos que usar diferentes rutas. En el procedimiento descrito a continuación `${card}` será la ruta al dispositivo de la tarjeta y ${p} la partición (si la hay).
+
+Si la tarjeta se conecta via adaptador USB, linux la va a asociar a un dispositivo /dev/sdx, por ejemplo en mi portátil el disco duro es `/dev/sda` las distintas particiones serán `/dev/sda1`, `/devb/sda2`, etc.
+
+Si conectamos una memoria con un adaptador USB linux la podría mapear en `/dev/sdb` por ejemplo.
+
+Si la memoria se conecta mediante una ranura SD, linux la asociará a un dispositivo `/dev/mmcblk0` o `/dev/mmcblk1`, etc. etc. Dependerá de la ranura usada. Las particiones en este tipo de dispositivos tienen rutas como por ejemplo `/dev/mmcblk0p1`.
+
+Los datos se pueden almacenar directamente en la memoria SD o en una partición creada en la memoria.
+
+Resumiendo:
+
+-   `${card}` será `/dev/sdb` o `/dev/mmcblk0`
+-   *c**a**r**d*{p} será `/dev/sdb1` o `/dev/mmcblk0p1`
+
+Antes de seguir adelante hay que estar completamente seguro del dispositivo asociado a nuestra memoria SD para no armar ningún estropicio.
+
+Hay varias comprobaciones que se pueden hacer:
+
+`dmesg |tail` nos permitirá echar un ojo a los últimos mensajes en el log del sistema. Si acabamos de insertar la memoria veremos el dispositivo usado.
+
+`sudo fdisk -l` nos permite ver las particiones montadas en nuestro linux, por ejemplo con mi SD en la ranura SD de mi portatil la salida es (entre otras cosas, he obviado las particiones de los discos duros):
+
+``` {bash}
+Disk /dev/mmcblk0: 7.4 GiB, 7948206080 bytes, 15523840 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x00000000
+```
+
+`cat /proc/partitions` también nos dará una lista de particiones, en mi portátil las que interesan son:
+
+     179        0    7761920 mmcblk0
+     179        1    7757824 mmcblk0p1
+
+### Referencias
+
+<http://linux-sunxi.org/Bootable_SD_card>
+
 TODO
 ====
 
 -   cinelerra
--   zotero
 -   playonlinux
 -   darktable
 -   rawtherapee
@@ -1069,11 +1126,15 @@ TODO
 -   mypaint
 -   qStopmotion
 
-Inkscape https://elizsarobhasa.makes.org/thimble/MTMwNDIzMjE5Mg==/3d-printing-from-a-2d-drawing Instalar tb jessyink
+Inkscape
 
-chibios \* http://wiki.chibios.org/dokuwiki/doku.php?id=chibios:community:setup:openocd\_chibios \* http://www.josho.org/blog/blog/2014/11/30/nucleo-gcc/ \* http://www.stevebate.net/chibios-rpi/GettingStarted.html
+<https://elizsarobhasa.makes.org/thimble/MTMwNDIzMjE5Mg==/3d-printing-from-a-2d-drawing>
 
-rclone \[https://syncthing.net/\]
+Instalar tb jessyink
+
+chibios \* \[http://wiki.chibios.org/dokuwiki/doku.php?id=chibios:community:setup:openocd\_chibios\] \* \[http://www.josho.org/blog/blog/2014/11/30/nucleo-gcc/\] \* \[http://www.stevebate.net/chibios-rpi/GettingStarted.html\]
+
+rclone <https://syncthing.net/>
 
 vmware
 
