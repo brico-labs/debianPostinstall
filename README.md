@@ -1113,7 +1113,7 @@ Disk identifier: 0x00000000
 
 ### Referencias
 
-<http://linux-sunxi.org/Bootable_SD_card>
+<http://linux-sunxi.org/Bootable_SD_card> <https://docs.armbian.com/User-Guide_Getting-Started/> <https://docs.armbian.com/Hardware_Allwinner/> <https://www.armbian.com/orange-pi-zero/>
 
 TODO
 ====
