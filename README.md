@@ -753,7 +753,7 @@ set -x PATH ~/apps/anaconda3/bin $PATH
 
 Creamos un entorno conda con Python 2.7.x
 
-    conda create -n gl-env python=2.7 anaconda 
+    conda create -n gl-env python=2.7 anaconda
 
 Activamos el nuevo entorno (todo esto lo hice en bash, en fish hay un problemilla con el entorno conda [mas info](https://penandpants.com/2014/02/28/using-conda-environments-and-the-fish-shell/))
 
@@ -1111,9 +1111,160 @@ Disk identifier: 0x00000000
      179        0    7761920 mmcblk0
      179        1    7757824 mmcblk0p1
 
+Descargamos la imagen de Jessie adaptada a la *Orange Pi Zero* desde la página <https://www.armbian.com/download/>
+
+Descomprimimos la imagen y la grabamos en la tarjeta SD con el comando:
+
+    sudo dd if=./Armbian_5.24_Orangepizero_Debian_jessie_3.4.113.img of=/dev/mmcblk0
+
+Insertamos la tarjeta en la *Orange Pi* y le damos alimentación. El primer arranque llevará alrededor de tres minutos, y tras ese tiempo aun hará falta un minuto más para poder hacer login. Este retardo es debido a que el sistema intentará actualizar la lista de paquetes y creará un area de swap de emergencia en la SD, y además cambiará el tamaño de la partición que hemos creado para ocupar todo el espacio libre en la SD.
+
+De momento solo la he arrancado y efectivamente las particiones han cambiado tras el arranque así que tiene buena pinta.
+
+Volvemos a insertar la SD en la *Orange Pi* y la conectamos con un cable ethernet al router de casa. El Armbian viene configurado por defecto para obtener su IP desde un servidor DHCP.
+
+Como mi cutre-router no me da información de las IP asignadas usamos *nmap*:
+
+    nmap -sP 192.168.0.0 /24
+
+Con eso averiguamos la IP asignada a la *Orange Pi Zero* y ya podemos hacer login con:
+
+    ssh root@192.168.0.109
+
+¡Y ya estamos!
+
+![Primer login en *Orange Pi*](src/img/OrangePiZero_FirstLogin.png)
+
+Lo primero es poner al dia el sistema:
+
+    apt-get update
+    apt-get upgrade
+
+Si quieres puedes reconfigurar el *time zone*:
+
+    dpgk-reconfigura tzdata
+
+### Conexión WIFI
+
+Vamos a comprobar que todo va bien:
+
+    root@orangepizero:~# iwconfig
+    lo        no wireless extensions.
+
+    tunl0     no wireless extensions.
+
+    wlan0     IEEE 802.11bgn  ESSID:off/any
+              Mode:Managed  Access Point: Not-Associated   Tx-Power=20 dBm
+              Retry  long limit:7   RTS thr:off   Fragment thr:off
+              Encryption key:off
+              Power Management:on
+
+    eth0      no wireless extensions.
+
+Todo tiene buena pinta, vamos a ver si detecta WIFIs:
+
+    root@orangepizero:~# iwlist wlan0  scan |grep ESSID
+                        ESSID:"wificlientesR"
+                        ESSID:"casa_de_verano"
+                        ESSID:"MOVISTAR_BEEF"
+                        ESSID:"wificlientesR"
+                        ESSID:"R-wlan90"
+                        ESSID:"MOVISTAR_BAAF"
+                        ESSID:"ababab"
+                        ESSID:"WLAN 77"
+                        ESSID:"castillo"
+                        ESSID:"unaWifi"
+                        ESSID:""
+                        ESSID:"mikasa"
+
+Para configurar el wifi echamos un ojo al fichero `/etc/network/interfaces` pero en ese mismo fichero encontramos el aviso:
+
+    # Armbian ships with network-manager installed by default. To save you time
+    # and hassles consider using 'sudo nmtui' instead of configuring Wi-Fi settings
+    # manually.
+
+Así que basta con ejecutar `sudo nwtui` y ya podemos dar de alta nuestra wifi (yo la prefiero con IP estática).
+
+![Configuración WIFI](src/img/OrangePiZero_tmtui.png)
+
+Ejecutamos `ifconfig` y ya vemos nuestro nuevo interface configurado:
+
+    ifconfig
+
+    wlan0     Link encap:Ethernet  HWaddr a4:7c:f2:9a:97:7c
+              inet addr:192.168.0.120  Bcast:192.168.0.255  Mask:255.255.255.0
+              inet6 addr: fe80::a67c:f2ff:fe9a:977c/64 Scope:Link
+              UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+              RX packets:2 errors:0 dropped:0 overruns:0 frame:0
+              TX packets:8 errors:0 dropped:0 overruns:0 carrier:0
+              collisions:0 txqueuelen:1000
+              RX bytes:328 (328.0 B)  TX bytes:852 (852.0 B)
+
 ### Referencias
 
-<http://linux-sunxi.org/Bootable_SD_card> <https://docs.armbian.com/User-Guide_Getting-Started/> <https://docs.armbian.com/Hardware_Allwinner/> <https://www.armbian.com/orange-pi-zero/>
+-   [Página oficial](http://www.orangepi.org/)
+-   [Recursos oficiales](http://www.orangepi.org/downloadresources/) aquí hay imágenes y los esquemáticos
+-   [Tienda en Aliexpress](https://www.aliexpress.com/store/1553371?spm=2114.8147860.0.0.F1q43C)
+-   <http://linux-sunxi.org/Bootable_SD_card>
+-   <https://www.armbian.com/orange-pi-zero/>
+-   <https://docs.armbian.com/User-Guide_Getting-Started/>
+-   <https://docs.armbian.com/Hardware_Allwinner/>
+-   [GPIO](https://linux-sunxi.org/GPIO) Una explicación de como acceder al gpio desde terminal
+-   [Info variada](https://linux-sunxi.org/Orange_Pi_Zero) Aquí tenemos el esquema de pines
+
+Raspberry Pi Media Center
+-------------------------
+
+Bajamos la imagen con nuestro cliente torrent favorito desde [aquí](https://github.com/aikoncwd/aikoncwd-rpi-mediacenter), no os molesteis en clonar el directorio, hay que bajarse la imagen.
+
+    sudo dd if=./Mediacenter-AikonCWD-v6.img  of=/dev/mmcblk0 bs=4M
+
+Arrancamos con la toma ethernet conectada al router y nos conectamos tras averigurar la IP con `nmap` (ver *Orange Pi Zero*)
+
+Los pasos recomendados:
+
+1.  Cambiar la password de root: `passwd`
+2.  Fijar una IP estática: Editamos el fichero `/etc/dhcpcd.conf`, ya de paso configuramos la IP estática para la WIFI
+
+        interface eth0
+        static ip_address=192.168.0.125/24
+        static routers=192.168.0.1
+        static domain_name_servers=8.8.8.8
+
+        interface wlan0
+        static ip_address=192.168.0.126/24
+        static routers=192.168.0.1
+        static domain_name_servers=8.8.8.8
+
+    Una vez cambiado el fichero hay que reiniciar con `shutdown -r now`
+
+3.  Configurar la WIFI, en esta parte damos por supuesto que tenemos la wifi con WPA activado.
+
+    Echamos un ojo a nuestro interfaz radio con `iwconfig`, si aparece el `wlan0` todo va bien.
+
+        wlan0     IEEE 802.11bgn  ESSID:off/any
+                  Mode:Managed  Access Point: Not-Associated   Tx-Power=31 dBm
+                  Retry short limit:7   RTS thr:off   Fragment thr:off
+                  Encryption key:off
+                  Power Management:on
+
+    Tenemos que editar el fichero `/etc/network/interfaces` y asegurarnos de tener el `wlan0` como sigue:
+
+        allow-hotplug wlan0
+        iface wlan0 inet manual
+            wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+
+    Ahora vamos a editar el fichero de configuración de `wpa_supplicant`, es decir `/etc/wpa_supplicant/wpa_supplicant.conf` y añadir un bloque `network` que sea como el que va a continuación, de paso he cambiado el `country` a "ES", asi que queda así:
+
+        country=ES
+        ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+        update_config=1
+        network={
+          ssid="YOURSSID"
+          psk="YOURPASSWORD"
+        }
+
+    Un reinicio y listos: `shutdown -r now`
 
 TODO
 ====
