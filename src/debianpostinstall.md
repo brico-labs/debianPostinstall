@@ -1423,7 +1423,9 @@ sudo dd if=./Mediacenter-AikonCWD-v6.img  of=/dev/mmcblk0 bs=4M
 Arrancamos con la toma ethernet conectada al router y nos conectamos
 tras averigurar la IP con `nmap` (ver _Orange Pi Zero_)
 
-Los pasos recomendados:
+![Primer login en Raspberry](src/img/RaspiFirstLogin.png)
+
+Una vez instalado los pasos recomendados:
 
 1. Cambiar la password de root: `passwd`
 2. Fijar una IP estática: Editamos el fichero `/etc/dhcpcd.conf`, ya

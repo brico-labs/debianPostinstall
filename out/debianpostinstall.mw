@@ -981,7 +981,9 @@ Bajamos la imagen con nuestro cliente torrent favorito desde [https://github.com
 <pre>sudo dd if=./Mediacenter-AikonCWD-v6.img  of=/dev/mmcblk0 bs=4M</pre>
 Arrancamos con la toma ethernet conectada al router y nos conectamos tras averigurar la IP con <code>nmap</code> (ver ''Orange Pi Zero'')
 
-Los pasos recomendados:
+[[File:src/img/RaspiFirstLogin.png|frame|none|alt=|caption Primer login en Raspberry]]
+
+Una vez instalado los pasos recomendados:
 
 <ol style="list-style-type: decimal;">
 <li>Cambiar la password de root: <code>passwd</code></li>

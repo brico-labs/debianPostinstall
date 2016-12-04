@@ -1221,7 +1221,9 @@ Bajamos la imagen con nuestro cliente torrent favorito desde [aquí](https://git
 
 Arrancamos con la toma ethernet conectada al router y nos conectamos tras averigurar la IP con `nmap` (ver *Orange Pi Zero*)
 
-Los pasos recomendados:
+![Primer login en Raspberry](src/img/RaspiFirstLogin.png)
+
+Una vez instalado los pasos recomendados:
 
 1.  Cambiar la password de root: `passwd`
 2.  Fijar una IP estática: Editamos el fichero `/etc/dhcpcd.conf`, ya de paso configuramos la IP estática para la WIFI
