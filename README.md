@@ -1278,6 +1278,8 @@ TODO
 -   krita
 -   mypaint
 -   qStopmotion
+-   chibios
+-   ICE Studio
 
 Inkscape
 

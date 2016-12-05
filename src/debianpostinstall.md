@@ -1491,6 +1491,8 @@ Una vez instalado los pasos recomendados:
 * krita
 * mypaint
 * qStopmotion
+* chibios
+* ICE Studio
 
 Inkscape
 
