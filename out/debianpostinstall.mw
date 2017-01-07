@@ -19,6 +19,15 @@ Lo primero fue la instalación del Bumblebee
 
 firmware-linux-nonfree Bumblebee-nvidia primus
 
+= Cambiar las opciones de idioma =
+
+Ejecutamos:
+
+<pre class="{bash}">sudo dpkg-reconfigure locales</pre>
+Y después solo tenemos que cambiar la selección del idioma en la configuración de Gnome.
+
+Nos pedirá rearrancar Gnome y renombrará todos los directorios de sistema.
+
 = Gestión de paquetes =
 
 Instalamos ''aptitude'', ''synaptic'' y ''gdebi''
@@ -75,6 +84,8 @@ Instalado ''keepass2'' desde Debian
 Un ''sudo'' en modo gráfico:
 
 <pre>sudo aptitude install gksu</pre>
+'''Muy importante''' ejecutar <code>gksu-properties</code> y escoger el modo <code>sudo</code> en lugar de <code>su</code>. Nos evitaremos problemas con la instalación de muchas aplicaciones.
+
 === Diskmanager ===
 
 Para gestionar discos portátiles
@@ -502,7 +513,7 @@ git config --global alias.ca 'commit -a'</pre>
 <pre>apt-get install openjdk-7-jre icedtea-7-plugin</pre>
 == D-apt e instalación de programas ==
 
-configurado d-apt, instalados todos los programas incluidos
+Configurado d-apt, instalados todos los programas incluidos
 
 <pre class="{bash}">sudo wget http://master.dl.sourceforge.net/project/d-apt/files/d-apt.list -O /etc/apt/sources.list.d/d-apt.list
 sudo apt-get update &amp;&amp; sudo apt-get -y --allow-unauthenticated install --reinstall d-apt-keyring &amp;&amp; sudo apt-get update</pre>
@@ -512,6 +523,19 @@ Instalamos todos los programas asociados.
 
 Configuración de DCD
 
+== gdc ==
+
+Instalado con
+
+<pre>sudo aptitude install gdc</pre>
+== ldc ==
+
+Instalado con:
+
+<pre>sudo aptitude install ldc</pre>
+Para poder ejecutar aplicaciones basadas en [http://vibed.org/ Vibed], necesitamos instalar:
+
+<pre>sudo apt-get install -y libssl-dev libevent-dev</pre>
 == Emacs para editar D ==
 
 Instalados los siguientes paquetes desde ''marmalade''
@@ -568,7 +592,7 @@ python3 -V
 Python 3.4.2</pre>
 Instalado python-pip y python-virtualenv desde aptitude.
 
-<pre class="{bash}">sudo aptitude install python-pip python-virtualenv</pre>
+<pre class="{bash}">sudo aptitude install python-pip python-virtualenv virtualenv</pre>
 Instalamos a mayores ''Ananconda'', es la forma fácil de poder usar ''ipython notebook''. De hecho me he instalado dos versiones la que incluye el python2 y la que incluye el python3.
 
 Las instalaciones de ''Anaconda'' son redundantes, basta con instalar uno de ellos. En cualquier caso para realizar la instalación basta con descargar los scripts de instalación desde la página web de Anaconda.
@@ -679,7 +703,9 @@ Vamos a instalar a mayores algunas librerias de KiCAD, para poder crear Shields 
 * [https://github.com/freetronics/freetronics_kicad_library Freetronics] una libreria que no solo incluye Shield para Arduino sino una completa colección de componentes que nos permitirá hacer proyectos completos. [http://www.freetronics.com Freetronics] es una especie de BricoGeek australiano, publica tutoriales, vende componentes, y al parecer mantiene una biblioteca para KiCAD. La biblioteca de Freetronics se mantiene en un repo de github. Lo suyo es incorporarla a cada proyecto, por que si la actualizas se pueden romper los proyectos que estes haciendo.
 * [http://meta-blog.eklablog.com/kicad-librairie-arduino-pretty-p930786 eklablog] Esta biblioteca de componentes está incluida en el github de KiCAD, así que teoricamente no habría que instalarla en nuestro disco duro.
 
-= Docker =
+= Virtualización =
+
+== Docker ==
 
 <pre class="{bash}">apt-get install apt-transport-https ca-certificates
 apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
@@ -697,6 +723,33 @@ sudo service docker start
 sudo docker run hello-world   - todo bien
 
 sudo gpasswd -a salvari docker</pre>
+== Virtualbox ==
+
+Tenemos que:
+
+<ul>
+<li>Añadir el fichero ''virtualbox.list'' al directorio ''/etc/apt/sources.list.d''</li>
+<li>Bajarnos y añadir a nuestro llavero las claves públicas de Oracle</li>
+<li>Actualizar la lista de paquetes</li>
+<li>Instalar virtualbox</li>
+<li><p>Añadir nuestro usuario al grupo vboxuser (no tengo claro que esto sea necesario)</p>
+<p>echo &quot;deb http://download.virtualbox.org/virtualbox/debian jessie contrib&quot; |sudo tee /etc/apt/sources.list.d/virtualbox.list wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add - sudo apt-get update sudo apt-get install virtualbox-5.1 sudo gpasswd -a salvari vboxusers</p></li></ul>
+
+Una vez instalado el virtualbox tenemos que instalarnos el pack de extensiones, es muy importante descargar el pack correspondiente a nuestra versión desde [https://www.virtualbox.org/wiki/Downloads? la página web de descargas]
+
+Sin más que hacer doble click en el fichero descargado lo instalaremos en nuestra instancia de ''Virtualbox'' (necesitamos la contraseña de administración).
+
+== Virtualizando un Windows 7 ==
+
+* 2 Gb de ram
+* Create virtual hard disk
+* 10Gb dinamically allocated
+* Settings -&gt; System-&gt;Boot Order: Quitamos el floppy
+* Storage -&gt; Add IDE Controller-&gt;Add Optical Disk -&gt; Choose Disk -&gt; ISO Image
+* Instalamos Windows en Inglés y con teclado en español
+
+Una vez instalado el SO Windows instalamos las Guest Additions.
+
 = Shells alternativos: zsh y fish =
 
 Los dos son muy interesantes. He usado zsh casi un año, ahora voy a probar '''fish'''.
@@ -775,15 +828,6 @@ git clone https://github.com/powerline/fonts
 mkdir ~/.fonts
 cp someFontFile ~/.fonts/
 fc-cache -vf ~/.fonts/</pre>
-= Cambiar las opciones de idioma =
-
-Ejecutamos:
-
-<pre class="{bash}">sudo dpkg-reconfigure locales</pre>
-Y después solo tenemos que cambiar la selección del idioma en la configuración de Gnome.
-
-Nos pedirá rearrancar Gnome y renombrará todos los directorios de sistema.
-
 = Reprap =
 
 == Sl1c3r ==
@@ -812,16 +856,54 @@ sudo dpkg -i Cura-2.1.3-Linux.deb</pre>
 cython python-libxml2 python-gobject python-dbus python-psutil python-cairosvg git
 
 python setup.py build_ext --inplace</pre>
-= Bases de datos =
+= Aplicaciones Web =
 
-== MySQL ==
+== Servidor Web ==
+
+=== Apache ===
+
+Instalamos el paquete ''apache2''
+
+<pre>sudo aptitude install apache2</pre>
+Si abrimos el navegador y visitamos http://localhost/ veremos la página de Apache.
+
+El directorio raiz por defecto de Apache en Debian es ''/var/www'', y el fichero de configuración principal es ''/etc/apache2/apache2.conf''. Hay ficheros de configuración adicionales en el directorio ''/etc/apache2'' y sus subdirectorios. Por ejemplo:
+
+* /etc/apache2/mods-enabled
+* /etc/apache2/sites-enabled
+* /etc/apache2/conf-enabled
+
+Además del Apache vamos a dejar instalado el ''php5''
+
+<pre>sudo aptitude install php5 libapache2-mod-php5</pre>
+Hay que reiniciar el servicio: <code>sudo service apache2 restart</code>
+
+Si creamos un fichero ''/var/www/html/info.php'', que contenga las lineas:
+
+<pre>&lt;?php
+phpinfo();
+?&gt;</pre>
+Podemos ver en el siguiente enlace http://localhost/info.php si el php funciona correctamente.
+
+Módulos de php relacionados con mysql:
+
+<pre>sudo aptitude install php5-mysqlnd php5-curl php5-gd php5-intl php-pear \
+php5-imagick php5-imap php5-mcrypt php5-memcache php5-pspell php5-recode \
+php5-snmp php5-sqlite php5-tidy php5-xmlrpc php5-xsl</pre>
+=== nginx ===
+
+TODO
+
+== Servidores de bases de datos ==
+
+=== MySQL ===
 
 Instalamos desde aptitude ''mysql-server.5.6''
 
 Opcionalmente (y muy recomendable)
 
 <pre>mysql_secure_instalallation</pre>
-=== Actualización ===
+==== Actualización ====
 
 Cambiamos el fichero ''mysql.conf.d/mysqld.cnf''
 
@@ -830,11 +912,15 @@ max_allowed_packet  = 500M</pre>
 Reiniciamos el servicio:
 
 <pre>/etc/init.d/mysql restart</pre>
-== Cliente SQL SQuirreL SQL ==
+=== Cliente SQL SQuirreL SQL ===
 
 Descargamos el paquete desde la página [http://squirrel-sql.sourceforge.net/ web] y lo descomprimimos en ''~/apps'', también tendremos que descargar el conector de mysql para java, por ejemplo desde [http://dev.mysql.com/downloads/connector/j/3.0.html aquí]
 
 Una vez instalado, creamos el desktop-file con ''MenuLibre'' y configuramos el driver ''MySQL'' añadiendo el path a donde hayamos dejado el conector java.
+
+=== MariaDB ===
+
+TODO
 
 = Cuentas online abiertas =
 
@@ -1056,4 +1142,435 @@ sudo aptitude install chromium
 * https://www.roaringpenguin.com/products/remind
 * http://taskwarrior.org/
 
+= Licencia =
+
+<pre>
+Attribution-ShareAlike 4.0 International
+
+=======================================================================
+
+Creative Commons Corporation (&quot;Creative Commons&quot;) is not a law firm and
+does not provide legal services or legal advice. Distribution of
+Creative Commons public licenses does not create a lawyer-client or
+other relationship. Creative Commons makes its licenses and related
+information available on an &quot;as-is&quot; basis. Creative Commons gives no
+warranties regarding its licenses, any material licensed under their
+terms and conditions, or any related information. Creative Commons
+disclaims all liability for damages resulting from their use to the
+fullest extent possible.
+
+Using Creative Commons Public Licenses
+
+Creative Commons public licenses provide a standard set of terms and
+conditions that creators and other rights holders may use to share
+original works of authorship and other material subject to copyright
+and certain other rights specified in the public license below. The
+following considerations are for informational purposes only, are not
+exhaustive, and do not form part of our licenses.
+
+     Considerations for licensors: Our public licenses are
+     intended for use by those authorized to give the public
+     permission to use material in ways otherwise restricted by
+     copyright and certain other rights. Our licenses are
+     irrevocable. Licensors should read and understand the terms
+     and conditions of the license they choose before applying it.
+     Licensors should also secure all rights necessary before
+     applying our licenses so that the public can reuse the
+     material as expected. Licensors should clearly mark any
+     material not subject to the license. This includes other CC-
+     licensed material, or material used under an exception or
+     limitation to copyright. More considerations for licensors:
+    wiki.creativecommons.org/Considerations_for_licensors
+
+     Considerations for the public: By using one of our public
+     licenses, a licensor grants the public permission to use the
+     licensed material under specified terms and conditions. If
+     the licensor's permission is not necessary for any reason--for
+     example, because of any applicable exception or limitation to
+     copyright--then that use is not regulated by the license. Our
+     licenses grant only permissions under copyright and certain
+     other rights that a licensor has authority to grant. Use of
+     the licensed material may still be restricted for other
+     reasons, including because others have copyright or other
+     rights in the material. A licensor may make special requests,
+     such as asking that all changes be marked or described.
+     Although not required by our licenses, you are encouraged to
+     respect those requests where reasonable. More_considerations
+     for the public:
+    wiki.creativecommons.org/Considerations_for_licensees
+
+=======================================================================
+
+Creative Commons Attribution-ShareAlike 4.0 International Public
+License
+
+By exercising the Licensed Rights (defined below), You accept and agree
+to be bound by the terms and conditions of this Creative Commons
+Attribution-ShareAlike 4.0 International Public License (&quot;Public
+License&quot;). To the extent this Public License may be interpreted as a
+contract, You are granted the Licensed Rights in consideration of Your
+acceptance of these terms and conditions, and the Licensor grants You
+such rights in consideration of benefits the Licensor receives from
+making the Licensed Material available under these terms and
+conditions.
+
+
+Section 1 -- Definitions.
+
+  a. Adapted Material means material subject to Copyright and Similar
+     Rights that is derived from or based upon the Licensed Material
+     and in which the Licensed Material is translated, altered,
+     arranged, transformed, or otherwise modified in a manner requiring
+     permission under the Copyright and Similar Rights held by the
+     Licensor. For purposes of this Public License, where the Licensed
+     Material is a musical work, performance, or sound recording,
+     Adapted Material is always produced where the Licensed Material is
+     synched in timed relation with a moving image.
+
+  b. Adapter's License means the license You apply to Your Copyright
+     and Similar Rights in Your contributions to Adapted Material in
+     accordance with the terms and conditions of this Public License.
+
+  c. BY-SA Compatible License means a license listed at
+     creativecommons.org/compatiblelicenses, approved by Creative
+     Commons as essentially the equivalent of this Public License.
+
+  d. Copyright and Similar Rights means copyright and/or similar rights
+     closely related to copyright including, without limitation,
+     performance, broadcast, sound recording, and Sui Generis Database
+     Rights, without regard to how the rights are labeled or
+     categorized. For purposes of this Public License, the rights
+     specified in Section 2(b)(1)-(2) are not Copyright and Similar
+     Rights.
+
+  e. Effective Technological Measures means those measures that, in the
+     absence of proper authority, may not be circumvented under laws
+     fulfilling obligations under Article 11 of the WIPO Copyright
+     Treaty adopted on December 20, 1996, and/or similar international
+     agreements.
+
+  f. Exceptions and Limitations means fair use, fair dealing, and/or
+     any other exception or limitation to Copyright and Similar Rights
+     that applies to Your use of the Licensed Material.
+
+  g. License Elements means the license attributes listed in the name
+     of a Creative Commons Public License. The License Elements of this
+     Public License are Attribution and ShareAlike.
+
+  h. Licensed Material means the artistic or literary work, database,
+     or other material to which the Licensor applied this Public
+     License.
+
+  i. Licensed Rights means the rights granted to You subject to the
+     terms and conditions of this Public License, which are limited to
+     all Copyright and Similar Rights that apply to Your use of the
+     Licensed Material and that the Licensor has authority to license.
+
+  j. Licensor means the individual(s) or entity(ies) granting rights
+     under this Public License.
+
+  k. Share means to provide material to the public by any means or
+     process that requires permission under the Licensed Rights, such
+     as reproduction, public display, public performance, distribution,
+     dissemination, communication, or importation, and to make material
+     available to the public including in ways that members of the
+     public may access the material from a place and at a time
+     individually chosen by them.
+
+  l. Sui Generis Database Rights means rights other than copyright
+     resulting from Directive 96/9/EC of the European Parliament and of
+     the Council of 11 March 1996 on the legal protection of databases,
+     as amended and/or succeeded, as well as other essentially
+     equivalent rights anywhere in the world.
+
+  m. You means the individual or entity exercising the Licensed Rights
+     under this Public License. Your has a corresponding meaning.
+
+
+Section 2 -- Scope.
+
+  a. License grant.
+
+       1. Subject to the terms and conditions of this Public License,
+          the Licensor hereby grants You a worldwide, royalty-free,
+          non-sublicensable, non-exclusive, irrevocable license to
+          exercise the Licensed Rights in the Licensed Material to:
+
+            a. reproduce and Share the Licensed Material, in whole or
+               in part; and
+
+            b. produce, reproduce, and Share Adapted Material.
+
+       2. Exceptions and Limitations. For the avoidance of doubt, where
+          Exceptions and Limitations apply to Your use, this Public
+          License does not apply, and You do not need to comply with
+          its terms and conditions.
+
+       3. Term. The term of this Public License is specified in Section
+          6(a).
+
+       4. Media and formats; technical modifications allowed. The
+          Licensor authorizes You to exercise the Licensed Rights in
+          all media and formats whether now known or hereafter created,
+          and to make technical modifications necessary to do so. The
+          Licensor waives and/or agrees not to assert any right or
+          authority to forbid You from making technical modifications
+          necessary to exercise the Licensed Rights, including
+          technical modifications necessary to circumvent Effective
+          Technological Measures. For purposes of this Public License,
+          simply making modifications authorized by this Section 2(a)
+          (4) never produces Adapted Material.
+
+       5. Downstream recipients.
+
+            a. Offer from the Licensor -- Licensed Material. Every
+               recipient of the Licensed Material automatically
+               receives an offer from the Licensor to exercise the
+               Licensed Rights under the terms and conditions of this
+               Public License.
+
+            b. Additional offer from the Licensor -- Adapted Material.
+               Every recipient of Adapted Material from You
+               automatically receives an offer from the Licensor to
+               exercise the Licensed Rights in the Adapted Material
+               under the conditions of the Adapter's License You apply.
+
+            c. No downstream restrictions. You may not offer or impose
+               any additional or different terms or conditions on, or
+               apply any Effective Technological Measures to, the
+               Licensed Material if doing so restricts exercise of the
+               Licensed Rights by any recipient of the Licensed
+               Material.
+
+       6. No endorsement. Nothing in this Public License constitutes or
+          may be construed as permission to assert or imply that You
+          are, or that Your use of the Licensed Material is, connected
+          with, or sponsored, endorsed, or granted official status by,
+          the Licensor or others designated to receive attribution as
+          provided in Section 3(a)(1)(A)(i).
+
+  b. Other rights.
+
+       1. Moral rights, such as the right of integrity, are not
+          licensed under this Public License, nor are publicity,
+          privacy, and/or other similar personality rights; however, to
+          the extent possible, the Licensor waives and/or agrees not to
+          assert any such rights held by the Licensor to the limited
+          extent necessary to allow You to exercise the Licensed
+          Rights, but not otherwise.
+
+       2. Patent and trademark rights are not licensed under this
+          Public License.
+
+       3. To the extent possible, the Licensor waives any right to
+          collect royalties from You for the exercise of the Licensed
+          Rights, whether directly or through a collecting society
+          under any voluntary or waivable statutory or compulsory
+          licensing scheme. In all other cases the Licensor expressly
+          reserves any right to collect such royalties.
+
+
+Section 3 -- License Conditions.
+
+Your exercise of the Licensed Rights is expressly made subject to the
+following conditions.
+
+  a. Attribution.
+
+       1. If You Share the Licensed Material (including in modified
+          form), You must:
+
+            a. retain the following if it is supplied by the Licensor
+               with the Licensed Material:
+
+                 i. identification of the creator(s) of the Licensed
+                    Material and any others designated to receive
+                    attribution, in any reasonable manner requested by
+                    the Licensor (including by pseudonym if
+                    designated);
+
+                ii. a copyright notice;
+
+               iii. a notice that refers to this Public License;
+
+                iv. a notice that refers to the disclaimer of
+                    warranties;
+
+                 v. a URI or hyperlink to the Licensed Material to the
+                    extent reasonably practicable;
+
+            b. indicate if You modified the Licensed Material and
+               retain an indication of any previous modifications; and
+
+            c. indicate the Licensed Material is licensed under this
+               Public License, and include the text of, or the URI or
+               hyperlink to, this Public License.
+
+       2. You may satisfy the conditions in Section 3(a)(1) in any
+          reasonable manner based on the medium, means, and context in
+          which You Share the Licensed Material. For example, it may be
+          reasonable to satisfy the conditions by providing a URI or
+          hyperlink to a resource that includes the required
+          information.
+
+       3. If requested by the Licensor, You must remove any of the
+          information required by Section 3(a)(1)(A) to the extent
+          reasonably practicable.
+
+  b. ShareAlike.
+
+     In addition to the conditions in Section 3(a), if You Share
+     Adapted Material You produce, the following conditions also apply.
+
+       1. The Adapter's License You apply must be a Creative Commons
+          license with the same License Elements, this version or
+          later, or a BY-SA Compatible License.
+
+       2. You must include the text of, or the URI or hyperlink to, the
+          Adapter's License You apply. You may satisfy this condition
+          in any reasonable manner based on the medium, means, and
+          context in which You Share Adapted Material.
+
+       3. You may not offer or impose any additional or different terms
+          or conditions on, or apply any Effective Technological
+          Measures to, Adapted Material that restrict exercise of the
+          rights granted under the Adapter's License You apply.
+
+
+Section 4 -- Sui Generis Database Rights.
+
+Where the Licensed Rights include Sui Generis Database Rights that
+apply to Your use of the Licensed Material:
+
+  a. for the avoidance of doubt, Section 2(a)(1) grants You the right
+     to extract, reuse, reproduce, and Share all or a substantial
+     portion of the contents of the database;
+
+  b. if You include all or a substantial portion of the database
+     contents in a database in which You have Sui Generis Database
+     Rights, then the database in which You have Sui Generis Database
+     Rights (but not its individual contents) is Adapted Material,
+
+     including for purposes of Section 3(b); and
+  c. You must comply with the conditions in Section 3(a) if You Share
+     all or a substantial portion of the contents of the database.
+
+For the avoidance of doubt, this Section 4 supplements and does not
+replace Your obligations under this Public License where the Licensed
+Rights include other Copyright and Similar Rights.
+
+
+Section 5 -- Disclaimer of Warranties and Limitation of Liability.
+
+  a. UNLESS OTHERWISE SEPARATELY UNDERTAKEN BY THE LICENSOR, TO THE
+     EXTENT POSSIBLE, THE LICENSOR OFFERS THE LICENSED MATERIAL AS-IS
+     AND AS-AVAILABLE, AND MAKES NO REPRESENTATIONS OR WARRANTIES OF
+     ANY KIND CONCERNING THE LICENSED MATERIAL, WHETHER EXPRESS,
+     IMPLIED, STATUTORY, OR OTHER. THIS INCLUDES, WITHOUT LIMITATION,
+     WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR
+     PURPOSE, NON-INFRINGEMENT, ABSENCE OF LATENT OR OTHER DEFECTS,
+     ACCURACY, OR THE PRESENCE OR ABSENCE OF ERRORS, WHETHER OR NOT
+     KNOWN OR DISCOVERABLE. WHERE DISCLAIMERS OF WARRANTIES ARE NOT
+     ALLOWED IN FULL OR IN PART, THIS DISCLAIMER MAY NOT APPLY TO YOU.
+
+  b. TO THE EXTENT POSSIBLE, IN NO EVENT WILL THE LICENSOR BE LIABLE
+     TO YOU ON ANY LEGAL THEORY (INCLUDING, WITHOUT LIMITATION,
+     NEGLIGENCE) OR OTHERWISE FOR ANY DIRECT, SPECIAL, INDIRECT,
+     INCIDENTAL, CONSEQUENTIAL, PUNITIVE, EXEMPLARY, OR OTHER LOSSES,
+     COSTS, EXPENSES, OR DAMAGES ARISING OUT OF THIS PUBLIC LICENSE OR
+     USE OF THE LICENSED MATERIAL, EVEN IF THE LICENSOR HAS BEEN
+     ADVISED OF THE POSSIBILITY OF SUCH LOSSES, COSTS, EXPENSES, OR
+     DAMAGES. WHERE A LIMITATION OF LIABILITY IS NOT ALLOWED IN FULL OR
+     IN PART, THIS LIMITATION MAY NOT APPLY TO YOU.
+
+  c. The disclaimer of warranties and limitation of liability provided
+     above shall be interpreted in a manner that, to the extent
+     possible, most closely approximates an absolute disclaimer and
+     waiver of all liability.
+
+
+Section 6 -- Term and Termination.
+
+  a. This Public License applies for the term of the Copyright and
+     Similar Rights licensed here. However, if You fail to comply with
+     this Public License, then Your rights under this Public License
+     terminate automatically.
+
+  b. Where Your right to use the Licensed Material has terminated under
+     Section 6(a), it reinstates:
+
+       1. automatically as of the date the violation is cured, provided
+          it is cured within 30 days of Your discovery of the
+          violation; or
+
+       2. upon express reinstatement by the Licensor.
+
+     For the avoidance of doubt, this Section 6(b) does not affect any
+     right the Licensor may have to seek remedies for Your violations
+     of this Public License.
+
+  c. For the avoidance of doubt, the Licensor may also offer the
+     Licensed Material under separate terms or conditions or stop
+     distributing the Licensed Material at any time; however, doing so
+     will not terminate this Public License.
+
+  d. Sections 1, 5, 6, 7, and 8 survive termination of this Public
+     License.
+
+
+Section 7 -- Other Terms and Conditions.
+
+  a. The Licensor shall not be bound by any additional or different
+     terms or conditions communicated by You unless expressly agreed.
+
+  b. Any arrangements, understandings, or agreements regarding the
+     Licensed Material not stated herein are separate from and
+     independent of the terms and conditions of this Public License.
+
+
+Section 8 -- Interpretation.
+
+  a. For the avoidance of doubt, this Public License does not, and
+     shall not be interpreted to, reduce, limit, restrict, or impose
+     conditions on any use of the Licensed Material that could lawfully
+     be made without permission under this Public License.
+
+  b. To the extent possible, if any provision of this Public License is
+     deemed unenforceable, it shall be automatically reformed to the
+     minimum extent necessary to make it enforceable. If the provision
+     cannot be reformed, it shall be severed from this Public License
+     without affecting the enforceability of the remaining terms and
+     conditions.
+
+  c. No term or condition of this Public License will be waived and no
+     failure to comply consented to unless expressly agreed to by the
+     Licensor.
+
+  d. Nothing in this Public License constitutes or may be interpreted
+     as a limitation upon, or waiver of, any privileges and immunities
+     that apply to the Licensor or You, including from the legal
+     processes of any jurisdiction or authority.
+
+
+=======================================================================
+
+Creative Commons is not a party to its public
+licenses. Notwithstanding, Creative Commons may elect to apply one of
+its public licenses to material it publishes and in those instances
+will be considered the “Licensor.” The text of the Creative Commons
+public licenses is dedicated to the public domain under the CC0 Public
+Domain Dedication. Except for the limited purpose of indicating that
+material is shared under a Creative Commons public license or as
+otherwise permitted by the Creative Commons policies published at
+creativecommons.org/policies, Creative Commons does not authorize the
+use of the trademark &quot;Creative Commons&quot; or any other trademark or logo
+of Creative Commons without its prior written consent including,
+without limitation, in connection with any unauthorized modifications
+to any of its public licenses or any other arrangements,
+understandings, or agreements concerning use of licensed material. For
+the avoidance of doubt, this paragraph does not form part of the
+public licenses.
+
+Creative Commons may be contacted at creativecommons.org.
+</pre>
 <references />
