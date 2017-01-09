@@ -547,7 +547,8 @@ sudo aptitude install emacs
 Instalamos los paquetes _markdown-mode_, _mardown-plus_ y _pandoc-mode_ desde el menú
 de gestión de paquetes de __emacs__.
 
-También instalamos _d-mde_ y _flymake-d_. Hay una sección de configuración en el fichero _.emacs_.
+También instalamos _d-mode_ y _flymake-d_. Hay una sección de
+configuración en el fichero _.emacs_.
 
 
 Configuramos el fichero _.emacs_ definimos algunas preferencias,
@@ -773,6 +774,8 @@ Para poder ejecutar aplicaciones basadas en [Vibed](http://vibed.org/), necesita
 sudo apt-get install -y libssl-dev libevent-dev
 ~~~~
 
+
+
 ## Emacs para editar D
 
 Instalados los siguientes paquetes desde _marmalade_
@@ -789,7 +792,19 @@ Se configura en el fichero __~/.emacs__:
 (global-set-key (kbd "C-c p") 'flymake-goto-prev-error)
 
 ;; Activate flymake for D
-(add-hook 'd-mode-hook 'flymake-d-load)
+;;(add-hook 'd-mode-hook 'flymake-d-load)
+(add-hook 'd-mode-hook
+          (lambda()
+            ('flymake-d-load)))
+
+;; Define diet template mode (this is not installed from package)
+(add-to-list 'auto-mode-alist '("\\.dt$" . whitespace-mode))
+(add-hook 'whitespace-mode-hook
+          (lambda()
+            (setq tab-width 2)
+            (setq whitespace-line-column 250)
+            (setq indent-tabs-mode nil)
+            (setq indent-line-function 'insert-tab)))
 ~~~~
 
 ## Processing

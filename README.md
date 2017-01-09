@@ -466,7 +466,7 @@ sudo aptitude install emacs
 
 Instalamos los paquetes *markdown-mode*, *mardown-plus* y *pandoc-mode* desde el menú de gestión de paquetes de **emacs**.
 
-También instalamos *d-mde* y *flymake-d*. Hay una sección de configuración en el fichero *.emacs*.
+También instalamos *d-mode* y *flymake-d*. Hay una sección de configuración en el fichero *.emacs*.
 
 Configuramos el fichero *.emacs* definimos algunas preferencias, algunas funciones útiles y añadimos orígenes extra de paquetes.
 
@@ -702,7 +702,19 @@ Se configura en el fichero **~/.emacs**:
 (global-set-key (kbd "C-c p") 'flymake-goto-prev-error)
 
 ;; Activate flymake for D
-(add-hook 'd-mode-hook 'flymake-d-load)
+;;(add-hook 'd-mode-hook 'flymake-d-load)
+(add-hook 'd-mode-hook
+          (lambda()
+            ('flymake-d-load)))
+
+;; Define diet template mode (this is not installed from package)
+(add-to-list 'auto-mode-alist '("\\.dt$" . whitespace-mode))
+(add-hook 'whitespace-mode-hook
+          (lambda()
+            (setq tab-width 2)
+            (setq whitespace-line-column 250)
+            (setq indent-tabs-mode nil)
+            (setq indent-line-function 'insert-tab)))
 ```
 
 Processing

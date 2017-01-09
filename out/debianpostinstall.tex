@@ -662,7 +662,7 @@ Instalamos los paquetes \emph{markdown-mode}, \emph{mardown-plus} y
 \emph{pandoc-mode} desde el menú de gestión de paquetes de
 \textbf{emacs}.
 
-También instalamos \emph{d-mde} y \emph{flymake-d}. Hay una sección de
+También instalamos \emph{d-mode} y \emph{flymake-d}. Hay una sección de
 configuración en el fichero \emph{.emacs}.
 
 Configuramos el fichero \emph{.emacs} definimos algunas preferencias,
@@ -910,7 +910,19 @@ Se configura en el fichero \textbf{\textasciitilde{}/.emacs}:
 (global-set-key (kbd "C-c p") 'flymake-goto-prev-error)
 
 ;; Activate flymake for D
-(add-hook 'd-mode-hook 'flymake-d-load)
+;;(add-hook 'd-mode-hook 'flymake-d-load)
+(add-hook 'd-mode-hook
+          (lambda()
+            ('flymake-d-load)))
+
+;; Define diet template mode (this is not installed from package)
+(add-to-list 'auto-mode-alist '("\\.dt$" . whitespace-mode))
+(add-hook 'whitespace-mode-hook
+          (lambda()
+            (setq tab-width 2)
+            (setq whitespace-line-column 250)
+            (setq indent-tabs-mode nil)
+            (setq indent-line-function 'insert-tab)))
 \end{verbatim}
 
 \subsection{Processing}\label{processing}
