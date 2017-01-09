@@ -145,10 +145,18 @@ Bajado el paquete Debian desde la página [web de Dropbox](https://www.dropbox.c
 sudo apt-get install rar unrar zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar
 ```
 
+### Freeplane
+
+Mejor que [Freemind](http://freemind.sourceforge.net/wiki/index.php/Main_Page) (en mi opinión). El baile de siempre, descargar de la [web](http://www.freeplane.org/), descomprimir en *~/apps* y crear lanzador con *MenuLibre*. Todos los ficheros que tenía de *Freemind* se pueden usar directamente con *Freeplane*.
+
+### Telegram desktop
+
+El cliente de mensajeria de Telegram. Descargado desde la web, instalado en *~/apps*
+
 Internet
 --------
 
-### Chrome
+### Chrome y Chromium
 
 Instalado chrome añadiendo fuentes a aptitude. No recuerdo como las añadí, en el fichero */etc/apt/sources.list.d/google-chrome.list*, tengo los siguientes contenidos:
 
@@ -1166,7 +1174,7 @@ Una vez instalado, creamos el desktop-file con *MenuLibre* y configuramos el dri
 
 ### MariaDB
 
-TODO
+**PENDIENTE**
 
 Cuentas online abiertas
 =======================
@@ -1383,27 +1391,20 @@ TODO
 
 -   cinelerra
 -   playonlinux
--   darktable
--   rawtherapee
 -   krita
 -   mypaint
 -   qStopmotion
 -   chibios
+    -   \[http://wiki.chibios.org/dokuwiki/doku.php?id=chibios:community:setup:openocd\_chibios\]
+    -   \[http://www.josho.org/blog/blog/2014/11/30/nucleo-gcc/\]
+    -   \[http://www.stevebate.net/chibios-rpi/GettingStarted.html\]
 -   ICE Studio
-
-Inkscape
-
-<https://elizsarobhasa.makes.org/thimble/MTMwNDIzMjE5Mg==/3d-printing-from-a-2d-drawing>
-
-Instalar tb jessyink
-
-chibios \* \[http://wiki.chibios.org/dokuwiki/doku.php?id=chibios:community:setup:openocd\_chibios\] \* \[http://www.josho.org/blog/blog/2014/11/30/nucleo-gcc/\] \* \[http://www.stevebate.net/chibios-rpi/GettingStarted.html\]
-
-rclone <https://syncthing.net/>
-
-vmware
-
-sudo aptitude install chromium
+-   Inkscape
+    -   <https://elizsarobhasa.makes.org/thimble/MTMwNDIzMjE5Mg==/3d-printing-from-a-2d-drawing>
+    -   Instalar tb jessyink
+-   rclone <https://syncthing.net/>
+-   vmware (no creo, virtualbox va genial)
+-   Astronomía
 
 Links
 =====

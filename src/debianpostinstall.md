@@ -182,9 +182,21 @@ gestor de ficheros.
 sudo apt-get install rar unrar zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar
 ~~~~
 
+### Freeplane
+
+Mejor que [Freemind](http://freemind.sourceforge.net/wiki/index.php/Main_Page)
+(en mi opinión). El baile de siempre, descargar de
+la [web](http://www.freeplane.org/), descomprimir en _~/apps_ y crear
+lanzador con _MenuLibre_. Todos los ficheros que tenía de _Freemind_
+se pueden usar directamente con _Freeplane_.
+
+### Telegram desktop
+
+El cliente de mensajeria de Telegram. Descargado desde la web, instalado en _~/apps_
+
 ## Internet
 
-### Chrome
+### Chrome y Chromium
 
 Instalado chrome añadiendo fuentes a aptitude. No recuerdo como las
 añadí, en el fichero _/etc/apt/sources.list.d/google-chrome.list_,
@@ -1336,7 +1348,7 @@ dejado el conector java.
 
 ### MariaDB
 
-TODO
+__PENDIENTE__
 
 # Cuentas online abiertas
 
@@ -1626,34 +1638,20 @@ Una vez instalado los pasos recomendados:
 
 * cinelerra
 * playonlinux
-* darktable
-* rawtherapee
 * krita
 * mypaint
 * qStopmotion
 * chibios
+    * [http://wiki.chibios.org/dokuwiki/doku.php?id=chibios:community:setup:openocd_chibios]
+    * [http://www.josho.org/blog/blog/2014/11/30/nucleo-gcc/]
+    * [http://www.stevebate.net/chibios-rpi/GettingStarted.html]
 * ICE Studio
-
-Inkscape
-
-<https://elizsarobhasa.makes.org/thimble/MTMwNDIzMjE5Mg==/3d-printing-from-a-2d-drawing>
-
-Instalar tb jessyink
-
-
-
-
-chibios
-* [http://wiki.chibios.org/dokuwiki/doku.php?id=chibios:community:setup:openocd_chibios]
-* [http://www.josho.org/blog/blog/2014/11/30/nucleo-gcc/]
-* [http://www.stevebate.net/chibios-rpi/GettingStarted.html]
-
-rclone
-<https://syncthing.net/>
-
-vmware
-
-sudo aptitude install chromium
+* Inkscape
+    * <https://elizsarobhasa.makes.org/thimble/MTMwNDIzMjE5Mg==/3d-printing-from-a-2d-drawing>
+    * Instalar tb jessyink
+* rclone <https://syncthing.net/>
+* vmware (no creo, virtualbox va genial)
+* Astronomía
 
 
 # Links
