@@ -877,9 +877,27 @@ sudo apt-get update && sudo apt-get -y --allow-unauthenticated install --reinsta
 
 Instalamos todos los programas asociados.
 
+\begin{verbatim}
+sudo aptitude install dmd dub dcd dfix dfmt dscanner textadept
+\end{verbatim}
+
 \subsection{DCD}\label{dcd}
 
-Configuración de DCD
+Una vez instalado el DCD tenemos que configurarlo creando el fichero
+\emph{\textasciitilde{}/.config/dcd/dcd.conf} con el siguiente
+contenido:
+
+\begin{verbatim}
+/usr/include/dmd/druntime/import
+/usr/include/dmd/phobos
+\end{verbatim}
+
+Podemos probarlo con:
+
+\begin{verbatim}
+dcd-server &
+echo | dcd-client --search toImpl
+\end{verbatim}
 
 \subsection{gdc}\label{gdc}
 
@@ -914,6 +932,10 @@ Instalados los siguientes paquetes desde \emph{marmalade}
   \emph{d-mode}
 \item
   \emph{flymake-d}
+\item
+  \emph{auto-complete} (desde \emph{melpa})
+\item
+  \emph{ac-dcd}
 \end{itemize}
 
 Se configura en el fichero \textbf{\textasciitilde{}/.emacs}:
@@ -924,11 +946,33 @@ Se configura en el fichero \textbf{\textasciitilde{}/.emacs}:
 (global-set-key (kbd "C-c n") 'flymake-goto-next-error)
 (global-set-key (kbd "C-c p") 'flymake-goto-prev-error)
 
+;; Define d-mode addons
 ;; Activate flymake for D
-;;(add-hook 'd-mode-hook 'flymake-d-load)
+;; Activate auto-complete-mode
+;; Activate yasnippet minor mode if available
+;; Activate dcd-server
+(require 'ac-dcd)
 (add-hook 'd-mode-hook
           (lambda()
-            ('flymake-d-load)))
+            (flymake-d-load)
+           (auto-complete-mode t)
+           (when (featurep 'yasnippet)
+             (yas-minor-mode-on))
+           (ac-dcd-maybe-start-server)
+           (ac-dcd-add-imports)
+           (add-to-list 'ac-sources 'ac-source-dcd)
+           (define-key d-mode-map (kbd "C-c ?") 'ac-dcd-show-ddoc-with-buffer)
+           (define-key d-mode-map (kbd "C-c .") 'ac-dcd-goto-definition)
+           (define-key d-mode-map (kbd "C-c ,") 'ac-dcd-goto-def-pop-marker)
+           (define-key d-mode-map (kbd "C-c s") 'ac-dcd-search-symbol)
+           (when (featurep 'popwin)
+             (add-to-list 'popwin:special-display-config
+                          `(,ac-dcd-error-buffer-name :noselect t))
+             (add-to-list 'popwin:special-display-config
+                          `(,ac-dcd-document-buffer-name :position right :width 80))
+             (add-to-list 'popwin:special-display-config
+                          `(,ac-dcd-search-symbol-buffer-name :position bottom :width 5)))))
+            
 
 ;; Define diet template mode (this is not installed from package)
 (add-to-list 'auto-mode-alist '("\\.dt$" . whitespace-mode))
@@ -939,6 +983,16 @@ Se configura en el fichero \textbf{\textasciitilde{}/.emacs}:
             (setq indent-tabs-mode nil)
             (setq indent-line-function 'insert-tab)))
 \end{verbatim}
+
+\subsubsection{Referencias}\label{referencias}
+
+\begin{itemize}
+\tightlist
+\item
+  \url{https://github.com/atilaneves/ac-dcd}
+\item
+  \url{https://github.com/Hackerpilot/DCD}
+\end{itemize}
 
 \subsection{Processing}\label{processing}
 
@@ -1729,7 +1783,7 @@ wlan0     Link encap:Ethernet  HWaddr a4:7c:f2:9a:97:7c
           RX bytes:328 (328.0 B)  TX bytes:852 (852.0 B)
 \end{verbatim}
 
-\subsubsection{Referencias}\label{referencias}
+\subsubsection{Referencias}\label{referencias-1}
 
 \begin{itemize}
 \tightlist

@@ -670,10 +670,20 @@ sudo apt-get update && sudo apt-get -y --allow-unauthenticated install --reinsta
 
 Instalamos todos los programas asociados.
 
+    sudo aptitude install dmd dub dcd dfix dfmt dscanner textadept
+
 DCD
 ---
 
-Configuración de DCD
+Una vez instalado el DCD tenemos que configurarlo creando el fichero *~/.config/dcd/dcd.conf* con el siguiente contenido:
+
+    /usr/include/dmd/druntime/import
+    /usr/include/dmd/phobos
+
+Podemos probarlo con:
+
+    dcd-server &
+    echo | dcd-client --search toImpl
 
 gdc
 ---
@@ -700,6 +710,8 @@ Instalados los siguientes paquetes desde *marmalade*
 
 -   *d-mode*
 -   *flymake-d*
+-   *auto-complete* (desde *melpa*)
+-   *ac-dcd*
 
 Se configura en el fichero **~/.emacs**:
 
@@ -709,11 +721,33 @@ Se configura en el fichero **~/.emacs**:
 (global-set-key (kbd "C-c n") 'flymake-goto-next-error)
 (global-set-key (kbd "C-c p") 'flymake-goto-prev-error)
 
+;; Define d-mode addons
 ;; Activate flymake for D
-;;(add-hook 'd-mode-hook 'flymake-d-load)
+;; Activate auto-complete-mode
+;; Activate yasnippet minor mode if available
+;; Activate dcd-server
+(require 'ac-dcd)
 (add-hook 'd-mode-hook
           (lambda()
-            ('flymake-d-load)))
+            (flymake-d-load)
+           (auto-complete-mode t)
+           (when (featurep 'yasnippet)
+             (yas-minor-mode-on))
+           (ac-dcd-maybe-start-server)
+           (ac-dcd-add-imports)
+           (add-to-list 'ac-sources 'ac-source-dcd)
+           (define-key d-mode-map (kbd "C-c ?") 'ac-dcd-show-ddoc-with-buffer)
+           (define-key d-mode-map (kbd "C-c .") 'ac-dcd-goto-definition)
+           (define-key d-mode-map (kbd "C-c ,") 'ac-dcd-goto-def-pop-marker)
+           (define-key d-mode-map (kbd "C-c s") 'ac-dcd-search-symbol)
+           (when (featurep 'popwin)
+             (add-to-list 'popwin:special-display-config
+                          `(,ac-dcd-error-buffer-name :noselect t))
+             (add-to-list 'popwin:special-display-config
+                          `(,ac-dcd-document-buffer-name :position right :width 80))
+             (add-to-list 'popwin:special-display-config
+                          `(,ac-dcd-search-symbol-buffer-name :position bottom :width 5)))))
+            
 
 ;; Define diet template mode (this is not installed from package)
 (add-to-list 'auto-mode-alist '("\\.dt$" . whitespace-mode))
@@ -724,6 +758,11 @@ Se configura en el fichero **~/.emacs**:
             (setq indent-tabs-mode nil)
             (setq indent-line-function 'insert-tab)))
 ```
+
+### Referencias
+
+-   <https://github.com/atilaneves/ac-dcd>
+-   <https://github.com/Hackerpilot/DCD>
 
 Processing
 ----------
