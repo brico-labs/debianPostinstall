@@ -365,6 +365,61 @@ sudo aptitude install recordmydesktop gtk-recordmydesktop
 sudo aptitude install handbrake handbrake-cli handbrake-gtk
 ~~~~
 
+## Lector de DNIe
+
+Instalamos:
+
+~~~~
+sudo aptitude libccid install pcscd pcsc-tools
+~~~~
+
+Como root ejecutamos *pcsc_scan* ^[Es posible que sean necesario
+reiniciar el pc antes de seguir]:
+
+~~~~
+root@rasalhague:~# pcsc_scan 
+PC/SC device scanner
+V 1.4.23 (c) 2001-2011, Ludovic Rousseau <ludovic.rousseau@free.fr>
+Compiled with PC/SC lite version: 1.8.11
+Using reader plug'n play mechanism
+Scanning present readers...
+Waiting for the first reader...
+~~~~
+
+Si insertamos el lector veremos algo como esto:
+
+~~~~
+root@rasalhague:~# pcsc_scan 
+PC/SC device scanner
+V 1.4.23 (c) 2001-2011, Ludovic Rousseau <ludovic.rousseau@free.fr>
+Compiled with PC/SC lite version: 1.8.11
+Using reader plug'n play mechanism
+Scanning present readers...
+Waiting for the first reader...found one
+Scanning present readers...
+0: C3PO LTC31 v2 (11061005) 00 00
+
+Wed Jan 25 01:17:20 2017
+Reader 0: C3PO LTC31 v2 (11061005) 00 00
+  Card state: Card removed, 
+~~~~
+
+Si insertamos un DNI veremos que se lee la información de la tarjeta
+insertada:
+
+~~~~
+Reader 0: C3PO LTC31 v2 (11061005) 00 00
+  Card state: Card inserted, 
+y mas rollo
+~~~~
+
+Instalamos ahora:
+
+~~~~
+aptitude install pinentry-gtk2 opensc
+~~~~
+
+
 # Documentos
 
 ## Calibre
@@ -559,8 +614,11 @@ sudo aptitude install emacs
 Instalamos los paquetes _markdown-mode_, _mardown-plus_ y _pandoc-mode_ desde el menú
 de gestión de paquetes de __emacs__.
 
-También instalamos _d-mode_ y _flymake-d_. Hay una sección de
-configuración en el fichero _.emacs_.
+También instalamos _d-mode_ y _flymake-d_.
+
+Después de probar _flymake_ y _flycheck_ al final me ha gustado más
+_flycheck_ Hay una sección de configuración en el fichero _.emacs_
+para cada uno de ellos, pero la de _flymake_ está comentada.
 
 
 Configuramos el fichero _.emacs_ definimos algunas preferencias,
@@ -572,14 +630,14 @@ algunas funciones útiles y añadimos orígenes extra de paquetes.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(column-number-mode t)
  '(show-paren-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Mensch" :foundry "bitstream" :slant normal :weight normal :height 128 :width normal)))))
+ )
+
 ;;------------------------------------------------------------
 ;; Some settings
 (setq inhibit-startup-message t) ; Eliminate FSF startup msg
@@ -596,13 +654,14 @@ algunas funciones útiles y añadimos orígenes extra de paquetes.
 (setq-default indent-tabs-mode nil)       ; Insert spaces instead of tabs
 (global-set-key "\r" 'newline-and-indent) ; turn autoindenting on
 ;(set-default 'truncate-lines t)           ; Truncate lines for all buffers
-(require 'iso-transl)
+;(require 'iso-transl)                     ; doesn't seems to be needed in debian
+
 
 ;;------------------------------------------------------------
 ;; Some useful key definitions
 (define-key global-map [M-S-down-mouse-3] 'imenu)
 (global-set-key [C-tab] 'hippie-expand)                    ; expand
-(global-set-key [C-kp-subtract] 'undo)                     ; [Undo]
+(global-set-key [C-kp-subtract] 'undo)                     ; [Undo] 
 (global-set-key [C-kp-multiply] 'goto-line)                ; goto line
 (global-set-key [C-kp-add] 'toggle-truncate-lines)         ; goto line
 (global-set-key [C-kp-divide] 'delete-trailing-whitespace) ; delete trailing whitespace
@@ -659,7 +718,7 @@ algunas funciones útiles y añadimos orígenes extra de paquetes.
    (while rest
      (bury-buffer (car rest))
      (setq rest (cdr rest)))
-   (setq time (time-now)))
+   (setq time (time-now))) 
 
 (global-set-key [f8] 'bubble-buffer)    ; win-tab switch the buffer
 
@@ -667,8 +726,8 @@ algunas funciones útiles y añadimos orígenes extra de paquetes.
    ;; Kill default buffer without the extra emacs questions
    (interactive)
    (kill-buffer (buffer-name))
-   (set-name))
-(global-set-key [C-delete] 'geosoft-kill-buffer)
+   (set-name)) 
+(global-set-key [C-delete] 'geosoft-kill-buffer) 
 
 ;;----------------------------------------------------------------------
 ;; MELPA and others
@@ -680,17 +739,68 @@ algunas funciones útiles y añadimos orígenes extra de paquetes.
   (add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/") t)
   )
 
+; (add-to-list 'load-path "~/.emacs.d/")
+
 ;;----------------------------------------------------------------------
-;; flymake installed from package
+;; Packages installed via package
+;;------------------------------
 
-(require 'flymake)
-(global-set-key (kbd "C-c d") 'flymake-display-err-menu-for-current-line)
-(global-set-key (kbd "C-c n") 'flymake-goto-next-error)
-(global-set-key (kbd "C-c p") 'flymake-goto-prev-error)
+;;----------------------------------------------------------------------
+;; flymake and flycheck installed from package
+;; I think you have to choose only one
 
-;; Activate flymake for D
-(add-hook 'd-mode-hook 'flymake-d-load)
+;; (require 'flymake)
+;; ;;(global-set-key (kbd "C-c d") 'flymake-display-err-menu-for-current-line)
+;; (global-set-key (kbd "C-c d") 'flymake-popup-current-error-menu)
+;; (global-set-key (kbd "C-c n") 'flymake-goto-next-error)
+;; (global-set-key (kbd "C-c p") 'flymake-goto-prev-error)
 
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(global-set-key  (kbd "C-c C-p") 'flycheck-previous-error)
+(global-set-key  (kbd "C-c C-n") 'flycheck-next-error)
+
+;; Define d-mode addons
+;; Activate flymake or flycheck for D
+;; Activate auto-complete-mode
+;; Activate yasnippet minor mode if available
+;; Activate dcd-server
+(require 'ac-dcd)
+(add-hook 'd-mode-hook
+          (lambda()
+            ;;(flymake-d-load)
+            (flycheck-dmd-dub-set-variables)
+            (require 'flycheck-d-unittest)
+            (setup-flycheck-d-unittest)
+            (auto-complete-mode t)
+            (when (featurep 'yasnippet)
+              (yas-minor-mode-on))
+            (ac-dcd-maybe-start-server)
+            (ac-dcd-add-imports)
+            (add-to-list 'ac-sources 'ac-source-dcd)
+            (define-key d-mode-map (kbd "C-c ?") 'ac-dcd-show-ddoc-with-buffer)
+            (define-key d-mode-map (kbd "C-c .") 'ac-dcd-goto-definition)
+            (define-key d-mode-map (kbd "C-c ,") 'ac-dcd-goto-def-pop-marker)
+            (define-key d-mode-map (kbd "C-c s") 'ac-dcd-search-symbol)
+            (when (featurep 'popwin)
+              (add-to-list 'popwin:special-display-config
+                           `(,ac-dcd-error-buffer-name :noselect t))
+              (add-to-list 'popwin:special-display-config
+                           `(,ac-dcd-document-buffer-name :position right :width 80))
+              (add-to-list 'popwin:special-display-config
+                           `(,ac-dcd-search-symbol-buffer-name :position bottom :width 5)))))
+
+;; Define diet template mode (this is not installed from package)
+(add-to-list 'auto-mode-alist '("\\.dt$" . whitespace-mode))
+(add-hook 'whitespace-mode-hook
+          (lambda()
+            (setq tab-width 2)
+            (setq whitespace-line-column 250)
+            (setq indent-tabs-mode nil)
+            (setq indent-line-function 'insert-tab)))
+
+;;----------------------------------------------------------------------
+;; elpy
+(elpy-enable)
 ~~~~
 
 ## Scribus
@@ -812,26 +922,37 @@ Instalados los siguientes paquetes desde _marmalade_
 
 * _d-mode_
 * _flymake-d_
+* _flycheck_
+* _flycheck-dmd-dub_
+* _flychek-d-unittest_
 * _auto-complete_ (desde _melpa_)
 * _ac-dcd_
 
 Se configura en el fichero __~/.emacs__:
 
 ~~~~{lisp}
-(require 'flymake)
-(global-set-key (kbd "C-c d") 'flymake-display-err-menu-for-current-line)
-(global-set-key (kbd "C-c n") 'flymake-goto-next-error)
-(global-set-key (kbd "C-c p") 'flymake-goto-prev-error)
+;; (require 'flymake)
+;; ;;(global-set-key (kbd "C-c d") 'flymake-display-err-menu-for-current-line)
+;; (global-set-key (kbd "C-c d") 'flymake-popup-current-error-menu)
+;; (global-set-key (kbd "C-c n") 'flymake-goto-next-error)
+;; (global-set-key (kbd "C-c p") 'flymake-goto-prev-error)
+
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(global-set-key  (kbd "C-c C-p") 'flycheck-previous-error)
+(global-set-key  (kbd "C-c C-n") 'flycheck-next-error)
 
 ;; Define d-mode addons
-;; Activate flymake for D
+;; Activate flymake or flycheck for D
 ;; Activate auto-complete-mode
 ;; Activate yasnippet minor mode if available
 ;; Activate dcd-server
 (require 'ac-dcd)
 (add-hook 'd-mode-hook
           (lambda()
-            (flymake-d-load)
+            ;;(flymake-d-load)
+            (flycheck-dmd-dub-set-variables)
+            (require 'flycheck-d-unittest)
+            (setup-flycheck-d-unittest)
             (auto-complete-mode t)
             (when (featurep 'yasnippet)
               (yas-minor-mode-on))
@@ -1027,12 +1148,20 @@ pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.
 
 ### Usar Emacs para editar Python
 
-Instalamos _elpy_ desde el gestor de paquetes de Emacs, concretamente desde el repo _marmalade_
+Instalamos _elpy_ desde el gestor de paquetes de Emacs, concretamente
+desde el repo _marmalade_
 
-Hay que habilitar _elpy_ en el fichero __~/.emacs__ para ello añadimos la linea
+Hay que habilitar _elpy_ en el fichero __~/.emacs__ para ello añadimos
+la linea
 
 ~~~~{lisp}
 (elpy enable)
+~~~~
+
+_flycheck_ chequea el código python conviene instalar:
+
+~~~~
+sudo pip install pylint
 ~~~~
 
 #### TODO

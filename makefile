@@ -11,12 +11,16 @@ target  := debianpostinstall
 mainfont := 'Ubuntu'
 monofont := 'Ubuntu Mono'
 
+# for latex and pdf
+documentclass := 'scrartcl'
+
 pdf_opt := --smart --standalone --variable geometry:a4paper --variable lang=$(lang) \
            --number-sections --toc --from=markdown --to latex --latex-engine=xelatex \
            --variable colorlinks \
            --variable mainfont=$(mainfont) \
            --variable monofont=$(monofont) \
            --variable fontsize='12pt' \
+           --variable documentclass=$(documentclass) \
 
 ## Recipes for targets
 
@@ -24,7 +28,7 @@ pdf_opt := --smart --standalone --variable geometry:a4paper --variable lang=$(la
 .PHONY: clean pdf latex mediawiki epub github
 
 # all -- This target try to build every thing
-all: pdf latex mediawiki epub github docx
+all: pdf latex mediawiki dokuwiki epub github docx
 
 # reset -- This target deletes every target and then tries to build everithing
 reset: clean all
@@ -50,6 +54,13 @@ mediawiki: $(output)/$(target).mw $(sources)
 $(output)/$(target).mw: $(sources)
 	pandoc --from markdown --to mediawiki \
 	--output=$(output)/$(target).mw \
+	$(sources)
+
+# dokuwiki  -- buid dokuwiki file into output directory
+dokuwiki: $(output)/$(target).dw $(sources)
+$(output)/$(target).dw: $(sources)
+	pandoc --from markdown --to dokuwiki \
+	--output=$(output)/$(target).dw \
 	$(sources)
 
 #epub  -- buid epub file into output directory

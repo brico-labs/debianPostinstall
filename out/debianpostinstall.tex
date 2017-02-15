@@ -459,6 +459,60 @@ sudo aptitude install recordmydesktop gtk-recordmydesktop
 sudo aptitude install handbrake handbrake-cli handbrake-gtk
 \end{verbatim}
 
+\subsection{Lector de DNIe}\label{lector-de-dnie}
+
+Instalamos:
+
+\begin{verbatim}
+sudo aptitude libccid install pcscd pcsc-tools
+\end{verbatim}
+
+Como root ejecutamos \emph{pcsc\_scan} \footnote{Es posible que sean
+  necesario reiniciar el pc antes de seguir}:
+
+\begin{verbatim}
+root@rasalhague:~# pcsc_scan 
+PC/SC device scanner
+V 1.4.23 (c) 2001-2011, Ludovic Rousseau <ludovic.rousseau@free.fr>
+Compiled with PC/SC lite version: 1.8.11
+Using reader plug'n play mechanism
+Scanning present readers...
+Waiting for the first reader...
+\end{verbatim}
+
+Si insertamos el lector veremos algo como esto:
+
+\begin{verbatim}
+root@rasalhague:~# pcsc_scan 
+PC/SC device scanner
+V 1.4.23 (c) 2001-2011, Ludovic Rousseau <ludovic.rousseau@free.fr>
+Compiled with PC/SC lite version: 1.8.11
+Using reader plug'n play mechanism
+Scanning present readers...
+Waiting for the first reader...found one
+Scanning present readers...
+0: C3PO LTC31 v2 (11061005) 00 00
+
+Wed Jan 25 01:17:20 2017
+Reader 0: C3PO LTC31 v2 (11061005) 00 00
+  Card state: Card removed, 
+\end{verbatim}
+
+Si insertamos un DNI veremos que se lee la información de la tarjeta
+insertada:
+
+\begin{verbatim}
+Reader 0: C3PO LTC31 v2 (11061005) 00 00
+  Card state: Card inserted, 
+y mas rollo
+\end{verbatim}
+
+Instalamos ahora:
+
+\begin{verbatim}
+aptitude install pinentry-gtk2 opensc
+\end{verbatim}
+
 \section{Documentos}\label{documentos}
 
 \subsection{Calibre}\label{calibre}
@@ -677,8 +731,12 @@ Instalamos los paquetes \emph{markdown-mode}, \emph{mardown-plus} y
 \emph{pandoc-mode} desde el menú de gestión de paquetes de
 \textbf{emacs}.
 
-También instalamos \emph{d-mode} y \emph{flymake-d}. Hay una sección de
-configuración en el fichero \emph{.emacs}.
+También instalamos \emph{d-mode} y \emph{flymake-d}.
+
+Después de probar \emph{flymake} y \emph{flycheck} al final me ha
+gustado más \emph{flycheck} Hay una sección de configuración en el
+fichero \emph{.emacs} para cada uno de ellos, pero la de \emph{flymake}
+está comentada.
 
 Configuramos el fichero \emph{.emacs} definimos algunas preferencias,
 algunas funciones útiles y añadimos orígenes extra de paquetes.
@@ -689,14 +747,14 @@ algunas funciones útiles y añadimos orígenes extra de paquetes.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(column-number-mode t)
  '(show-paren-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Mensch" :foundry "bitstream" :slant normal :weight normal :height 128 :width normal)))))
+ )
+
 ;;------------------------------------------------------------
 ;; Some settings
 (setq inhibit-startup-message t) ; Eliminate FSF startup msg
@@ -713,13 +771,14 @@ algunas funciones útiles y añadimos orígenes extra de paquetes.
 (setq-default indent-tabs-mode nil)       ; Insert spaces instead of tabs
 (global-set-key "\r" 'newline-and-indent) ; turn autoindenting on
 ;(set-default 'truncate-lines t)           ; Truncate lines for all buffers
-(require 'iso-transl)
+;(require 'iso-transl)                     ; doesn't seems to be needed in debian
+
 
 ;;------------------------------------------------------------
 ;; Some useful key definitions
 (define-key global-map [M-S-down-mouse-3] 'imenu)
 (global-set-key [C-tab] 'hippie-expand)                    ; expand
-(global-set-key [C-kp-subtract] 'undo)                     ; [Undo]
+(global-set-key [C-kp-subtract] 'undo)                     ; [Undo] 
 (global-set-key [C-kp-multiply] 'goto-line)                ; goto line
 (global-set-key [C-kp-add] 'toggle-truncate-lines)         ; goto line
 (global-set-key [C-kp-divide] 'delete-trailing-whitespace) ; delete trailing whitespace
@@ -776,7 +835,7 @@ algunas funciones útiles y añadimos orígenes extra de paquetes.
    (while rest
      (bury-buffer (car rest))
      (setq rest (cdr rest)))
-   (setq time (time-now)))
+   (setq time (time-now))) 
 
 (global-set-key [f8] 'bubble-buffer)    ; win-tab switch the buffer
 
@@ -784,8 +843,8 @@ algunas funciones útiles y añadimos orígenes extra de paquetes.
    ;; Kill default buffer without the extra emacs questions
    (interactive)
    (kill-buffer (buffer-name))
-   (set-name))
-(global-set-key [C-delete] 'geosoft-kill-buffer)
+   (set-name)) 
+(global-set-key [C-delete] 'geosoft-kill-buffer) 
 
 ;;----------------------------------------------------------------------
 ;; MELPA and others
@@ -797,16 +856,68 @@ algunas funciones útiles y añadimos orígenes extra de paquetes.
   (add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/") t)
   )
 
+; (add-to-list 'load-path "~/.emacs.d/")
+
 ;;----------------------------------------------------------------------
-;; flymake installed from package
+;; Packages installed via package
+;;------------------------------
 
-(require 'flymake)
-(global-set-key (kbd "C-c d") 'flymake-display-err-menu-for-current-line)
-(global-set-key (kbd "C-c n") 'flymake-goto-next-error)
-(global-set-key (kbd "C-c p") 'flymake-goto-prev-error)
+;;----------------------------------------------------------------------
+;; flymake and flycheck installed from package
+;; I think you have to choose only one
 
-;; Activate flymake for D
-(add-hook 'd-mode-hook 'flymake-d-load)
+;; (require 'flymake)
+;; ;;(global-set-key (kbd "C-c d") 'flymake-display-err-menu-for-current-line)
+;; (global-set-key (kbd "C-c d") 'flymake-popup-current-error-menu)
+;; (global-set-key (kbd "C-c n") 'flymake-goto-next-error)
+;; (global-set-key (kbd "C-c p") 'flymake-goto-prev-error)
+
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(global-set-key  (kbd "C-c C-p") 'flycheck-previous-error)
+(global-set-key  (kbd "C-c C-n") 'flycheck-next-error)
+
+;; Define d-mode addons
+;; Activate flymake or flycheck for D
+;; Activate auto-complete-mode
+;; Activate yasnippet minor mode if available
+;; Activate dcd-server
+(require 'ac-dcd)
+(add-hook 'd-mode-hook
+          (lambda()
+            ;;(flymake-d-load)
+            (flycheck-dmd-dub-set-variables)
+            (require 'flycheck-d-unittest)
+            (setup-flycheck-d-unittest)
+            (auto-complete-mode t)
+            (when (featurep 'yasnippet)
+              (yas-minor-mode-on))
+            (ac-dcd-maybe-start-server)
+            (ac-dcd-add-imports)
+            (add-to-list 'ac-sources 'ac-source-dcd)
+            (define-key d-mode-map (kbd "C-c ?") 'ac-dcd-show-ddoc-with-buffer)
+            (define-key d-mode-map (kbd "C-c .") 'ac-dcd-goto-definition)
+            (define-key d-mode-map (kbd "C-c ,") 'ac-dcd-goto-def-pop-marker)
+            (define-key d-mode-map (kbd "C-c s") 'ac-dcd-search-symbol)
+            (when (featurep 'popwin)
+              (add-to-list 'popwin:special-display-config
+                           `(,ac-dcd-error-buffer-name :noselect t))
+              (add-to-list 'popwin:special-display-config
+                           `(,ac-dcd-document-buffer-name :position right :width 80))
+              (add-to-list 'popwin:special-display-config
+                           `(,ac-dcd-search-symbol-buffer-name :position bottom :width 5)))))
+
+;; Define diet template mode (this is not installed from package)
+(add-to-list 'auto-mode-alist '("\\.dt$" . whitespace-mode))
+(add-hook 'whitespace-mode-hook
+          (lambda()
+            (setq tab-width 2)
+            (setq whitespace-line-column 250)
+            (setq indent-tabs-mode nil)
+            (setq indent-line-function 'insert-tab)))
+
+;;----------------------------------------------------------------------
+;; elpy
+(elpy-enable)
 \end{verbatim}
 
 \subsection{Scribus}\label{scribus}
@@ -933,6 +1044,12 @@ Instalados los siguientes paquetes desde \emph{marmalade}
 \item
   \emph{flymake-d}
 \item
+  \emph{flycheck}
+\item
+  \emph{flycheck-dmd-dub}
+\item
+  \emph{flychek-d-unittest}
+\item
   \emph{auto-complete} (desde \emph{melpa})
 \item
   \emph{ac-dcd}
@@ -941,38 +1058,45 @@ Instalados los siguientes paquetes desde \emph{marmalade}
 Se configura en el fichero \textbf{\textasciitilde{}/.emacs}:
 
 \begin{verbatim}
-(require 'flymake)
-(global-set-key (kbd "C-c d") 'flymake-display-err-menu-for-current-line)
-(global-set-key (kbd "C-c n") 'flymake-goto-next-error)
-(global-set-key (kbd "C-c p") 'flymake-goto-prev-error)
+;; (require 'flymake)
+;; ;;(global-set-key (kbd "C-c d") 'flymake-display-err-menu-for-current-line)
+;; (global-set-key (kbd "C-c d") 'flymake-popup-current-error-menu)
+;; (global-set-key (kbd "C-c n") 'flymake-goto-next-error)
+;; (global-set-key (kbd "C-c p") 'flymake-goto-prev-error)
+
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(global-set-key  (kbd "C-c C-p") 'flycheck-previous-error)
+(global-set-key  (kbd "C-c C-n") 'flycheck-next-error)
 
 ;; Define d-mode addons
-;; Activate flymake for D
+;; Activate flymake or flycheck for D
 ;; Activate auto-complete-mode
 ;; Activate yasnippet minor mode if available
 ;; Activate dcd-server
 (require 'ac-dcd)
 (add-hook 'd-mode-hook
           (lambda()
-            (flymake-d-load)
-           (auto-complete-mode t)
-           (when (featurep 'yasnippet)
-             (yas-minor-mode-on))
-           (ac-dcd-maybe-start-server)
-           (ac-dcd-add-imports)
-           (add-to-list 'ac-sources 'ac-source-dcd)
-           (define-key d-mode-map (kbd "C-c ?") 'ac-dcd-show-ddoc-with-buffer)
-           (define-key d-mode-map (kbd "C-c .") 'ac-dcd-goto-definition)
-           (define-key d-mode-map (kbd "C-c ,") 'ac-dcd-goto-def-pop-marker)
-           (define-key d-mode-map (kbd "C-c s") 'ac-dcd-search-symbol)
-           (when (featurep 'popwin)
-             (add-to-list 'popwin:special-display-config
-                          `(,ac-dcd-error-buffer-name :noselect t))
-             (add-to-list 'popwin:special-display-config
-                          `(,ac-dcd-document-buffer-name :position right :width 80))
-             (add-to-list 'popwin:special-display-config
-                          `(,ac-dcd-search-symbol-buffer-name :position bottom :width 5)))))
-            
+            ;;(flymake-d-load)
+            (flycheck-dmd-dub-set-variables)
+            (require 'flycheck-d-unittest)
+            (setup-flycheck-d-unittest)
+            (auto-complete-mode t)
+            (when (featurep 'yasnippet)
+              (yas-minor-mode-on))
+            (ac-dcd-maybe-start-server)
+            (ac-dcd-add-imports)
+            (add-to-list 'ac-sources 'ac-source-dcd)
+            (define-key d-mode-map (kbd "C-c ?") 'ac-dcd-show-ddoc-with-buffer)
+            (define-key d-mode-map (kbd "C-c .") 'ac-dcd-goto-definition)
+            (define-key d-mode-map (kbd "C-c ,") 'ac-dcd-goto-def-pop-marker)
+            (define-key d-mode-map (kbd "C-c s") 'ac-dcd-search-symbol)
+            (when (featurep 'popwin)
+              (add-to-list 'popwin:special-display-config
+                           `(,ac-dcd-error-buffer-name :noselect t))
+              (add-to-list 'popwin:special-display-config
+                           `(,ac-dcd-document-buffer-name :position right :width 80))
+              (add-to-list 'popwin:special-display-config
+                           `(,ac-dcd-search-symbol-buffer-name :position bottom :width 5)))))
 
 ;; Define diet template mode (this is not installed from package)
 (add-to-list 'auto-mode-alist '("\\.dt$" . whitespace-mode))
@@ -1174,6 +1298,12 @@ Hay que habilitar \emph{elpy} en el fichero
 
 \begin{verbatim}
 (elpy enable)
+\end{verbatim}
+
+\emph{flycheck} chequea el código python conviene instalar:
+
+\begin{verbatim}
+sudo pip install pylint
 \end{verbatim}
 
 \paragraph{TODO}\label{todo}
@@ -1570,16 +1700,6 @@ dejado el conector java.
 \subsubsection{MariaDB}\label{mariadb}
 
 \textbf{PENDIENTE}
-
-\section{Cuentas online abiertas}\label{cuentas-online-abiertas}
-
-\begin{itemize}
-\tightlist
-\item
-  google
-\item
-  pocket (plugin de chrome)
-\end{itemize}
 
 \section{Recetas varias}\label{recetas-varias}
 
