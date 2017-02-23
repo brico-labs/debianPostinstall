@@ -25,8 +25,18 @@ características:
 
 * 750Gb HD
 
+Mi portátil equipa una tarjeta _Nvidia Geforce GT540M_ que resulta
+pertenecer a una rama muerta en el árbol de desarrollo de Nvidia.
+
 La gráfica es una Nvidia Optimus, es decir una tarjeta híbrida que
-funciona perfectamente en Ubuntu 14.04 usando Bumblebee.
+funcionaba perfectamente en Ubuntu 14.04 usando Bumblebee.
+
+Con el paso a Ubuntu _Xenial Xerus_ mi tarjeta gráfica dejó de
+funcionar correctamente con el procedimiento de instalación de
+Bumblebee que venía usando. Y con todos los que fui capaz de probar.
+
+A mayores me encontré también con problemas insalvables para instalar
+el Virtual Box así que decidí volver a Debian.
 
 Para hacer la actualización del sistema opté por desinstalar el dvd y
 montar en su lugar un disco SSD en un Caddie para Acer. La instalación
@@ -34,14 +44,12 @@ fué muy fácil, y aunque el portátil arranca perfectamente de
 cualquiera de los dos discos opté por instalar el SSD en la bahía del
 HD original y pasar el HD al caddie.
 
-Comentar los problemas con calentamiento en Ubuntu
+Una vez instalado el sistema operativo, lo primero fue la instalación
+del Bumblebee para probar que funcionaba normalmente.
 
-Comentar la creación de usb bootable
-
-Lo primero fue la instalación del Bumblebee
-
-firmware-linux-nonfree
-Bumblebee-nvidia primus
+~~~~
+sudo apt-get install firmware-linux-nonfree Bumblebee-nvidia primus
+~~~~
 
 # Cambiar las opciones de idioma
 
@@ -289,6 +297,14 @@ sudo aptitude install gimp-plugin-registry gimp-texturize gimp-data-extras gimp-
 
 ~~~~
 
+### Shutter
+
+Un programa de captura de pantallas que permite editarlas rápidamente:
+
+~~~~
+sudo aptitude install shutter libgoo-canvas-perl
+~~~~
+
 ## Fotografía
 
 ### Rawtherapee y Darktable: Tratamiento de imágenes fotogŕaficas
@@ -362,8 +378,11 @@ Instalamos también utilidades de video:
 ~~~~{bash}
 sudo aptitude install vlc browser-plugin-vlc
 sudo aptitude install recordmydesktop gtk-recordmydesktop
+sudo aptitude install vokoscreen
 sudo aptitude install handbrake handbrake-cli handbrake-gtk
 ~~~~
+
+
 
 ## Lector de DNIe
 
@@ -418,6 +437,7 @@ Instalamos ahora:
 ~~~~
 aptitude install pinentry-gtk2 opensc
 ~~~~
+
 
 
 # Documentos
@@ -1799,6 +1819,18 @@ Una vez instalado los pasos recomendados:
 
     Un reinicio y listos: `shutdown -r now`
 
+
+## Grabar time-lapse del escritorio
+
+### Usando avconv
+
+Capturas periódicas de la pantalla:
+
+~~~~{bash}
+avconv -video_size 1366x768 -framerate 1/10 -f x11grab -i :0.0+0,0 -pix_fmt rgb24 ~/tmp/frames/frame_%05d.png
+~~~~
+
+El framerate son imágenes por segundo, así que aquí estamos diciendo que capturamos una imagen cada 10 sg.
 
 
 

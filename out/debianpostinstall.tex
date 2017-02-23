@@ -1,4 +1,4 @@
-\documentclass[12pt,spanish,]{article}
+\documentclass[12pt,spanish,]{scrartcl}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -106,8 +106,18 @@ características:
   750Gb HD
 \end{itemize}
 
+Mi portátil equipa una tarjeta \emph{Nvidia Geforce GT540M} que resulta
+pertenecer a una rama muerta en el árbol de desarrollo de Nvidia.
+
 La gráfica es una Nvidia Optimus, es decir una tarjeta híbrida que
-funciona perfectamente en Ubuntu 14.04 usando Bumblebee.
+funcionaba perfectamente en Ubuntu 14.04 usando Bumblebee.
+
+Con el paso a Ubuntu \emph{Xenial Xerus} mi tarjeta gráfica dejó de
+funcionar correctamente con el procedimiento de instalación de Bumblebee
+que venía usando. Y con todos los que fui capaz de probar.
+
+A mayores me encontré también con problemas insalvables para instalar el
+Virtual Box así que decidí volver a Debian.
 
 Para hacer la actualización del sistema opté por desinstalar el dvd y
 montar en su lugar un disco SSD en un Caddie para Acer. La instalación
@@ -115,13 +125,12 @@ fué muy fácil, y aunque el portátil arranca perfectamente de cualquiera
 de los dos discos opté por instalar el SSD en la bahía del HD original y
 pasar el HD al caddie.
 
-Comentar los problemas con calentamiento en Ubuntu
+Una vez instalado el sistema operativo, lo primero fue la instalación
+del Bumblebee para probar que funcionaba normalmente.
 
-Comentar la creación de usb bootable
-
-Lo primero fue la instalación del Bumblebee
-
-firmware-linux-nonfree Bumblebee-nvidia primus
+\begin{verbatim}
+sudo apt-get install firmware-linux-nonfree Bumblebee-nvidia primus
+\end{verbatim}
 
 \section{Cambiar las opciones de
 idioma}\label{cambiar-las-opciones-de-idioma}
@@ -381,6 +390,14 @@ Gimp ya estaba instalado, adicionalmente instalado el gimp data-extra
 sudo aptitude install gimp-plugin-registry gimp-texturize gimp-data-extras gimp-gap
 \end{verbatim}
 
+\subsubsection{Shutter}\label{shutter}
+
+Un programa de captura de pantallas que permite editarlas rápidamente:
+
+\begin{verbatim}
+sudo aptitude install shutter libgoo-canvas-perl
+\end{verbatim}
+
 \subsection{Fotografía}\label{fotografuxeda}
 
 \subsubsection{Rawtherapee y Darktable: Tratamiento de imágenes
@@ -456,6 +473,7 @@ Instalamos también utilidades de video:
 \begin{verbatim}
 sudo aptitude install vlc browser-plugin-vlc
 sudo aptitude install recordmydesktop gtk-recordmydesktop
+sudo aptitude install vokoscreen
 sudo aptitude install handbrake handbrake-cli handbrake-gtk
 \end{verbatim}
 

@@ -11,17 +11,19 @@ Mi portátil es un ordenador Acer 5755G con las siguientes características:
 
 -   750Gb HD
 
-La gráfica es una Nvidia Optimus, es decir una tarjeta híbrida que funciona perfectamente en Ubuntu 14.04 usando Bumblebee.
+Mi portátil equipa una tarjeta *Nvidia Geforce GT540M* que resulta pertenecer a una rama muerta en el árbol de desarrollo de Nvidia.
+
+La gráfica es una Nvidia Optimus, es decir una tarjeta híbrida que funcionaba perfectamente en Ubuntu 14.04 usando Bumblebee.
+
+Con el paso a Ubuntu *Xenial Xerus* mi tarjeta gráfica dejó de funcionar correctamente con el procedimiento de instalación de Bumblebee que venía usando. Y con todos los que fui capaz de probar.
+
+A mayores me encontré también con problemas insalvables para instalar el Virtual Box así que decidí volver a Debian.
 
 Para hacer la actualización del sistema opté por desinstalar el dvd y montar en su lugar un disco SSD en un Caddie para Acer. La instalación fué muy fácil, y aunque el portátil arranca perfectamente de cualquiera de los dos discos opté por instalar el SSD en la bahía del HD original y pasar el HD al caddie.
 
-Comentar los problemas con calentamiento en Ubuntu
+Una vez instalado el sistema operativo, lo primero fue la instalación del Bumblebee para probar que funcionaba normalmente.
 
-Comentar la creación de usb bootable
-
-Lo primero fue la instalación del Bumblebee
-
-firmware-linux-nonfree Bumblebee-nvidia primus
+    sudo apt-get install firmware-linux-nonfree Bumblebee-nvidia primus
 
 Cambiar las opciones de idioma
 ==============================
@@ -227,6 +229,12 @@ Gimp ya estaba instalado, adicionalmente instalado el gimp data-extra
 
     sudo aptitude install gimp-plugin-registry gimp-texturize gimp-data-extras gimp-gap
 
+### Shutter
+
+Un programa de captura de pantallas que permite editarlas rápidamente:
+
+    sudo aptitude install shutter libgoo-canvas-perl
+
 Fotografía
 ----------
 
@@ -292,6 +300,7 @@ Instalamos también utilidades de video:
 ``` {bash}
 sudo aptitude install vlc browser-plugin-vlc
 sudo aptitude install recordmydesktop gtk-recordmydesktop
+sudo aptitude install vokoscreen
 sudo aptitude install handbrake handbrake-cli handbrake-gtk
 ```
 
