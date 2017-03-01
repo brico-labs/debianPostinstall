@@ -931,6 +931,9 @@ Instalado python-pip y python-virtualenv desde aptitude.
 
 ``` {bash}
 sudo aptitude install python-pip python-virtualenv virtualenv
+
+sudo pip install --upgrade pip
+sudo pip install --upgrade virtualenv
 ```
 
 Instalamos a mayores *Ananconda*, es la forma fácil de poder usar *ipython notebook*. De hecho me he instalado dos versiones la que incluye el python2 y la que incluye el python3.
@@ -1031,6 +1034,44 @@ Hay que habilitar *elpy* en el fichero **~/.emacs** para ello añadimos la linea
 #### TODO
 
 Estudiar esto con calma <https://elpy.readthedocs.io/en/latest>
+
+### Web2py
+
+Desde [la página web oficial de web2py](http://www.web2py.com) descargamos el *source code* para usuarios normales.
+
+Yo he descomprimido el framework en `~/apps/web2py`
+
+Para que el framework soporte ssl convine generar los siguientes certificados:
+
+    openssl genrsa -out server.key 2048
+    openssl req -new -key server.key -out server.csr
+
+    Country Name (2 letter code) [AU]:ES
+    State or Province Name (full name) [Some-State]:CORUNA
+    Locality Name (eg, city) []:CORUNA
+    Organization Name (eg, company) [Internet Widgits Pty Ltd]:Mikasa
+    Organizational Unit Name (eg, section) []:salvari
+    Common Name (e.g. server FQDN or YOUR name) []:salvari
+    Email Address []:salvari@gmail.com
+
+    Please enter the following 'extra' attributes
+    to be sent with your certificate request
+    A challenge password []:secret1t05
+    An optional company name []:Mikasa
+
+Ahora ejecutamos:
+
+    openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+
+Ahora deberíamos dejar los ficheros `server.key`, `server.csr` y `server.crt` en el directorio raiz de *web2py* y ya podremos arrancar el framework con los siguientes parámetros:
+
+    python web2py.py -a 'admin_password' -c server.crt -k server.key -i 0.0.0.0 -p 8000
+
+Y ya podemos acceder nuestro server en la dirección <https://localhost:8000>
+
+Tampoco está de más instalar las librerías de graphviz:
+
+    sudo aptitude install python-pygraphviz
 
 Desarrollo hardware
 ===================
@@ -1539,6 +1580,19 @@ Una vez instalado los pasos recomendados:
         }
 
     Un reinicio y listos: `shutdown -r now`
+
+Grabar time-lapse del escritorio
+--------------------------------
+
+### Usando avconv
+
+Capturas periódicas de la pantalla:
+
+``` {bash}
+avconv -video_size 1366x768 -framerate 1/10 -f x11grab -i :0.0+0,0 -pix_fmt rgb24 ~/tmp/frames/frame_%05d.png
+```
+
+El framerate son imágenes por segundo, así que aquí estamos diciendo que capturamos una imagen cada 10 sg.
 
 TODO
 ====

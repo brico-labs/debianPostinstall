@@ -1191,6 +1191,9 @@ Instalado python-pip y python-virtualenv desde aptitude.
 
 \begin{verbatim}
 sudo aptitude install python-pip python-virtualenv virtualenv
+
+sudo pip install --upgrade pip
+sudo pip install --upgrade virtualenv
 \end{verbatim}
 
 Instalamos a mayores \emph{Ananconda}, es la forma fácil de poder usar
@@ -1327,6 +1330,59 @@ sudo pip install pylint
 \paragraph{TODO}\label{todo}
 
 Estudiar esto con calma \url{https://elpy.readthedocs.io/en/latest}
+
+\subsubsection{Web2py}\label{web2py}
+
+Desde \href{http://www.web2py.com}{la página web oficial de web2py}
+descargamos el \emph{source code} para usuarios normales.
+
+Yo he descomprimido el framework en
+\texttt{\textasciitilde{}/apps/web2py}
+
+Para que el framework soporte ssl convine generar los siguientes
+certificados:
+
+\begin{verbatim}
+openssl genrsa -out server.key 2048
+openssl req -new -key server.key -out server.csr
+
+Country Name (2 letter code) [AU]:ES
+State or Province Name (full name) [Some-State]:CORUNA
+Locality Name (eg, city) []:CORUNA
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Mikasa
+Organizational Unit Name (eg, section) []:salvari
+Common Name (e.g. server FQDN or YOUR name) []:salvari
+Email Address []:salvari@gmail.com
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:secret1t05
+An optional company name []:Mikasa
+\end{verbatim}
+
+Ahora ejecutamos:
+
+\begin{verbatim}
+openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+\end{verbatim}
+
+Ahora deberíamos dejar los ficheros \texttt{server.key},
+\texttt{server.csr} y \texttt{server.crt} en el directorio raiz de
+\emph{web2py} y ya podremos arrancar el framework con los siguientes
+parámetros:
+
+\begin{verbatim}
+python web2py.py -a 'admin_password' -c server.crt -k server.key -i 0.0.0.0 -p 8000
+\end{verbatim}
+
+Y ya podemos acceder nuestro server en la dirección
+\url{https://localhost:8000}
+
+Tampoco está de más instalar las librerías de graphviz:
+
+\begin{verbatim}
+sudo aptitude install python-pygraphviz
+\end{verbatim}
 
 \section{Desarrollo hardware}\label{desarrollo-hardware}
 
@@ -2034,6 +2090,20 @@ network={
 
   Un reinicio y listos: \texttt{shutdown\ -r\ now}
 \end{enumerate}
+
+\subsection{Grabar time-lapse del
+escritorio}\label{grabar-time-lapse-del-escritorio}
+
+\subsubsection{Usando avconv}\label{usando-avconv}
+
+Capturas periódicas de la pantalla:
+
+\begin{verbatim}
+avconv -video_size 1366x768 -framerate 1/10 -f x11grab -i :0.0+0,0 -pix_fmt rgb24 ~/tmp/frames/frame_%05d.png
+\end{verbatim}
+
+El framerate son imágenes por segundo, así que aquí estamos diciendo que
+capturamos una imagen cada 10 sg.
 
 \section{TODO}\label{todo-1}
 
