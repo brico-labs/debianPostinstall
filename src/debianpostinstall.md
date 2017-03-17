@@ -438,8 +438,6 @@ Instalamos ahora:
 aptitude install pinentry-gtk2 opensc
 ~~~~
 
-
-
 # Documentos
 
 ## Calibre
@@ -467,8 +465,6 @@ Algunos enlaces útiles:
 * <http://www.lectoreselectronicos.com/foro/showthread.php?15116-Manual-de-instalaci%C3%B3n-y-uso-del-plugin-Kobo-Touch-Extended-para-Calibre>
 * <http://www.redelijkheid.com/blog/2013/7/25/kobo-glo-ebook-library-management-with-calibre>
 * <https://www.netogram.com/kobo.htm>
-
-
 
 
 ## Pandoc
@@ -823,6 +819,20 @@ algunas funciones útiles y añadimos orígenes extra de paquetes.
 (elpy-enable)
 ~~~~
 
+## Textadept
+
+Un potente editor de desarrollo, multiplataforma.
+
+Viene incluido en el pack D-apt, por que es muy potente como IDE para
+__D__.
+
+De momento lo único que he configurado es la fuente, para ello
+editamos el fichero _~/.textadept/init.lua_ y añadimos la linea:
+
+~~~~{lua}
+ui.set_theme('light', {font = 'Meslo LG L Regular for Powerline', fontsize = 14})
+~~~~
+
 ## Scribus
 
 Instalado con aptitude
@@ -1098,11 +1108,12 @@ set -x PATH ~/apps/anaconda3/bin $PATH
 Creamos un entorno conda con Python 2.7.x
 
 ~~~~
+export PATH="~/apps/anaconda2/bin:$PATH"
 conda create -n gl-env python=2.7 anaconda
 ~~~~
 
 Activamos el nuevo entorno (todo esto lo hice en bash, en fish hay un
-problemilla con el entorno conda
+problemilla con el entorno conda 
 [mas info](https://penandpants.com/2014/02/28/using-conda-environments-and-the-fish-shell/))
 
 ~~~~
@@ -1169,6 +1180,16 @@ pip install "jupyter"
 pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
 ~~~~
 
+### Instalar Jupyter en el Python del sistema
+
+Seguimos las instrucciones [aquí](https://gist.github.com/frgomes/24c1923f2c9f14a27b14)
+
+Se instala el __Jupyter__ con el python3 del sistema.
+
+#### TODO
+
+Añadir comentarios del virtualenvwrapper y demás detalles
+
 ### Usar Emacs para editar Python
 
 Instalamos _elpy_ desde el gestor de paquetes de Emacs, concretamente
@@ -1181,7 +1202,7 @@ la linea
 (elpy enable)
 ~~~~
 
-_flycheck_ chequea el código python conviene instalar:
+_flycheck_ chequea el código python. Conviene instalar:
 
 ~~~~
 sudo pip install pylint
@@ -1239,6 +1260,33 @@ Tampoco está de más instalar las librerías de graphviz:
 
 ~~~~
 sudo aptitude install python-pygraphviz
+~~~~
+
+## Go language
+
+Nos bajamos los binarios desde la [página oficial](https://golang.org/dl/)
+
+Descomprimimos en _/opt_, ejecutando (como root):
+
+~~~~
+cd /opt
+tar xvzf ~/Downloads/go1.8.linux-amd64.tar.gz 
+~~~~
+
+Deberíamos dejar configuradas las siguientes variables de entorno:
+
+~~~~
+# Point to the local installation of golang.
+export GOROOT=/opt/go
+
+# Point to the location beneath which source and binaries are installed.
+export GOPATH=$HOME/go
+
+# Ensure that the binary-release is on your PATH.
+export PATH=${PATH}:${GOROOT}/bin
+
+# Ensure that compiled binaries are also on your PATH.
+export PATH=${PATH}:${GOPATH}/bin
 ~~~~
     
 # Desarrollo hardware
