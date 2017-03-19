@@ -1202,7 +1202,15 @@ python3 -V
 Python 3.4.2
 \end{verbatim}
 
-Instalado python-pip y python-virtualenv desde aptitude.
+\subsubsection{pip, virtualenv, virtualenvwrapper,
+virtualfish}\label{pip-virtualenv-virtualenvwrapper-virtualfish}
+
+\emph{pip} es un gestor de paquetes para \textbf{Python} que facilita la
+instalación de librerías y utilidades.
+
+Para poder usar los entornos virtuales instalaremos también virtualenv.
+
+Instalamos los dos desde aptitude:
 
 \begin{verbatim}
 sudo aptitude install python-pip python-virtualenv virtualenv
@@ -1211,7 +1219,48 @@ sudo pip install --upgrade pip
 sudo pip install --upgrade virtualenv
 \end{verbatim}
 
-Instalamos a mayores \emph{Ananconda}, es la forma fácil de poder usar
+\emph{virtualenv} es una herramienta imprescindible en Python, pero da
+un poco de trabajo, así que se han desarrollado algunos frontends para
+simplificar su uso, para \emph{bash} y \emph{zsh} usaremos
+\emph{virtualenvwrapper}, y para \emph{fish} el \emph{virtualfish}. Como
+veremos son todos muy parecidos.
+
+Instalamos el virtualwrapper:
+
+\begin{verbatim}
+sudo apt-get install virtualenvwrapper -y
+\end{verbatim}
+
+Para usar \emph{virtualenvwrapper} tenemos que hacer:
+
+\begin{verbatim}
+source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+\end{verbatim}
+
+O añadir esa linea a nuestros ficheros \emph{.bashrc} y/o \emph{.zshrc}
+
+Yo he dejado la variable de entorno \emph{WORKON\_HOME} sin definir, así
+que apunta al directorio por defecto,
+\texttt{\textasciitilde{}/.virtualenvs}. En ese directorio es donde se
+guardarán nuestros entornos virtuales.
+
+\href{http://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html}{Aquí}
+tenemos la referencia de comandos de \emph{virtualenvwrapper}
+
+Por último, si queremos tener utilidades parecidas en nuestro \emph{fish
+shell} instalamos \emph{virtualfish}:
+
+\begin{verbatim}
+sudo pip install virtualfish
+\end{verbatim}
+
+\href{http://virtualfish.readthedocs.io/en/latest/index.html}{Aquí}
+tenemos la documentación de \emph{virtualfish} y la descripción de todos
+los comandos y plugins disponibles.
+
+\subsubsection{iPython notebook}\label{ipython-notebook}
+
+Teóricamente \emph{Ananconda}, es la forma fácil de poder usar
 \emph{ipython notebook}. De hecho me he instalado dos versiones la que
 incluye el python2 y la que incluye el python3.
 
@@ -1330,11 +1379,13 @@ sistema}\label{instalar-jupyter-en-el-python-del-sistema}
 Seguimos las instrucciones
 \href{https://gist.github.com/frgomes/24c1923f2c9f14a27b14}{aquí}
 
-Se instala el \textbf{Jupyter} con el python3 del sistema.
+Si usamos el script descargado del github se instalará el
+\textbf{Jupyter} con el python3 del sistema. \_\_Conviene asegurarse de
+que estamos apuntando al python del S.O. y no al de Anaconda:
 
-\paragraph{TODO}\label{todo}
-
-Añadir comentarios del virtualenvwrapper y demás detalles
+\begin{verbatim}
+which python
+\end{verbatim}
 
 \subsubsection{Usar Emacs para editar
 Python}\label{usar-emacs-para-editar-python}
@@ -1355,7 +1406,7 @@ Hay que habilitar \emph{elpy} en el fichero
 sudo pip install pylint
 \end{verbatim}
 
-\paragraph{TODO}\label{todo-1}
+\paragraph{TODO}\label{todo}
 
 Estudiar esto con calma \url{https://elpy.readthedocs.io/en/latest}
 
@@ -2161,7 +2212,7 @@ avconv -video_size 1366x768 -framerate 1/10 -f x11grab -i :0.0+0,0 -pix_fmt rgb2
 El framerate son imágenes por segundo, así que aquí estamos diciendo que
 capturamos una imagen cada 10 sg.
 
-\section{TODO}\label{todo-2}
+\section{TODO}\label{todo-1}
 
 \begin{itemize}
 \tightlist

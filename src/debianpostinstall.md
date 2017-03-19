@@ -1063,7 +1063,15 @@ python3 -V
 Python 3.4.2
 ~~~~
 
-Instalado python-pip y python-virtualenv desde aptitude.
+### pip, virtualenv, virtualenvwrapper, virtualfish
+
+_pip_ es un gestor de paquetes para __Python__ que facilita la
+instalación de librerías y utilidades.
+
+Para poder usar los entornos virtuales instalaremos también
+virtualenv.
+
+Instalamos los dos desde aptitude:
 
 ~~~~{bash}
 sudo aptitude install python-pip python-virtualenv virtualenv
@@ -1072,9 +1080,48 @@ sudo pip install --upgrade pip
 sudo pip install --upgrade virtualenv
 ~~~~
 
-Instalamos a mayores _Ananconda_, es la forma fácil de poder usar
-_ipython notebook_. De hecho me he instalado dos versiones la que
-incluye el python2 y la que incluye el python3.
+_virtualenv_ es una herramienta imprescindible en Python, pero da un
+poco de trabajo, así que se han desarrollado algunos frontends para
+simplificar su uso, para _bash_ y _zsh_ usaremos _virtualenvwrapper_,
+y para _fish_ el _virtualfish_. Como veremos son todos muy parecidos.
+
+Instalamos el virtualwrapper:
+
+~~~~{bash}
+sudo apt-get install virtualenvwrapper -y
+~~~~
+
+Para usar _virtualenvwrapper_ tenemos que hacer:
+
+~~~~{bash}
+source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+~~~~
+
+O añadir esa linea a nuestros ficheros _.bashrc_ y/o _.zshrc_
+
+Yo he dejado la variable de entorno *WORKON_HOME* sin definir, así que
+apunta al directorio por defecto, `~/.virtualenvs`. En ese directorio
+es donde se guardarán nuestros entornos virtuales.
+
+[Aquí](http://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html) tenemos
+la referencia de comandos de _virtualenvwrapper_
+
+Por último, si queremos tener utilidades parecidas en nuestro _fish
+shell_ instalamos _virtualfish_:
+
+~~~~{bash}
+sudo pip install virtualfish
+~~~~
+
+[Aquí](http://virtualfish.readthedocs.io/en/latest/index.html) tenemos
+la documentación de _virtualfish_ y la descripción de todos los
+comandos y plugins disponibles.
+
+### iPython notebook
+
+Teóricamente _Ananconda_, es la forma fácil de poder usar _ipython
+notebook_. De hecho me he instalado dos versiones la que incluye el
+python2 y la que incluye el python3.
 
 Las instalaciones de _Anaconda_ son redundantes, basta con instalar
 uno de ellos. En cualquier caso para realizar la instalación basta con
@@ -1184,11 +1231,17 @@ pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.
 
 Seguimos las instrucciones [aquí](https://gist.github.com/frgomes/24c1923f2c9f14a27b14)
 
-Se instala el __Jupyter__ con el python3 del sistema.
+Si usamos el script descargado del github se instalará el __Jupyter__
+con el python3 del sistema. __Conviene asegurarse de que estamos
+apuntando al python del S.O. y no al de Anaconda:
 
-#### TODO
+~~~~{bash}
+which python
+~~~~
 
-Añadir comentarios del virtualenvwrapper y demás detalles
+
+
+
 
 ### Usar Emacs para editar Python
 
