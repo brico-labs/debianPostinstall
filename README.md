@@ -1200,6 +1200,8 @@ Vamos a instalar a mayores algunas librerias de KiCAD, para poder crear Shields 
 Analizador lógico
 -----------------
 
+Mi analizador es un OpenBench de Seedstudio, [aquí hay mas info](http://dangerousprototypes.com/docs/Open_Bench_Logic_Sniffer)
+
 ### Sigrok
 
 Instalamos **Sigrok**, simplemente desde los repos de Debian:
@@ -1210,7 +1212,7 @@ sudo aptitude install sigrok
 
 Al instalar **Sigrok** instalamos también **Pulseview**.
 
-Mi analizador es un OpenBench de Seedstudio, si echamos un ojo al fichero *syslog* vemos que al conectarlo se mapea en un puerto tty.
+Si al conectar el analizador, echamos un ojo al fichero *syslog* vemos que al conectarlo se mapea en un puerto tty.
 
 Si arrancamos **Pulseview** (nuestro usuario tiene que estar incluido en el grupo *dialout*), en la opción *File::Connect to device*, escogemos la opción *Openbench* y le pasamos el puerto. Al pulsar la opción *Scan for devices* reconoce el analizador correctamente como un *Sump Logic Analyzer*.
 
@@ -1234,6 +1236,10 @@ Editamos el fichero *~/apps/Logic Analyzer/client/run.sh* y lo dejamos así:
     java -cp /usr/share/java/RXTXcomm.jar:analyzer.jar org.sump.analyzer.Loader
 
 Y ya funciona.
+
+### OLS
+
+[Página oficial](https://www.lxtreme.nl/ols/)
 
 Virtualización
 ==============

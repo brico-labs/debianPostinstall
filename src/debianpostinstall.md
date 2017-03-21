@@ -1403,6 +1403,9 @@ crear Shields de Arduino.
 
 ## Analizador lógico
 
+Mi analizador es un OpenBench de
+Seedstudio,
+[aquí hay mas info](http://dangerousprototypes.com/docs/Open_Bench_Logic_Sniffer)
 
 ### Sigrok
 
@@ -1414,7 +1417,7 @@ sudo aptitude install sigrok
 
 Al instalar __Sigrok__ instalamos también __Pulseview__.
 
-Mi analizador es un OpenBench de Seedstudio, si echamos un ojo al
+Si al conectar el analizador, echamos un ojo al
 fichero _syslog_ vemos que al conectarlo se mapea en un puerto tty.
 
 Si arrancamos __Pulseview__ (nuestro usuario tiene que estar incluido
@@ -1449,6 +1452,9 @@ java -cp /usr/share/java/RXTXcomm.jar:analyzer.jar org.sump.analyzer.Loader
 
 Y ya funciona.
 
+### OLS
+
+[Página oficial](https://www.lxtreme.nl/ols/)
 
 
 

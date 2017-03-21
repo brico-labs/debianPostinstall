@@ -1556,6 +1556,10 @@ Shields de Arduino.
 
 \subsection{Analizador lógico}\label{analizador-luxf3gico}
 
+Mi analizador es un OpenBench de Seedstudio,
+\href{http://dangerousprototypes.com/docs/Open_Bench_Logic_Sniffer}{aquí
+hay mas info}
+
 \subsubsection{Sigrok}\label{sigrok}
 
 Instalamos \textbf{Sigrok}, simplemente desde los repos de Debian:
@@ -1566,8 +1570,8 @@ sudo aptitude install sigrok
 
 Al instalar \textbf{Sigrok} instalamos también \textbf{Pulseview}.
 
-Mi analizador es un OpenBench de Seedstudio, si echamos un ojo al
-fichero \emph{syslog} vemos que al conectarlo se mapea en un puerto tty.
+Si al conectar el analizador, echamos un ojo al fichero \emph{syslog}
+vemos que al conectarlo se mapea en un puerto tty.
 
 Si arrancamos \textbf{Pulseview} (nuestro usuario tiene que estar
 incluido en el grupo \emph{dialout}), en la opción \emph{File::Connect
@@ -1599,6 +1603,10 @@ java -cp /usr/share/java/RXTXcomm.jar:analyzer.jar org.sump.analyzer.Loader
 \end{verbatim}
 
 Y ya funciona.
+
+\subsubsection{OLS}\label{ols}
+
+\href{https://www.lxtreme.nl/ols/}{Página oficial}
 
 \section{Virtualización}\label{virtualizaciuxf3n}
 
