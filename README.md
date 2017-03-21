@@ -1197,6 +1197,44 @@ Vamos a instalar a mayores algunas librerias de KiCAD, para poder crear Shields 
 -   [Freetronics](https://github.com/freetronics/freetronics_kicad_library) una libreria que no solo incluye Shield para Arduino sino una completa colección de componentes que nos permitirá hacer proyectos completos. [Freetronics](http://www.freetronics.com) es una especie de BricoGeek australiano, publica tutoriales, vende componentes, y al parecer mantiene una biblioteca para KiCAD. La biblioteca de Freetronics se mantiene en un repo de github. Lo suyo es incorporarla a cada proyecto, por que si la actualizas se pueden romper los proyectos que estes haciendo.
 -   [eklablog](http://meta-blog.eklablog.com/kicad-librairie-arduino-pretty-p930786) Esta biblioteca de componentes está incluida en el github de KiCAD, así que teoricamente no habría que instalarla en nuestro disco duro.
 
+Analizador lógico
+-----------------
+
+### Sigrok
+
+Instalamos **Sigrok**, simplemente desde los repos de Debian:
+
+``` {bash}
+sudo aptitude install sigrok
+```
+
+Al instalar **Sigrok** instalamos también **Pulseview**.
+
+Mi analizador es un OpenBench de Seedstudio, si echamos un ojo al fichero *syslog* vemos que al conectarlo se mapea en un puerto tty.
+
+Si arrancamos **Pulseview** (nuestro usuario tiene que estar incluido en el grupo *dialout*), en la opción *File::Connect to device*, escogemos la opción *Openbench* y le pasamos el puerto. Al pulsar la opción *Scan for devices* reconoce el analizador correctamente como un *Sump Logic Analyzer*.
+
+### Sump logic analyzer
+
+Este es el software recomendado para usar con el analizador.
+
+Descargamos el paquete de la [página del proyecto](https://www.sump.org) y descomprimimos en *~/apps*
+
+Instalamos las dependencias:
+
+``` {bash}
+sudo aptitude install librxtx-java
+```
+
+Editamos el fichero *~/apps/Logic Analyzer/client/run.sh* y lo dejamos así:
+
+    #!/bin/bash
+
+    # java -jar analyzer.jar $*
+    java -cp /usr/share/java/RXTXcomm.jar:analyzer.jar org.sump.analyzer.Loader
+
+Y ya funciona.
+
 Virtualización
 ==============
 

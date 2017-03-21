@@ -1554,6 +1554,52 @@ Shields de Arduino.
   así que teoricamente no habría que instalarla en nuestro disco duro.
 \end{itemize}
 
+\subsection{Analizador lógico}\label{analizador-luxf3gico}
+
+\subsubsection{Sigrok}\label{sigrok}
+
+Instalamos \textbf{Sigrok}, simplemente desde los repos de Debian:
+
+\begin{verbatim}
+sudo aptitude install sigrok
+\end{verbatim}
+
+Al instalar \textbf{Sigrok} instalamos también \textbf{Pulseview}.
+
+Mi analizador es un OpenBench de Seedstudio, si echamos un ojo al
+fichero \emph{syslog} vemos que al conectarlo se mapea en un puerto tty.
+
+Si arrancamos \textbf{Pulseview} (nuestro usuario tiene que estar
+incluido en el grupo \emph{dialout}), en la opción \emph{File::Connect
+to device}, escogemos la opción \emph{Openbench} y le pasamos el puerto.
+Al pulsar la opción \emph{Scan for devices} reconoce el analizador
+correctamente como un \emph{Sump Logic Analyzer}.
+
+\subsubsection{Sump logic analyzer}\label{sump-logic-analyzer}
+
+Este es el software recomendado para usar con el analizador.
+
+Descargamos el paquete de la \href{https://www.sump.org}{página del
+proyecto} y descomprimimos en \emph{\textasciitilde{}/apps}
+
+Instalamos las dependencias:
+
+\begin{verbatim}
+sudo aptitude install librxtx-java
+\end{verbatim}
+
+Editamos el fichero \emph{\textasciitilde{}/apps/Logic
+Analyzer/client/run.sh} y lo dejamos así:
+
+\begin{verbatim}
+#!/bin/bash
+
+# java -jar analyzer.jar $*
+java -cp /usr/share/java/RXTXcomm.jar:analyzer.jar org.sump.analyzer.Loader
+\end{verbatim}
+
+Y ya funciona.
+
 \section{Virtualización}\label{virtualizaciuxf3n}
 
 \subsection{Docker}\label{docker}

@@ -1401,6 +1401,57 @@ crear Shields de Arduino.
   Esta biblioteca de componentes está incluida en el github de KiCAD, así que
   teoricamente no habría que instalarla en nuestro disco duro.
 
+## Analizador lógico
+
+
+### Sigrok
+
+Instalamos __Sigrok__, simplemente desde los repos de Debian:
+
+~~~~{bash}
+sudo aptitude install sigrok
+~~~~
+
+Al instalar __Sigrok__ instalamos también __Pulseview__.
+
+Mi analizador es un OpenBench de Seedstudio, si echamos un ojo al
+fichero _syslog_ vemos que al conectarlo se mapea en un puerto tty.
+
+Si arrancamos __Pulseview__ (nuestro usuario tiene que estar incluido
+en el grupo _dialout_), en la opción _File::Connect to device_,
+escogemos la opción _Openbench_ y le pasamos el puerto.  Al pulsar la
+opción _Scan for devices_ reconoce el analizador correctamente como un
+_Sump Logic Analyzer_.
+
+### Sump logic analyzer
+
+Este es el software recomendado para usar con el analizador.
+
+Descargamos el paquete de
+la [página del proyecto](https://www.sump.org) y descomprimimos en
+_~/apps_
+
+Instalamos las dependencias:
+
+~~~~{bash}
+sudo aptitude install librxtx-java
+~~~~
+
+Editamos el fichero _~/apps/Logic Analyzer/client/run.sh_ y lo dejamos
+así:
+
+~~~~
+#!/bin/bash
+
+# java -jar analyzer.jar $*
+java -cp /usr/share/java/RXTXcomm.jar:analyzer.jar org.sump.analyzer.Loader
+~~~~
+
+Y ya funciona.
+
+
+
+
 # Virtualización
 
 ## Docker
