@@ -1495,7 +1495,7 @@ export PATH=${PATH}:${GOPATH}/bin
 
 \subsection{Arduino IDE}\label{arduino-ide}
 
-Bajamos los paquetes de la página \href{https://www.arduino.cc}{web} ,
+Bajamos los paquetes de la página \href{https://www.arduino.cc}{web},
 descomprimimimos en \emph{\textasciitilde{}/apps/arduino}.
 
 Creamos un link al directorio del software que hemos descargado:
@@ -1508,6 +1508,26 @@ ln -s arduino-x.y.z current
 La primera ves que instalamos será necesario crear el desktop file con
 \textbf{Menulibre} con las actulizaciones no será necesario, siempre y
 cuando apunte a \emph{\textasciitilde{}/apps/arduino/current}
+
+\subsubsection{Añadir biblioteca de soporte para
+Makeblock}\label{auxf1adir-biblioteca-de-soporte-para-makeblock}
+
+Clonamos el
+\href{https://github.com/Makeblock-official/Makeblock-Libraries}{repo
+oficial en github}.
+
+Una vez que descarguemos las librerias es necesario copiar el directorio
+\texttt{Makeblock-Libraries/makeblock} en nuestro directorio de
+bibliotecas de Arduino. En mi caso
+\texttt{\textasciitilde{}/Arduino/libraries/}.
+
+Una vez instaladas las bibliotecas es necesario reiniciar el IDE Arduino
+si estaba arrancado. Podemos ver si se ha instalado correctamente
+simplemente echando un ojo al menú de ejemplos en el IDE, tendríamos que
+ver los ejemplos de \emph{Makeblock}.
+
+Un detalle importante para programar el Auriga-Me es necesario
+seleccionar el micro Arduino Mega 2560 en el IDE Arduino.
 
 \subsection{Pinguino IDE}\label{pinguino-ide}
 
@@ -1709,7 +1729,11 @@ Instalamos oh-my-fish
 curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install > install
 fish install
 rm install
+\end{verbatim}
 
+Si queremos que \textbf{fish} sea nuestro nuevo \emph{shell}:
+
+\begin{verbatim}
 chsh -s `which fish`
 \end{verbatim}
 

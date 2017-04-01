@@ -1163,7 +1163,7 @@ Desarrollo hardware
 Arduino IDE
 -----------
 
-Bajamos los paquetes de la página [web](https://www.arduino.cc) , descomprimimimos en *~/apps/arduino*.
+Bajamos los paquetes de la página [web](https://www.arduino.cc), descomprimimimos en *~/apps/arduino*.
 
 Creamos un link al directorio del software que hemos descargado:
 
@@ -1171,6 +1171,16 @@ Creamos un link al directorio del software que hemos descargado:
     ln -s arduino-x.y.z current
 
 La primera ves que instalamos será necesario crear el desktop file con **Menulibre** con las actulizaciones no será necesario, siempre y cuando apunte a *~/apps/arduino/current*
+
+### Añadir biblioteca de soporte para Makeblock
+
+Clonamos el [repo oficial en github](https://github.com/Makeblock-official/Makeblock-Libraries).
+
+Una vez que descarguemos las librerias es necesario copiar el directorio `Makeblock-Libraries/makeblock` en nuestro directorio de bibliotecas de Arduino. En mi caso `~/Arduino/libraries/`.
+
+Una vez instaladas las bibliotecas es necesario reiniciar el IDE Arduino si estaba arrancado. Podemos ver si se ha instalado correctamente simplemente echando un ojo al menú de ejemplos en el IDE, tendríamos que ver los ejemplos de *Makeblock*.
+
+Un detalle importante para programar el Auriga-Me es necesario seleccionar el micro Arduino Mega 2560 en el IDE Arduino.
 
 Pinguino IDE
 ------------
@@ -1315,9 +1325,11 @@ Instalamos oh-my-fish
 curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install > install
 fish install
 rm install
-
-chsh -s `which fish`
 ```
+
+Si queremos que **fish** sea nuestro nuevo *shell*:
+
+    chsh -s `which fish`
 
 zsh
 ---
