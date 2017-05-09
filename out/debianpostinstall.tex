@@ -27,8 +27,6 @@
 \usepackage[unicode=true]{hyperref}
 \PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
 \hypersetup{
-            pdftitle={Debian Post-install},
-            pdfauthor={Sergio Alvariño salvari@gmail.com},
             colorlinks=true,
             linkcolor=Maroon,
             citecolor=Blue,
@@ -41,6 +39,7 @@
   \usepackage{polyglossia}
   \setmainlanguage[]{spanish}
 \fi
+\usepackage{longtable,booktabs}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -70,26 +69,30 @@
 \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 
-\title{Debian Post-install}
-\providecommand{\subtitle}[1]{}
-\subtitle{Un documento de BricoLabs}
-\author{Sergio Alvariño
-\href{mailto:salvari@gmail.com}{\nolinkurl{salvari@gmail.com}}}
-\date{julio-2016}
+\date{}
 
 \begin{document}
-\maketitle
-\begin{abstract}
-Instalación de Debian
-
-Algunas notas referentes a la instalación de Debian Jessie
-\end{abstract}
 
 {
 \hypersetup{linkcolor=black}
 \setcounter{tocdepth}{3}
 \tableofcontents
 }
+\begin{longtable}[]{@{}l@{}}
+\toprule
+\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+title: Debian Post-install subtitle: Un documento de BricoLabs author: -
+Sergio Alvariño
+\href{mailto:salvari@gmail.com}{\nolinkurl{salvari@gmail.com}} tags:
+{[}Pandoc, Documentación, makefile, git{]} date: julio-2016 lang: es-ES
+abstract: \textbar{} Instalación de Debian\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
+Algunas notas referentes a la instalación de Debian Jessie\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
 \section{Introducción}\label{introducciuxf3n}
 
 Mi portátil es un ordenador Acer 5755G con las siguientes
@@ -324,6 +327,11 @@ Bajado el comprimido desde la web y descomprimido en
 \emph{\textasciitilde{}/apps} copiado el fichero desktop a
 \emph{\textasciitilde{}/.local/share/applications}
 
+\subsubsection{openvpn}\label{openvpn}
+
+Basado en la web
+\href{https://nixbsd.wordpress.com/2017/04/01/freebsd-10-2-configure-openvpn-client/}{nix/bsd}.
+
 \subsubsection{Deluge}\label{deluge}
 
 Instalamos desde aptitude
@@ -397,6 +405,14 @@ Un programa de captura de pantallas que permite editarlas rápidamente:
 \begin{verbatim}
 sudo aptitude install shutter libgoo-canvas-perl
 \end{verbatim}
+
+\subsubsection{Pencil}\label{pencil}
+
+Descargar la última versión (paquete Debian) desde
+\href{http://pencil.evolus.vn/}{la página web}. Lo instalamos y listo.
+Puede dar problemas si usamos Iceweasel, ya que el paquete depende de
+Firefox. Más info
+\href{https://www.linuxwebzone.com/install-pencil-on-debian/}{aquí}
 
 \subsection{Fotografía}\label{fotografuxeda}
 
@@ -990,6 +1006,7 @@ git config --global credential.helper cache
 git config --global credential.helper 'cache --timeout=7200'
 git config --global push.default simple
 git config --global alias.sla 'log --oneline --decorate --graph --all'
+git config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all"
 git config --global alias.car 'commit --amend --no-edit'
 git config --global alias.unstage reset
 git config --global alias.st status
@@ -1462,6 +1479,50 @@ Tampoco está de más instalar las librerías de graphviz:
 \begin{verbatim}
 sudo aptitude install python-pygraphviz
 \end{verbatim}
+
+\subsubsection{Selenium}\label{selenium}
+
+Vamos a instalar \emph{Selenium} para hacer TDD \footnote{Test Driven
+  Development} de aplicaciones web con Python. Lo haremos siguiendo
+\href{http://selenium-python.readthedocs.io/index.html}{estas
+instrucciones}.
+
+En principio lo voy a usar con el Python del sistema
+\texttt{Python\ 2.7.9} en este momento, y no lo voy a instalar en un
+\emph{virtualenv}:
+
+\begin{verbatim}
+sudo pip install -U selenium
+\end{verbatim}
+
+Con esto nos queda instalado \texttt{Selenium\ 3.3.3}
+
+Además de Selenium necesitamos los drivers de los navegadores que
+queremos controlar, de momento solo usaré \emph{Firefox}, así que nos
+bajamos la última versión de Geckodriver (0.15.0). Simplemente nos
+bajamos el archivo, descomprimimos y dejamos el fichero en
+\emph{/usr/local/bin} con los permisos necesarios.
+
+\begin{verbatim}
+sudo chown root:staff ~/tmp/geckodriver
+sudo chmod 755 ~/tmp/geckodriver
+sudo mv ~/tmp/geckodriver /usr/local/bin
+\end{verbatim}
+
+Para probarlo escribimos un pequeño programa en Python:
+
+\begin{verbatim}
+from selenium import webdriver
+
+browser = webdriver.Firefox()
+browser.get('http://seleniumhq.org/')
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\begin{quote}
+\textbf{Nota}: Tengo que pensar bien como hacerlo.
+\end{quote}
 
 \subsection{Go language}\label{go-language}
 

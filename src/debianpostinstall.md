@@ -1,4 +1,4 @@
----
+--
 title: Debian Post-install
 subtitle: Un documento de BricoLabs
 author:
@@ -232,6 +232,10 @@ sudo aptitude install chromium
 Bajado el comprimido desde la web y descomprimido en _~/apps_ copiado
 el fichero desktop a _~/.local/share/applications_
 
+### openvpn
+
+Basado en la web [nix/bsd](https://nixbsd.wordpress.com/2017/04/01/freebsd-10-2-configure-openvpn-client/).
+
 ### Deluge
 
 Instalamos desde aptitude
@@ -304,6 +308,14 @@ Un programa de captura de pantallas que permite editarlas rápidamente:
 ~~~~
 sudo aptitude install shutter libgoo-canvas-perl
 ~~~~
+
+### Pencil
+
+Descargar la última versión (paquete Debian)
+desde [la página web](http://pencil.evolus.vn/). Lo instalamos y
+listo. Puede dar problemas si usamos Iceweasel, ya que el paquete
+depende de Firefox. Más
+info [aquí](https://www.linuxwebzone.com/install-pencil-on-debian/)
 
 ## Fotografía
 
@@ -871,6 +883,7 @@ git config --global credential.helper cache
 git config --global credential.helper 'cache --timeout=7200'
 git config --global push.default simple
 git config --global alias.sla 'log --oneline --decorate --graph --all'
+git config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all"
 git config --global alias.car 'commit --amend --no-edit'
 git config --global alias.unstage reset
 git config --global alias.st status
@@ -1194,7 +1207,8 @@ Y para terminar instalamos iPython ^[TODO: conda install jupyter]:
 conda install ipython-notebook
 ~~~~
 
-Desde ahora basta con activar el entorno que hemos creado para tener acceso al iPython.
+Desde ahora basta con activar el entorno que hemos creado para tener
+acceso al iPython.
 
 ~~~~
 source activate gl-env
@@ -1238,9 +1252,6 @@ apuntando al python del S.O. y no al de Anaconda:
 ~~~~{bash}
 which python
 ~~~~
-
-
-
 
 
 ### Usar Emacs para editar Python
@@ -1314,6 +1325,47 @@ Tampoco está de más instalar las librerías de graphviz:
 ~~~~
 sudo aptitude install python-pygraphviz
 ~~~~
+
+### Selenium
+
+Vamos a instalar _Selenium_ para hacer TDD ^[Test Driven Development]
+de aplicaciones web con Python. Lo haremos siguiendo [estas
+instrucciones](http://selenium-python.readthedocs.io/index.html).
+
+En principio lo voy a usar con el Python del sistema `Python 2.7.9` en
+este momento, y no lo voy a instalar en un _virtualenv_:
+
+~~~~{bash}
+sudo pip install -U selenium
+~~~~
+
+Con esto nos queda instalado `Selenium 3.3.3`
+
+Además de Selenium necesitamos los drivers de los navegadores que
+queremos controlar, de momento solo usaré _Firefox_, así que nos
+bajamos la última versión de Geckodriver (0.15.0). Simplemente nos
+bajamos el archivo, descomprimimos y dejamos el fichero en
+_/usr/local/bin_ con los permisos necesarios.
+
+~~~~{bash}
+sudo chown root:staff ~/tmp/geckodriver
+sudo chmod 755 ~/tmp/geckodriver
+sudo mv ~/tmp/geckodriver /usr/local/bin
+~~~~
+
+Para probarlo escribimos un pequeño programa en Python:
+
+~~~~{python}
+from selenium import webdriver
+
+browser = webdriver.Firefox()
+browser.get('http://seleniumhq.org/')
+~~~~
+
+
+
+---
+> __Nota__: Tengo que pensar bien como hacerlo.
 
 ## Go language
 
