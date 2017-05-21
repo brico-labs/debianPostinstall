@@ -163,7 +163,7 @@ sudo apt-get install ntfs-3g disk-manager
 
 ### Gnucash
 
-Finanzas en linux
+Finanzas en linux, para mi imprescindible.
 
 ~~~~
 sudo apt-get -t jessie-backports install gnucash
@@ -171,7 +171,7 @@ sudo apt-get -t jessie-backports install gnucash
 
 ### Herramientas _sync_
 
-No sin mis _backups_
+La uso para hacer mis backups a discos externos.
 
 ~~~~
 sudo apt-get install rsync grsync
@@ -207,7 +207,7 @@ El cliente de mensajeria de Telegram. Descargado desde la web, instalado en _~/a
 ### Chrome y Chromium
 
 Instalado chrome añadiendo fuentes a aptitude. No recuerdo como las
-añadí, en el fichero _/etc/apt/sources.list.d/google-chrome.list_,
+añadí, pero en el fichero _/etc/apt/sources.list.d/google-chrome.list_,
 tengo los siguientes contenidos:
 
 ~~~~
@@ -229,8 +229,11 @@ sudo aptitude install chromium
 
 ### Tor
 
-Bajado el comprimido desde la web y descomprimido en _~/apps_ copiado
-el fichero desktop a _~/.local/share/applications_
+El navegador anónimo.
+
+Bajamos el zip de la aplicación desde
+la [web](https://www.torproject.org) y descomprimido en _~/apps_
+copiado el fichero desktop a _~/.local/share/applications_
 
 ### openvpn
 
@@ -238,7 +241,7 @@ Basado en la web [nix/bsd](https://nixbsd.wordpress.com/2017/04/01/freebsd-10-2-
 
 ### Deluge
 
-Instalamos desde aptitude
+El cliente torrent que uso habitualmente. Instalamos desde aptitude
 
 ~~~~
 sudo aptitude install deluge
@@ -258,23 +261,18 @@ Me he descargado:
   bitácora.
 * [GSD5](http://gsd5.tiddlyspot.com/) un _TiddlyWiki_ adaptado a _GTD_
 
-A mayores me he instalado la
-aplicación
+A mayores me he instalado la aplicación
 [TiddlyDesktop](https://github.com/Jermolene/TiddlyDesktop), basada en
 _node webkit_ que simplifica el tema de backups (en teoría).
 
 Como siempre la instalamos en _~/apps_ y creamos un lanzador con
 _MenuLibre_.
 
-~~~~{bash}
-
-~~~~
-
-
-
 ## Gráficos
 
 ### Inkscape
+
+El programa libre para creación y edición de gráficos vectoriales.
 
 ~~~~{bash}
 apt-cache policy inkscape
@@ -284,7 +282,8 @@ aptitude install ink-generator
 
 ### LibreCAD y FreeCAD
 
-Instalado desde repos con aptitude
+Imprescindibles para el diseño de cacharros. Instalados desde repos
+con aptitude
 
 ~~~~
 apt-get install librecad
@@ -293,6 +292,8 @@ apt-get -t jessie-backports install freecad
 ~~~~
 
 ### Gimp
+
+El programa para edición y retocado de imágenes.
 
 Gimp ya estaba instalado, adicionalmente instalado el gimp data-extra
 
@@ -303,13 +304,16 @@ sudo aptitude install gimp-plugin-registry gimp-texturize gimp-data-extras gimp-
 
 ### Shutter
 
-Un programa de captura de pantallas que permite editarlas rápidamente:
+Un programa de captura de pantallas que permite editarlas rápida y fácilmente:
 
 ~~~~
 sudo aptitude install shutter libgoo-canvas-perl
 ~~~~
 
 ### Pencil
+
+Una aplicación java para hacer esquemas de aplicaciones web, puede que no
+lo necesites.
 
 Descargar la última versión (paquete Debian)
 desde [la página web](http://pencil.evolus.vn/). Lo instalamos y
@@ -321,12 +325,17 @@ info [aquí](https://www.linuxwebzone.com/install-pencil-on-debian/)
 
 ### Rawtherapee y Darktable: Tratamiento de imágenes fotogŕaficas
 
+Si te gusta la fotografía y/o tienes una cámara reflex,
+definitivamente necesitas estas aplicaciones.
+
 ~~~~
 sudo aptitude install icc-profiles icc-profiles-free
 sudo aptitude install rawtherapee darktable
 ~~~~
 
 ### Stopmotion
+
+Para hacer pélis de animación Stopmotion.
 
 ~~~~
 sudo aptitude install stopmotion vgrabbj dvgrab
@@ -394,9 +403,9 @@ sudo aptitude install vokoscreen
 sudo aptitude install handbrake handbrake-cli handbrake-gtk
 ~~~~
 
+## Seguridad
 
-
-## Lector de DNIe
+### Lector de DNIe
 
 Instalamos:
 
@@ -454,6 +463,8 @@ aptitude install pinentry-gtk2 opensc
 
 ## Calibre
 
+La mejor utilidad para gestionar tu colección de libros electrónicos.
+
 Ejecutamos lo que manda la página web:
 
 ~~~~
@@ -480,6 +491,10 @@ Algunos enlaces útiles:
 
 
 ## Pandoc
+
+Pandoc es un traductor entre formatos de documento. Está escrito en
+Python y es increiblemente útil. De hecho este documento está escrito
+con _Pandoc_.
 
 Instalado el Pandoc descargando paquete _deb_ desde la página web del Pandoc.
 

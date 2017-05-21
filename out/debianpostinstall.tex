@@ -253,7 +253,7 @@ sudo apt-get install ntfs-3g disk-manager
 
 \subsubsection{Gnucash}\label{gnucash}
 
-Finanzas en linux
+Finanzas en linux, para mi imprescindible.
 
 \begin{verbatim}
 sudo apt-get -t jessie-backports install gnucash
@@ -262,7 +262,7 @@ sudo apt-get -t jessie-backports install gnucash
 \subsubsection{\texorpdfstring{Herramientas
 \emph{sync}}{Herramientas sync}}\label{herramientas-sync}
 
-No sin mis \emph{backups}
+La uso para hacer mis backups a discos externos.
 
 \begin{verbatim}
 sudo apt-get install rsync grsync
@@ -301,8 +301,9 @@ en \emph{\textasciitilde{}/apps}
 \subsubsection{Chrome y Chromium}\label{chrome-y-chromium}
 
 Instalado chrome añadiendo fuentes a aptitude. No recuerdo como las
-añadí, en el fichero \emph{/etc/apt/sources.list.d/google-chrome.list},
-tengo los siguientes contenidos:
+añadí, pero en el fichero
+\emph{/etc/apt/sources.list.d/google-chrome.list}, tengo los siguientes
+contenidos:
 
 \begin{verbatim}
 ###
@@ -323,7 +324,10 @@ sudo aptitude install chromium
 
 \subsubsection{Tor}\label{tor}
 
-Bajado el comprimido desde la web y descomprimido en
+El navegador anónimo.
+
+Bajamos el zip de la aplicación desde la
+\href{https://www.torproject.org}{web} y descomprimido en
 \emph{\textasciitilde{}/apps} copiado el fichero desktop a
 \emph{\textasciitilde{}/.local/share/applications}
 
@@ -334,7 +338,7 @@ Basado en la web
 
 \subsubsection{Deluge}\label{deluge}
 
-Instalamos desde aptitude
+El cliente torrent que uso habitualmente. Instalamos desde aptitude
 
 \begin{verbatim}
 sudo aptitude install deluge
@@ -367,12 +371,11 @@ en \emph{node webkit} que simplifica el tema de backups (en teoría).
 Como siempre la instalamos en \emph{\textasciitilde{}/apps} y creamos un
 lanzador con \emph{MenuLibre}.
 
-\begin{verbatim}
-\end{verbatim}
-
 \subsection{Gráficos}\label{gruxe1ficos}
 
 \subsubsection{Inkscape}\label{inkscape}
+
+El programa libre para creación y edición de gráficos vectoriales.
 
 \begin{verbatim}
 apt-cache policy inkscape
@@ -382,7 +385,8 @@ aptitude install ink-generator
 
 \subsubsection{LibreCAD y FreeCAD}\label{librecad-y-freecad}
 
-Instalado desde repos con aptitude
+Imprescindibles para el diseño de cacharros. Instalados desde repos con
+aptitude
 
 \begin{verbatim}
 apt-get install librecad
@@ -392,6 +396,8 @@ apt-get -t jessie-backports install freecad
 
 \subsubsection{Gimp}\label{gimp}
 
+El programa para edición y retocado de imágenes.
+
 Gimp ya estaba instalado, adicionalmente instalado el gimp data-extra
 
 \begin{verbatim}
@@ -400,13 +406,17 @@ sudo aptitude install gimp-plugin-registry gimp-texturize gimp-data-extras gimp-
 
 \subsubsection{Shutter}\label{shutter}
 
-Un programa de captura de pantallas que permite editarlas rápidamente:
+Un programa de captura de pantallas que permite editarlas rápida y
+fácilmente:
 
 \begin{verbatim}
 sudo aptitude install shutter libgoo-canvas-perl
 \end{verbatim}
 
 \subsubsection{Pencil}\label{pencil}
+
+Una aplicación java para hacer esquemas de aplicaciones web, puede que
+no lo necesites.
 
 Descargar la última versión (paquete Debian) desde
 \href{http://pencil.evolus.vn/}{la página web}. Lo instalamos y listo.
@@ -419,12 +429,17 @@ Firefox. Más info
 \subsubsection{Rawtherapee y Darktable: Tratamiento de imágenes
 fotogŕaficas}\label{rawtherapee-y-darktable-tratamiento-de-imuxe1genes-fotogux155aficas}
 
+Si te gusta la fotografía y/o tienes una cámara reflex, definitivamente
+necesitas estas aplicaciones.
+
 \begin{verbatim}
 sudo aptitude install icc-profiles icc-profiles-free
 sudo aptitude install rawtherapee darktable
 \end{verbatim}
 
 \subsubsection{Stopmotion}\label{stopmotion}
+
+Para hacer pélis de animación Stopmotion.
 
 \begin{verbatim}
 sudo aptitude install stopmotion vgrabbj dvgrab
@@ -493,7 +508,9 @@ sudo aptitude install vokoscreen
 sudo aptitude install handbrake handbrake-cli handbrake-gtk
 \end{verbatim}
 
-\subsection{Lector de DNIe}\label{lector-de-dnie}
+\subsection{Seguridad}\label{seguridad}
+
+\subsubsection{Lector de DNIe}\label{lector-de-dnie}
 
 Instalamos:
 
@@ -551,6 +568,8 @@ aptitude install pinentry-gtk2 opensc
 
 \subsection{Calibre}\label{calibre}
 
+La mejor utilidad para gestionar tu colección de libros electrónicos.
+
 Ejecutamos lo que manda la página web:
 
 \begin{verbatim}
@@ -598,6 +617,10 @@ Algunos enlaces útiles:
 \end{itemize}
 
 \subsection{Pandoc}\label{pandoc}
+
+Pandoc es un traductor entre formatos de documento. Está escrito en
+Python y es increiblemente útil. De hecho este documento está escrito
+con \emph{Pandoc}.
 
 Instalado el Pandoc descargando paquete \emph{deb} desde la página web
 del Pandoc.

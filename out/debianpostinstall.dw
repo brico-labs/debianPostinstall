@@ -119,14 +119,14 @@ sudo apt-get install ntfs-3g disk-manager
 </code>
 ==== Gnucash ====
 
-Finanzas en linux
+Finanzas en linux, para mi imprescindible.
 
 <code>
 sudo apt-get -t jessie-backports install gnucash
 </code>
 ==== Herramientas sync ====
 
-No sin mis //backups//
+La uso para hacer mis backups a discos externos.
 
 <code>
 sudo apt-get install rsync grsync
@@ -152,7 +152,7 @@ El cliente de mensajeria de Telegram. Descargado desde la web, instalado en //~/
 
 ==== Chrome y Chromium ====
 
-Instalado chrome añadiendo fuentes a aptitude. No recuerdo como las añadí, en el fichero ///etc/apt/sources.list.d/google-chrome.list//, tengo los siguientes contenidos:
+Instalado chrome añadiendo fuentes a aptitude. No recuerdo como las añadí, pero en el fichero ///etc/apt/sources.list.d/google-chrome.list//, tengo los siguientes contenidos:
 
 <code>
 ###
@@ -171,7 +171,9 @@ sudo aptitude install chromium
 </code>
 ==== Tor ====
 
-Bajado el comprimido desde la web y descomprimido en //~/apps// copiado el fichero desktop a //~/.local/share/applications//
+El navegador anónimo.
+
+Bajamos el zip de la aplicación desde la [[https://www.torproject.org|web]] y descomprimido en //~/apps// copiado el fichero desktop a //~/.local/share/applications//
 
 ==== openvpn ====
 
@@ -179,7 +181,7 @@ Basado en la web [[https://nixbsd.wordpress.com/2017/04/01/freebsd-10-2-configur
 
 ==== Deluge ====
 
-Instalamos desde aptitude
+El cliente torrent que uso habitualmente. Instalamos desde aptitude
 
 <code>
 sudo aptitude install deluge
@@ -198,12 +200,11 @@ A mayores me he instalado la aplicación [[https://github.com/Jermolene/TiddlyDe
 
 Como siempre la instalamos en //~/apps// y creamos un lanzador con //MenuLibre//.
 
-<code>
-
-</code>
 ===== Gráficos =====
 
 ==== Inkscape ====
+
+El programa libre para creación y edición de gráficos vectoriales.
 
 <code>
 apt-cache policy inkscape
@@ -212,7 +213,7 @@ aptitude install ink-generator
 </code>
 ==== LibreCAD y FreeCAD ====
 
-Instalado desde repos con aptitude
+Imprescindibles para el diseño de cacharros. Instalados desde repos con aptitude
 
 <code>
 apt-get install librecad
@@ -220,6 +221,8 @@ apt-get install librecad
 apt-get -t jessie-backports install freecad
 </code>
 ==== Gimp ====
+
+El programa para edición y retocado de imágenes.
 
 Gimp ya estaba instalado, adicionalmente instalado el gimp data-extra
 
@@ -229,12 +232,14 @@ sudo aptitude install gimp-plugin-registry gimp-texturize gimp-data-extras gimp-
 </code>
 ==== Shutter ====
 
-Un programa de captura de pantallas que permite editarlas rápidamente:
+Un programa de captura de pantallas que permite editarlas rápida y fácilmente:
 
 <code>
 sudo aptitude install shutter libgoo-canvas-perl
 </code>
 ==== Pencil ====
+
+Una aplicación java para hacer esquemas de aplicaciones web, puede que no lo necesites.
 
 Descargar la última versión (paquete Debian) desde [[http://pencil.evolus.vn/|la página web]]. Lo instalamos y listo. Puede dar problemas si usamos Iceweasel, ya que el paquete depende de Firefox. Más info [[https://www.linuxwebzone.com/install-pencil-on-debian/|aquí]]
 
@@ -242,11 +247,15 @@ Descargar la última versión (paquete Debian) desde [[http://pencil.evolus.vn/|
 
 ==== Rawtherapee y Darktable: Tratamiento de imágenes fotogŕaficas ====
 
+Si te gusta la fotografía y/o tienes una cámara reflex, definitivamente necesitas estas aplicaciones.
+
 <code>
 sudo aptitude install icc-profiles icc-profiles-free
 sudo aptitude install rawtherapee darktable
 </code>
 ==== Stopmotion ====
+
+Para hacer pélis de animación Stopmotion.
 
 <code>
 sudo aptitude install stopmotion vgrabbj dvgrab
@@ -306,7 +315,9 @@ sudo aptitude install recordmydesktop gtk-recordmydesktop
 sudo aptitude install vokoscreen
 sudo aptitude install handbrake handbrake-cli handbrake-gtk
 </code>
-===== Lector de DNIe =====
+===== Seguridad =====
+
+==== Lector de DNIe ====
 
 Instalamos:
 
@@ -358,6 +369,8 @@ aptitude install pinentry-gtk2 opensc
 
 ===== Calibre =====
 
+La mejor utilidad para gestionar tu colección de libros electrónicos.
+
 Ejecutamos lo que manda la página web:
 
 <code>
@@ -381,6 +394,8 @@ Algunos enlaces útiles:
   * https://www.netogram.com/kobo.htm
 
 ===== Pandoc =====
+
+Pandoc es un traductor entre formatos de documento. Está escrito en Python y es increiblemente útil. De hecho este documento está escrito con //Pandoc//.
 
 Instalado el Pandoc descargando paquete //deb// desde la página web del Pandoc.
 

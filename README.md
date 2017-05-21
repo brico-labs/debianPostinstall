@@ -141,13 +141,13 @@ Para gestionar discos portátiles
 
 ### Gnucash
 
-Finanzas en linux
+Finanzas en linux, para mi imprescindible.
 
     sudo apt-get -t jessie-backports install gnucash
 
 ### Herramientas *sync*
 
-No sin mis *backups*
+La uso para hacer mis backups a discos externos.
 
     sudo apt-get install rsync grsync
 
@@ -174,7 +174,7 @@ Internet
 
 ### Chrome y Chromium
 
-Instalado chrome añadiendo fuentes a aptitude. No recuerdo como las añadí, en el fichero */etc/apt/sources.list.d/google-chrome.list*, tengo los siguientes contenidos:
+Instalado chrome añadiendo fuentes a aptitude. No recuerdo como las añadí, pero en el fichero */etc/apt/sources.list.d/google-chrome.list*, tengo los siguientes contenidos:
 
     ###
     ###
@@ -193,7 +193,9 @@ sudo aptitude install chromium
 
 ### Tor
 
-Bajado el comprimido desde la web y descomprimido en *~/apps* copiado el fichero desktop a *~/.local/share/applications*
+El navegador anónimo.
+
+Bajamos el zip de la aplicación desde la [web](https://www.torproject.org) y descomprimido en *~/apps* copiado el fichero desktop a *~/.local/share/applications*
 
 ### openvpn
 
@@ -201,7 +203,7 @@ Basado en la web [nix/bsd](https://nixbsd.wordpress.com/2017/04/01/freebsd-10-2-
 
 ### Deluge
 
-Instalamos desde aptitude
+El cliente torrent que uso habitualmente. Instalamos desde aptitude
 
     sudo aptitude install deluge
     xdg-mime default deluge.desktop x-scheme-handler/magnet
@@ -219,13 +221,12 @@ A mayores me he instalado la aplicación [TiddlyDesktop](https://github.com/Jerm
 
 Como siempre la instalamos en *~/apps* y creamos un lanzador con *MenuLibre*.
 
-``` {bash}
-```
-
 Gráficos
 --------
 
 ### Inkscape
+
+El programa libre para creación y edición de gráficos vectoriales.
 
 ``` {bash}
 apt-cache policy inkscape
@@ -235,7 +236,7 @@ aptitude install ink-generator
 
 ### LibreCAD y FreeCAD
 
-Instalado desde repos con aptitude
+Imprescindibles para el diseño de cacharros. Instalados desde repos con aptitude
 
     apt-get install librecad
 
@@ -243,17 +244,21 @@ Instalado desde repos con aptitude
 
 ### Gimp
 
+El programa para edición y retocado de imágenes.
+
 Gimp ya estaba instalado, adicionalmente instalado el gimp data-extra
 
     sudo aptitude install gimp-plugin-registry gimp-texturize gimp-data-extras gimp-gap
 
 ### Shutter
 
-Un programa de captura de pantallas que permite editarlas rápidamente:
+Un programa de captura de pantallas que permite editarlas rápida y fácilmente:
 
     sudo aptitude install shutter libgoo-canvas-perl
 
 ### Pencil
+
+Una aplicación java para hacer esquemas de aplicaciones web, puede que no lo necesites.
 
 Descargar la última versión (paquete Debian) desde [la página web](http://pencil.evolus.vn/). Lo instalamos y listo. Puede dar problemas si usamos Iceweasel, ya que el paquete depende de Firefox. Más info [aquí](https://www.linuxwebzone.com/install-pencil-on-debian/)
 
@@ -262,10 +267,14 @@ Fotografía
 
 ### Rawtherapee y Darktable: Tratamiento de imágenes fotogŕaficas
 
+Si te gusta la fotografía y/o tienes una cámara reflex, definitivamente necesitas estas aplicaciones.
+
     sudo aptitude install icc-profiles icc-profiles-free
     sudo aptitude install rawtherapee darktable
 
 ### Stopmotion
+
+Para hacer pélis de animación Stopmotion.
 
     sudo aptitude install stopmotion vgrabbj dvgrab
 
@@ -326,8 +335,10 @@ sudo aptitude install vokoscreen
 sudo aptitude install handbrake handbrake-cli handbrake-gtk
 ```
 
-Lector de DNIe
---------------
+Seguridad
+---------
+
+### Lector de DNIe
 
 Instalamos:
 
@@ -375,6 +386,8 @@ Documentos
 Calibre
 -------
 
+La mejor utilidad para gestionar tu colección de libros electrónicos.
+
 Ejecutamos lo que manda la página web:
 
     sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py \
@@ -399,6 +412,8 @@ Algunos enlaces útiles:
 
 Pandoc
 ------
+
+Pandoc es un traductor entre formatos de documento. Está escrito en Python y es increiblemente útil. De hecho este documento está escrito con *Pandoc*.
 
 Instalado el Pandoc descargando paquete *deb* desde la página web del Pandoc.
 
