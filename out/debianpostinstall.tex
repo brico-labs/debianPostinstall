@@ -994,6 +994,10 @@ ui.set_theme('light', {font = 'Meslo LG L Regular for Powerline', fontsize = 14}
 
 \subsection{Scribus}\label{scribus}
 
+Scribus es un programa libre de composición de documentos. con Scribus
+puedes elaborar desde los folletos de una exposición hasta una revista o
+un poster.
+
 Instalado con aptitude
 
 \begin{verbatim}
@@ -1001,6 +1005,8 @@ sudo aptitude install scribus
 \end{verbatim}
 
 \subsection{Comix}\label{comix}
+
+Mi lector de comics favorito.
 
 Instalado con aptitude
 
@@ -1010,7 +1016,18 @@ sudo aptitude install comix
 
 \section{Desarrollo sw}\label{desarrollo-sw}
 
+\subsection{Paquetes esenciales}\label{paquetes-esenciales}
+
+Estos son los paquetes esenciales para empezar a desarrollar software en
+Linux.
+
+\begin{verbatim}
+sudo apt-get install build-essential checkinstall make automake cmake autoconf git git-core dpkg wget
+\end{verbatim}
+
 \subsection{Git}\label{git}
+
+Control de versiones distribuido. Imprescindible.
 
 Instalado git desde aptitude
 
@@ -1021,8 +1038,8 @@ sudo aptitude install git
 Configuración básica de \textbf{git}
 
 \begin{verbatim}
-git config --global user.name "Sergio Alvariño"
-git config --global user.email "salvari@gmail.com"
+git config --global user.name "Nombre Apellido"
+git config --global user.email "direccion@correo.com"
 git config --global core.editor emacs
 git config --global color.ui true
 git config --global credential.helper cache
@@ -1037,22 +1054,25 @@ git config --global alias.last  'log -1 HEAD'
 git config --global alias.ca 'commit -a'
 \end{verbatim}
 
-\subsection{Paquetes esenciales}\label{paquetes-esenciales}
-
-\begin{verbatim}
-sudo apt-get install build-essential checkinstall make automake cmake autoconf git git-core dpkg wget
-\end{verbatim}
-
 \subsection{Open Java}\label{open-java}
 
 \begin{verbatim}
 apt-get install openjdk-7-jre icedtea-7-plugin
 \end{verbatim}
 
-\subsection{D-apt e instalación de
+\subsection{Lenguaje de programación D (D programming
+language)}\label{lenguaje-de-programaciuxf3n-d-d-programming-language}
+
+\href{https://dlang.org/}{El lenguaje de programación D} es un lenguaje
+de programación de sistemas con una sintaxis similar a la de C y con
+tipado estático. Combina eficiencia, control y potencia de modelado con
+seguridad y productividad.
+
+\subsubsection{D-apt e instalación de
 programas}\label{d-apt-e-instalaciuxf3n-de-programas}
 
-Configurado d-apt, instalados todos los programas incluidos
+Configurado \href{http://d-apt.sourceforge.net/}{d-apt}, instalados
+todos los programas incluidos
 
 \begin{verbatim}
 sudo wget http://master.dl.sourceforge.net/project/d-apt/files/d-apt.list -O /etc/apt/sources.list.d/d-apt.list
@@ -1065,7 +1085,7 @@ Instalamos todos los programas asociados.
 sudo aptitude install dmd dub dcd dfix dfmt dscanner textadept
 \end{verbatim}
 
-\subsection{DCD}\label{dcd}
+\subsubsection{DCD}\label{dcd}
 
 Una vez instalado el DCD tenemos que configurarlo creando el fichero
 \emph{\textasciitilde{}/.config/dcd/dcd.conf} con el siguiente
@@ -1083,7 +1103,7 @@ dcd-server &
 echo | dcd-client --search toImpl
 \end{verbatim}
 
-\subsection{gdc}\label{gdc}
+\subsubsection{gdc}\label{gdc}
 
 Instalado con
 
@@ -1091,7 +1111,7 @@ Instalado con
 sudo aptitude install gdc
 \end{verbatim}
 
-\subsection{ldc}\label{ldc}
+\subsubsection{ldc}\label{ldc}
 
 Instalado con:
 
@@ -1106,7 +1126,7 @@ Para poder ejecutar aplicaciones basadas en
 sudo apt-get install -y libssl-dev libevent-dev
 \end{verbatim}
 
-\subsection{Emacs para editar D}\label{emacs-para-editar-d}
+\subsubsection{Emacs para editar D}\label{emacs-para-editar-d}
 
 Instalados los siguientes paquetes desde \emph{marmalade}
 
@@ -1181,7 +1201,7 @@ Se configura en el fichero \textbf{\textasciitilde{}/.emacs}:
             (setq indent-line-function 'insert-tab)))
 \end{verbatim}
 
-\subsubsection{Referencias}\label{referencias}
+\paragraph{Referencias}\label{referencias}
 
 \begin{itemize}
 \tightlist

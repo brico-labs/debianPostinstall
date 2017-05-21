@@ -622,25 +622,36 @@ De momento lo único que he configurado es la fuente, para ello editamos el fich
 <pre class="{lua}">ui.set_theme('light', {font = 'Meslo LG L Regular for Powerline', fontsize = 14})</pre>
 == Scribus ==
 
+Scribus es un programa libre de composición de documentos. con Scribus puedes elaborar desde los folletos de una exposición hasta una revista o un poster.
+
 Instalado con aptitude
 
 <pre>sudo aptitude install scribus</pre>
 == Comix ==
+
+Mi lector de comics favorito.
 
 Instalado con aptitude
 
 <pre>sudo aptitude install comix</pre>
 = Desarrollo sw =
 
+== Paquetes esenciales ==
+
+Estos son los paquetes esenciales para empezar a desarrollar software en Linux.
+
+<pre>sudo apt-get install build-essential checkinstall make automake cmake autoconf git git-core dpkg wget</pre>
 == Git ==
+
+Control de versiones distribuido. Imprescindible.
 
 Instalado git desde aptitude
 
 <pre class="{bash}">sudo aptitude install git</pre>
 Configuración básica de '''git'''
 
-<pre class="{bash}">git config --global user.name &quot;Sergio Alvariño&quot;
-git config --global user.email &quot;salvari@gmail.com&quot;
+<pre class="{bash}">git config --global user.name &quot;Nombre Apellido&quot;
+git config --global user.email &quot;direccion@correo.com&quot;
 git config --global core.editor emacs
 git config --global color.ui true
 git config --global credential.helper cache
@@ -653,22 +664,23 @@ git config --global alias.unstage reset
 git config --global alias.st status
 git config --global alias.last  'log -1 HEAD'
 git config --global alias.ca 'commit -a'</pre>
-== Paquetes esenciales ==
-
-<pre>sudo apt-get install build-essential checkinstall make automake cmake autoconf git git-core dpkg wget</pre>
 == Open Java ==
 
 <pre>apt-get install openjdk-7-jre icedtea-7-plugin</pre>
-== D-apt e instalación de programas ==
+== Lenguaje de programación D (D programming language) ==
 
-Configurado d-apt, instalados todos los programas incluidos
+[https://dlang.org/ El lenguaje de programación D] es un lenguaje de programación de sistemas con una sintaxis similar a la de C y con tipado estático. Combina eficiencia, control y potencia de modelado con seguridad y productividad.
+
+=== D-apt e instalación de programas ===
+
+Configurado [http://d-apt.sourceforge.net/ d-apt], instalados todos los programas incluidos
 
 <pre class="{bash}">sudo wget http://master.dl.sourceforge.net/project/d-apt/files/d-apt.list -O /etc/apt/sources.list.d/d-apt.list
 sudo apt-get update &amp;&amp; sudo apt-get -y --allow-unauthenticated install --reinstall d-apt-keyring &amp;&amp; sudo apt-get update</pre>
 Instalamos todos los programas asociados.
 
 <pre>sudo aptitude install dmd dub dcd dfix dfmt dscanner textadept</pre>
-== DCD ==
+=== DCD ===
 
 Una vez instalado el DCD tenemos que configurarlo creando el fichero ''~/.config/dcd/dcd.conf'' con el siguiente contenido:
 
@@ -678,12 +690,12 @@ Podemos probarlo con:
 
 <pre>dcd-server &amp;
 echo | dcd-client --search toImpl</pre>
-== gdc ==
+=== gdc ===
 
 Instalado con
 
 <pre>sudo aptitude install gdc</pre>
-== ldc ==
+=== ldc ===
 
 Instalado con:
 
@@ -691,7 +703,7 @@ Instalado con:
 Para poder ejecutar aplicaciones basadas en [http://vibed.org/ Vibed], necesitamos instalar:
 
 <pre>sudo apt-get install -y libssl-dev libevent-dev</pre>
-== Emacs para editar D ==
+=== Emacs para editar D ===
 
 Instalados los siguientes paquetes desde ''marmalade''
 
@@ -753,7 +765,7 @@ Se configura en el fichero '''~/.emacs''':
             (setq whitespace-line-column 250)
             (setq indent-tabs-mode nil)
             (setq indent-line-function 'insert-tab)))</pre>
-=== Referencias ===
+==== Referencias ====
 
 * https://github.com/atilaneves/ac-dcd
 * https://github.com/Hackerpilot/DCD

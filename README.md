@@ -764,12 +764,16 @@ ui.set_theme('light', {font = 'Meslo LG L Regular for Powerline', fontsize = 14}
 Scribus
 -------
 
+Scribus es un programa libre de composición de documentos. con Scribus puedes elaborar desde los folletos de una exposición hasta una revista o un poster.
+
 Instalado con aptitude
 
     sudo aptitude install scribus
 
 Comix
 -----
+
+Mi lector de comics favorito.
 
 Instalado con aptitude
 
@@ -778,8 +782,17 @@ Instalado con aptitude
 Desarrollo sw
 =============
 
+Paquetes esenciales
+-------------------
+
+Estos son los paquetes esenciales para empezar a desarrollar software en Linux.
+
+    sudo apt-get install build-essential checkinstall make automake cmake autoconf git git-core dpkg wget
+
 Git
 ---
+
+Control de versiones distribuido. Imprescindible.
 
 Instalado git desde aptitude
 
@@ -790,8 +803,8 @@ sudo aptitude install git
 Configuración básica de **git**
 
 ``` {bash}
-git config --global user.name "Sergio Alvariño"
-git config --global user.email "salvari@gmail.com"
+git config --global user.name "Nombre Apellido"
+git config --global user.email "direccion@correo.com"
 git config --global core.editor emacs
 git config --global color.ui true
 git config --global credential.helper cache
@@ -806,20 +819,19 @@ git config --global alias.last  'log -1 HEAD'
 git config --global alias.ca 'commit -a'
 ```
 
-Paquetes esenciales
--------------------
-
-    sudo apt-get install build-essential checkinstall make automake cmake autoconf git git-core dpkg wget
-
 Open Java
 ---------
 
     apt-get install openjdk-7-jre icedtea-7-plugin
 
-D-apt e instalación de programas
---------------------------------
+Lenguaje de programación D (D programming language)
+---------------------------------------------------
 
-Configurado d-apt, instalados todos los programas incluidos
+[El lenguaje de programación D](https://dlang.org/) es un lenguaje de programación de sistemas con una sintaxis similar a la de C y con tipado estático. Combina eficiencia, control y potencia de modelado con seguridad y productividad.
+
+### D-apt e instalación de programas
+
+Configurado [d-apt](http://d-apt.sourceforge.net/), instalados todos los programas incluidos
 
 ``` {bash}
 sudo wget http://master.dl.sourceforge.net/project/d-apt/files/d-apt.list -O /etc/apt/sources.list.d/d-apt.list
@@ -830,8 +842,7 @@ Instalamos todos los programas asociados.
 
     sudo aptitude install dmd dub dcd dfix dfmt dscanner textadept
 
-DCD
----
+### DCD
 
 Una vez instalado el DCD tenemos que configurarlo creando el fichero *~/.config/dcd/dcd.conf* con el siguiente contenido:
 
@@ -843,15 +854,13 @@ Podemos probarlo con:
     dcd-server &
     echo | dcd-client --search toImpl
 
-gdc
----
+### gdc
 
 Instalado con
 
     sudo aptitude install gdc
 
-ldc
----
+### ldc
 
 Instalado con:
 
@@ -861,8 +870,7 @@ Para poder ejecutar aplicaciones basadas en [Vibed](http://vibed.org/), necesita
 
     sudo apt-get install -y libssl-dev libevent-dev
 
-Emacs para editar D
--------------------
+### Emacs para editar D
 
 Instalados los siguientes paquetes desde *marmalade*
 
@@ -927,7 +935,7 @@ Se configura en el fichero **~/.emacs**:
             (setq indent-line-function 'insert-tab)))
 ```
 
-### Referencias
+#### Referencias
 
 -   <https://github.com/atilaneves/ac-dcd>
 -   <https://github.com/Hackerpilot/DCD>
