@@ -1268,7 +1268,8 @@ virtualfish}\label{pip-virtualenv-virtualenvwrapper-virtualfish}
 \emph{pip} es un gestor de paquetes para \textbf{Python} que facilita la
 instalación de librerías y utilidades.
 
-Para poder usar los entornos virtuales instalaremos también virtualenv.
+Para poder usar los entornos virtuales instalaremos también
+\emph{virtualenv}.
 
 Instalamos los dos desde aptitude:
 
@@ -1320,13 +1321,34 @@ los comandos y plugins disponibles.
 
 \subsubsection{iPython notebook}\label{ipython-notebook}
 
-Teóricamente \emph{Ananconda}, es la forma fácil de poder usar
-\emph{ipython notebook}. De hecho me he instalado dos versiones la que
-incluye el python2 y la que incluye el python3.
+\href{https://ipython.org/}{iPython}, y su evolución
+\href{https://jupyter.org/index.html}{Jupyter} proporcionan un entorno
+para interactivo de programación que permite elaborar documentos muy
+complejos con programas embebidos.
 
-Las instalaciones de \emph{Anaconda} son redundantes, basta con instalar
-uno de ellos. En cualquier caso para realizar la instalación basta con
-descargar los scripts de instalación desde la página web de Anaconda.
+\paragraph{Instalar Jupyter en el Python del
+sistema}\label{instalar-jupyter-en-el-python-del-sistema}
+
+Seguimos las instrucciones
+\href{https://gist.github.com/frgomes/24c1923f2c9f14a27b14}{aquí}
+
+Si usamos el script descargado del github se instalará el
+\textbf{Jupyter} con el python3 del sistema. \_\_Conviene asegurarse de
+que estamos apuntando al python del S.O. y no a cualquier otro Python
+que hayamos instalado:
+
+\begin{verbatim}
+which python
+\end{verbatim}
+
+\paragraph{Instalar Anaconda Python}\label{instalar-anaconda-python}
+
+Teóricamente \href{https://www.continuum.io/downloads}{Anaconda}, es la
+forma fácil de poder usar \emph{ipython notebook}. Así que la primera
+vez que instalé el iPython lo hice instalando \emph{Anaconda} De hecho
+me he instalado dos versiones la que incluye el python2 y la que incluye
+el python3, aunque son completamente redundantes, basta con instalar una
+sola de ellas.
 
 \begin{verbatim}
 bash Anaconda3-4.2.0-Linux-x86_64.sh
@@ -1352,7 +1374,10 @@ Para hacer lo mismo en fish:
 set -x PATH ~/apps/anaconda3/bin $PATH
 \end{verbatim}
 
-\subsubsection{iPython y GraphLab}\label{ipython-y-graphlab}
+\paragraph{iPython y GraphLab}\label{ipython-y-graphlab}
+
+La instalación de iPython y GraphLab (que es una librería comercial) la
+hice para realizar un curso.
 
 Creamos un entorno conda con Python 2.7.x
 
@@ -1409,7 +1434,7 @@ ipython notebook
 source deactivate gl-env
 \end{verbatim}
 
-\paragraph{Instalación alternativa con
+\subparagraph{Instalación alternativa con
 virtualenv}\label{instalaciuxf3n-alternativa-con-virtualenv}
 
 \begin{verbatim}
@@ -1431,20 +1456,6 @@ pip install "jupyter"
 
 # Install your licensed copy of GraphLab Create
 pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
-\end{verbatim}
-
-\subsubsection{Instalar Jupyter en el Python del
-sistema}\label{instalar-jupyter-en-el-python-del-sistema}
-
-Seguimos las instrucciones
-\href{https://gist.github.com/frgomes/24c1923f2c9f14a27b14}{aquí}
-
-Si usamos el script descargado del github se instalará el
-\textbf{Jupyter} con el python3 del sistema. \_\_Conviene asegurarse de
-que estamos apuntando al python del S.O. y no al de Anaconda:
-
-\begin{verbatim}
-which python
 \end{verbatim}
 
 \subsubsection{Usar Emacs para editar

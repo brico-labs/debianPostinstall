@@ -812,7 +812,7 @@ Python 3.4.2</pre>
 
 ''pip'' es un gestor de paquetes para '''Python''' que facilita la instalación de librerías y utilidades.
 
-Para poder usar los entornos virtuales instalaremos también virtualenv.
+Para poder usar los entornos virtuales instalaremos también ''virtualenv''.
 
 Instalamos los dos desde aptitude:
 
@@ -841,9 +841,18 @@ Por último, si queremos tener utilidades parecidas en nuestro ''fish shell'' in
 
 === iPython notebook ===
 
-Teóricamente ''Ananconda'', es la forma fácil de poder usar ''ipython notebook''. De hecho me he instalado dos versiones la que incluye el python2 y la que incluye el python3.
+[https://ipython.org/ iPython], y su evolución [https://jupyter.org/index.html Jupyter] proporcionan un entorno para interactivo de programación que permite elaborar documentos muy complejos con programas embebidos.
 
-Las instalaciones de ''Anaconda'' son redundantes, basta con instalar uno de ellos. En cualquier caso para realizar la instalación basta con descargar los scripts de instalación desde la página web de Anaconda.
+==== Instalar Jupyter en el Python del sistema ====
+
+Seguimos las instrucciones [https://gist.github.com/frgomes/24c1923f2c9f14a27b14 aquí]
+
+Si usamos el script descargado del github se instalará el '''Jupyter''' con el python3 del sistema. __Conviene asegurarse de que estamos apuntando al python del S.O. y no a cualquier otro Python que hayamos instalado:
+
+<pre class="{bash}">which python</pre>
+==== Instalar Anaconda Python ====
+
+Teóricamente [https://www.continuum.io/downloads Anaconda], es la forma fácil de poder usar ''ipython notebook''. Así que la primera vez que instalé el iPython lo hice instalando ''Anaconda'' De hecho me he instalado dos versiones la que incluye el python2 y la que incluye el python3, aunque son completamente redundantes, basta con instalar una sola de ellas.
 
 <pre class="{bash}">bash Anaconda3-4.2.0-Linux-x86_64.sh
 bash Anaconda2-4.2.0-Linux-x86_64.sh</pre>
@@ -857,7 +866,9 @@ Por ejemplo para activar anaconda3 en bash:
 Para hacer lo mismo en fish:
 
 <pre class="{fish}">set -x PATH ~/apps/anaconda3/bin $PATH</pre>
-=== iPython y GraphLab ===
+==== iPython y GraphLab ====
+
+La instalación de iPython y GraphLab (que es una librería comercial) la hice para realizar un curso.
 
 Creamos un entorno conda con Python 2.7.x
 
@@ -889,7 +900,7 @@ Desde ahora basta con activar el entorno que hemos creado para tener acceso al i
 ipython notebook
 
 source deactivate gl-env</pre>
-==== Instalación alternativa con virtualenv ====
+===== Instalación alternativa con virtualenv =====
 
 <pre># Create a virtual environment named e.g. gl-env
 virtualenv gl-env
@@ -909,13 +920,6 @@ pip install &quot;jupyter&quot;
 
 # Install your licensed copy of GraphLab Create
 pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz</pre>
-=== Instalar Jupyter en el Python del sistema ===
-
-Seguimos las instrucciones [https://gist.github.com/frgomes/24c1923f2c9f14a27b14 aquí]
-
-Si usamos el script descargado del github se instalará el '''Jupyter''' con el python3 del sistema. __Conviene asegurarse de que estamos apuntando al python del S.O. y no al de Anaconda:
-
-<pre class="{bash}">which python</pre>
 === Usar Emacs para editar Python ===
 
 Instalamos ''elpy'' desde el gestor de paquetes de Emacs, concretamente desde el repo ''marmalade''

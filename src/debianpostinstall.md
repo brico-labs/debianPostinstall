@@ -1115,7 +1115,7 @@ _pip_ es un gestor de paquetes para __Python__ que facilita la
 instalación de librerías y utilidades.
 
 Para poder usar los entornos virtuales instalaremos también
-virtualenv.
+_virtualenv_.
 
 Instalamos los dos desde aptitude:
 
@@ -1165,13 +1165,31 @@ comandos y plugins disponibles.
 
 ### iPython notebook
 
-Teóricamente _Ananconda_, es la forma fácil de poder usar _ipython
-notebook_. De hecho me he instalado dos versiones la que incluye el
-python2 y la que incluye el python3.
+[iPython](https://ipython.org/), y su
+evolución [Jupyter](https://jupyter.org/index.html) proporcionan un
+entorno para interactivo de programación que permite elaborar
+documentos muy complejos con programas embebidos.
 
-Las instalaciones de _Anaconda_ son redundantes, basta con instalar
-uno de ellos. En cualquier caso para realizar la instalación basta con
-descargar los scripts de instalación desde la página web de Anaconda.
+#### Instalar Jupyter en el Python del sistema
+
+Seguimos las instrucciones [aquí](https://gist.github.com/frgomes/24c1923f2c9f14a27b14)
+
+Si usamos el script descargado del github se instalará el __Jupyter__
+con el python3 del sistema. __Conviene asegurarse de que estamos
+apuntando al python del S.O. y no a cualquier otro Python que hayamos instalado:
+
+~~~~{bash}
+which python
+~~~~
+
+#### Instalar Anaconda Python
+
+Teóricamente [Anaconda](https://www.continuum.io/downloads), es la
+forma fácil de poder usar _ipython notebook_. Así que la primera vez
+que instalé el iPython lo hice instalando _Anaconda_ De hecho me he
+instalado dos versiones la que incluye el python2 y la que incluye el
+python3, aunque son completamente redundantes, basta con instalar una
+sola de ellas.
 
 ~~~~{bash}
 bash Anaconda3-4.2.0-Linux-x86_64.sh
@@ -1196,7 +1214,10 @@ Para hacer lo mismo en fish:
 set -x PATH ~/apps/anaconda3/bin $PATH
 ~~~~
 
-### iPython y GraphLab
+#### iPython y GraphLab
+
+La instalación de iPython y GraphLab (que es una librería comercial)
+la hice para realizar un curso.
 
 Creamos un entorno conda con Python 2.7.x
 
@@ -1251,7 +1272,7 @@ ipython notebook
 source deactivate gl-env
 ~~~~
 
-#### Instalación alternativa con virtualenv
+##### Instalación alternativa con virtualenv
 
 ~~~~
 # Create a virtual environment named e.g. gl-env
@@ -1273,19 +1294,6 @@ pip install "jupyter"
 # Install your licensed copy of GraphLab Create
 pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
 ~~~~
-
-### Instalar Jupyter en el Python del sistema
-
-Seguimos las instrucciones [aquí](https://gist.github.com/frgomes/24c1923f2c9f14a27b14)
-
-Si usamos el script descargado del github se instalará el __Jupyter__
-con el python3 del sistema. __Conviene asegurarse de que estamos
-apuntando al python del S.O. y no al de Anaconda:
-
-~~~~{bash}
-which python
-~~~~
-
 
 ### Usar Emacs para editar Python
 

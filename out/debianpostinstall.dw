@@ -947,7 +947,7 @@ Python 3.4.2
 
 //pip// es un gestor de paquetes para **Python** que facilita la instalación de librerías y utilidades.
 
-Para poder usar los entornos virtuales instalaremos también virtualenv.
+Para poder usar los entornos virtuales instalaremos también //virtualenv//.
 
 Instalamos los dos desde aptitude:
 
@@ -984,9 +984,20 @@ sudo pip install virtualfish
 
 ==== iPython notebook ====
 
-Teóricamente //Ananconda//, es la forma fácil de poder usar //ipython notebook//. De hecho me he instalado dos versiones la que incluye el python2 y la que incluye el python3.
+[[https://ipython.org/|iPython]], y su evolución [[https://jupyter.org/index.html|Jupyter]] proporcionan un entorno para interactivo de programación que permite elaborar documentos muy complejos con programas embebidos.
 
-Las instalaciones de //Anaconda// son redundantes, basta con instalar uno de ellos. En cualquier caso para realizar la instalación basta con descargar los scripts de instalación desde la página web de Anaconda.
+=== Instalar Jupyter en el Python del sistema ===
+
+Seguimos las instrucciones [[https://gist.github.com/frgomes/24c1923f2c9f14a27b14|aquí]]
+
+Si usamos el script descargado del github se instalará el **Jupyter** con el python3 del sistema. %%__%%Conviene asegurarse de que estamos apuntando al python del S.O. y no a cualquier otro Python que hayamos instalado:
+
+<code>
+which python
+</code>
+=== Instalar Anaconda Python ===
+
+Teóricamente [[https://www.continuum.io/downloads|Anaconda]], es la forma fácil de poder usar //ipython notebook//. Así que la primera vez que instalé el iPython lo hice instalando //Anaconda// De hecho me he instalado dos versiones la que incluye el python2 y la que incluye el python3, aunque son completamente redundantes, basta con instalar una sola de ellas.
 
 <code>
 bash Anaconda3-4.2.0-Linux-x86_64.sh
@@ -1006,7 +1017,9 @@ Para hacer lo mismo en fish:
 <code>
 set -x PATH ~/apps/anaconda3/bin $PATH
 </code>
-==== iPython y GraphLab ====
+=== iPython y GraphLab ===
+
+La instalación de iPython y GraphLab (que es una librería comercial) la hice para realizar un curso.
 
 Creamos un entorno conda con Python 2.7.x
 
@@ -1050,7 +1063,7 @@ ipython notebook
 
 source deactivate gl-env
 </code>
-=== Instalación alternativa con virtualenv ===
+== Instalación alternativa con virtualenv ==
 
 <code>
 # Create a virtual environment named e.g. gl-env
@@ -1071,15 +1084,6 @@ pip install "jupyter"
 
 # Install your licensed copy of GraphLab Create
 pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
-</code>
-==== Instalar Jupyter en el Python del sistema ====
-
-Seguimos las instrucciones [[https://gist.github.com/frgomes/24c1923f2c9f14a27b14|aquí]]
-
-Si usamos el script descargado del github se instalará el **Jupyter** con el python3 del sistema. %%__%%Conviene asegurarse de que estamos apuntando al python del S.O. y no al de Anaconda:
-
-<code>
-which python
 </code>
 ==== Usar Emacs para editar Python ====
 
