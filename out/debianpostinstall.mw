@@ -311,6 +311,11 @@ wget -q https://wire-app.wire.com/linux/releases.key -O- | sudo apt-key add -
 echo &quot;deb https://wire-app.wire.com/linux/debian stable main&quot; | sudo tee /etc/apt/sources.list.d/wire-desktop.list
 sudo aptitude update
 sudo aptitude install wire-desktop</pre>
+=== Probar ===
+
+* [https://tails.boum.org/index.en.html Tails]
+* [https://www.qubes-os.org/ Qubes]
+
 = Documentos =
 
 == Calibre ==

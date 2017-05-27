@@ -376,6 +376,11 @@ echo "deb https://wire-app.wire.com/linux/debian stable main" | sudo tee /etc/ap
 sudo aptitude update
 sudo aptitude install wire-desktop
 </code>
+==== Probar ====
+
+  * [[https://tails.boum.org/index.en.html|Tails]]
+  * [[https://www.qubes-os.org/|Qubes]]
+
 ====== Documentos ======
 
 ===== Calibre =====

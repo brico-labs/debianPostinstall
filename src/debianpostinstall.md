@@ -471,6 +471,11 @@ sudo aptitude update
 sudo aptitude install wire-desktop
 ~~~~
 
+### Probar 
+
+* [Tails](https://tails.boum.org/index.en.html)
+* [Qubes](https://www.qubes-os.org/)
+
 # Documentos
 
 ## Calibre
