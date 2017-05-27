@@ -365,6 +365,17 @@ Instalamos ahora:
 <code>
 aptitude install pinentry-gtk2 opensc
 </code>
+==== wire ====
+
+Un cliente de mensajeria seguro.
+
+<code>
+sudo aptitude install apt-transport-https
+wget -q https://wire-app.wire.com/linux/releases.key -O- | sudo apt-key add -
+echo "deb https://wire-app.wire.com/linux/debian stable main" | sudo tee /etc/apt/sources.list.d/wire-desktop.list
+sudo aptitude update
+sudo aptitude install wire-desktop
+</code>
 ====== Documentos ======
 
 ===== Calibre =====

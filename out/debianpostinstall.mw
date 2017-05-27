@@ -302,6 +302,15 @@ y mas rollo</pre>
 Instalamos ahora:
 
 <pre>aptitude install pinentry-gtk2 opensc</pre>
+=== wire ===
+
+Un cliente de mensajeria seguro.
+
+<pre>sudo aptitude install apt-transport-https
+wget -q https://wire-app.wire.com/linux/releases.key -O- | sudo apt-key add -
+echo &quot;deb https://wire-app.wire.com/linux/debian stable main&quot; | sudo tee /etc/apt/sources.list.d/wire-desktop.list
+sudo aptitude update
+sudo aptitude install wire-desktop</pre>
 = Documentos =
 
 == Calibre ==
