@@ -576,6 +576,12 @@ sudo aptitude update
 sudo aptitude install wire-desktop
 \end{verbatim}
 
+\subsubsection{Ring}\label{ring}
+
+Un cliente de mensajería seguro y descentralizado basado en Blockchain.
+
+En Debian 9
+
 \subsubsection{Probar}\label{probar}
 
 \begin{itemize}
@@ -1302,6 +1308,13 @@ sudo pip install --upgrade pip
 sudo pip install --upgrade virtualenv
 \end{verbatim}
 
+Para \emph{Python3} hacemos:
+
+\begin{verbatim}
+sudo python3 -m pip install --upgrade pip
+sudo python3 -m pip install --upgrade virtualenv
+\end{verbatim}
+
 \emph{virtualenv} es una herramienta imprescindible en Python, pero da
 un poco de trabajo, así que se han desarrollado algunos frontends para
 simplificar su uso, para \emph{bash} y \emph{zsh} usaremos
@@ -1486,6 +1499,16 @@ Python}\label{usar-emacs-para-editar-python}
 Instalamos \emph{elpy} desde el gestor de paquetes de Emacs,
 concretamente desde el repo \emph{marmalade}
 
+Además de \emph{elpy} conviene instalar las siguientes bibliotecas de
+\emph{Python}:
+
+\begin{verbatim}
+pip install --user elpy jedi flake8 importmagic autopep8 yapf epc
+\end{verbatim}
+
+O bien sin el parámetro \texttt{-\/-user} si queremos instalarlo a nivel
+de sistema.
+
 Hay que habilitar \emph{elpy} en el fichero
 \textbf{\textasciitilde{}/.emacs} para ello añadimos la linea
 
@@ -1569,9 +1592,10 @@ En principio lo voy a usar con el Python del sistema
 
 \begin{verbatim}
 sudo pip install -U selenium
+sudo python3 -m pip install -U selenium
 \end{verbatim}
 
-Con esto nos queda instalado \texttt{Selenium\ 3.3.3}
+Con esto nos queda instalado \texttt{Selenium\ 3.4.3}
 
 Además de Selenium necesitamos los drivers de los navegadores que
 queremos controlar, de momento solo usaré \emph{Firefox}, así que nos
@@ -1592,6 +1616,17 @@ from selenium import webdriver
 
 browser = webdriver.Firefox()
 browser.get('http://seleniumhq.org/')
+\end{verbatim}
+
+\subsubsection{Networkx}\label{networkx}
+
+Instalamos \emph{Networkx} para todo el sistema. Networkx me interesa
+para poder hacer esquemas de red automáticos desde \emph{Python} puede
+que no lo necesites para nada.
+
+\begin{verbatim}
+sudo pip install -U networkx
+sudo python3 -m pip install -U networkx
 \end{verbatim}
 
 \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}

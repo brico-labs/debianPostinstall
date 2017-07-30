@@ -376,6 +376,12 @@ echo "deb https://wire-app.wire.com/linux/debian stable main" | sudo tee /etc/ap
 sudo aptitude update
 sudo aptitude install wire-desktop
 </code>
+==== Ring ====
+
+Un cliente de mensajería seguro y descentralizado basado en Blockchain.
+
+En Debian 9
+
 ==== Probar ====
 
   * [[https://tails.boum.org/index.en.html|Tails]]
@@ -973,6 +979,12 @@ sudo aptitude install python-pip python-virtualenv virtualenv
 sudo pip install --upgrade pip
 sudo pip install --upgrade virtualenv
 </code>
+Para //Python3// hacemos:
+
+<code>
+sudo python3 -m pip install --upgrade pip
+sudo python3 -m pip install --upgrade virtualenv
+</code>
 //virtualenv// es una herramienta imprescindible en Python, pero da un poco de trabajo, así que se han desarrollado algunos frontends para simplificar su uso, para //bash// y //zsh// usaremos //virtualenvwrapper//, y para //fish// el //virtualfish//. Como veremos son todos muy parecidos.
 
 Instalamos el virtualwrapper:
@@ -1105,6 +1117,13 @@ pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.
 
 Instalamos //elpy// desde el gestor de paquetes de Emacs, concretamente desde el repo //marmalade//
 
+Además de //elpy// conviene instalar las siguientes bibliotecas de //Python//:
+
+<code>
+pip install --user elpy jedi flake8 importmagic autopep8 yapf epc
+</code>
+O bien sin el parámetro ''%%--user%%'' si queremos instalarlo a nivel de sistema.
+
 Hay que habilitar //elpy// en el fichero **~/.emacs** para ello añadimos la linea
 
 <code>
@@ -1170,8 +1189,9 @@ En principio lo voy a usar con el Python del sistema ''%%Python 2.7.9%%'' en est
 
 <code>
 sudo pip install -U selenium
+sudo python3 -m pip install -U selenium
 </code>
-Con esto nos queda instalado ''%%Selenium 3.3.3%%''
+Con esto nos queda instalado ''%%Selenium 3.4.3%%''
 
 Además de Selenium necesitamos los drivers de los navegadores que queremos controlar, de momento solo usaré //Firefox//, así que nos bajamos la última versión de Geckodriver (0.15.0). Simplemente nos bajamos el archivo, descomprimimos y dejamos el fichero en ///usr/local/bin// con los permisos necesarios.
 
@@ -1187,6 +1207,14 @@ from selenium import webdriver
 
 browser = webdriver.Firefox()
 browser.get('http://seleniumhq.org/')
+</code>
+==== Networkx ====
+
+Instalamos //Networkx// para todo el sistema. Networkx me interesa para poder hacer esquemas de red automáticos desde //Python// puede que no lo necesites para nada.
+
+<code>
+sudo pip install -U networkx
+sudo python3 -m pip install -U networkx
 </code>
 
 ----

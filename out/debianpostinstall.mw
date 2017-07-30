@@ -311,6 +311,12 @@ wget -q https://wire-app.wire.com/linux/releases.key -O- | sudo apt-key add -
 echo &quot;deb https://wire-app.wire.com/linux/debian stable main&quot; | sudo tee /etc/apt/sources.list.d/wire-desktop.list
 sudo aptitude update
 sudo aptitude install wire-desktop</pre>
+=== Ring ===
+
+Un cliente de mensajería seguro y descentralizado basado en Blockchain.
+
+En Debian 9
+
 === Probar ===
 
 * [https://tails.boum.org/index.en.html Tails]
@@ -834,6 +840,10 @@ Instalamos los dos desde aptitude:
 
 sudo pip install --upgrade pip
 sudo pip install --upgrade virtualenv</pre>
+Para ''Python3'' hacemos:
+
+<pre class="{bash}">sudo python3 -m pip install --upgrade pip
+sudo python3 -m pip install --upgrade virtualenv</pre>
 ''virtualenv'' es una herramienta imprescindible en Python, pero da un poco de trabajo, así que se han desarrollado algunos frontends para simplificar su uso, para ''bash'' y ''zsh'' usaremos ''virtualenvwrapper'', y para ''fish'' el ''virtualfish''. Como veremos son todos muy parecidos.
 
 Instalamos el virtualwrapper:
@@ -938,6 +948,11 @@ pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.
 
 Instalamos ''elpy'' desde el gestor de paquetes de Emacs, concretamente desde el repo ''marmalade''
 
+Además de ''elpy'' conviene instalar las siguientes bibliotecas de ''Python'':
+
+<pre>pip install --user elpy jedi flake8 importmagic autopep8 yapf epc</pre>
+O bien sin el parámetro <code>--user</code> si queremos instalarlo a nivel de sistema.
+
 Hay que habilitar ''elpy'' en el fichero '''~/.emacs''' para ello añadimos la linea
 
 <pre class="{lisp}">(elpy enable)</pre>
@@ -989,8 +1004,9 @@ Vamos a instalar ''Selenium'' para hacer TDD <ref>Test Driven Development
 
 En principio lo voy a usar con el Python del sistema <code>Python 2.7.9</code> en este momento, y no lo voy a instalar en un ''virtualenv'':
 
-<pre class="{bash}">sudo pip install -U selenium</pre>
-Con esto nos queda instalado <code>Selenium 3.3.3</code>
+<pre class="{bash}">sudo pip install -U selenium
+sudo python3 -m pip install -U selenium</pre>
+Con esto nos queda instalado <code>Selenium 3.4.3</code>
 
 Además de Selenium necesitamos los drivers de los navegadores que queremos controlar, de momento solo usaré ''Firefox'', así que nos bajamos la última versión de Geckodriver (0.15.0). Simplemente nos bajamos el archivo, descomprimimos y dejamos el fichero en ''/usr/local/bin'' con los permisos necesarios.
 
@@ -1003,6 +1019,12 @@ Para probarlo escribimos un pequeño programa en Python:
 
 browser = webdriver.Firefox()
 browser.get('http://seleniumhq.org/')</pre>
+=== Networkx ===
+
+Instalamos ''Networkx'' para todo el sistema. Networkx me interesa para poder hacer esquemas de red automáticos desde ''Python'' puede que no lo necesites para nada.
+
+<pre class="{bash}">sudo pip install -U networkx
+sudo python3 -m pip install -U networkx</pre>
 
 -----
 

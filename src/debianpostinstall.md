@@ -471,6 +471,12 @@ sudo aptitude update
 sudo aptitude install wire-desktop
 ~~~~
 
+### Ring
+
+Un cliente de mensajería seguro y descentralizado basado en Blockchain.
+
+En Debian 9
+
 ### Probar 
 
 * [Tails](https://tails.boum.org/index.en.html)
@@ -1143,6 +1149,13 @@ sudo pip install --upgrade pip
 sudo pip install --upgrade virtualenv
 ~~~~
 
+Para _Python3_ hacemos:
+
+~~~~{bash}
+sudo python3 -m pip install --upgrade pip
+sudo python3 -m pip install --upgrade virtualenv
+~~~~
+
 _virtualenv_ es una herramienta imprescindible en Python, pero da un
 poco de trabajo, así que se han desarrollado algunos frontends para
 simplificar su uso, para _bash_ y _zsh_ usaremos _virtualenvwrapper_,
@@ -1317,6 +1330,16 @@ pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.
 Instalamos _elpy_ desde el gestor de paquetes de Emacs, concretamente
 desde el repo _marmalade_
 
+Además de _elpy_ conviene instalar las siguientes bibliotecas de _Python_:
+
+~~~~
+pip install --user elpy jedi flake8 importmagic autopep8 yapf epc
+~~~~
+
+O bien sin el parámetro `--user` si queremos instalarlo a nivel de sistema.
+
+
+
 Hay que habilitar _elpy_ en el fichero __~/.emacs__ para ello añadimos
 la linea
 
@@ -1329,6 +1352,8 @@ _flycheck_ chequea el código python. Conviene instalar:
 ~~~~
 sudo pip install pylint
 ~~~~
+
+
 
 #### TODO
 
@@ -1395,9 +1420,10 @@ este momento, y no lo voy a instalar en un _virtualenv_:
 
 ~~~~{bash}
 sudo pip install -U selenium
+sudo python3 -m pip install -U selenium
 ~~~~
 
-Con esto nos queda instalado `Selenium 3.3.3`
+Con esto nos queda instalado `Selenium 3.4.3`
 
 Además de Selenium necesitamos los drivers de los navegadores que
 queremos controlar, de momento solo usaré _Firefox_, así que nos
@@ -1420,10 +1446,23 @@ browser = webdriver.Firefox()
 browser.get('http://seleniumhq.org/')
 ~~~~
 
+### Networkx
+
+Instalamos _Networkx_ para todo el sistema. Networkx me interesa para
+poder hacer esquemas de red automáticos desde _Python_ puede que no lo
+necesites para nada.
+
+~~~~{bash}
+sudo pip install -U networkx
+sudo python3 -m pip install -U networkx
+~~~~
 
 
 ---
 > __Nota__: Tengo que pensar bien como hacerlo.
+
+
+
 
 ## Go language
 

@@ -120,3 +120,11 @@ Cuentas online abiertas
 
 google
 pocket (plugin de chrome) 
+
+
+Upgrade a nueva release
+
+https://linuxconfig.org/how-to-upgrade-debian-8-jessie-to-debian-9-stretch
+
+https://tex.stackexchange.com/questions/1092/how-to-install-vanilla-texlive-on-debian-or-ubuntu
+
