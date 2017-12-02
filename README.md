@@ -1,21 +1,8 @@
-<table style="width:3%;">
-<colgroup>
-<col width="2%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td>title: Debian Post-install subtitle: Un documento de BricoLabs author: - Sergio Alvariño <a href="mailto:salvari@gmail.com">salvari@gmail.com</a> tags: [Pandoc, Documentación, makefile, git] date: julio-2016 lang: es-ES abstract: | Instalación de Debian</td>
-</tr>
-<tr class="even">
-<td>Algunas notas referentes a la instalación de Debian Jessie</td>
-</tr>
-</tbody>
-</table>
-
 Introducción
 ============
 
-Mi portátil es un ordenador Acer 5755G con las siguientes características:
+Mi portátil es un ordenador Acer 5755G con las siguientes
+características:
 
 -   Core i5 2430M 2.4GHz
 
@@ -25,17 +12,27 @@ Mi portátil es un ordenador Acer 5755G con las siguientes características:
 
 -   750Gb HD
 
-Mi portátil equipa una tarjeta *Nvidia Geforce GT540M* que resulta pertenecer a una rama muerta en el árbol de desarrollo de Nvidia.
+Mi portátil equipa una tarjeta *Nvidia Geforce GT540M* que resulta
+pertenecer a una rama muerta en el árbol de desarrollo de Nvidia.
 
-La gráfica es una Nvidia Optimus, es decir una tarjeta híbrida que funcionaba perfectamente en Ubuntu 14.04 usando Bumblebee.
+La gráfica es una Nvidia Optimus, es decir una tarjeta híbrida que
+funcionaba perfectamente en Ubuntu 14.04 usando Bumblebee.
 
-Con el paso a Ubuntu *Xenial Xerus* mi tarjeta gráfica dejó de funcionar correctamente con el procedimiento de instalación de Bumblebee que venía usando. Y con todos los que fui capaz de probar.
+Con el paso a Ubuntu *Xenial Xerus* mi tarjeta gráfica dejó de funcionar
+correctamente con el procedimiento de instalación de Bumblebee que venía
+usando. Y con todos los que fui capaz de probar.
 
-A mayores me encontré también con problemas insalvables para instalar el Virtual Box así que decidí volver a Debian.
+A mayores me encontré también con problemas insalvables para instalar el
+Virtual Box así que decidí volver a Debian.
 
-Para hacer la actualización del sistema opté por desinstalar el dvd y montar en su lugar un disco SSD en un Caddie para Acer. La instalación fué muy fácil, y aunque el portátil arranca perfectamente de cualquiera de los dos discos opté por instalar el SSD en la bahía del HD original y pasar el HD al caddie.
+Para hacer la actualización del sistema opté por desinstalar el dvd y
+montar en su lugar un disco SSD en un Caddie para Acer. La instalación
+fué muy fácil, y aunque el portátil arranca perfectamente de cualquiera
+de los dos discos opté por instalar el SSD en la bahía del HD original y
+pasar el HD al caddie.
 
-Una vez instalado el sistema operativo, lo primero fue la instalación del Bumblebee para probar que funcionaba normalmente.
+Una vez instalado el sistema operativo, lo primero fue la instalación
+del Bumblebee para probar que funcionaba normalmente.
 
     sudo apt-get install firmware-linux-nonfree Bumblebee-nvidia primus
 
@@ -48,9 +45,11 @@ Ejecutamos:
 sudo dpkg-reconfigure locales
 ```
 
-Y después solo tenemos que cambiar la selección del idioma en la configuración de Gnome.
+Y después solo tenemos que cambiar la selección del idioma en la
+configuración de Gnome.
 
-Nos pedirá rearrancar Gnome y renombrará todos los directorios de sistema.
+Nos pedirá rearrancar Gnome y renombrará todos los directorios de
+sistema.
 
 Gestión de paquetes
 ===================
@@ -63,12 +62,14 @@ sudo apt-get install synaptic
 sudo apt-get install gdebi
 ```
 
-Cambiamos las opciones de *aptitude* para que **no instale** los paquetes recomendados.
+Cambiamos las opciones de *aptitude* para que **no instale** los
+paquetes recomendados.
 
 Quitamos el cdrom de los sources.list
 -------------------------------------
 
-Editamos el fichero */etc/apt/sources.list* y comentamos las lineas del cdrom.
+Editamos el fichero */etc/apt/sources.list* y comentamos las lineas del
+cdrom.
 
 Habilitamos los backports y multimedia
 --------------------------------------
@@ -107,13 +108,16 @@ Programas de utilidad y uso frecuente
 
 ### Menulibre
 
-Un editor de menús para Gnome, nos permite generar los archivos desktop para cualquier aplicación. Mucho más completo que *alacarte* la otra alternativa.
+Un editor de menús para Gnome, nos permite generar los archivos desktop
+para cualquier aplicación. Mucho más completo que *alacarte* la otra
+alternativa.
 
     sudo apt-get install menulibre
 
 ### Terminator
 
-Terminator es un emulador de terminal muy completo y muy flexible. Los instalamos desde *aptitude*
+Terminator es un emulador de terminal muy completo y muy flexible. Los
+instalamos desde *aptitude*
 
 ``` {bash}
 sudo aptitude install terminator python-keybinder
@@ -131,7 +135,9 @@ Un *sudo* en modo gráfico:
 
     sudo aptitude install gksu
 
-**Muy importante** ejecutar `gksu-properties` y escoger el modo `sudo` en lugar de `su`. Nos evitaremos problemas con la instalación de muchas aplicaciones.
+**Muy importante** ejecutar `gksu-properties` y escoger el modo `sudo`
+en lugar de `su`. Nos evitaremos problemas con la instalación de muchas
+aplicaciones.
 
 ### Diskmanager
 
@@ -153,7 +159,10 @@ La uso para hacer mis backups a discos externos.
 
 ### Dropbox
 
-Bajado el paquete Debian desde la página [web de Dropbox](https://www.dropbox.com/install-linux), instalado el paquete con *packageinstall*, es decir, simplemente pinchando desde el gestor de ficheros.
+Bajado el paquete Debian desde la página [web de
+Dropbox](https://www.dropbox.com/install-linux), instalado el paquete
+con *packageinstall*, es decir, simplemente pinchando desde el gestor de
+ficheros.
 
 ### Compresores et al
 
@@ -163,18 +172,26 @@ sudo apt-get install rar unrar zip unzip unace bzip2 lzop p7zip p7zip-full p7zip
 
 ### Freeplane
 
-Mejor que [Freemind](http://freemind.sourceforge.net/wiki/index.php/Main_Page) (en mi opinión). El baile de siempre, descargar de la [web](http://www.freeplane.org/), descomprimir en *~/apps* y crear lanzador con *MenuLibre*. Todos los ficheros que tenía de *Freemind* se pueden usar directamente con *Freeplane*.
+Mejor que
+[Freemind](http://freemind.sourceforge.net/wiki/index.php/Main_Page) (en
+mi opinión). El baile de siempre, descargar de la
+[web](http://www.freeplane.org/), descomprimir en *~/apps* y crear
+lanzador con *MenuLibre*. Todos los ficheros que tenía de *Freemind* se
+pueden usar directamente con *Freeplane*.
 
 ### Telegram desktop
 
-El cliente de mensajeria de Telegram. Descargado desde la web, instalado en *~/apps*
+El cliente de mensajeria de Telegram. Descargado desde la web, instalado
+en *~/apps*
 
 Internet
 --------
 
 ### Chrome y Chromium
 
-Instalado chrome añadiendo fuentes a aptitude. No recuerdo como las añadí, pero en el fichero */etc/apt/sources.list.d/google-chrome.list*, tengo los siguientes contenidos:
+Instalado chrome añadiendo fuentes a aptitude. No recuerdo como las
+añadí, pero en el fichero */etc/apt/sources.list.d/google-chrome.list*,
+tengo los siguientes contenidos:
 
     ###
     ###
@@ -195,11 +212,14 @@ sudo aptitude install chromium
 
 El navegador anónimo.
 
-Bajamos el zip de la aplicación desde la [web](https://www.torproject.org) y descomprimido en *~/apps* copiado el fichero desktop a *~/.local/share/applications*
+Bajamos el zip de la aplicación desde la
+[web](https://www.torproject.org) y descomprimido en *~/apps* copiado el
+fichero desktop a *~/.local/share/applications*
 
 ### openvpn
 
-Basado en la web [nix/bsd](https://nixbsd.wordpress.com/2017/04/01/freebsd-10-2-configure-openvpn-client/).
+Basado en la web
+[nix/bsd](https://nixbsd.wordpress.com/2017/04/01/freebsd-10-2-configure-openvpn-client/).
 
 ### Deluge
 
@@ -210,16 +230,23 @@ El cliente torrent que uso habitualmente. Instalamos desde aptitude
 
 ### TiddlyDesktop
 
-*Tiddly* es una wiki auto-contenida y muy flexible, tiene un sinfin de versiones adaptadas para diferentes usos. Hace años que la uso como cuaderno de bitácora personal, pero no había seguido su evolución.
+*Tiddly* es una wiki auto-contenida y muy flexible, tiene un sinfin de
+versiones adaptadas para diferentes usos. Hace años que la uso como
+cuaderno de bitácora personal, pero no había seguido su evolución.
 
 Me he descargado:
 
--   [Tiddlywiki](http://tiddlywiki.com/) y le he instalado los plugins de *FontAwesome* y *WikiMap*, este será mi nuevo cuaderno de bitácora.
+-   [Tiddlywiki](http://tiddlywiki.com/) y le he instalado los plugins
+    de *FontAwesome* y *WikiMap*, este será mi nuevo cuaderno de
+    bitácora.
 -   [GSD5](http://gsd5.tiddlyspot.com/) un *TiddlyWiki* adaptado a *GTD*
 
-A mayores me he instalado la aplicación [TiddlyDesktop](https://github.com/Jermolene/TiddlyDesktop), basada en *node webkit* que simplifica el tema de backups (en teoría).
+A mayores me he instalado la aplicación
+[TiddlyDesktop](https://github.com/Jermolene/TiddlyDesktop), basada en
+*node webkit* que simplifica el tema de backups (en teoría).
 
-Como siempre la instalamos en *~/apps* y creamos un lanzador con *MenuLibre*.
+Como siempre la instalamos en *~/apps* y creamos un lanzador con
+*MenuLibre*.
 
 Gráficos
 --------
@@ -236,7 +263,8 @@ aptitude install ink-generator
 
 ### LibreCAD y FreeCAD
 
-Imprescindibles para el diseño de cacharros. Instalados desde repos con aptitude
+Imprescindibles para el diseño de cacharros. Instalados desde repos con
+aptitude
 
     apt-get install librecad
 
@@ -252,22 +280,28 @@ Gimp ya estaba instalado, adicionalmente instalado el gimp data-extra
 
 ### Shutter
 
-Un programa de captura de pantallas que permite editarlas rápida y fácilmente:
+Un programa de captura de pantallas que permite editarlas rápida y
+fácilmente:
 
     sudo aptitude install shutter libgoo-canvas-perl
 
 ### Pencil
 
-Una aplicación java para hacer esquemas de aplicaciones web, puede que no lo necesites.
+Una aplicación java para hacer esquemas de aplicaciones web, puede que
+no lo necesites.
 
-Descargar la última versión (paquete Debian) desde [la página web](http://pencil.evolus.vn/). Lo instalamos y listo. Puede dar problemas si usamos Iceweasel, ya que el paquete depende de Firefox. Más info [aquí](https://www.linuxwebzone.com/install-pencil-on-debian/)
+Descargar la última versión (paquete Debian) desde [la página
+web](http://pencil.evolus.vn/). Lo instalamos y listo. Puede dar
+problemas si usamos Iceweasel, ya que el paquete depende de Firefox. Más
+info [aquí](https://www.linuxwebzone.com/install-pencil-on-debian/)
 
 Fotografía
 ----------
 
 ### Rawtherapee y Darktable: Tratamiento de imágenes fotogŕaficas
 
-Si te gusta la fotografía y/o tienes una cámara reflex, definitivamente necesitas estas aplicaciones.
+Si te gusta la fotografía y/o tienes una cámara reflex, definitivamente
+necesitas estas aplicaciones.
 
     sudo aptitude install icc-profiles icc-profiles-free
     sudo aptitude install rawtherapee darktable
@@ -311,7 +345,8 @@ sudo aptitude install decibel-audio-player audacity soundconverter
 
 ### Gpodder
 
-Instalamos *gpodder* para gestionar nuestros podcast, aunque *Clementine* también nos vale.
+Instalamos *gpodder* para gestionar nuestros podcast, aunque
+*Clementine* también nos vale.
 
     sudo aptitude install gpodder
 
@@ -370,7 +405,8 @@ Si insertamos el lector veremos algo como esto:
     Reader 0: C3PO LTC31 v2 (11061005) 00 00
       Card state: Card removed, 
 
-Si insertamos un DNI veremos que se lee la información de la tarjeta insertada:
+Si insertamos un DNI veremos que se lee la información de la tarjeta
+insertada:
 
     Reader 0: C3PO LTC31 v2 (11061005) 00 00
       Card state: Card inserted, 
@@ -420,8 +456,10 @@ Para usar el calibre con el Kobo Glo:
 -   Creamos una columna *MyShelves* con identificativo *\#myshelves*
 -   En las opciones del plugin:
 
-    -   En la opción *Collection columns* añadimos las columnas *series,\#myshelves*
-    -   Marcamos las opciones *Create collections* y *Delete empy collections*
+    -   En la opción *Collection columns* añadimos las columnas
+        *series,\#myshelves*
+    -   Marcamos las opciones *Create collections* y *Delete empy
+        collections*
     -   *Update metadata on device* y *Set series information*
 
 Algunos enlaces útiles:
@@ -434,11 +472,16 @@ Algunos enlaces útiles:
 Pandoc
 ------
 
-Pandoc es un traductor entre formatos de documento. Está escrito en Python y es increiblemente útil. De hecho este documento está escrito con *Pandoc*.
+Pandoc es un traductor entre formatos de documento. Está escrito en
+Python y es increiblemente útil. De hecho este documento está escrito
+con *Pandoc*.
 
-Instalado el Pandoc descargando paquete *deb* desde la página web del Pandoc.
+Instalado el Pandoc descargando paquete *deb* desde la página web del
+Pandoc.
 
-Descargamos las plantillas desde [el repo](https://github.com/jgm/pandoc-templates) ejecutando los siguientes comandos:
+Descargamos las plantillas desde [el
+repo](https://github.com/jgm/pandoc-templates) ejecutando los siguientes
+comandos:
 
 ``` {bash}
 cd ~/.pandoc
@@ -448,14 +491,18 @@ git clone https://github.com/jgm/pandoc-templates templates
 Zotero
 ------
 
-Zotero es un programa que te permite guardar una o varias bibliografías con referencias a libros, páginas web o documentos electrónicos.
+Zotero es un programa que te permite guardar una o varias bibliografías
+con referencias a libros, páginas web o documentos electrónicos.
 
-Instalado el Zotero Standalone desde la [página web del programa](https://www.zotero.org/)
+Instalado el Zotero Standalone desde la [página web del
+programa](https://www.zotero.org/)
 
 Vanilla LaTeX
 -------------
 
-El LaTeX de Debian está un poquillo anticuado, si se quiere usar una versión reciente hay que aplicar [este truco](http://tex.stackexchange.com/questions/1092/how-to-install-vanilla-texlive-on-debian-or-ubuntu).
+El LaTeX de Debian está un poquillo anticuado, si se quiere usar una
+versión reciente hay que aplicar [este
+truco](http://tex.stackexchange.com/questions/1092/how-to-install-vanilla-texlive-on-debian-or-ubuntu).
 
 ``` {bash}
 cd ~
@@ -466,24 +513,30 @@ tar xzf install-tl-unx.tar.gz
 cd install-tl-xxxxxx
 ```
 
-La parte xxxxxx varía en función del estado de la última versión de LaTeX disponible.
+La parte xxxxxx varía en función del estado de la última versión de
+LaTeX disponible.
 
 ``` {bash}
 sudo ./install-tl
 ```
 
-Una vez lanzada la instalación podemos desmarcar las opciones que instalan la documentación y las fuentes. Eso nos obligará a consultar la documentación *on line* pero ahorrará practicamente el 50% del espacio necesario. En mi caso sin *doc* ni *src* ocupa 2,3Gb
+Una vez lanzada la instalación podemos desmarcar las opciones que
+instalan la documentación y las fuentes. Eso nos obligará a consultar la
+documentación *on line* pero ahorrará practicamente el 50% del espacio
+necesario. En mi caso sin *doc* ni *src* ocupa 2,3Gb
 
 ``` {bash}
-mkdir -p /opt
-sudo ln -s /usr/local/texlive/2016/bin/* /opt/texbin
+mkdir -p /opt/texbin
+sudo ln -s /usr/local/texlive/2017/bin/x86_64-linux/* /opt/texbin
 ```
 
-Por último para acabar la instalación añadimos **/opt/texbin** al *path*.
+Por último para acabar la instalación añadimos **/opt/texbin** al
+*path*.
 
 ### Falsificando paquetes
 
-Ya tenemos el **texlive** instalado, ahora necesitamos que el gestor de paquetes sepa que ya lo tenemos instalado.
+Ya tenemos el **texlive** instalado, ahora necesitamos que el gestor de
+paquetes sepa que ya lo tenemos instalado.
 
 ``` {bash}
 sudo apt-get install equivs --no-install-recommends
@@ -491,25 +544,31 @@ mkdir -p /tmp/tl-equivs && cd /tmp/tl-equivs
 equivs-control texlive-local
 ```
 
-Para hacerlo más fácil podemos descargarnos un fichero ya preparado, ejecutando:
+Alternativamente para hacerlo más fácil podemos descargarnos un fichero
+ya preparado, ejecutando:
 
 ``` {bash}
-wget http://www.tug.org/texlive/files/debian-equivs-2015-ex.txt
-/bin/cp -f debian-equivs-2015-ex.txt texlive-local
+wget http://www.tug.org/texlive/files/debian-equivs-2017-ex.txt
+/bin/cp -f debian-equivs-2017-ex.txt texlive-local
 ```
 
 Editamos la versión y
 
 ``` {bash}
 equivs-build texlive-local
-sudo dpkg -i texlive-local_2015-1_all.deb
+sudo dpkg -i texlive-local_2017-1_all.deb
 ```
 
-Todo listo, ahora podemos instalar cualquier paquete que dependa de texlive
+Ha fallado por que tiene una dependencia *freeglut3*, la he instalado y
+se ha dejado instalar sin problema.
+
+Todo listo, ahora podemos instalar cualquier paquete que dependa de
+texlive
 
 ### Fuentes
 
-Para dejar disponibles las fuentes opentype y truetype que vienen con texlive para el resto de aplicaciones:
+Para dejar disponibles las fuentes opentype y truetype que vienen con
+texlive para el resto de aplicaciones:
 
 ``` {bash}
 sudo cp $(kpsewhich -var-value TEXMFSYSVAR)/fonts/conf/texlive-fontconfig.conf /etc/fonts/conf.d/09-texlive.conf
@@ -567,7 +626,8 @@ Icon=system-software-update
 EOF
 ```
 
-Ojo que hay que dejar instalado el gksu (aunque debería estar de antes si sigues este doc)
+Ojo que hay que dejar instalado el gksu (aunque debería estar de antes
+si sigues este doc)
 
 ``` {bash}
 sudo aptitude install gksu
@@ -582,13 +642,17 @@ Instalado emacs desde los repos:
 sudo aptitude install emacs
 ```
 
-Instalamos los paquetes *markdown-mode*, *mardown-plus* y *pandoc-mode* desde el menú de gestión de paquetes de **emacs**.
+Instalamos los paquetes *markdown-mode*, *mardown-plus* y *pandoc-mode*
+desde el menú de gestión de paquetes de **emacs**.
 
 También instalamos *d-mode* y *flymake-d*.
 
-Después de probar *flymake* y *flycheck* al final me ha gustado más *flycheck* Hay una sección de configuración en el fichero *.emacs* para cada uno de ellos, pero la de *flymake* está comentada.
+Después de probar *flymake* y *flycheck* al final me ha gustado más
+*flycheck* Hay una sección de configuración en el fichero *.emacs* para
+cada uno de ellos, pero la de *flymake* está comentada.
 
-Configuramos el fichero *.emacs* definimos algunas preferencias, algunas funciones útiles y añadimos orígenes extra de paquetes.
+Configuramos el fichero *.emacs* definimos algunas preferencias, algunas
+funciones útiles y añadimos orígenes extra de paquetes.
 
 ``` {lisp}
 (custom-set-variables
@@ -774,9 +838,11 @@ Textadept
 
 Un potente editor de desarrollo, multiplataforma.
 
-Viene incluido en el pack D-apt, por que es muy potente como IDE para **D**.
+Viene incluido en el pack D-apt, por que es muy potente como IDE para
+**D**.
 
-De momento lo único que he configurado es la fuente, para ello editamos el fichero *~/.textadept/init.lua* y añadimos la linea:
+De momento lo único que he configurado es la fuente, para ello editamos
+el fichero *~/.textadept/init.lua* y añadimos la linea:
 
 ``` {lua}
 ui.set_theme('light', {font = 'Meslo LG L Regular for Powerline', fontsize = 14})
@@ -785,7 +851,9 @@ ui.set_theme('light', {font = 'Meslo LG L Regular for Powerline', fontsize = 14}
 Scribus
 -------
 
-Scribus es un programa libre de composición de documentos. con Scribus puedes elaborar desde los folletos de una exposición hasta una revista o un poster.
+Scribus es un programa libre de composición de documentos. con Scribus
+puedes elaborar desde los folletos de una exposición hasta una revista o
+un poster.
 
 Instalado con aptitude
 
@@ -806,7 +874,8 @@ Desarrollo sw
 Paquetes esenciales
 -------------------
 
-Estos son los paquetes esenciales para empezar a desarrollar software en Linux.
+Estos son los paquetes esenciales para empezar a desarrollar software en
+Linux.
 
     sudo apt-get install build-essential checkinstall make automake cmake autoconf git git-core dpkg wget
 
@@ -848,11 +917,15 @@ Open Java
 Lenguaje de programación D (D programming language)
 ---------------------------------------------------
 
-[El lenguaje de programación D](https://dlang.org/) es un lenguaje de programación de sistemas con una sintaxis similar a la de C y con tipado estático. Combina eficiencia, control y potencia de modelado con seguridad y productividad.
+[El lenguaje de programación D](https://dlang.org/) es un lenguaje de
+programación de sistemas con una sintaxis similar a la de C y con tipado
+estático. Combina eficiencia, control y potencia de modelado con
+seguridad y productividad.
 
 ### D-apt e instalación de programas
 
-Configurado [d-apt](http://d-apt.sourceforge.net/), instalados todos los programas incluidos
+Configurado [d-apt](http://d-apt.sourceforge.net/), instalados todos los
+programas incluidos
 
 ``` {bash}
 sudo wget http://master.dl.sourceforge.net/project/d-apt/files/d-apt.list -O /etc/apt/sources.list.d/d-apt.list
@@ -865,7 +938,8 @@ Instalamos todos los programas asociados.
 
 ### DCD
 
-Una vez instalado el DCD tenemos que configurarlo creando el fichero *~/.config/dcd/dcd.conf* con el siguiente contenido:
+Una vez instalado el DCD tenemos que configurarlo creando el fichero
+*~/.config/dcd/dcd.conf* con el siguiente contenido:
 
     /usr/include/dmd/druntime/import
     /usr/include/dmd/phobos
@@ -887,7 +961,8 @@ Instalado con:
 
     sudo aptitude install ldc
 
-Para poder ejecutar aplicaciones basadas en [Vibed](http://vibed.org/), necesitamos instalar:
+Para poder ejecutar aplicaciones basadas en [Vibed](http://vibed.org/),
+necesitamos instalar:
 
     sudo apt-get install -y libssl-dev libevent-dev
 
@@ -964,7 +1039,8 @@ Se configura en el fichero **~/.emacs**:
 Processing
 ----------
 
-Bajamos los paquetes de las respectivas páginas web, descomprimimimos en *~/apps/* y creamos los desktop file con **Menulibre**
+Bajamos los paquetes de las respectivas páginas web, descomprimimimos en
+*~/apps/* y creamos los desktop file con **Menulibre**
 
 Openframeworks
 --------------
@@ -1009,9 +1085,11 @@ Python 3.4.2
 
 ### pip, virtualenv, virtualenvwrapper, virtualfish
 
-*pip* es un gestor de paquetes para **Python** que facilita la instalación de librerías y utilidades.
+*pip* es un gestor de paquetes para **Python** que facilita la
+instalación de librerías y utilidades.
 
-Para poder usar los entornos virtuales instalaremos también *virtualenv*.
+Para poder usar los entornos virtuales instalaremos también
+*virtualenv*.
 
 Instalamos los dos desde aptitude:
 
@@ -1029,7 +1107,10 @@ sudo python3 -m pip install --upgrade pip
 sudo python3 -m pip install --upgrade virtualenv
 ```
 
-*virtualenv* es una herramienta imprescindible en Python, pero da un poco de trabajo, así que se han desarrollado algunos frontends para simplificar su uso, para *bash* y *zsh* usaremos *virtualenvwrapper*, y para *fish* el *virtualfish*. Como veremos son todos muy parecidos.
+*virtualenv* es una herramienta imprescindible en Python, pero da un
+poco de trabajo, así que se han desarrollado algunos frontends para
+simplificar su uso, para *bash* y *zsh* usaremos *virtualenvwrapper*, y
+para *fish* el *virtualfish*. Como veremos son todos muy parecidos.
 
 Instalamos el virtualwrapper:
 
@@ -1045,27 +1126,40 @@ source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
 O añadir esa linea a nuestros ficheros *.bashrc* y/o *.zshrc*
 
-Yo he dejado la variable de entorno *WORKON\_HOME* sin definir, así que apunta al directorio por defecto, `~/.virtualenvs`. En ese directorio es donde se guardarán nuestros entornos virtuales.
+Yo he dejado la variable de entorno *WORKON\_HOME* sin definir, así que
+apunta al directorio por defecto, `~/.virtualenvs`. En ese directorio es
+donde se guardarán nuestros entornos virtuales.
 
-[Aquí](http://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html) tenemos la referencia de comandos de *virtualenvwrapper*
+[Aquí](http://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html)
+tenemos la referencia de comandos de *virtualenvwrapper*
 
-Por último, si queremos tener utilidades parecidas en nuestro *fish shell* instalamos *virtualfish*:
+Por último, si queremos tener utilidades parecidas en nuestro *fish
+shell* instalamos *virtualfish*:
 
 ``` {bash}
 sudo pip install virtualfish
 ```
 
-[Aquí](http://virtualfish.readthedocs.io/en/latest/index.html) tenemos la documentación de *virtualfish* y la descripción de todos los comandos y plugins disponibles.
+[Aquí](http://virtualfish.readthedocs.io/en/latest/index.html) tenemos
+la documentación de *virtualfish* y la descripción de todos los comandos
+y plugins disponibles.
 
 ### iPython notebook
 
-[iPython](https://ipython.org/), y su evolución [Jupyter](https://jupyter.org/index.html) proporcionan un entorno para interactivo de programación que permite elaborar documentos muy complejos con programas embebidos.
+[iPython](https://ipython.org/), y su evolución
+[Jupyter](https://jupyter.org/index.html) proporcionan un entorno para
+interactivo de programación que permite elaborar documentos muy
+complejos con programas embebidos.
 
 #### Instalar Jupyter en el Python del sistema
 
-Seguimos las instrucciones [aquí](https://gist.github.com/frgomes/24c1923f2c9f14a27b14)
+Seguimos las instrucciones
+[aquí](https://gist.github.com/frgomes/24c1923f2c9f14a27b14)
 
-Si usamos el script descargado del github se instalará el **Jupyter** con el python3 del sistema. \_\_Conviene asegurarse de que estamos apuntando al python del S.O. y no a cualquier otro Python que hayamos instalado:
+Si usamos el script descargado del github se instalará el **Jupyter**
+con el python3 del sistema. \_\_Conviene asegurarse de que estamos
+apuntando al python del S.O. y no a cualquier otro Python que hayamos
+instalado:
 
 ``` {bash}
 which python
@@ -1073,7 +1167,12 @@ which python
 
 #### Instalar Anaconda Python
 
-Teóricamente [Anaconda](https://www.continuum.io/downloads), es la forma fácil de poder usar *ipython notebook*. Así que la primera vez que instalé el iPython lo hice instalando *Anaconda* De hecho me he instalado dos versiones la que incluye el python2 y la que incluye el python3, aunque son completamente redundantes, basta con instalar una sola de ellas.
+Teóricamente [Anaconda](https://www.continuum.io/downloads), es la forma
+fácil de poder usar *ipython notebook*. Así que la primera vez que
+instalé el iPython lo hice instalando *Anaconda* De hecho me he
+instalado dos versiones la que incluye el python2 y la que incluye el
+python3, aunque son completamente redundantes, basta con instalar una
+sola de ellas.
 
 ``` {bash}
 bash Anaconda3-4.2.0-Linux-x86_64.sh
@@ -1082,7 +1181,9 @@ bash Anaconda2-4.2.0-Linux-x86_64.sh
 
 Los he dejado instalados en *~/apps/anaconda2* y *~/apps/anaconda3*
 
-Cada una de estas instalaciones incorpora su propia versión de Python. Para usarlas tenemos que cambiar nuestro PATH para que el Python deseado sea el primero que se selecciona.
+Cada una de estas instalaciones incorpora su propia versión de Python.
+Para usarlas tenemos que cambiar nuestro PATH para que el Python deseado
+sea el primero que se selecciona.
 
 Por ejemplo para activar anaconda3 en bash:
 
@@ -1098,27 +1199,34 @@ set -x PATH ~/apps/anaconda3/bin $PATH
 
 #### iPython y GraphLab
 
-La instalación de iPython y GraphLab (que es una librería comercial) la hice para realizar un curso.
+La instalación de iPython y GraphLab (que es una librería comercial) la
+hice para realizar un curso.
 
 Creamos un entorno conda con Python 2.7.x
 
     export PATH="~/apps/anaconda2/bin:$PATH"
     conda create -n gl-env python=2.7 anaconda
 
-Activamos el nuevo entorno (todo esto lo hice en bash, en fish hay un problemilla con el entorno conda [mas info](https://penandpants.com/2014/02/28/using-conda-environments-and-the-fish-shell/))
+Activamos el nuevo entorno (todo esto lo hice en bash, en fish hay un
+problemilla con el entorno conda [mas
+info](https://penandpants.com/2014/02/28/using-conda-environments-and-the-fish-shell/))
 
     bash
     source activate gl-env
 
-En el futuro esto es todo lo que tendremos que hacer activar el entorno conda donde estamos instalando el iPython.
+En el futuro esto es todo lo que tendremos que hacer activar el entorno
+conda donde estamos instalando el iPython.
 
 Nos aseguramos de tener *pip* al dia:
 
     conda update pip
 
-Instalamos la biblioteca [GraphLab Create](https://turi.com/products/create/). Esta biblioteca se supone que es fácil de usar pero está sujeta a licencia. [2]
+Instalamos la biblioteca [GraphLab
+Create](https://turi.com/products/create/). Esta biblioteca se supone
+que es fácil de usar pero está sujeta a licencia. [2]
 
-Una vez registrado en la página web te pasan un número de registro que tienes que usar para instalar la biblioteca.
+Una vez registrado en la página web te pasan un número de registro que
+tienes que usar para instalar la biblioteca.
 
     pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
 
@@ -1126,7 +1234,8 @@ Y para terminar instalamos iPython [3]:
 
     conda install ipython-notebook
 
-Desde ahora basta con activar el entorno que hemos creado para tener acceso al iPython.
+Desde ahora basta con activar el entorno que hemos creado para tener
+acceso al iPython.
 
     source activate gl-env
 
@@ -1157,15 +1266,19 @@ Desde ahora basta con activar el entorno que hemos creado para tener acceso al i
 
 ### Usar Emacs para editar Python
 
-Instalamos *elpy* desde el gestor de paquetes de Emacs, concretamente desde el repo *marmalade*
+Instalamos *elpy* desde el gestor de paquetes de Emacs, concretamente
+desde el repo *marmalade*
 
-Además de *elpy* conviene instalar las siguientes bibliotecas de *Python*:
+Además de *elpy* conviene instalar las siguientes bibliotecas de
+*Python*:
 
     pip install --user elpy jedi flake8 importmagic autopep8 yapf epc
 
-O bien sin el parámetro `--user` si queremos instalarlo a nivel de sistema.
+O bien sin el parámetro `--user` si queremos instalarlo a nivel de
+sistema.
 
-Hay que habilitar *elpy* en el fichero **~/.emacs** para ello añadimos la linea
+Hay que habilitar *elpy* en el fichero **~/.emacs** para ello añadimos
+la linea
 
 ``` {lisp}
 (elpy enable)
@@ -1181,11 +1294,13 @@ Estudiar esto con calma <https://elpy.readthedocs.io/en/latest>
 
 ### Web2py
 
-Desde [la página web oficial de web2py](http://www.web2py.com) descargamos el *source code* para usuarios normales.
+Desde [la página web oficial de web2py](http://www.web2py.com)
+descargamos el *source code* para usuarios normales.
 
 Yo he descomprimido el framework en `~/apps/web2py`
 
-Para que el framework soporte ssl convine generar los siguientes certificados:
+Para que el framework soporte ssl convine generar los siguientes
+certificados:
 
     openssl genrsa -out server.key 2048
     openssl req -new -key server.key -out server.csr
@@ -1207,11 +1322,14 @@ Ahora ejecutamos:
 
     openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
-Ahora deberíamos dejar los ficheros `server.key`, `server.csr` y `server.crt` en el directorio raiz de *web2py* y ya podremos arrancar el framework con los siguientes parámetros:
+Ahora deberíamos dejar los ficheros `server.key`, `server.csr` y
+`server.crt` en el directorio raiz de *web2py* y ya podremos arrancar el
+framework con los siguientes parámetros:
 
     python web2py.py -a 'admin_password' -c server.crt -k server.key -i 0.0.0.0 -p 8000
 
-Y ya podemos acceder nuestro server en la dirección <https://localhost:8000>
+Y ya podemos acceder nuestro server en la dirección
+<https://localhost:8000>
 
 Tampoco está de más instalar las librerías de graphviz:
 
@@ -1219,9 +1337,12 @@ Tampoco está de más instalar las librerías de graphviz:
 
 ### Selenium
 
-Vamos a instalar *Selenium* para hacer TDD [4] de aplicaciones web con Python. Lo haremos siguiendo [estas instrucciones](http://selenium-python.readthedocs.io/index.html).
+Vamos a instalar *Selenium* para hacer TDD [4] de aplicaciones web con
+Python. Lo haremos siguiendo [estas
+instrucciones](http://selenium-python.readthedocs.io/index.html).
 
-En principio lo voy a usar con el Python del sistema `Python 2.7.9` en este momento, y no lo voy a instalar en un *virtualenv*:
+En principio lo voy a usar con el Python del sistema `Python 2.7.9` en
+este momento, y no lo voy a instalar en un *virtualenv*:
 
 ``` {bash}
 sudo pip install -U selenium
@@ -1230,7 +1351,11 @@ sudo python3 -m pip install -U selenium
 
 Con esto nos queda instalado `Selenium 3.4.3`
 
-Además de Selenium necesitamos los drivers de los navegadores que queremos controlar, de momento solo usaré *Firefox*, así que nos bajamos la última versión de Geckodriver (0.15.0). Simplemente nos bajamos el archivo, descomprimimos y dejamos el fichero en */usr/local/bin* con los permisos necesarios.
+Además de Selenium necesitamos los drivers de los navegadores que
+queremos controlar, de momento solo usaré *Firefox*, así que nos bajamos
+la última versión de Geckodriver (0.15.0). Simplemente nos bajamos el
+archivo, descomprimimos y dejamos el fichero en */usr/local/bin* con los
+permisos necesarios.
 
 ``` {bash}
 sudo chown root:staff ~/tmp/geckodriver
@@ -1249,7 +1374,9 @@ browser.get('http://seleniumhq.org/')
 
 ### Networkx
 
-Instalamos *Networkx* para todo el sistema. Networkx me interesa para poder hacer esquemas de red automáticos desde *Python* puede que no lo necesites para nada.
+Instalamos *Networkx* para todo el sistema. Networkx me interesa para
+poder hacer esquemas de red automáticos desde *Python* puede que no lo
+necesites para nada.
 
 ``` {bash}
 sudo pip install -U networkx
@@ -1263,7 +1390,8 @@ sudo python3 -m pip install -U networkx
 Go language
 -----------
 
-Nos bajamos los binarios desde la [página oficial](https://golang.org/dl/)
+Nos bajamos los binarios desde la [página
+oficial](https://golang.org/dl/)
 
 Descomprimimos en */opt*, ejecutando (como root):
 
@@ -1290,35 +1418,51 @@ Desarrollo hardware
 Arduino IDE
 -----------
 
-Bajamos los paquetes de la página [web](https://www.arduino.cc), descomprimimimos en *~/apps/arduino*.
+Bajamos los paquetes de la página [web](https://www.arduino.cc),
+descomprimimimos en *~/apps/arduino*.
 
 Creamos un link al directorio del software que hemos descargado:
 
     cd ~/apps/arduino
     ln -s arduino-x.y.z current
 
-La primera ves que instalamos será necesario crear el desktop file con **Menulibre** con las actulizaciones no será necesario, siempre y cuando apunte a *~/apps/arduino/current*
+La primera ves que instalamos será necesario crear el desktop file con
+**Menulibre** con las actulizaciones no será necesario, siempre y cuando
+apunte a *~/apps/arduino/current*
 
 ### Añadir biblioteca de soporte para Makeblock
 
-Clonamos el [repo oficial en github](https://github.com/Makeblock-official/Makeblock-Libraries).
+Clonamos el [repo oficial en
+github](https://github.com/Makeblock-official/Makeblock-Libraries).
 
-Una vez que descarguemos las librerias es necesario copiar el directorio `Makeblock-Libraries/makeblock` en nuestro directorio de bibliotecas de Arduino. En mi caso `~/Arduino/libraries/`.
+Una vez que descarguemos las librerias es necesario copiar el directorio
+`Makeblock-Libraries/makeblock` en nuestro directorio de bibliotecas de
+Arduino. En mi caso `~/Arduino/libraries/`.
 
-Una vez instaladas las bibliotecas es necesario reiniciar el IDE Arduino si estaba arrancado. Podemos ver si se ha instalado correctamente simplemente echando un ojo al menú de ejemplos en el IDE, tendríamos que ver los ejemplos de *Makeblock*.
+Una vez instaladas las bibliotecas es necesario reiniciar el IDE Arduino
+si estaba arrancado. Podemos ver si se ha instalado correctamente
+simplemente echando un ojo al menú de ejemplos en el IDE, tendríamos que
+ver los ejemplos de *Makeblock*.
 
-Un detalle importante para programar el Auriga-Me es necesario seleccionar el micro Arduino Mega 2560 en el IDE Arduino.
+Un detalle importante para programar el Auriga-Me es necesario
+seleccionar el micro Arduino Mega 2560 en el IDE Arduino.
 
 Pinguino IDE
 ------------
 
-Tenemos el paquete de instalación disponible en su página [web](http://pinguino.cc/download.php)
+Tenemos el paquete de instalación disponible en su página
+[web](http://pinguino.cc/download.php)
 
-Ejecutamos el programa de instalación. El programa descargará los paquetes Debian necesarios para dejar el IDE y los compiladores instalados.
+Ejecutamos el programa de instalación. El programa descargará los
+paquetes Debian necesarios para dejar el IDE y los compiladores
+instalados.
 
-Al acabar la instalación he tenido que crear el directorio *~/Pinguino/v11*, parece que hay algún problema con el programa de instalación y no lo crea automáticamente.
+Al acabar la instalación he tenido que crear el directorio
+*~/Pinguino/v11*, parece que hay algún problema con el programa de
+instalación y no lo crea automáticamente.
 
-El programa queda correctamente instalado en */opt* y arranca correctamente, habrá que probarlo con los micros.
+El programa queda correctamente instalado en */opt* y arranca
+correctamente, habrá que probarlo con los micros.
 
 KiCAD
 -----
@@ -1329,15 +1473,27 @@ Instalamos desde *backports*:
 sudo aptitude install -t jessie-backports kicad
 ```
 
-Vamos a instalar a mayores algunas librerias de KiCAD, para poder crear Shields de Arduino.
+Vamos a instalar a mayores algunas librerias de KiCAD, para poder crear
+Shields de Arduino.
 
--   [Freetronics](https://github.com/freetronics/freetronics_kicad_library) una libreria que no solo incluye Shield para Arduino sino una completa colección de componentes que nos permitirá hacer proyectos completos. [Freetronics](http://www.freetronics.com) es una especie de BricoGeek australiano, publica tutoriales, vende componentes, y al parecer mantiene una biblioteca para KiCAD. La biblioteca de Freetronics se mantiene en un repo de github. Lo suyo es incorporarla a cada proyecto, por que si la actualizas se pueden romper los proyectos que estes haciendo.
--   [eklablog](http://meta-blog.eklablog.com/kicad-librairie-arduino-pretty-p930786) Esta biblioteca de componentes está incluida en el github de KiCAD, así que teoricamente no habría que instalarla en nuestro disco duro.
+-   [Freetronics](https://github.com/freetronics/freetronics_kicad_library)
+    una libreria que no solo incluye Shield para Arduino sino una
+    completa colección de componentes que nos permitirá hacer proyectos
+    completos. [Freetronics](http://www.freetronics.com) es una especie
+    de BricoGeek australiano, publica tutoriales, vende componentes, y
+    al parecer mantiene una biblioteca para KiCAD. La biblioteca de
+    Freetronics se mantiene en un repo de github. Lo suyo es
+    incorporarla a cada proyecto, por que si la actualizas se pueden
+    romper los proyectos que estes haciendo.
+-   [eklablog](http://meta-blog.eklablog.com/kicad-librairie-arduino-pretty-p930786)
+    Esta biblioteca de componentes está incluida en el github de KiCAD,
+    así que teoricamente no habría que instalarla en nuestro disco duro.
 
 Analizador lógico
 -----------------
 
-Mi analizador es un OpenBench de Seedstudio, [aquí hay mas info](http://dangerousprototypes.com/docs/Open_Bench_Logic_Sniffer)
+Mi analizador es un OpenBench de Seedstudio, [aquí hay mas
+info](http://dangerousprototypes.com/docs/Open_Bench_Logic_Sniffer)
 
 ### Sigrok
 
@@ -1349,15 +1505,21 @@ sudo aptitude install sigrok
 
 Al instalar **Sigrok** instalamos también **Pulseview**.
 
-Si al conectar el analizador, echamos un ojo al fichero *syslog* vemos que al conectarlo se mapea en un puerto tty.
+Si al conectar el analizador, echamos un ojo al fichero *syslog* vemos
+que al conectarlo se mapea en un puerto tty.
 
-Si arrancamos **Pulseview** (nuestro usuario tiene que estar incluido en el grupo *dialout*), en la opción *File::Connect to device*, escogemos la opción *Openbench* y le pasamos el puerto. Al pulsar la opción *Scan for devices* reconoce el analizador correctamente como un *Sump Logic Analyzer*.
+Si arrancamos **Pulseview** (nuestro usuario tiene que estar incluido en
+el grupo *dialout*), en la opción *File::Connect to device*, escogemos
+la opción *Openbench* y le pasamos el puerto. Al pulsar la opción *Scan
+for devices* reconoce el analizador correctamente como un *Sump Logic
+Analyzer*.
 
 ### Sump logic analyzer
 
 Este es el software recomendado para usar con el analizador.
 
-Descargamos el paquete de la [página del proyecto](https://www.sump.org) y descomprimimos en *~/apps*
+Descargamos el paquete de la [página del proyecto](https://www.sump.org)
+y descomprimimos en *~/apps*
 
 Instalamos las dependencias:
 
@@ -1365,7 +1527,8 @@ Instalamos las dependencias:
 sudo aptitude install librxtx-java
 ```
 
-Editamos el fichero *~/apps/Logic Analyzer/client/run.sh* y lo dejamos así:
+Editamos el fichero *~/apps/Logic Analyzer/client/run.sh* y lo dejamos
+así:
 
     #!/bin/bash
 
@@ -1408,17 +1571,28 @@ Virtualbox
 
 Tenemos que:
 
--   Añadir el fichero *virtualbox.list* al directorio */etc/apt/sources.list.d*
+-   Añadir el fichero *virtualbox.list* al directorio
+    */etc/apt/sources.list.d*
 -   Bajarnos y añadir a nuestro llavero las claves públicas de Oracle
 -   Actualizar la lista de paquetes
 -   Instalar virtualbox
--   Añadir nuestro usuario al grupo vboxuser (no tengo claro que esto sea necesario)
+-   Añadir nuestro usuario al grupo vboxuser (no tengo claro que esto
+    sea necesario)
 
-    echo "deb http://download.virtualbox.org/virtualbox/debian jessie contrib" |sudo tee /etc/apt/sources.list.d/virtualbox.list wget -q https://www.virtualbox.org/download/oracle\_vbox\_2016.asc -O- | sudo apt-key add - sudo apt-get update sudo apt-get install virtualbox-5.1 sudo gpasswd -a salvari vboxusers
+    echo “deb http://download.virtualbox.org/virtualbox/debian jessie
+    contrib” \|sudo tee /etc/apt/sources.list.d/virtualbox.list wget -q
+    https://www.virtualbox.org/download/oracle\_vbox\_2016.asc -O- \|
+    sudo apt-key add - sudo apt-get update sudo apt-get install
+    virtualbox-5.1 sudo gpasswd -a salvari vboxusers
 
-Una vez instalado el virtualbox tenemos que instalarnos el pack de extensiones, es muy importante descargar el pack correspondiente a nuestra versión desde [la página web de descargas](https://www.virtualbox.org/wiki/Downloads?)
+Una vez instalado el virtualbox tenemos que instalarnos el pack de
+extensiones, es muy importante descargar el pack correspondiente a
+nuestra versión desde [la página web de
+descargas](https://www.virtualbox.org/wiki/Downloads?)
 
-Sin más que hacer doble click en el fichero descargado lo instalaremos en nuestra instancia de *Virtualbox* (necesitamos la contraseña de administración).
+Sin más que hacer doble click en el fichero descargado lo instalaremos
+en nuestra instancia de *Virtualbox* (necesitamos la contraseña de
+administración).
 
 Virtualizando un Windows 7
 --------------------------
@@ -1427,7 +1601,8 @@ Virtualizando un Windows 7
 -   Create virtual hard disk
 -   10Gb dinamically allocated
 -   Settings -&gt; System-&gt;Boot Order: Quitamos el floppy
--   Storage -&gt; Add IDE Controller-&gt;Add Optical Disk -&gt; Choose Disk -&gt; ISO Image
+-   Storage -&gt; Add IDE Controller-&gt;Add Optical Disk -&gt; Choose
+    Disk -&gt; ISO Image
 -   Instalamos Windows en Inglés y con teclado en español
 
 Una vez instalado el SO Windows instalamos las Guest Additions.
@@ -1435,7 +1610,8 @@ Una vez instalado el SO Windows instalamos las Guest Additions.
 Shells alternativos: zsh y fish
 ===============================
 
-Los dos son muy interesantes. He usado zsh casi un año, ahora voy a probar **fish**.
+Los dos son muy interesantes. He usado zsh casi un año, ahora voy a
+probar **fish**.
 
 fish
 ----
@@ -1514,7 +1690,8 @@ Y editamos el fichero *~/.zshrc* para que contenga:
 
 Antigen ya se encarga de descargar todo lo que queramos utilizar en zsh.
 
-Nos queda arreglar las fuentes para que funcione correctamente la linea de estado en los repos de git. Necesitamos una fuente *Awesome*
+Nos queda arreglar las fuentes para que funcione correctamente la linea
+de estado en los repos de git. Necesitamos una fuente *Awesome*
 
 Instalación de fuentes adicionales
 ----------------------------------
@@ -1580,9 +1757,13 @@ Instalamos el paquete *apache2*
 
     sudo aptitude install apache2
 
-Si abrimos el navegador y visitamos <http://localhost/> veremos la página de Apache.
+Si abrimos el navegador y visitamos <http://localhost/> veremos la
+página de Apache.
 
-El directorio raiz por defecto de Apache en Debian es */var/www*, y el fichero de configuración principal es */etc/apache2/apache2.conf*. Hay ficheros de configuración adicionales en el directorio */etc/apache2* y sus subdirectorios. Por ejemplo:
+El directorio raiz por defecto de Apache en Debian es */var/www*, y el
+fichero de configuración principal es */etc/apache2/apache2.conf*. Hay
+ficheros de configuración adicionales en el directorio */etc/apache2* y
+sus subdirectorios. Por ejemplo:
 
 -   /etc/apache2/mods-enabled
 -   /etc/apache2/sites-enabled
@@ -1600,7 +1781,8 @@ Si creamos un fichero */var/www/html/info.php*, que contenga las lineas:
     phpinfo();
     ?>
 
-Podemos ver en el siguiente enlace <http://localhost/info.php> si el php funciona correctamente.
+Podemos ver en el siguiente enlace <http://localhost/info.php> si el php
+funciona correctamente.
 
 Módulos de php relacionados con mysql:
 
@@ -1636,9 +1818,15 @@ Reiniciamos el servicio:
 
 ### Cliente SQL SQuirreL SQL
 
-Descargamos el paquete desde la página [web](http://squirrel-sql.sourceforge.net/) y lo descomprimimos en *~/apps*, también tendremos que descargar el conector de mysql para java, por ejemplo desde [aquí](http://dev.mysql.com/downloads/connector/j/3.0.html)
+Descargamos el paquete desde la página
+[web](http://squirrel-sql.sourceforge.net/) y lo descomprimimos en
+*~/apps*, también tendremos que descargar el conector de mysql para
+java, por ejemplo desde
+[aquí](http://dev.mysql.com/downloads/connector/j/3.0.html)
 
-Una vez instalado, creamos el desktop-file con *MenuLibre* y configuramos el driver *MySQL* añadiendo el path a donde hayamos dejado el conector java.
+Una vez instalado, creamos el desktop-file con *MenuLibre* y
+configuramos el driver *MySQL* añadiendo el path a donde hayamos dejado
+el conector java.
 
 ### MariaDB
 
@@ -1650,32 +1838,49 @@ Recetas varias
 Orange Pi Zero
 --------------
 
-Para usar la Orange Pi Zero tendremos que crear imágenes arrancables en tarjetas micro SD.
+Para usar la Orange Pi Zero tendremos que crear imágenes arrancables en
+tarjetas micro SD.
 
 ### Crear una SD arrancable
 
-Dependiendo de donde conectemos la tarjeta tendremos que usar diferentes rutas. En el procedimiento descrito a continuación `${card}` será la ruta al dispositivo de la tarjeta y ${p} la partición (si la hay).
+Dependiendo de donde conectemos la tarjeta tendremos que usar diferentes
+rutas. En el procedimiento descrito a continuación `${card}` será la
+ruta al dispositivo de la tarjeta y ${p} la partición (si la hay).
 
-Si la tarjeta se conecta via adaptador USB, linux la va a asociar a un dispositivo /dev/sdx, por ejemplo en mi portátil el disco duro es `/dev/sda` las distintas particiones serán `/dev/sda1`, `/devb/sda2`, etc.
+Si la tarjeta se conecta via adaptador USB, linux la va a asociar a un
+dispositivo /dev/sdx, por ejemplo en mi portátil el disco duro es
+`/dev/sda` las distintas particiones serán `/dev/sda1`, `/devb/sda2`,
+etc.
 
-Si conectamos una memoria con un adaptador USB linux la podría mapear en `/dev/sdb` por ejemplo.
+Si conectamos una memoria con un adaptador USB linux la podría mapear en
+`/dev/sdb` por ejemplo.
 
-Si la memoria se conecta mediante una ranura SD, linux la asociará a un dispositivo `/dev/mmcblk0` o `/dev/mmcblk1`, etc. etc. Dependerá de la ranura usada. Las particiones en este tipo de dispositivos tienen rutas como por ejemplo `/dev/mmcblk0p1`.
+Si la memoria se conecta mediante una ranura SD, linux la asociará a un
+dispositivo `/dev/mmcblk0` o `/dev/mmcblk1`, etc. etc. Dependerá de la
+ranura usada. Las particiones en este tipo de dispositivos tienen rutas
+como por ejemplo `/dev/mmcblk0p1`.
 
-Los datos se pueden almacenar directamente en la memoria SD o en una partición creada en la memoria.
+Los datos se pueden almacenar directamente en la memoria SD o en una
+partición creada en la memoria.
 
 Resumiendo:
 
 -   `${card}` será `/dev/sdb` o `/dev/mmcblk0`
 -   *c**a**r**d*{p} será `/dev/sdb1` o `/dev/mmcblk0p1`
 
-Antes de seguir adelante hay que estar completamente seguro del dispositivo asociado a nuestra memoria SD para no armar ningún estropicio.
+Antes de seguir adelante hay que estar completamente seguro del
+dispositivo asociado a nuestra memoria SD para no armar ningún
+estropicio.
 
 Hay varias comprobaciones que se pueden hacer:
 
-`dmesg |tail` nos permitirá echar un ojo a los últimos mensajes en el log del sistema. Si acabamos de insertar la memoria veremos el dispositivo usado.
+`dmesg |tail` nos permitirá echar un ojo a los últimos mensajes en el
+log del sistema. Si acabamos de insertar la memoria veremos el
+dispositivo usado.
 
-`sudo fdisk -l` nos permite ver las particiones montadas en nuestro linux, por ejemplo con mi SD en la ranura SD de mi portatil la salida es (entre otras cosas, he obviado las particiones de los discos duros):
+`sudo fdisk -l` nos permite ver las particiones montadas en nuestro
+linux, por ejemplo con mi SD en la ranura SD de mi portatil la salida es
+(entre otras cosas, he obviado las particiones de los discos duros):
 
 ``` {bash}
 Disk /dev/mmcblk0: 7.4 GiB, 7948206080 bytes, 15523840 sectors
@@ -1686,28 +1891,40 @@ Disklabel type: dos
 Disk identifier: 0x00000000
 ```
 
-`cat /proc/partitions` también nos dará una lista de particiones, en mi portátil las que interesan son:
+`cat /proc/partitions` también nos dará una lista de particiones, en mi
+portátil las que interesan son:
 
      179        0    7761920 mmcblk0
      179        1    7757824 mmcblk0p1
 
-Descargamos la imagen de Jessie adaptada a la *Orange Pi Zero* desde la página <https://www.armbian.com/download/>
+Descargamos la imagen de Jessie adaptada a la *Orange Pi Zero* desde la
+página <https://www.armbian.com/download/>
 
 Descomprimimos la imagen y la grabamos en la tarjeta SD con el comando:
 
     sudo dd if=./Armbian_5.24_Orangepizero_Debian_jessie_3.4.113.img of=/dev/mmcblk0
 
-Insertamos la tarjeta en la *Orange Pi* y le damos alimentación. El primer arranque llevará alrededor de tres minutos, y tras ese tiempo aun hará falta un minuto más para poder hacer login. Este retardo es debido a que el sistema intentará actualizar la lista de paquetes y creará un area de swap de emergencia en la SD, y además cambiará el tamaño de la partición que hemos creado para ocupar todo el espacio libre en la SD.
+Insertamos la tarjeta en la *Orange Pi* y le damos alimentación. El
+primer arranque llevará alrededor de tres minutos, y tras ese tiempo aun
+hará falta un minuto más para poder hacer login. Este retardo es debido
+a que el sistema intentará actualizar la lista de paquetes y creará un
+area de swap de emergencia en la SD, y además cambiará el tamaño de la
+partición que hemos creado para ocupar todo el espacio libre en la SD.
 
-De momento solo la he arrancado y efectivamente las particiones han cambiado tras el arranque así que tiene buena pinta.
+De momento solo la he arrancado y efectivamente las particiones han
+cambiado tras el arranque así que tiene buena pinta.
 
-Volvemos a insertar la SD en la *Orange Pi* y la conectamos con un cable ethernet al router de casa. El Armbian viene configurado por defecto para obtener su IP desde un servidor DHCP.
+Volvemos a insertar la SD en la *Orange Pi* y la conectamos con un cable
+ethernet al router de casa. El Armbian viene configurado por defecto
+para obtener su IP desde un servidor DHCP.
 
-Como mi cutre-router no me da información de las IP asignadas usamos *nmap*:
+Como mi cutre-router no me da información de las IP asignadas usamos
+*nmap*:
 
     nmap -sP 192.168.0.0 /24
 
-Con eso averiguamos la IP asignada a la *Orange Pi Zero* y ya podemos hacer login con:
+Con eso averiguamos la IP asignada a la *Orange Pi Zero* y ya podemos
+hacer login con:
 
     ssh root@192.168.0.109
 
@@ -1757,13 +1974,16 @@ Todo tiene buena pinta, vamos a ver si detecta WIFIs:
                         ESSID:""
                         ESSID:"mikasa"
 
-Para configurar el wifi echamos un ojo al fichero `/etc/network/interfaces` pero en ese mismo fichero encontramos el aviso:
+Para configurar el wifi echamos un ojo al fichero
+`/etc/network/interfaces` pero en ese mismo fichero encontramos el
+aviso:
 
     # Armbian ships with network-manager installed by default. To save you time
     # and hassles consider using 'sudo nmtui' instead of configuring Wi-Fi settings
     # manually.
 
-Así que basta con ejecutar `sudo nwtui` y ya podemos dar de alta nuestra wifi (yo la prefiero con IP estática).
+Así que basta con ejecutar `sudo nwtui` y ya podemos dar de alta nuestra
+wifi (yo la prefiero con IP estática).
 
 ![Configuración WIFI](src/img/OrangePiZero_tmtui.png)
 
@@ -1783,68 +2003,82 @@ Ejecutamos `ifconfig` y ya vemos nuestro nuevo interface configurado:
 ### Referencias
 
 -   [Página oficial](http://www.orangepi.org/)
--   [Recursos oficiales](http://www.orangepi.org/downloadresources/) aquí hay imágenes y los esquemáticos
--   [Tienda en Aliexpress](https://www.aliexpress.com/store/1553371?spm=2114.8147860.0.0.F1q43C)
+-   [Recursos oficiales](http://www.orangepi.org/downloadresources/)
+    aquí hay imágenes y los esquemáticos
+-   [Tienda en
+    Aliexpress](https://www.aliexpress.com/store/1553371?spm=2114.8147860.0.0.F1q43C)
 -   <http://linux-sunxi.org/Bootable_SD_card>
 -   <https://www.armbian.com/orange-pi-zero/>
 -   <https://docs.armbian.com/User-Guide_Getting-Started/>
 -   <https://docs.armbian.com/Hardware_Allwinner/>
--   [GPIO](https://linux-sunxi.org/GPIO) Una explicación de como acceder al gpio desde terminal
--   [Info variada](https://linux-sunxi.org/Orange_Pi_Zero) Aquí tenemos el esquema de pines
+-   [GPIO](https://linux-sunxi.org/GPIO) Una explicación de como acceder
+    al gpio desde terminal
+-   [Info variada](https://linux-sunxi.org/Orange_Pi_Zero) Aquí tenemos
+    el esquema de pines
 
 Raspberry Pi Media Center
 -------------------------
 
-Bajamos la imagen con nuestro cliente torrent favorito desde [aquí](https://github.com/aikoncwd/aikoncwd-rpi-mediacenter), no os molesteis en clonar el directorio, hay que bajarse la imagen.
+Bajamos la imagen con nuestro cliente torrent favorito desde
+[aquí](https://github.com/aikoncwd/aikoncwd-rpi-mediacenter), no os
+molesteis en clonar el directorio, hay que bajarse la imagen.
 
     sudo dd if=./Mediacenter-AikonCWD-v6.img  of=/dev/mmcblk0 bs=4M
 
-Arrancamos con la toma ethernet conectada al router y nos conectamos tras averigurar la IP con `nmap` (ver *Orange Pi Zero*)
+Arrancamos con la toma ethernet conectada al router y nos conectamos
+tras averigurar la IP con `nmap` (ver *Orange Pi Zero*)
 
 ![Primer login en Raspberry](src/img/RaspiFirstLogin.png)
 
 Una vez instalado los pasos recomendados:
 
 1.  Cambiar la password de root: `passwd`
-2.  Fijar una IP estática: Editamos el fichero `/etc/dhcpcd.conf`, ya de paso configuramos la IP estática para la WIFI
+2.  Fijar una IP estática: Editamos el fichero `/etc/dhcpcd.conf`, ya de
+    paso configuramos la IP estática para la WIFI
 
-        interface eth0
-        static ip_address=192.168.0.125/24
-        static routers=192.168.0.1
-        static domain_name_servers=8.8.8.8
+         interface eth0
+         static ip_address=192.168.0.125/24
+         static routers=192.168.0.1
+         static domain_name_servers=8.8.8.8
 
-        interface wlan0
-        static ip_address=192.168.0.126/24
-        static routers=192.168.0.1
-        static domain_name_servers=8.8.8.8
+         interface wlan0
+         static ip_address=192.168.0.126/24
+         static routers=192.168.0.1
+         static domain_name_servers=8.8.8.8
 
     Una vez cambiado el fichero hay que reiniciar con `shutdown -r now`
 
-3.  Configurar la WIFI, en esta parte damos por supuesto que tenemos la wifi con WPA activado.
+3.  Configurar la WIFI, en esta parte damos por supuesto que tenemos la
+    wifi con WPA activado.
 
-    Echamos un ojo a nuestro interfaz radio con `iwconfig`, si aparece el `wlan0` todo va bien.
+    Echamos un ojo a nuestro interfaz radio con `iwconfig`, si aparece
+    el `wlan0` todo va bien.
 
-        wlan0     IEEE 802.11bgn  ESSID:off/any
-                  Mode:Managed  Access Point: Not-Associated   Tx-Power=31 dBm
-                  Retry short limit:7   RTS thr:off   Fragment thr:off
-                  Encryption key:off
-                  Power Management:on
+         wlan0     IEEE 802.11bgn  ESSID:off/any
+                   Mode:Managed  Access Point: Not-Associated   Tx-Power=31 dBm
+                   Retry short limit:7   RTS thr:off   Fragment thr:off
+                   Encryption key:off
+                   Power Management:on
 
-    Tenemos que editar el fichero `/etc/network/interfaces` y asegurarnos de tener el `wlan0` como sigue:
+    Tenemos que editar el fichero `/etc/network/interfaces` y
+    asegurarnos de tener el `wlan0` como sigue:
 
-        allow-hotplug wlan0
-        iface wlan0 inet manual
-            wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+         allow-hotplug wlan0
+         iface wlan0 inet manual
+             wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 
-    Ahora vamos a editar el fichero de configuración de `wpa_supplicant`, es decir `/etc/wpa_supplicant/wpa_supplicant.conf` y añadir un bloque `network` que sea como el que va a continuación, de paso he cambiado el `country` a "ES", asi que queda así:
+    Ahora vamos a editar el fichero de configuración de
+    `wpa_supplicant`, es decir `/etc/wpa_supplicant/wpa_supplicant.conf`
+    y añadir un bloque `network` que sea como el que va a continuación,
+    de paso he cambiado el `country` a “ES”, asi que queda así:
 
-        country=ES
-        ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-        update_config=1
-        network={
-          ssid="YOURSSID"
-          psk="YOURPASSWORD"
-        }
+         country=ES
+         ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+         update_config=1
+         network={
+           ssid="YOURSSID"
+           psk="YOURPASSWORD"
+         }
 
     Un reinicio y listos: `shutdown -r now`
 
@@ -1859,7 +2093,8 @@ Capturas periódicas de la pantalla:
 avconv -video_size 1366x768 -framerate 1/10 -f x11grab -i :0.0+0,0 -pix_fmt rgb24 ~/tmp/frames/frame_%05d.png
 ```
 
-El framerate son imágenes por segundo, así que aquí estamos diciendo que capturamos una imagen cada 10 sg.
+El framerate son imágenes por segundo, así que aquí estamos diciendo que
+capturamos una imagen cada 10 sg.
 
 TODO
 ====
@@ -1885,9 +2120,12 @@ Links
 =====
 
 -   [Systemd](https://wiki.debian.org/systemd)
--   [Gnome shortcuts](https://wiki.gnome.org/Design/OS/KeyboardShortcuts)
--   [Gnome optimizaciones](https://www.linux.com/learn/easy-steps-make-gnome-3-more-efficient)
--   [Instalación Debian](https://diversidadyunpocodetodo.blogspot.com.es/2015/03/sensores-temperatura-hardware-discos-cpu-debian-ubuntu.html)
+-   [Gnome
+    shortcuts](https://wiki.gnome.org/Design/OS/KeyboardShortcuts)
+-   [Gnome
+    optimizaciones](https://www.linux.com/learn/easy-steps-make-gnome-3-more-efficient)
+-   [Instalación
+    Debian](https://diversidadyunpocodetodo.blogspot.com.es/2015/03/sensores-temperatura-hardware-discos-cpu-debian-ubuntu.html)
 -   [zsh](http://joshldavis.com/2014/07/26/oh-my-zsh-is-a-disease-antigen-is-the-vaccine/)
 -   [zsh](http://blog.namangoel.com/zsh-with-antigen)
 -   <https://www.roaringpenguin.com/products/remind>

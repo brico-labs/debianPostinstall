@@ -1,6 +1,3 @@
-|title: Debian Post-install subtitle: Un documento de BricoLabs author: - Sergio Alvariño <salvari@gmail.com> tags: [Pandoc, Documentación, makefile, git] date: julio-2016 lang: es-ES abstract: | Instalación de Debian|
-|Algunas notas referentes a la instalación de Debian Jessie                                                                                                                                                              |
-
 ====== Introducción ======
 
 Mi portátil es un ordenador Acer 5755G con las siguientes características:
@@ -453,8 +450,8 @@ sudo ./install-tl
 Una vez lanzada la instalación podemos desmarcar las opciones que instalan la documentación y las fuentes. Eso nos obligará a consultar la documentación //on line// pero ahorrará practicamente el 50% del espacio necesario. En mi caso sin //doc// ni //src// ocupa 2,3Gb
 
 <code>
-mkdir -p /opt
-sudo ln -s /usr/local/texlive/2016/bin/* /opt/texbin
+mkdir -p /opt/texbin
+sudo ln -s /usr/local/texlive/2017/bin/x86_64-linux/* /opt/texbin
 </code>
 Por último para acabar la instalación añadimos **/opt/texbin** al //path//.
 
@@ -467,18 +464,20 @@ sudo apt-get install equivs --no-install-recommends
 mkdir -p /tmp/tl-equivs && cd /tmp/tl-equivs
 equivs-control texlive-local
 </code>
-Para hacerlo más fácil podemos descargarnos un fichero ya preparado, ejecutando:
+Alternativamente para hacerlo más fácil podemos descargarnos un fichero ya preparado, ejecutando:
 
 <code>
-wget http://www.tug.org/texlive/files/debian-equivs-2015-ex.txt
-/bin/cp -f debian-equivs-2015-ex.txt texlive-local
+wget http://www.tug.org/texlive/files/debian-equivs-2017-ex.txt
+/bin/cp -f debian-equivs-2017-ex.txt texlive-local
 </code>
 Editamos la versión y
 
 <code>
 equivs-build texlive-local
-sudo dpkg -i texlive-local_2015-1_all.deb
+sudo dpkg -i texlive-local_2017-1_all.deb
 </code>
+Ha fallado por que tiene una dependencia //freeglut3//, la he instalado y se ha dejado instalar sin problema.
+
 Todo listo, ahora podemos instalar cualquier paquete que dependa de texlive
 
 ==== Fuentes ====
@@ -1366,7 +1365,7 @@ Tenemos que:
 <HTML><li></HTML>Actualizar la lista de paquetes<HTML></li></HTML>
 <HTML><li></HTML>Instalar virtualbox<HTML></li></HTML>
 <HTML><li></HTML><HTML><p></HTML>Añadir nuestro usuario al grupo vboxuser (no tengo claro que esto sea necesario)<HTML></p></HTML>
-<HTML><p></HTML>echo "deb http:%%//%%download.virtualbox.org/virtualbox/debian jessie contrib" |sudo tee /etc/apt/sources.list.d/virtualbox.list wget -q https:%%//%%www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add - sudo apt-get update sudo apt-get install virtualbox-5.1 sudo gpasswd -a salvari vboxusers<HTML></p></HTML><HTML></li></HTML><HTML></ul></HTML>
+<HTML><p></HTML>echo “deb http:%%//%%download.virtualbox.org/virtualbox/debian jessie contrib” |sudo tee /etc/apt/sources.list.d/virtualbox.list wget -q https:%%//%%www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add - sudo apt-get update sudo apt-get install virtualbox-5.1 sudo gpasswd -a salvari vboxusers<HTML></p></HTML><HTML></li></HTML><HTML></ul></HTML>
 
 Una vez instalado el virtualbox tenemos que instalarnos el pack de extensiones, es muy importante descargar el pack correspondiente a nuestra versión desde [[https://www.virtualbox.org/wiki/Downloads?|la página web de descargas]]
 
@@ -1759,41 +1758,41 @@ Una vez instalado los pasos recomendados:
 <HTML><li></HTML>Cambiar la password de root: ''%%passwd%%''<HTML></li></HTML>
 <HTML><li></HTML><HTML><p></HTML>Fijar una IP estática: Editamos el fichero ''%%/etc/dhcpcd.conf%%'', ya de paso configuramos la IP estática para la WIFI<HTML></p></HTML>
 <code>
-interface eth0
-static ip_address=192.168.0.125/24
-static routers=192.168.0.1
-static domain_name_servers=8.8.8.8
+ interface eth0
+ static ip_address=192.168.0.125/24
+ static routers=192.168.0.1
+ static domain_name_servers=8.8.8.8
 
-interface wlan0
-static ip_address=192.168.0.126/24
-static routers=192.168.0.1
-static domain_name_servers=8.8.8.8
+ interface wlan0
+ static ip_address=192.168.0.126/24
+ static routers=192.168.0.1
+ static domain_name_servers=8.8.8.8
 </code>
 <HTML><p></HTML>Una vez cambiado el fichero hay que reiniciar con ''%%shutdown -r now%%''<HTML></p></HTML><HTML></li></HTML>
 <HTML><li></HTML><HTML><p></HTML>Configurar la WIFI, en esta parte damos por supuesto que tenemos la wifi con WPA activado.<HTML></p></HTML>
 <HTML><p></HTML>Echamos un ojo a nuestro interfaz radio con ''%%iwconfig%%'', si aparece el ''%%wlan0%%'' todo va bien.<HTML></p></HTML>
 <code>
-wlan0     IEEE 802.11bgn  ESSID:off/any
-          Mode:Managed  Access Point: Not-Associated   Tx-Power=31 dBm
-          Retry short limit:7   RTS thr:off   Fragment thr:off
-          Encryption key:off
-          Power Management:on
+ wlan0     IEEE 802.11bgn  ESSID:off/any
+           Mode:Managed  Access Point: Not-Associated   Tx-Power=31 dBm
+           Retry short limit:7   RTS thr:off   Fragment thr:off
+           Encryption key:off
+           Power Management:on
 </code>
 <HTML><p></HTML>Tenemos que editar el fichero ''%%/etc/network/interfaces%%'' y asegurarnos de tener el ''%%wlan0%%'' como sigue:<HTML></p></HTML>
 <code>
-allow-hotplug wlan0
-iface wlan0 inet manual
-    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+ allow-hotplug wlan0
+ iface wlan0 inet manual
+     wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 </code>
-<HTML><p></HTML>Ahora vamos a editar el fichero de configuración de ''%%wpa_supplicant%%'', es decir ''%%/etc/wpa_supplicant/wpa_supplicant.conf%%'' y añadir un bloque ''%%network%%'' que sea como el que va a continuación, de paso he cambiado el ''%%country%%'' a "ES", asi que queda así:<HTML></p></HTML>
+<HTML><p></HTML>Ahora vamos a editar el fichero de configuración de ''%%wpa_supplicant%%'', es decir ''%%/etc/wpa_supplicant/wpa_supplicant.conf%%'' y añadir un bloque ''%%network%%'' que sea como el que va a continuación, de paso he cambiado el ''%%country%%'' a “ES”, asi que queda así:<HTML></p></HTML>
 <code>
-country=ES
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
-network={
-  ssid="YOURSSID"
-  psk="YOURPASSWORD"
-}
+ country=ES
+ ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+ update_config=1
+ network={
+   ssid="YOURSSID"
+   psk="YOURPASSWORD"
+ }
 </code>
 <HTML><p></HTML>Un reinicio y listos: ''%%shutdown -r now%%''<HTML></p></HTML><HTML></li></HTML><HTML></ol></HTML>
 

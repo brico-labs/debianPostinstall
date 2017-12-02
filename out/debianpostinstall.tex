@@ -1,3 +1,7 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
+%
 \documentclass[12pt,spanish,]{scrartcl}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
@@ -6,12 +10,9 @@
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
 \else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
+  \usepackage{unicode-math}
   \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
     \setmainfont[]{Ubuntu}
     \setmonofont[Mapping=tex-ansi]{Ubuntu Mono}
@@ -20,26 +21,27 @@
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 % use microtype if available
 \IfFileExists{microtype.sty}{%
-\usepackage{microtype}
+\usepackage[]{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\usepackage[a4paper]{geometry}
-\usepackage[unicode=true]{hyperref}
-\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{xcolor}
+\usepackage{hyperref}
 \hypersetup{
+            pdftitle={Debian Post-install},
+            pdfauthor={Sergio Alvariño salvari@gmail.com},
             colorlinks=true,
             linkcolor=Maroon,
             citecolor=Blue,
             urlcolor=Blue,
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \usepackage[shorthands=off,main=spanish]{babel}
-\else
-  \usepackage{polyglossia}
-  \setmainlanguage[]{spanish}
-\fi
-\usepackage{longtable,booktabs}
+\usepackage[a4paper]{geometry}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -49,12 +51,6 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -69,31 +65,41 @@
 \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 
-\date{}
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[shorthands=off,main=spanish]{babel}
+\else
+  % load polyglossia as late as possible as it *could* call bidi if RTL lang (e.g. Hebrew or Arabic)
+  \usepackage{polyglossia}
+  \setmainlanguage[]{spanish}
+\fi
+
+\title{Debian Post-install}
+\providecommand{\subtitle}[1]{}
+\subtitle{Un documento de BricoLabs}
+\author{Sergio Alvariño
+\href{mailto:salvari@gmail.com}{\nolinkurl{salvari@gmail.com}}}
+\date{julio-2016}
 
 \begin{document}
+\maketitle
+\begin{abstract}
+Instalación de Debian
+
+Algunas notas referentes a la instalación de Debian Jessie
+\end{abstract}
 
 {
-\hypersetup{linkcolor=black}
+\hypersetup{linkcolor=}
 \setcounter{tocdepth}{3}
 \tableofcontents
 }
-\begin{longtable}[]{@{}l@{}}
-\toprule
-\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
-title: Debian Post-install subtitle: Un documento de BricoLabs author: -
-Sergio Alvariño
-\href{mailto:salvari@gmail.com}{\nolinkurl{salvari@gmail.com}} tags:
-{[}Pandoc, Documentación, makefile, git{]} date: julio-2016 lang: es-ES
-abstract: \textbar{} Instalación de Debian\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.03\columnwidth}\raggedright\strut
-Algunas notas referentes a la instalación de Debian Jessie\strut
-\end{minipage}\tabularnewline
-\bottomrule
-\end{longtable}
-
-\section{Introducción}\label{introducciuxf3n}
+\hypertarget{introducciuxf3n}{%
+\section{Introducción}\label{introducciuxf3n}}
 
 Mi portátil es un ordenador Acer 5755G con las siguientes
 características:
@@ -135,8 +141,9 @@ del Bumblebee para probar que funcionaba normalmente.
 sudo apt-get install firmware-linux-nonfree Bumblebee-nvidia primus
 \end{verbatim}
 
+\hypertarget{cambiar-las-opciones-de-idioma}{%
 \section{Cambiar las opciones de
-idioma}\label{cambiar-las-opciones-de-idioma}
+idioma}\label{cambiar-las-opciones-de-idioma}}
 
 Ejecutamos:
 
@@ -150,7 +157,8 @@ configuración de Gnome.
 Nos pedirá rearrancar Gnome y renombrará todos los directorios de
 sistema.
 
-\section{Gestión de paquetes}\label{gestiuxf3n-de-paquetes}
+\hypertarget{gestiuxf3n-de-paquetes}{%
+\section{Gestión de paquetes}\label{gestiuxf3n-de-paquetes}}
 
 Instalamos \emph{aptitude}, \emph{synaptic} y \emph{gdebi}
 
@@ -163,16 +171,19 @@ sudo apt-get install gdebi
 Cambiamos las opciones de \emph{aptitude} para que \textbf{no instale}
 los paquetes recomendados.
 
+\hypertarget{quitamos-el-cdrom-de-los-sources.list}{%
 \subsection{Quitamos el cdrom de los
-sources.list}\label{quitamos-el-cdrom-de-los-sources.list}
+sources.list}\label{quitamos-el-cdrom-de-los-sources.list}}
 
 Editamos el fichero \emph{/etc/apt/sources.list} y comentamos las lineas
 del cdrom.
 
+\hypertarget{habilitamos-los-backports-y-multimedia}{%
 \subsection{Habilitamos los backports y
-multimedia}\label{habilitamos-los-backports-y-multimedia}
+multimedia}\label{habilitamos-los-backports-y-multimedia}}
 
-\subsubsection{Backports:}\label{backports}
+\hypertarget{backports}{%
+\subsubsection{Backports:}\label{backports}}
 
 \begin{verbatim}
 sudo cat > /etc/apt/sources.list.d/backports.list << EOF
@@ -181,7 +192,8 @@ deb http://ftp.debian.org/debian/ jessie-backports main contrib non-free
 EOF
 \end{verbatim}
 
-\subsubsection{Multimedia:}\label{multimedia}
+\hypertarget{multimedia}{%
+\subsubsection{Multimedia:}\label{multimedia}}
 
 \begin{verbatim}
 sudo cat >> /etc/apt/sources.list.d/multimedia.list << EOF
@@ -198,13 +210,16 @@ Y actualizamos
 sudo aptitude update
 \end{verbatim}
 
+\hypertarget{instalaciuxf3n-de-varios-paquetes-sueltos}{%
 \section{Instalación de varios paquetes
-sueltos}\label{instalaciuxf3n-de-varios-paquetes-sueltos}
+sueltos}\label{instalaciuxf3n-de-varios-paquetes-sueltos}}
 
+\hypertarget{programas-de-utilidad-y-uso-frecuente}{%
 \subsection{Programas de utilidad y uso
-frecuente}\label{programas-de-utilidad-y-uso-frecuente}
+frecuente}\label{programas-de-utilidad-y-uso-frecuente}}
 
-\subsubsection{Menulibre}\label{menulibre}
+\hypertarget{menulibre}{%
+\subsubsection{Menulibre}\label{menulibre}}
 
 Un editor de menús para Gnome, nos permite generar los archivos desktop
 para cualquier aplicación. Mucho más completo que \emph{alacarte} la
@@ -214,7 +229,8 @@ otra alternativa.
 sudo apt-get install menulibre
 \end{verbatim}
 
-\subsubsection{Terminator}\label{terminator}
+\hypertarget{terminator}{%
+\subsubsection{Terminator}\label{terminator}}
 
 Terminator es un emulador de terminal muy completo y muy flexible. Los
 instalamos desde \emph{aptitude}
@@ -223,7 +239,8 @@ instalamos desde \emph{aptitude}
 sudo aptitude install terminator python-keybinder
 \end{verbatim}
 
-\subsubsection{Keepass2}\label{keepass2}
+\hypertarget{keepass2}{%
+\subsubsection{Keepass2}\label{keepass2}}
 
 Instalado \emph{keepass2} desde Debian
 
@@ -231,7 +248,8 @@ Instalado \emph{keepass2} desde Debian
 sudo aptitude install keepass2
 \end{verbatim}
 
-\subsubsection{gksu}\label{gksu}
+\hypertarget{gksu}{%
+\subsubsection{gksu}\label{gksu}}
 
 Un \emph{sudo} en modo gráfico:
 
@@ -243,7 +261,8 @@ sudo aptitude install gksu
 modo \texttt{sudo} en lugar de \texttt{su}. Nos evitaremos problemas con
 la instalación de muchas aplicaciones.
 
-\subsubsection{Diskmanager}\label{diskmanager}
+\hypertarget{diskmanager}{%
+\subsubsection{Diskmanager}\label{diskmanager}}
 
 Para gestionar discos portátiles
 
@@ -251,7 +270,8 @@ Para gestionar discos portátiles
 sudo apt-get install ntfs-3g disk-manager
 \end{verbatim}
 
-\subsubsection{Gnucash}\label{gnucash}
+\hypertarget{gnucash}{%
+\subsubsection{Gnucash}\label{gnucash}}
 
 Finanzas en linux, para mi imprescindible.
 
@@ -259,8 +279,9 @@ Finanzas en linux, para mi imprescindible.
 sudo apt-get -t jessie-backports install gnucash
 \end{verbatim}
 
+\hypertarget{herramientas-sync}{%
 \subsubsection{\texorpdfstring{Herramientas
-\emph{sync}}{Herramientas sync}}\label{herramientas-sync}
+\emph{sync}}{Herramientas sync}}\label{herramientas-sync}}
 
 La uso para hacer mis backups a discos externos.
 
@@ -268,20 +289,23 @@ La uso para hacer mis backups a discos externos.
 sudo apt-get install rsync grsync
 \end{verbatim}
 
-\subsubsection{Dropbox}\label{dropbox}
+\hypertarget{dropbox}{%
+\subsubsection{Dropbox}\label{dropbox}}
 
 Bajado el paquete Debian desde la página
 \href{https://www.dropbox.com/install-linux}{web de Dropbox}, instalado
 el paquete con \emph{packageinstall}, es decir, simplemente pinchando
 desde el gestor de ficheros.
 
-\subsubsection{Compresores et al}\label{compresores-et-al}
+\hypertarget{compresores-et-al}{%
+\subsubsection{Compresores et al}\label{compresores-et-al}}
 
 \begin{verbatim}
 sudo apt-get install rar unrar zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar
 \end{verbatim}
 
-\subsubsection{Freeplane}\label{freeplane}
+\hypertarget{freeplane}{%
+\subsubsection{Freeplane}\label{freeplane}}
 
 Mejor que
 \href{http://freemind.sourceforge.net/wiki/index.php/Main_Page}{Freemind}
@@ -291,14 +315,17 @@ Mejor que
 Todos los ficheros que tenía de \emph{Freemind} se pueden usar
 directamente con \emph{Freeplane}.
 
-\subsubsection{Telegram desktop}\label{telegram-desktop}
+\hypertarget{telegram-desktop}{%
+\subsubsection{Telegram desktop}\label{telegram-desktop}}
 
 El cliente de mensajeria de Telegram. Descargado desde la web, instalado
 en \emph{\textasciitilde{}/apps}
 
-\subsection{Internet}\label{internet}
+\hypertarget{internet}{%
+\subsection{Internet}\label{internet}}
 
-\subsubsection{Chrome y Chromium}\label{chrome-y-chromium}
+\hypertarget{chrome-y-chromium}{%
+\subsubsection{Chrome y Chromium}\label{chrome-y-chromium}}
 
 Instalado chrome añadiendo fuentes a aptitude. No recuerdo como las
 añadí, pero en el fichero
@@ -322,7 +349,8 @@ sudo aptitude install google-chrome-stable
 sudo aptitude install chromium
 \end{verbatim}
 
-\subsubsection{Tor}\label{tor}
+\hypertarget{tor}{%
+\subsubsection{Tor}\label{tor}}
 
 El navegador anónimo.
 
@@ -331,12 +359,14 @@ Bajamos el zip de la aplicación desde la
 \emph{\textasciitilde{}/apps} copiado el fichero desktop a
 \emph{\textasciitilde{}/.local/share/applications}
 
-\subsubsection{openvpn}\label{openvpn}
+\hypertarget{openvpn}{%
+\subsubsection{openvpn}\label{openvpn}}
 
 Basado en la web
 \href{https://nixbsd.wordpress.com/2017/04/01/freebsd-10-2-configure-openvpn-client/}{nix/bsd}.
 
-\subsubsection{Deluge}\label{deluge}
+\hypertarget{deluge}{%
+\subsubsection{Deluge}\label{deluge}}
 
 El cliente torrent que uso habitualmente. Instalamos desde aptitude
 
@@ -345,7 +375,8 @@ sudo aptitude install deluge
 xdg-mime default deluge.desktop x-scheme-handler/magnet
 \end{verbatim}
 
-\subsubsection{TiddlyDesktop}\label{tiddlydesktop}
+\hypertarget{tiddlydesktop}{%
+\subsubsection{TiddlyDesktop}\label{tiddlydesktop}}
 
 \emph{Tiddly} es una wiki auto-contenida y muy flexible, tiene un sinfin
 de versiones adaptadas para diferentes usos. Hace años que la uso como
@@ -371,9 +402,11 @@ en \emph{node webkit} que simplifica el tema de backups (en teoría).
 Como siempre la instalamos en \emph{\textasciitilde{}/apps} y creamos un
 lanzador con \emph{MenuLibre}.
 
-\subsection{Gráficos}\label{gruxe1ficos}
+\hypertarget{gruxe1ficos}{%
+\subsection{Gráficos}\label{gruxe1ficos}}
 
-\subsubsection{Inkscape}\label{inkscape}
+\hypertarget{inkscape}{%
+\subsubsection{Inkscape}\label{inkscape}}
 
 El programa libre para creación y edición de gráficos vectoriales.
 
@@ -383,7 +416,8 @@ apt-get -t jessie-backports install inkscape
 aptitude install ink-generator
 \end{verbatim}
 
-\subsubsection{LibreCAD y FreeCAD}\label{librecad-y-freecad}
+\hypertarget{librecad-y-freecad}{%
+\subsubsection{LibreCAD y FreeCAD}\label{librecad-y-freecad}}
 
 Imprescindibles para el diseño de cacharros. Instalados desde repos con
 aptitude
@@ -394,7 +428,8 @@ apt-get install librecad
 apt-get -t jessie-backports install freecad
 \end{verbatim}
 
-\subsubsection{Gimp}\label{gimp}
+\hypertarget{gimp}{%
+\subsubsection{Gimp}\label{gimp}}
 
 El programa para edición y retocado de imágenes.
 
@@ -404,7 +439,8 @@ Gimp ya estaba instalado, adicionalmente instalado el gimp data-extra
 sudo aptitude install gimp-plugin-registry gimp-texturize gimp-data-extras gimp-gap
 \end{verbatim}
 
-\subsubsection{Shutter}\label{shutter}
+\hypertarget{shutter}{%
+\subsubsection{Shutter}\label{shutter}}
 
 Un programa de captura de pantallas que permite editarlas rápida y
 fácilmente:
@@ -413,7 +449,8 @@ fácilmente:
 sudo aptitude install shutter libgoo-canvas-perl
 \end{verbatim}
 
-\subsubsection{Pencil}\label{pencil}
+\hypertarget{pencil}{%
+\subsubsection{Pencil}\label{pencil}}
 
 Una aplicación java para hacer esquemas de aplicaciones web, puede que
 no lo necesites.
@@ -424,10 +461,12 @@ Puede dar problemas si usamos Iceweasel, ya que el paquete depende de
 Firefox. Más info
 \href{https://www.linuxwebzone.com/install-pencil-on-debian/}{aquí}
 
-\subsection{Fotografía}\label{fotografuxeda}
+\hypertarget{fotografuxeda}{%
+\subsection{Fotografía}\label{fotografuxeda}}
 
+\hypertarget{rawtherapee-y-darktable-tratamiento-de-imuxe1genes-fotogux155aficas}{%
 \subsubsection{Rawtherapee y Darktable: Tratamiento de imágenes
-fotogŕaficas}\label{rawtherapee-y-darktable-tratamiento-de-imuxe1genes-fotogux155aficas}
+fotogŕaficas}\label{rawtherapee-y-darktable-tratamiento-de-imuxe1genes-fotogux155aficas}}
 
 Si te gusta la fotografía y/o tienes una cámara reflex, definitivamente
 necesitas estas aplicaciones.
@@ -437,7 +476,8 @@ sudo aptitude install icc-profiles icc-profiles-free
 sudo aptitude install rawtherapee darktable
 \end{verbatim}
 
-\subsubsection{Stopmotion}\label{stopmotion}
+\hypertarget{stopmotion}{%
+\subsubsection{Stopmotion}\label{stopmotion}}
 
 Para hacer pélis de animación Stopmotion.
 
@@ -447,9 +487,11 @@ sudo aptitude install stopmotion vgrabbj dvgrab
 
 TODO: Probar qStopmotion
 
-\subsection{Audio y video}\label{audio-y-video}
+\hypertarget{audio-y-video}{%
+\subsection{Audio y video}\label{audio-y-video}}
 
-\subsubsection{Codecs}\label{codecs}
+\hypertarget{codecs}{%
+\subsubsection{Codecs}\label{codecs}}
 
 Instalamos los codecs
 
@@ -466,8 +508,9 @@ libdvdnav4 libmad0 sox libxvidcore4 libstdc++5
 sudo apt-get install w64codecs
 \end{verbatim}
 
+\hypertarget{reproductores-de-muxfasica}{%
 \subsubsection{Reproductores de
-música}\label{reproductores-de-muxfasica}
+música}\label{reproductores-de-muxfasica}}
 
 Instalamos \emph{Clementine}, \emph{decibel}, \emph{audacity},
 \emph{soundconverter}:
@@ -477,7 +520,8 @@ sudo aptitude install clementine gstreamer0.10-plugins-bad
 sudo aptitude install decibel-audio-player audacity soundconverter
 \end{verbatim}
 
-\subsubsection{Gpodder}\label{gpodder}
+\hypertarget{gpodder}{%
+\subsubsection{Gpodder}\label{gpodder}}
 
 Instalamos \emph{gpodder} para gestionar nuestros podcast, aunque
 \emph{Clementine} también nos vale.
@@ -486,7 +530,8 @@ Instalamos \emph{gpodder} para gestionar nuestros podcast, aunque
 sudo aptitude install gpodder
 \end{verbatim}
 
-\subsubsection{Spotify}\label{spotify}
+\hypertarget{spotify}{%
+\subsubsection{Spotify}\label{spotify}}
 
 Cliente de \emph{Spotify}
 
@@ -497,7 +542,8 @@ sudo aptitude update
 sudo aptitude install spotify-client
 \end{verbatim}
 
-\subsubsection{Video}\label{video}
+\hypertarget{video}{%
+\subsubsection{Video}\label{video}}
 
 Instalamos también utilidades de video:
 
@@ -508,9 +554,11 @@ sudo aptitude install vokoscreen
 sudo aptitude install handbrake handbrake-cli handbrake-gtk
 \end{verbatim}
 
-\subsection{Seguridad}\label{seguridad}
+\hypertarget{seguridad}{%
+\subsection{Seguridad}\label{seguridad}}
 
-\subsubsection{Lector de DNIe}\label{lector-de-dnie}
+\hypertarget{lector-de-dnie}{%
+\subsubsection{Lector de DNIe}\label{lector-de-dnie}}
 
 Instalamos:
 
@@ -564,7 +612,8 @@ Instalamos ahora:
 aptitude install pinentry-gtk2 opensc
 \end{verbatim}
 
-\subsubsection{wire}\label{wire}
+\hypertarget{wire}{%
+\subsubsection{wire}\label{wire}}
 
 Un cliente de mensajeria seguro.
 
@@ -576,13 +625,15 @@ sudo aptitude update
 sudo aptitude install wire-desktop
 \end{verbatim}
 
-\subsubsection{Ring}\label{ring}
+\hypertarget{ring}{%
+\subsubsection{Ring}\label{ring}}
 
 Un cliente de mensajería seguro y descentralizado basado en Blockchain.
 
 En Debian 9
 
-\subsubsection{Probar}\label{probar}
+\hypertarget{probar}{%
+\subsubsection{Probar}\label{probar}}
 
 \begin{itemize}
 \tightlist
@@ -592,9 +643,11 @@ En Debian 9
   \href{https://www.qubes-os.org/}{Qubes}
 \end{itemize}
 
-\section{Documentos}\label{documentos}
+\hypertarget{documentos}{%
+\section{Documentos}\label{documentos}}
 
-\subsection{Calibre}\label{calibre}
+\hypertarget{calibre}{%
+\subsection{Calibre}\label{calibre}}
 
 La mejor utilidad para gestionar tu colección de libros electrónicos.
 
@@ -644,7 +697,8 @@ Algunos enlaces útiles:
   \url{https://www.netogram.com/kobo.htm}
 \end{itemize}
 
-\subsection{Pandoc}\label{pandoc}
+\hypertarget{pandoc}{%
+\subsection{Pandoc}\label{pandoc}}
 
 Pandoc es un traductor entre formatos de documento. Está escrito en
 Python y es increiblemente útil. De hecho este documento está escrito
@@ -662,7 +716,8 @@ cd ~/.pandoc
 git clone https://github.com/jgm/pandoc-templates templates
 \end{verbatim}
 
-\subsection{Zotero}\label{zotero}
+\hypertarget{zotero}{%
+\subsection{Zotero}\label{zotero}}
 
 Zotero es un programa que te permite guardar una o varias bibliografías
 con referencias a libros, páginas web o documentos electrónicos.
@@ -670,7 +725,8 @@ con referencias a libros, páginas web o documentos electrónicos.
 Instalado el Zotero Standalone desde la
 \href{https://www.zotero.org/}{página web del programa}
 
-\subsection{Vanilla LaTeX}\label{vanilla-latex}
+\hypertarget{vanilla-latex}{%
+\subsection{Vanilla LaTeX}\label{vanilla-latex}}
 
 El LaTeX de Debian está un poquillo anticuado, si se quiere usar una
 versión reciente hay que aplicar
@@ -699,14 +755,15 @@ documentación \emph{on line} pero ahorrará practicamente el 50\% del
 espacio necesario. En mi caso sin \emph{doc} ni \emph{src} ocupa 2,3Gb
 
 \begin{verbatim}
-mkdir -p /opt
-sudo ln -s /usr/local/texlive/2016/bin/* /opt/texbin
+mkdir -p /opt/texbin
+sudo ln -s /usr/local/texlive/2017/bin/x86_64-linux/* /opt/texbin
 \end{verbatim}
 
 Por último para acabar la instalación añadimos \textbf{/opt/texbin} al
 \emph{path}.
 
-\subsubsection{Falsificando paquetes}\label{falsificando-paquetes}
+\hypertarget{falsificando-paquetes}{%
+\subsubsection{Falsificando paquetes}\label{falsificando-paquetes}}
 
 Ya tenemos el \textbf{texlive} instalado, ahora necesitamos que el
 gestor de paquetes sepa que ya lo tenemos instalado.
@@ -717,25 +774,29 @@ mkdir -p /tmp/tl-equivs && cd /tmp/tl-equivs
 equivs-control texlive-local
 \end{verbatim}
 
-Para hacerlo más fácil podemos descargarnos un fichero ya preparado,
-ejecutando:
+Alternativamente para hacerlo más fácil podemos descargarnos un fichero
+ya preparado, ejecutando:
 
 \begin{verbatim}
-wget http://www.tug.org/texlive/files/debian-equivs-2015-ex.txt
-/bin/cp -f debian-equivs-2015-ex.txt texlive-local
+wget http://www.tug.org/texlive/files/debian-equivs-2017-ex.txt
+/bin/cp -f debian-equivs-2017-ex.txt texlive-local
 \end{verbatim}
 
 Editamos la versión y
 
 \begin{verbatim}
 equivs-build texlive-local
-sudo dpkg -i texlive-local_2015-1_all.deb
+sudo dpkg -i texlive-local_2017-1_all.deb
 \end{verbatim}
+
+Ha fallado por que tiene una dependencia \emph{freeglut3}, la he
+instalado y se ha dejado instalar sin problema.
 
 Todo listo, ahora podemos instalar cualquier paquete que dependa de
 texlive
 
-\subsubsection{Fuentes}\label{fuentes}
+\hypertarget{fuentes}{%
+\subsubsection{Fuentes}\label{fuentes}}
 
 Para dejar disponibles las fuentes opentype y truetype que vienen con
 texlive para el resto de aplicaciones:
@@ -757,7 +818,8 @@ Y ejecutamos:
 sudo fc-cache -fsv
 \end{verbatim}
 
-\subsubsection{Actualizaciones}\label{actualizaciones}
+\hypertarget{actualizaciones}{%
+\subsubsection{Actualizaciones}\label{actualizaciones}}
 
 Para actualizar nuestro latex a la última versión de todos los paquetes:
 
@@ -778,8 +840,9 @@ Para usar el instalador gráfico hay que instalar previamente:
 sudo apt-get install perl-tk --no-install-recommends
 \end{verbatim}
 
+\hypertarget{lanzador-para-el-actualizador-de-texlive}{%
 \subsubsection{Lanzador para el actualizador de
-texlive}\label{lanzador-para-el-actualizador-de-texlive}
+texlive}\label{lanzador-para-el-actualizador-de-texlive}}
 
 \begin{verbatim}
 mkdir -p ~/.local/share/applications
@@ -804,7 +867,8 @@ si sigues este doc)
 sudo aptitude install gksu
 \end{verbatim}
 
-\subsection{Emacs}\label{emacs}
+\hypertarget{emacs}{%
+\subsection{Emacs}\label{emacs}}
 
 Instalado emacs desde los repos:
 
@@ -1005,7 +1069,8 @@ algunas funciones útiles y añadimos orígenes extra de paquetes.
 (elpy-enable)
 \end{verbatim}
 
-\subsection{Textadept}\label{textadept}
+\hypertarget{textadept}{%
+\subsection{Textadept}\label{textadept}}
 
 Un potente editor de desarrollo, multiplataforma.
 
@@ -1020,7 +1085,8 @@ linea:
 ui.set_theme('light', {font = 'Meslo LG L Regular for Powerline', fontsize = 14})
 \end{verbatim}
 
-\subsection{Scribus}\label{scribus}
+\hypertarget{scribus}{%
+\subsection{Scribus}\label{scribus}}
 
 Scribus es un programa libre de composición de documentos. con Scribus
 puedes elaborar desde los folletos de una exposición hasta una revista o
@@ -1032,7 +1098,8 @@ Instalado con aptitude
 sudo aptitude install scribus
 \end{verbatim}
 
-\subsection{Comix}\label{comix}
+\hypertarget{comix}{%
+\subsection{Comix}\label{comix}}
 
 Mi lector de comics favorito.
 
@@ -1042,9 +1109,11 @@ Instalado con aptitude
 sudo aptitude install comix
 \end{verbatim}
 
-\section{Desarrollo sw}\label{desarrollo-sw}
+\hypertarget{desarrollo-sw}{%
+\section{Desarrollo sw}\label{desarrollo-sw}}
 
-\subsection{Paquetes esenciales}\label{paquetes-esenciales}
+\hypertarget{paquetes-esenciales}{%
+\subsection{Paquetes esenciales}\label{paquetes-esenciales}}
 
 Estos son los paquetes esenciales para empezar a desarrollar software en
 Linux.
@@ -1053,7 +1122,8 @@ Linux.
 sudo apt-get install build-essential checkinstall make automake cmake autoconf git git-core dpkg wget
 \end{verbatim}
 
-\subsection{Git}\label{git}
+\hypertarget{git}{%
+\subsection{Git}\label{git}}
 
 Control de versiones distribuido. Imprescindible.
 
@@ -1082,22 +1152,25 @@ git config --global alias.last  'log -1 HEAD'
 git config --global alias.ca 'commit -a'
 \end{verbatim}
 
-\subsection{Open Java}\label{open-java}
+\hypertarget{open-java}{%
+\subsection{Open Java}\label{open-java}}
 
 \begin{verbatim}
 apt-get install openjdk-7-jre icedtea-7-plugin
 \end{verbatim}
 
+\hypertarget{lenguaje-de-programaciuxf3n-d-d-programming-language}{%
 \subsection{Lenguaje de programación D (D programming
-language)}\label{lenguaje-de-programaciuxf3n-d-d-programming-language}
+language)}\label{lenguaje-de-programaciuxf3n-d-d-programming-language}}
 
 \href{https://dlang.org/}{El lenguaje de programación D} es un lenguaje
 de programación de sistemas con una sintaxis similar a la de C y con
 tipado estático. Combina eficiencia, control y potencia de modelado con
 seguridad y productividad.
 
+\hypertarget{d-apt-e-instalaciuxf3n-de-programas}{%
 \subsubsection{D-apt e instalación de
-programas}\label{d-apt-e-instalaciuxf3n-de-programas}
+programas}\label{d-apt-e-instalaciuxf3n-de-programas}}
 
 Configurado \href{http://d-apt.sourceforge.net/}{d-apt}, instalados
 todos los programas incluidos
@@ -1113,7 +1186,8 @@ Instalamos todos los programas asociados.
 sudo aptitude install dmd dub dcd dfix dfmt dscanner textadept
 \end{verbatim}
 
-\subsubsection{DCD}\label{dcd}
+\hypertarget{dcd}{%
+\subsubsection{DCD}\label{dcd}}
 
 Una vez instalado el DCD tenemos que configurarlo creando el fichero
 \emph{\textasciitilde{}/.config/dcd/dcd.conf} con el siguiente
@@ -1131,7 +1205,8 @@ dcd-server &
 echo | dcd-client --search toImpl
 \end{verbatim}
 
-\subsubsection{gdc}\label{gdc}
+\hypertarget{gdc}{%
+\subsubsection{gdc}\label{gdc}}
 
 Instalado con
 
@@ -1139,7 +1214,8 @@ Instalado con
 sudo aptitude install gdc
 \end{verbatim}
 
-\subsubsection{ldc}\label{ldc}
+\hypertarget{ldc}{%
+\subsubsection{ldc}\label{ldc}}
 
 Instalado con:
 
@@ -1154,7 +1230,8 @@ Para poder ejecutar aplicaciones basadas en
 sudo apt-get install -y libssl-dev libevent-dev
 \end{verbatim}
 
-\subsubsection{Emacs para editar D}\label{emacs-para-editar-d}
+\hypertarget{emacs-para-editar-d}{%
+\subsubsection{Emacs para editar D}\label{emacs-para-editar-d}}
 
 Instalados los siguientes paquetes desde \emph{marmalade}
 
@@ -1229,7 +1306,8 @@ Se configura en el fichero \textbf{\textasciitilde{}/.emacs}:
             (setq indent-line-function 'insert-tab)))
 \end{verbatim}
 
-\paragraph{Referencias}\label{referencias}
+\hypertarget{referencias}{%
+\paragraph{Referencias}\label{referencias}}
 
 \begin{itemize}
 \tightlist
@@ -1239,13 +1317,15 @@ Se configura en el fichero \textbf{\textasciitilde{}/.emacs}:
   \url{https://github.com/Hackerpilot/DCD}
 \end{itemize}
 
-\subsection{Processing}\label{processing}
+\hypertarget{processing}{%
+\subsection{Processing}\label{processing}}
 
 Bajamos los paquetes de las respectivas páginas web, descomprimimimos en
 \emph{\textasciitilde{}/apps/} y creamos los desktop file con
 \textbf{Menulibre}
 
-\subsection{Openframeworks}\label{openframeworks}
+\hypertarget{openframeworks}{%
+\subsection{Openframeworks}\label{openframeworks}}
 
 Bajamos el paquete comprimido de la página web del proyecto.
 
@@ -1277,7 +1357,8 @@ Al final también va a añadir una linea al fichero
 export PG_OF_PATH=/home/salvari/apps/of/of_v0.9.3_linux64_release
 \end{verbatim}
 
-\subsection{Python}\label{python}
+\hypertarget{python}{%
+\subsection{Python}\label{python}}
 
 De partida tenemos instalado dos versiones: \emph{python} y
 \emph{python3}
@@ -1290,8 +1371,9 @@ python3 -V
 Python 3.4.2
 \end{verbatim}
 
+\hypertarget{pip-virtualenv-virtualenvwrapper-virtualfish}{%
 \subsubsection{pip, virtualenv, virtualenvwrapper,
-virtualfish}\label{pip-virtualenv-virtualenvwrapper-virtualfish}
+virtualfish}\label{pip-virtualenv-virtualenvwrapper-virtualfish}}
 
 \emph{pip} es un gestor de paquetes para \textbf{Python} que facilita la
 instalación de librerías y utilidades.
@@ -1354,15 +1436,17 @@ sudo pip install virtualfish
 tenemos la documentación de \emph{virtualfish} y la descripción de todos
 los comandos y plugins disponibles.
 
-\subsubsection{iPython notebook}\label{ipython-notebook}
+\hypertarget{ipython-notebook}{%
+\subsubsection{iPython notebook}\label{ipython-notebook}}
 
 \href{https://ipython.org/}{iPython}, y su evolución
 \href{https://jupyter.org/index.html}{Jupyter} proporcionan un entorno
 para interactivo de programación que permite elaborar documentos muy
 complejos con programas embebidos.
 
+\hypertarget{instalar-jupyter-en-el-python-del-sistema}{%
 \paragraph{Instalar Jupyter en el Python del
-sistema}\label{instalar-jupyter-en-el-python-del-sistema}
+sistema}\label{instalar-jupyter-en-el-python-del-sistema}}
 
 Seguimos las instrucciones
 \href{https://gist.github.com/frgomes/24c1923f2c9f14a27b14}{aquí}
@@ -1376,7 +1460,8 @@ que hayamos instalado:
 which python
 \end{verbatim}
 
-\paragraph{Instalar Anaconda Python}\label{instalar-anaconda-python}
+\hypertarget{instalar-anaconda-python}{%
+\paragraph{Instalar Anaconda Python}\label{instalar-anaconda-python}}
 
 Teóricamente \href{https://www.continuum.io/downloads}{Anaconda}, es la
 forma fácil de poder usar \emph{ipython notebook}. Así que la primera
@@ -1409,7 +1494,8 @@ Para hacer lo mismo en fish:
 set -x PATH ~/apps/anaconda3/bin $PATH
 \end{verbatim}
 
-\paragraph{iPython y GraphLab}\label{ipython-y-graphlab}
+\hypertarget{ipython-y-graphlab}{%
+\paragraph{iPython y GraphLab}\label{ipython-y-graphlab}}
 
 La instalación de iPython y GraphLab (que es una librería comercial) la
 hice para realizar un curso.
@@ -1469,8 +1555,9 @@ ipython notebook
 source deactivate gl-env
 \end{verbatim}
 
+\hypertarget{instalaciuxf3n-alternativa-con-virtualenv}{%
 \subparagraph{Instalación alternativa con
-virtualenv}\label{instalaciuxf3n-alternativa-con-virtualenv}
+virtualenv}\label{instalaciuxf3n-alternativa-con-virtualenv}}
 
 \begin{verbatim}
 # Create a virtual environment named e.g. gl-env
@@ -1493,8 +1580,9 @@ pip install "jupyter"
 pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
 \end{verbatim}
 
+\hypertarget{usar-emacs-para-editar-python}{%
 \subsubsection{Usar Emacs para editar
-Python}\label{usar-emacs-para-editar-python}
+Python}\label{usar-emacs-para-editar-python}}
 
 Instalamos \emph{elpy} desde el gestor de paquetes de Emacs,
 concretamente desde el repo \emph{marmalade}
@@ -1522,11 +1610,13 @@ Hay que habilitar \emph{elpy} en el fichero
 sudo pip install pylint
 \end{verbatim}
 
-\paragraph{TODO}\label{todo}
+\hypertarget{todo}{%
+\paragraph{TODO}\label{todo}}
 
 Estudiar esto con calma \url{https://elpy.readthedocs.io/en/latest}
 
-\subsubsection{Web2py}\label{web2py}
+\hypertarget{web2py}{%
+\subsubsection{Web2py}\label{web2py}}
 
 Desde \href{http://www.web2py.com}{la página web oficial de web2py}
 descargamos el \emph{source code} para usuarios normales.
@@ -1579,7 +1669,8 @@ Tampoco está de más instalar las librerías de graphviz:
 sudo aptitude install python-pygraphviz
 \end{verbatim}
 
-\subsubsection{Selenium}\label{selenium}
+\hypertarget{selenium}{%
+\subsubsection{Selenium}\label{selenium}}
 
 Vamos a instalar \emph{Selenium} para hacer TDD \footnote{Test Driven
   Development} de aplicaciones web con Python. Lo haremos siguiendo
@@ -1618,7 +1709,8 @@ browser = webdriver.Firefox()
 browser.get('http://seleniumhq.org/')
 \end{verbatim}
 
-\subsubsection{Networkx}\label{networkx}
+\hypertarget{networkx}{%
+\subsubsection{Networkx}\label{networkx}}
 
 Instalamos \emph{Networkx} para todo el sistema. Networkx me interesa
 para poder hacer esquemas de red automáticos desde \emph{Python} puede
@@ -1635,7 +1727,8 @@ sudo python3 -m pip install -U networkx
 \textbf{Nota}: Tengo que pensar bien como hacerlo.
 \end{quote}
 
-\subsection{Go language}\label{go-language}
+\hypertarget{go-language}{%
+\subsection{Go language}\label{go-language}}
 
 Nos bajamos los binarios desde la \href{https://golang.org/dl/}{página
 oficial}
@@ -1663,9 +1756,11 @@ export PATH=${PATH}:${GOROOT}/bin
 export PATH=${PATH}:${GOPATH}/bin
 \end{verbatim}
 
-\section{Desarrollo hardware}\label{desarrollo-hardware}
+\hypertarget{desarrollo-hardware}{%
+\section{Desarrollo hardware}\label{desarrollo-hardware}}
 
-\subsection{Arduino IDE}\label{arduino-ide}
+\hypertarget{arduino-ide}{%
+\subsection{Arduino IDE}\label{arduino-ide}}
 
 Bajamos los paquetes de la página \href{https://www.arduino.cc}{web},
 descomprimimimos en \emph{\textasciitilde{}/apps/arduino}.
@@ -1681,8 +1776,9 @@ La primera ves que instalamos será necesario crear el desktop file con
 \textbf{Menulibre} con las actulizaciones no será necesario, siempre y
 cuando apunte a \emph{\textasciitilde{}/apps/arduino/current}
 
+\hypertarget{auxf1adir-biblioteca-de-soporte-para-makeblock}{%
 \subsubsection{Añadir biblioteca de soporte para
-Makeblock}\label{auxf1adir-biblioteca-de-soporte-para-makeblock}
+Makeblock}\label{auxf1adir-biblioteca-de-soporte-para-makeblock}}
 
 Clonamos el
 \href{https://github.com/Makeblock-official/Makeblock-Libraries}{repo
@@ -1701,7 +1797,8 @@ ver los ejemplos de \emph{Makeblock}.
 Un detalle importante para programar el Auriga-Me es necesario
 seleccionar el micro Arduino Mega 2560 en el IDE Arduino.
 
-\subsection{Pinguino IDE}\label{pinguino-ide}
+\hypertarget{pinguino-ide}{%
+\subsection{Pinguino IDE}\label{pinguino-ide}}
 
 Tenemos el paquete de instalación disponible en su página
 \href{http://pinguino.cc/download.php}{web}
@@ -1717,7 +1814,8 @@ el programa de instalación y no lo crea automáticamente.
 El programa queda correctamente instalado en \emph{/opt} y arranca
 correctamente, habrá que probarlo con los micros.
 
-\subsection{KiCAD}\label{kicad}
+\hypertarget{kicad}{%
+\subsection{KiCAD}\label{kicad}}
 
 Instalamos desde \emph{backports}:
 
@@ -1746,13 +1844,15 @@ Shields de Arduino.
   así que teoricamente no habría que instalarla en nuestro disco duro.
 \end{itemize}
 
-\subsection{Analizador lógico}\label{analizador-luxf3gico}
+\hypertarget{analizador-luxf3gico}{%
+\subsection{Analizador lógico}\label{analizador-luxf3gico}}
 
 Mi analizador es un OpenBench de Seedstudio,
 \href{http://dangerousprototypes.com/docs/Open_Bench_Logic_Sniffer}{aquí
 hay mas info}
 
-\subsubsection{Sigrok}\label{sigrok}
+\hypertarget{sigrok}{%
+\subsubsection{Sigrok}\label{sigrok}}
 
 Instalamos \textbf{Sigrok}, simplemente desde los repos de Debian:
 
@@ -1771,7 +1871,8 @@ to device}, escogemos la opción \emph{Openbench} y le pasamos el puerto.
 Al pulsar la opción \emph{Scan for devices} reconoce el analizador
 correctamente como un \emph{Sump Logic Analyzer}.
 
-\subsubsection{Sump logic analyzer}\label{sump-logic-analyzer}
+\hypertarget{sump-logic-analyzer}{%
+\subsubsection{Sump logic analyzer}\label{sump-logic-analyzer}}
 
 Este es el software recomendado para usar con el analizador.
 
@@ -1796,13 +1897,16 @@ java -cp /usr/share/java/RXTXcomm.jar:analyzer.jar org.sump.analyzer.Loader
 
 Y ya funciona.
 
-\subsubsection{OLS}\label{ols}
+\hypertarget{ols}{%
+\subsubsection{OLS}\label{ols}}
 
 \href{https://www.lxtreme.nl/ols/}{Página oficial}
 
-\section{Virtualización}\label{virtualizaciuxf3n}
+\hypertarget{virtualizaciuxf3n}{%
+\section{Virtualización}\label{virtualizaciuxf3n}}
 
-\subsection{Docker}\label{docker}
+\hypertarget{docker}{%
+\subsection{Docker}\label{docker}}
 
 \begin{verbatim}
 apt-get install apt-transport-https ca-certificates
@@ -1823,7 +1927,8 @@ sudo docker run hello-world   - todo bien
 sudo gpasswd -a salvari docker
 \end{verbatim}
 
-\subsection{Virtualbox}\label{virtualbox}
+\hypertarget{virtualbox}{%
+\subsection{Virtualbox}\label{virtualbox}}
 
 Tenemos que:
 
@@ -1858,8 +1963,9 @@ Sin más que hacer doble click en el fichero descargado lo instalaremos
 en nuestra instancia de \emph{Virtualbox} (necesitamos la contraseña de
 administración).
 
+\hypertarget{virtualizando-un-windows-7}{%
 \subsection{Virtualizando un Windows
-7}\label{virtualizando-un-windows-7}
+7}\label{virtualizando-un-windows-7}}
 
 \begin{itemize}
 \tightlist
@@ -1881,13 +1987,15 @@ administración).
 
 Una vez instalado el SO Windows instalamos las Guest Additions.
 
+\hypertarget{shells-alternativos-zsh-y-fish}{%
 \section{Shells alternativos: zsh y
-fish}\label{shells-alternativos-zsh-y-fish}
+fish}\label{shells-alternativos-zsh-y-fish}}
 
 Los dos son muy interesantes. He usado zsh casi un año, ahora voy a
 probar \textbf{fish}.
 
-\subsection{fish}\label{fish}
+\hypertarget{fish}{%
+\subsection{fish}\label{fish}}
 
 Instalamos \textbf{fish} desde aptitude con:
 
@@ -1909,7 +2017,8 @@ Si queremos que \textbf{fish} sea nuestro nuevo \emph{shell}:
 chsh -s `which fish`
 \end{verbatim}
 
-\subsection{zsh}\label{zsh}
+\hypertarget{zsh}{%
+\subsection{zsh}\label{zsh}}
 
 Igualmente instalamos \textbf{zsh}:
 
@@ -1970,8 +2079,9 @@ Antigen ya se encarga de descargar todo lo que queramos utilizar en zsh.
 Nos queda arreglar las fuentes para que funcione correctamente la linea
 de estado en los repos de git. Necesitamos una fuente \emph{Awesome}
 
+\hypertarget{instalaciuxf3n-de-fuentes-adicionales}{%
 \subsection{Instalación de fuentes
-adicionales}\label{instalaciuxf3n-de-fuentes-adicionales}
+adicionales}\label{instalaciuxf3n-de-fuentes-adicionales}}
 
 Nos bajamos unas cuantas fuentes que soporten los iconos \emph{Awesome}.
 
@@ -1985,9 +2095,11 @@ cp someFontFile ~/.fonts/
 fc-cache -vf ~/.fonts/
 \end{verbatim}
 
-\section{Reprap}\label{reprap}
+\hypertarget{reprap}{%
+\section{Reprap}\label{reprap}}
 
-\subsection{Sl1c3r}\label{sl1c3r}
+\hypertarget{sl1c3r}{%
+\subsection{Sl1c3r}\label{sl1c3r}}
 
 Descargamos el paquete binario desde la página web.
 
@@ -2001,15 +2113,18 @@ Descargamos el paquete binario desde la página web.
   Es necesario instalar \emph{freeglut}
 \end{itemize}
 
-\subsection{OpenScad}\label{openscad}
+\hypertarget{openscad}{%
+\subsection{OpenScad}\label{openscad}}
 
 Instalado desde aptitude.
 
-\subsection{Printrun}\label{printrun}
+\hypertarget{printrun}{%
+\subsection{Printrun}\label{printrun}}
 
 Descargamos desde github
 
-\subsection{Cura}\label{cura}
+\hypertarget{cura}{%
+\subsection{Cura}\label{cura}}
 
 Descargamos desde la pagina web
 
@@ -2025,11 +2140,14 @@ cython python-libxml2 python-gobject python-dbus python-psutil python-cairosvg g
 python setup.py build_ext --inplace
 \end{verbatim}
 
-\section{Aplicaciones Web}\label{aplicaciones-web}
+\hypertarget{aplicaciones-web}{%
+\section{Aplicaciones Web}\label{aplicaciones-web}}
 
-\subsection{Servidor Web}\label{servidor-web}
+\hypertarget{servidor-web}{%
+\subsection{Servidor Web}\label{servidor-web}}
 
-\subsubsection{Apache}\label{apache}
+\hypertarget{apache}{%
+\subsubsection{Apache}\label{apache}}
 
 Instalamos el paquete \emph{apache2}
 
@@ -2084,14 +2202,17 @@ php5-imagick php5-imap php5-mcrypt php5-memcache php5-pspell php5-recode \
 php5-snmp php5-sqlite php5-tidy php5-xmlrpc php5-xsl
 \end{verbatim}
 
-\subsubsection{nginx}\label{nginx}
+\hypertarget{nginx}{%
+\subsubsection{nginx}\label{nginx}}
 
 TODO
 
+\hypertarget{servidores-de-bases-de-datos}{%
 \subsection{Servidores de bases de
-datos}\label{servidores-de-bases-de-datos}
+datos}\label{servidores-de-bases-de-datos}}
 
-\subsubsection{MySQL}\label{mysql}
+\hypertarget{mysql}{%
+\subsubsection{MySQL}\label{mysql}}
 
 Instalamos desde aptitude \emph{mysql-server.5.6}
 
@@ -2101,7 +2222,8 @@ Opcionalmente (y muy recomendable)
 mysql_secure_instalallation
 \end{verbatim}
 
-\paragraph{Actualización}\label{actualizaciuxf3n}
+\hypertarget{actualizaciuxf3n}{%
+\paragraph{Actualización}\label{actualizaciuxf3n}}
 
 Cambiamos el fichero \emph{mysql.conf.d/mysqld.cnf}
 
@@ -2116,7 +2238,9 @@ Reiniciamos el servicio:
 /etc/init.d/mysql restart
 \end{verbatim}
 
-\subsubsection{Cliente SQL SQuirreL SQL}\label{cliente-sql-squirrel-sql}
+\hypertarget{cliente-sql-squirrel-sql}{%
+\subsubsection{Cliente SQL SQuirreL
+SQL}\label{cliente-sql-squirrel-sql}}
 
 Descargamos el paquete desde la página
 \href{http://squirrel-sql.sourceforge.net/}{web} y lo descomprimimos en
@@ -2128,18 +2252,22 @@ Una vez instalado, creamos el desktop-file con \emph{MenuLibre} y
 configuramos el driver \emph{MySQL} añadiendo el path a donde hayamos
 dejado el conector java.
 
-\subsubsection{MariaDB}\label{mariadb}
+\hypertarget{mariadb}{%
+\subsubsection{MariaDB}\label{mariadb}}
 
 \textbf{PENDIENTE}
 
-\section{Recetas varias}\label{recetas-varias}
+\hypertarget{recetas-varias}{%
+\section{Recetas varias}\label{recetas-varias}}
 
-\subsection{Orange Pi Zero}\label{orange-pi-zero}
+\hypertarget{orange-pi-zero}{%
+\subsection{Orange Pi Zero}\label{orange-pi-zero}}
 
 Para usar la Orange Pi Zero tendremos que crear imágenes arrancables en
 tarjetas micro SD.
 
-\subsubsection{Crear una SD arrancable}\label{crear-una-sd-arrancable}
+\hypertarget{crear-una-sd-arrancable}{%
+\subsubsection{Crear una SD arrancable}\label{crear-una-sd-arrancable}}
 
 Dependiendo de donde conectemos la tarjeta tendremos que usar diferentes
 rutas. En el procedimiento descrito a continuación \texttt{\$\{card\}}
@@ -2243,7 +2371,7 @@ ssh root@192.168.0.109
 
 ¡Y ya estamos!
 
-\begin{figure}[htbp]
+\begin{figure}
 \centering
 \includegraphics{src/img/OrangePiZero_FirstLogin.png}
 \caption{Primer login en \emph{Orange Pi}}
@@ -2262,7 +2390,8 @@ Si quieres puedes reconfigurar el \emph{time zone}:
 dpgk-reconfigura tzdata
 \end{verbatim}
 
-\subsubsection{Conexión WIFI}\label{conexiuxf3n-wifi}
+\hypertarget{conexiuxf3n-wifi}{%
+\subsubsection{Conexión WIFI}\label{conexiuxf3n-wifi}}
 
 Vamos a comprobar que todo va bien:
 
@@ -2312,7 +2441,7 @@ el aviso:
 Así que basta con ejecutar \texttt{sudo\ nwtui} y ya podemos dar de alta
 nuestra wifi (yo la prefiero con IP estática).
 
-\begin{figure}[htbp]
+\begin{figure}
 \centering
 \includegraphics{src/img/OrangePiZero_tmtui.png}
 \caption{Configuración WIFI}
@@ -2334,7 +2463,8 @@ wlan0     Link encap:Ethernet  HWaddr a4:7c:f2:9a:97:7c
           RX bytes:328 (328.0 B)  TX bytes:852 (852.0 B)
 \end{verbatim}
 
-\subsubsection{Referencias}\label{referencias-1}
+\hypertarget{referencias-1}{%
+\subsubsection{Referencias}\label{referencias-1}}
 
 \begin{itemize}
 \tightlist
@@ -2362,7 +2492,8 @@ wlan0     Link encap:Ethernet  HWaddr a4:7c:f2:9a:97:7c
   tenemos el esquema de pines
 \end{itemize}
 
-\subsection{Raspberry Pi Media Center}\label{raspberry-pi-media-center}
+\hypertarget{raspberry-pi-media-center}{%
+\subsection{Raspberry Pi Media Center}\label{raspberry-pi-media-center}}
 
 Bajamos la imagen con nuestro cliente torrent favorito desde
 \href{https://github.com/aikoncwd/aikoncwd-rpi-mediacenter}{aquí}, no os
@@ -2375,7 +2506,7 @@ sudo dd if=./Mediacenter-AikonCWD-v6.img  of=/dev/mmcblk0 bs=4M
 Arrancamos con la toma ethernet conectada al router y nos conectamos
 tras averigurar la IP con \texttt{nmap} (ver \emph{Orange Pi Zero})
 
-\begin{figure}[htbp]
+\begin{figure}
 \centering
 \includegraphics{src/img/RaspiFirstLogin.png}
 \caption{Primer login en Raspberry}
@@ -2392,15 +2523,15 @@ Una vez instalado los pasos recomendados:
   ya de paso configuramos la IP estática para la WIFI
 
 \begin{verbatim}
-interface eth0
-static ip_address=192.168.0.125/24
-static routers=192.168.0.1
-static domain_name_servers=8.8.8.8
+ interface eth0
+ static ip_address=192.168.0.125/24
+ static routers=192.168.0.1
+ static domain_name_servers=8.8.8.8
 
-interface wlan0
-static ip_address=192.168.0.126/24
-static routers=192.168.0.1
-static domain_name_servers=8.8.8.8
+ interface wlan0
+ static ip_address=192.168.0.126/24
+ static routers=192.168.0.1
+ static domain_name_servers=8.8.8.8
 \end{verbatim}
 
   Una vez cambiado el fichero hay que reiniciar con
@@ -2413,20 +2544,20 @@ static domain_name_servers=8.8.8.8
   aparece el \texttt{wlan0} todo va bien.
 
 \begin{verbatim}
-wlan0     IEEE 802.11bgn  ESSID:off/any
-          Mode:Managed  Access Point: Not-Associated   Tx-Power=31 dBm
-          Retry short limit:7   RTS thr:off   Fragment thr:off
-          Encryption key:off
-          Power Management:on
+ wlan0     IEEE 802.11bgn  ESSID:off/any
+           Mode:Managed  Access Point: Not-Associated   Tx-Power=31 dBm
+           Retry short limit:7   RTS thr:off   Fragment thr:off
+           Encryption key:off
+           Power Management:on
 \end{verbatim}
 
   Tenemos que editar el fichero \texttt{/etc/network/interfaces} y
   asegurarnos de tener el \texttt{wlan0} como sigue:
 
 \begin{verbatim}
-allow-hotplug wlan0
-iface wlan0 inet manual
-    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+ allow-hotplug wlan0
+ iface wlan0 inet manual
+     wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
 \end{verbatim}
 
   Ahora vamos a editar el fichero de configuración de
@@ -2436,22 +2567,24 @@ iface wlan0 inet manual
   cambiado el \texttt{country} a ``ES'', asi que queda así:
 
 \begin{verbatim}
-country=ES
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
-network={
-  ssid="YOURSSID"
-  psk="YOURPASSWORD"
-}
+ country=ES
+ ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+ update_config=1
+ network={
+   ssid="YOURSSID"
+   psk="YOURPASSWORD"
+ }
 \end{verbatim}
 
   Un reinicio y listos: \texttt{shutdown\ -r\ now}
 \end{enumerate}
 
+\hypertarget{grabar-time-lapse-del-escritorio}{%
 \subsection{Grabar time-lapse del
-escritorio}\label{grabar-time-lapse-del-escritorio}
+escritorio}\label{grabar-time-lapse-del-escritorio}}
 
-\subsubsection{Usando avconv}\label{usando-avconv}
+\hypertarget{usando-avconv}{%
+\subsubsection{Usando avconv}\label{usando-avconv}}
 
 Capturas periódicas de la pantalla:
 
@@ -2462,7 +2595,8 @@ avconv -video_size 1366x768 -framerate 1/10 -f x11grab -i :0.0+0,0 -pix_fmt rgb2
 El framerate son imágenes por segundo, así que aquí estamos diciendo que
 capturamos una imagen cada 10 sg.
 
-\section{TODO}\label{todo-1}
+\hypertarget{todo-1}{%
+\section{TODO}\label{todo-1}}
 
 \begin{itemize}
 \tightlist
@@ -2508,7 +2642,8 @@ capturamos una imagen cada 10 sg.
   Astronomía
 \end{itemize}
 
-\section{Links}\label{links}
+\hypertarget{links}{%
+\section{Links}\label{links}}
 
 \begin{itemize}
 \tightlist
@@ -2533,7 +2668,8 @@ capturamos una imagen cada 10 sg.
   \url{http://taskwarrior.org/}
 \end{itemize}
 
-\section{Licencia}\label{licencia}
+\hypertarget{licencia}{%
+\section{Licencia}\label{licencia}}
 
 \begin{verbatim}
 

@@ -1,9 +1,3 @@
-{|
-|width="2%"| title: Debian Post-install subtitle: Un documento de BricoLabs author: - Sergio Alvariño [mailto:salvari@gmail.com salvari@gmail.com] tags: [Pandoc, Documentación, makefile, git] date: julio-2016 lang: es-ES abstract: | Instalación de Debian
-|-
-| Algunas notas referentes a la instalación de Debian Jessie
-|}
-
 = Introducción =
 
 Mi portátil es un ordenador Acer 5755G con las siguientes características:
@@ -269,8 +263,7 @@ sudo aptitude install handbrake handbrake-cli handbrake-gtk</pre>
 Instalamos:
 
 <pre>sudo aptitude libccid install pcscd pcsc-tools</pre>
-Como root ejecutamos ''pcsc_scan'' <ref>Es posible que sean necesario reiniciar el pc antes de seguir
-</ref>:
+Como root ejecutamos ''pcsc_scan'' <ref>Es posible que sean necesario reiniciar el pc antes de seguir</ref>:
 
 <pre>root@rasalhague:~# pcsc_scan 
 PC/SC device scanner
@@ -379,8 +372,8 @@ La parte xxxxxx varía en función del estado de la última versión de LaTeX di
 <pre class="{bash}">sudo ./install-tl</pre>
 Una vez lanzada la instalación podemos desmarcar las opciones que instalan la documentación y las fuentes. Eso nos obligará a consultar la documentación ''on line'' pero ahorrará practicamente el 50% del espacio necesario. En mi caso sin ''doc'' ni ''src'' ocupa 2,3Gb
 
-<pre class="{bash}">mkdir -p /opt
-sudo ln -s /usr/local/texlive/2016/bin/* /opt/texbin</pre>
+<pre class="{bash}">mkdir -p /opt/texbin
+sudo ln -s /usr/local/texlive/2017/bin/x86_64-linux/* /opt/texbin</pre>
 Por último para acabar la instalación añadimos '''/opt/texbin''' al ''path''.
 
 === Falsificando paquetes ===
@@ -390,14 +383,16 @@ Ya tenemos el '''texlive''' instalado, ahora necesitamos que el gestor de paquet
 <pre class="{bash}">sudo apt-get install equivs --no-install-recommends
 mkdir -p /tmp/tl-equivs &amp;&amp; cd /tmp/tl-equivs
 equivs-control texlive-local</pre>
-Para hacerlo más fácil podemos descargarnos un fichero ya preparado, ejecutando:
+Alternativamente para hacerlo más fácil podemos descargarnos un fichero ya preparado, ejecutando:
 
-<pre class="{bash}">wget http://www.tug.org/texlive/files/debian-equivs-2015-ex.txt
-/bin/cp -f debian-equivs-2015-ex.txt texlive-local</pre>
+<pre class="{bash}">wget http://www.tug.org/texlive/files/debian-equivs-2017-ex.txt
+/bin/cp -f debian-equivs-2017-ex.txt texlive-local</pre>
 Editamos la versión y
 
 <pre class="{bash}">equivs-build texlive-local
-sudo dpkg -i texlive-local_2015-1_all.deb</pre>
+sudo dpkg -i texlive-local_2017-1_all.deb</pre>
+Ha fallado por que tiene una dependencia ''freeglut3'', la he instalado y se ha dejado instalar sin problema.
+
 Todo listo, ahora podemos instalar cualquier paquete que dependa de texlive
 
 === Fuentes ===
@@ -907,14 +902,12 @@ En el futuro esto es todo lo que tendremos que hacer activar el entorno conda do
 Nos aseguramos de tener ''pip'' al dia:
 
 <pre>conda update pip</pre>
-Instalamos la biblioteca [https://turi.com/products/create/ GraphLab Create]. Esta biblioteca se supone que es fácil de usar pero está sujeta a licencia. <ref>TODO: Pasarme a ''scikit-learn''
-</ref>
+Instalamos la biblioteca [https://turi.com/products/create/ GraphLab Create]. Esta biblioteca se supone que es fácil de usar pero está sujeta a licencia. <ref>TODO: Pasarme a ''scikit-learn''</ref>
 
 Una vez registrado en la página web te pasan un número de registro que tienes que usar para instalar la biblioteca.
 
 <pre>pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz</pre>
-Y para terminar instalamos iPython <ref>TODO: conda install jupyter
-</ref>:
+Y para terminar instalamos iPython <ref>TODO: conda install jupyter</ref>:
 
 <pre>conda install ipython-notebook</pre>
 Desde ahora basta con activar el entorno que hemos creado para tener acceso al iPython.
@@ -999,8 +992,7 @@ Tampoco está de más instalar las librerías de graphviz:
 <pre>sudo aptitude install python-pygraphviz</pre>
 === Selenium ===
 
-Vamos a instalar ''Selenium'' para hacer TDD <ref>Test Driven Development
-</ref> de aplicaciones web con Python. Lo haremos siguiendo [http://selenium-python.readthedocs.io/index.html estas instrucciones].
+Vamos a instalar ''Selenium'' para hacer TDD <ref>Test Driven Development</ref> de aplicaciones web con Python. Lo haremos siguiendo [http://selenium-python.readthedocs.io/index.html estas instrucciones].
 
 En principio lo voy a usar con el Python del sistema <code>Python 2.7.9</code> en este momento, y no lo voy a instalar en un ''virtualenv'':
 
@@ -1159,7 +1151,7 @@ Tenemos que:
 <li>Actualizar la lista de paquetes</li>
 <li>Instalar virtualbox</li>
 <li><p>Añadir nuestro usuario al grupo vboxuser (no tengo claro que esto sea necesario)</p>
-<p>echo &quot;deb http://download.virtualbox.org/virtualbox/debian jessie contrib&quot; |sudo tee /etc/apt/sources.list.d/virtualbox.list wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add - sudo apt-get update sudo apt-get install virtualbox-5.1 sudo gpasswd -a salvari vboxusers</p></li></ul>
+<p>echo “deb http://download.virtualbox.org/virtualbox/debian jessie contrib” |sudo tee /etc/apt/sources.list.d/virtualbox.list wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add - sudo apt-get update sudo apt-get install virtualbox-5.1 sudo gpasswd -a salvari vboxusers</p></li></ul>
 
 Una vez instalado el virtualbox tenemos que instalarnos el pack de extensiones, es muy importante descargar el pack correspondiente a nuestra versión desde [https://www.virtualbox.org/wiki/Downloads? la página web de descargas]
 
@@ -1369,7 +1361,7 @@ Los datos se pueden almacenar directamente en la memoria SD o en una partición 
 Resumiendo:
 
 * <code>${card}</code> será <code>/dev/sdb</code> o <code>/dev/mmcblk0</code>
-* <math>{card}</math>{p} será <code>/dev/sdb1</code> o <code>/dev/mmcblk0p1</code>
+* <math display="inline">{card}</math>{p} será <code>/dev/sdb1</code> o <code>/dev/mmcblk0p1</code>
 
 Antes de seguir adelante hay que estar completamente seguro del dispositivo asociado a nuestra memoria SD para no armar ningún estropicio.
 
@@ -1495,35 +1487,35 @@ Una vez instalado los pasos recomendados:
 <ol style="list-style-type: decimal;">
 <li>Cambiar la password de root: <code>passwd</code></li>
 <li><p>Fijar una IP estática: Editamos el fichero <code>/etc/dhcpcd.conf</code>, ya de paso configuramos la IP estática para la WIFI</p>
-<pre>interface eth0
-static ip_address=192.168.0.125/24
-static routers=192.168.0.1
-static domain_name_servers=8.8.8.8
+<pre> interface eth0
+ static ip_address=192.168.0.125/24
+ static routers=192.168.0.1
+ static domain_name_servers=8.8.8.8
 
-interface wlan0
-static ip_address=192.168.0.126/24
-static routers=192.168.0.1
-static domain_name_servers=8.8.8.8</pre>
+ interface wlan0
+ static ip_address=192.168.0.126/24
+ static routers=192.168.0.1
+ static domain_name_servers=8.8.8.8</pre>
 <p>Una vez cambiado el fichero hay que reiniciar con <code>shutdown -r now</code></p></li>
 <li><p>Configurar la WIFI, en esta parte damos por supuesto que tenemos la wifi con WPA activado.</p>
 <p>Echamos un ojo a nuestro interfaz radio con <code>iwconfig</code>, si aparece el <code>wlan0</code> todo va bien.</p>
-<pre>wlan0     IEEE 802.11bgn  ESSID:off/any
-          Mode:Managed  Access Point: Not-Associated   Tx-Power=31 dBm
-          Retry short limit:7   RTS thr:off   Fragment thr:off
-          Encryption key:off
-          Power Management:on</pre>
+<pre> wlan0     IEEE 802.11bgn  ESSID:off/any
+           Mode:Managed  Access Point: Not-Associated   Tx-Power=31 dBm
+           Retry short limit:7   RTS thr:off   Fragment thr:off
+           Encryption key:off
+           Power Management:on</pre>
 <p>Tenemos que editar el fichero <code>/etc/network/interfaces</code> y asegurarnos de tener el <code>wlan0</code> como sigue:</p>
-<pre>allow-hotplug wlan0
-iface wlan0 inet manual
-    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf</pre>
-<p>Ahora vamos a editar el fichero de configuración de <code>wpa_supplicant</code>, es decir <code>/etc/wpa_supplicant/wpa_supplicant.conf</code> y añadir un bloque <code>network</code> que sea como el que va a continuación, de paso he cambiado el <code>country</code> a &quot;ES&quot;, asi que queda así:</p>
-<pre>country=ES
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
-network={
-  ssid=&quot;YOURSSID&quot;
-  psk=&quot;YOURPASSWORD&quot;
-}</pre>
+<pre> allow-hotplug wlan0
+ iface wlan0 inet manual
+     wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf</pre>
+<p>Ahora vamos a editar el fichero de configuración de <code>wpa_supplicant</code>, es decir <code>/etc/wpa_supplicant/wpa_supplicant.conf</code> y añadir un bloque <code>network</code> que sea como el que va a continuación, de paso he cambiado el <code>country</code> a “ES”, asi que queda así:</p>
+<pre> country=ES
+ ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+ update_config=1
+ network={
+   ssid=&quot;YOURSSID&quot;
+   psk=&quot;YOURPASSWORD&quot;
+ }</pre>
 <p>Un reinicio y listos: <code>shutdown -r now</code></p></li></ol>
 
 == Grabar time-lapse del escritorio ==

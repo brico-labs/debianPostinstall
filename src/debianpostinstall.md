@@ -1,4 +1,4 @@
---
+---
 title: Debian Post-install
 subtitle: Un documento de BricoLabs
 author:
@@ -566,8 +566,8 @@ la documentación _on line_ pero ahorrará practicamente el 50% del
 espacio necesario. En mi caso sin _doc_ ni _src_ ocupa 2,3Gb
 
 ~~~~{bash}
-mkdir -p /opt
-sudo ln -s /usr/local/texlive/2016/bin/* /opt/texbin
+mkdir -p /opt/texbin
+sudo ln -s /usr/local/texlive/2017/bin/x86_64-linux/* /opt/texbin
 ~~~~
 
 Por último para acabar la instalación añadimos __/opt/texbin__ al _path_.
@@ -583,20 +583,23 @@ mkdir -p /tmp/tl-equivs && cd /tmp/tl-equivs
 equivs-control texlive-local
 ~~~~
 
-Para hacerlo más fácil podemos descargarnos un fichero ya preparado,
-ejecutando:
+Alternativamente para hacerlo más fácil podemos descargarnos un
+fichero ya preparado, ejecutando:
 
 ~~~~{bash}
-wget http://www.tug.org/texlive/files/debian-equivs-2015-ex.txt
-/bin/cp -f debian-equivs-2015-ex.txt texlive-local
+wget http://www.tug.org/texlive/files/debian-equivs-2017-ex.txt
+/bin/cp -f debian-equivs-2017-ex.txt texlive-local
 ~~~~
 
 Editamos la versión y
 
 ~~~~{bash}
 equivs-build texlive-local
-sudo dpkg -i texlive-local_2015-1_all.deb
+sudo dpkg -i texlive-local_2017-1_all.deb
 ~~~~
+
+Ha fallado por que tiene una dependencia _freeglut3_, la he instalado
+y se ha dejado instalar sin problema.
 
 Todo listo, ahora podemos instalar cualquier paquete que dependa de
 texlive
