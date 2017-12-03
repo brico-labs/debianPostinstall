@@ -48,6 +48,24 @@ Cambiamos las opciones de //aptitude// para que **no instale** los paquetes reco
 
 Editamos el fichero ///etc/apt/sources.list// y comentamos las lineas del cdrom.
 
+Añadimos también //contrib// y //non-free//, el fichero queda más o menos así:
+
+<code>
+# 
+# deb cdrom:[Debian GNU/Linux 8.9.0 _Jessie_ - Official amd64 NETINST Binary-1 20170723-11:47]/ jessie main
+
+#deb cdrom:[Debian GNU/Linux 8.9.0 _Jessie_ - Official amd64 NETINST Binary-1 20170723-11:47]/ jessie main
+
+deb http://debian.netcologne.de/debian/ jessie main contrib non-free
+#deb-src http://debian.netcologne.de/debian/ jessie main contrib non-free
+
+deb http://security.debian.org/ jessie/updates main contrib non-free
+#deb-src http://security.debian.org/ jessie/updates main contrib non-free
+
+# jessie-updates, previously known as 'volatile'
+deb http://debian.netcologne.de/debian/ jessie-updates main contrib non-free
+#deb-src http://debian.netcologne.de/debian/ jessie-updates main contrib non-free
+</code>
 ===== Habilitamos los backports y multimedia =====
 
 ==== Backports: ====
@@ -73,6 +91,28 @@ Y actualizamos
 <code>
 sudo aptitude update
 </code>
+Algunas opciones interesantes
+
+Listar paquetes instalados con versiones en //Backports//:
+
+''%%aptitude search '?and(~i, ~Araring-backports)'%%''
+
+Listar todos los paquetes disponibles en //Backports//:
+
+''%%aptitude search '~Abackports ?not(~S ~i ~Abackports)'%%''
+
+Listar los paquetes con updates pendientes en //Backports//:
+
+''%%aptitude search -t $(lsb_release -sc)-backports '~U ~Abackports'%%''
+
+Lo mismo pero viendo la versión instalada y la candidata:
+
+''%%aptitude search -t $(lsb_release -sc)-backports -F '%p %v -> %V' '~U ~Abackports'%%''
+
+Podemos dejar este último (o cualquier otro) en un alias de //Bash//:
+
+''%%alias apt-list-backports="aptitude search -t $(lsb_release -sc)-backports -F '%p %v -> %V' '~U ~Abackports'"%%''
+
 ====== Instalación de varios paquetes sueltos ======
 
 ===== Programas de utilidad y uso frecuente =====

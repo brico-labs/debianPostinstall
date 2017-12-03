@@ -82,6 +82,25 @@ recomendados.
 Editamos el fichero _/etc/apt/sources.list_ y comentamos las lineas
 del cdrom.
 
+Añadimos también _contrib_ y _non-free_, el fichero queda más o menos así:
+
+~~~~
+# 
+# deb cdrom:[Debian GNU/Linux 8.9.0 _Jessie_ - Official amd64 NETINST Binary-1 20170723-11:47]/ jessie main
+
+#deb cdrom:[Debian GNU/Linux 8.9.0 _Jessie_ - Official amd64 NETINST Binary-1 20170723-11:47]/ jessie main
+
+deb http://debian.netcologne.de/debian/ jessie main contrib non-free
+#deb-src http://debian.netcologne.de/debian/ jessie main contrib non-free
+
+deb http://security.debian.org/ jessie/updates main contrib non-free
+#deb-src http://security.debian.org/ jessie/updates main contrib non-free
+
+# jessie-updates, previously known as 'volatile'
+deb http://debian.netcologne.de/debian/ jessie-updates main contrib non-free
+#deb-src http://debian.netcologne.de/debian/ jessie-updates main contrib non-free
+~~~~
+
 ## Habilitamos los backports y multimedia
 
 ### Backports:
@@ -109,6 +128,50 @@ Y actualizamos
 ~~~~{bash}
 sudo aptitude update
 ~~~~
+
+Algunas opciones interesantes
+
+Listar paquetes instalados con versiones en _Backports_:
+
+`aptitude search '?and(~i, ~Araring-backports)'`
+
+Listar todos los paquetes disponibles en _Backports_:
+
+`aptitude search '~Abackports ?not(~S ~i ~Abackports)'`
+
+Listar los paquetes con updates pendientes en _Backports_:
+
+`aptitude search -t $(lsb_release -sc)-backports '~U ~Abackports'`
+
+Lo mismo pero viendo la versión instalada y la candidata:
+
+`aptitude search -t $(lsb_release -sc)-backports -F '%p %v -> %V' '~U ~Abackports'`
+
+Podemos dejar este último (o cualquier otro) en un alias de _Bash_:
+
+`alias apt-list-backports="aptitude search -t $(lsb_release -sc)-backports -F '%p %v -> %V' '~U ~Abackports'"`
+
+## Instalamos el paquete de microcode: 
+
+`aptitude install intel-microcode`
+
+## Configuramos los parámetros de disco duro:
+
+~~~~
+cp /usr/share/doc/util-linux/examples/fstrim.{service,timer} /etc/systemd/system
+systemctl enable fstrim.timer
+
+echo vm.swappiness=1 >> /etc/sysctl.d/80-local.conf
+~~~~
+
+Control de temperatura:
+
+~~~~
+aptitude install lm-sensors
+aptitude install psensor
+aptitude install thermald
+~~~~
+
 
 # Instalación de varios paquetes sueltos
 
@@ -1508,9 +1571,12 @@ cd ~/apps/arduino
 ln -s arduino-x.y.z current
 ~~~~
 
-La primera ves que instalamos será necesario crear el desktop file con
-__Menulibre__ con las actulizaciones no será necesario, siempre y
+La primera vez que instalamos será necesario crear el desktop file con
+__Menulibre__ con las actualizaciones no será necesario, siempre y
 cuando apunte a _~/apps/arduino/current_
+
+No hay que olvidar añadir nuestro usuario al grupo _dialaout_: `sudo
+gpasswd --add username dialtout`
 
 ### Añadir biblioteca de soporte para Makeblock
 

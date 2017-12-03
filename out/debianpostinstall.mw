@@ -42,6 +42,22 @@ Cambiamos las opciones de ''aptitude'' para que '''no instale''' los paquetes re
 
 Editamos el fichero ''/etc/apt/sources.list'' y comentamos las lineas del cdrom.
 
+Añadimos también ''contrib'' y ''non-free'', el fichero queda más o menos así:
+
+<pre># 
+# deb cdrom:[Debian GNU/Linux 8.9.0 _Jessie_ - Official amd64 NETINST Binary-1 20170723-11:47]/ jessie main
+
+#deb cdrom:[Debian GNU/Linux 8.9.0 _Jessie_ - Official amd64 NETINST Binary-1 20170723-11:47]/ jessie main
+
+deb http://debian.netcologne.de/debian/ jessie main contrib non-free
+#deb-src http://debian.netcologne.de/debian/ jessie main contrib non-free
+
+deb http://security.debian.org/ jessie/updates main contrib non-free
+#deb-src http://security.debian.org/ jessie/updates main contrib non-free
+
+# jessie-updates, previously known as 'volatile'
+deb http://debian.netcologne.de/debian/ jessie-updates main contrib non-free
+#deb-src http://debian.netcologne.de/debian/ jessie-updates main contrib non-free</pre>
 == Habilitamos los backports y multimedia ==
 
 === Backports: ===
@@ -61,6 +77,28 @@ sudo apt-get -y --allow-unauthenticated install --reinstall deb-multimedia-keyri
 Y actualizamos
 
 <pre class="{bash}">sudo aptitude update</pre>
+Algunas opciones interesantes
+
+Listar paquetes instalados con versiones en ''Backports'':
+
+<code>aptitude search '?and(~i, ~Araring-backports)'</code>
+
+Listar todos los paquetes disponibles en ''Backports'':
+
+<code>aptitude search '~Abackports ?not(~S ~i ~Abackports)'</code>
+
+Listar los paquetes con updates pendientes en ''Backports'':
+
+<code>aptitude search -t $(lsb_release -sc)-backports '~U ~Abackports'</code>
+
+Lo mismo pero viendo la versión instalada y la candidata:
+
+<code>aptitude search -t $(lsb_release -sc)-backports -F '%p %v -&gt; %V' '~U ~Abackports'</code>
+
+Podemos dejar este último (o cualquier otro) en un alias de ''Bash'':
+
+<code>alias apt-list-backports=&quot;aptitude search -t $(lsb_release -sc)-backports -F '%p %v -&gt; %V' '~U ~Abackports'&quot;</code>
+
 = Instalación de varios paquetes sueltos =
 
 == Programas de utilidad y uso frecuente ==

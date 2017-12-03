@@ -178,6 +178,26 @@ sources.list}\label{quitamos-el-cdrom-de-los-sources.list}}
 Editamos el fichero \emph{/etc/apt/sources.list} y comentamos las lineas
 del cdrom.
 
+Añadimos también \emph{contrib} y \emph{non-free}, el fichero queda más
+o menos así:
+
+\begin{verbatim}
+# 
+# deb cdrom:[Debian GNU/Linux 8.9.0 _Jessie_ - Official amd64 NETINST Binary-1 20170723-11:47]/ jessie main
+
+#deb cdrom:[Debian GNU/Linux 8.9.0 _Jessie_ - Official amd64 NETINST Binary-1 20170723-11:47]/ jessie main
+
+deb http://debian.netcologne.de/debian/ jessie main contrib non-free
+#deb-src http://debian.netcologne.de/debian/ jessie main contrib non-free
+
+deb http://security.debian.org/ jessie/updates main contrib non-free
+#deb-src http://security.debian.org/ jessie/updates main contrib non-free
+
+# jessie-updates, previously known as 'volatile'
+deb http://debian.netcologne.de/debian/ jessie-updates main contrib non-free
+#deb-src http://debian.netcologne.de/debian/ jessie-updates main contrib non-free
+\end{verbatim}
+
 \hypertarget{habilitamos-los-backports-y-multimedia}{%
 \subsection{Habilitamos los backports y
 multimedia}\label{habilitamos-los-backports-y-multimedia}}
@@ -209,6 +229,28 @@ Y actualizamos
 \begin{verbatim}
 sudo aptitude update
 \end{verbatim}
+
+Algunas opciones interesantes
+
+Listar paquetes instalados con versiones en \emph{Backports}:
+
+\texttt{aptitude\ search\ \textquotesingle{}?and(\textasciitilde{}i,\ \textasciitilde{}Araring-backports)\textquotesingle{}}
+
+Listar todos los paquetes disponibles en \emph{Backports}:
+
+\texttt{aptitude\ search\ \textquotesingle{}\textasciitilde{}Abackports\ ?not(\textasciitilde{}S\ \textasciitilde{}i\ \textasciitilde{}Abackports)\textquotesingle{}}
+
+Listar los paquetes con updates pendientes en \emph{Backports}:
+
+\texttt{aptitude\ search\ -t\ \$(lsb\_release\ -sc)-backports\ \textquotesingle{}\textasciitilde{}U\ \textasciitilde{}Abackports\textquotesingle{}}
+
+Lo mismo pero viendo la versión instalada y la candidata:
+
+\texttt{aptitude\ search\ -t\ \$(lsb\_release\ -sc)-backports\ -F\ \textquotesingle{}\%p\ \%v\ -\textgreater{}\ \%V\textquotesingle{}\ \textquotesingle{}\textasciitilde{}U\ \textasciitilde{}Abackports\textquotesingle{}}
+
+Podemos dejar este último (o cualquier otro) en un alias de \emph{Bash}:
+
+\texttt{alias\ apt-list-backports="aptitude\ search\ -t\ \$(lsb\_release\ -sc)-backports\ -F\ \textquotesingle{}\%p\ \%v\ -\textgreater{}\ \%V\textquotesingle{}\ \textquotesingle{}\textasciitilde{}U\ \textasciitilde{}Abackports\textquotesingle{}"}
 
 \hypertarget{instalaciuxf3n-de-varios-paquetes-sueltos}{%
 \section{Instalación de varios paquetes
