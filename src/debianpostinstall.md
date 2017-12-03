@@ -290,6 +290,12 @@ sudo aptitude install google-chrome-stable
 sudo aptitude install chromium
 ~~~~
 
+### Firefox Quantum
+
+Bajamos las dos versiones: estable y de desarrollo. Descomprimimos en
+`~/apps` y cremos los lanzadores con _Menulibre_.
+
+
 ### Tor
 
 El navegador anónimo.
@@ -364,6 +370,11 @@ Gimp ya estaba instalado, adicionalmente instalado el gimp data-extra
 sudo aptitude install gimp-plugin-registry gimp-texturize gimp-data-extras gimp-gap
 
 ~~~~
+
+### Blender
+
+Bajamos el paquete de la web, descomprimimos en `~/apps' y creamos
+lanzador con _Menulibre_.
 
 ### Shutter
 
@@ -2300,7 +2311,7 @@ El framerate son imágenes por segundo, así que aquí estamos diciendo que capt
 * rclone <https://syncthing.net/>
 * vmware (no creo, virtualbox va genial)
 * Astronomía
-
+* Borg backup
 
 # Links
 
