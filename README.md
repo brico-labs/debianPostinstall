@@ -140,6 +140,36 @@ Podemos dejar este último (o cualquier otro) en un alias de *Bash*:
 
 `alias apt-list-backports="aptitude search -t $(lsb_release -sc)-backports -F '%p %v -> %V' '~U ~Abackports'"`
 
+Instalamos el paquete de microcode:
+-----------------------------------
+
+`aptitude install intel-microcode`
+
+Configuramos los parámetros de disco duro:
+------------------------------------------
+
+    cp /usr/share/doc/util-linux/examples/fstrim.{service,timer} /etc/systemd/system
+    systemctl enable fstrim.timer
+
+    echo vm.swappiness=1 >> /etc/sysctl.d/80-local.conf
+
+Control de temperatura:
+
+    aptitude install lm-sensors
+    aptitude install psensor
+    aptitude install thermald
+
+Activamos intel\_pstate
+-----------------------
+
+Editamos el fichero `/etc/default/grub` y lo modificamos para que
+contenga la linea:
+
+    GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_pstate=enable"
+
+La activación de `intel_pstate` ha tenido un efecto definitivo en la
+temperatura de mi portátil.
+
 Instalación de varios paquetes sueltos
 ======================================
 
@@ -248,6 +278,11 @@ sudo aptitude install google-chrome-stable
 sudo aptitude install chromium
 ```
 
+### Firefox Quantum
+
+Bajamos las dos versiones: estable y de desarrollo. Descomprimimos en
+`~/apps` y cremos los lanzadores con *Menulibre*.
+
 ### Tor
 
 El navegador anónimo.
@@ -266,7 +301,6 @@ Basado en la web
 El cliente torrent que uso habitualmente. Instalamos desde aptitude
 
     sudo aptitude install deluge
-    xdg-mime default deluge.desktop x-scheme-handler/magnet
 
 ### TiddlyDesktop
 
@@ -317,6 +351,11 @@ El programa para edición y retocado de imágenes.
 Gimp ya estaba instalado, adicionalmente instalado el gimp data-extra
 
     sudo aptitude install gimp-plugin-registry gimp-texturize gimp-data-extras gimp-gap
+
+### Blender
+
+Bajamos el paquete de la web, descomprimimos en \`~/apps’ y creamos
+lanzador con *Menulibre*.
 
 ### Shutter
 
@@ -1466,9 +1505,12 @@ Creamos un link al directorio del software que hemos descargado:
     cd ~/apps/arduino
     ln -s arduino-x.y.z current
 
-La primera ves que instalamos será necesario crear el desktop file con
-**Menulibre** con las actulizaciones no será necesario, siempre y cuando
-apunte a *~/apps/arduino/current*
+La primera vez que instalamos será necesario crear el desktop file con
+**Menulibre** con las actualizaciones no será necesario, siempre y
+cuando apunte a *~/apps/arduino/current*
+
+No hay que olvidar añadir nuestro usuario al grupo *dialaout*:
+`sudo gpasswd --add username dialtout`
 
 ### Añadir biblioteca de soporte para Makeblock
 
@@ -2155,6 +2197,7 @@ TODO
 -   rclone <https://syncthing.net/>
 -   vmware (no creo, virtualbox va genial)
 -   Astronomía
+-   Borg backup
 
 Links
 =====

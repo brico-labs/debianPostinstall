@@ -252,6 +252,44 @@ Podemos dejar este último (o cualquier otro) en un alias de \emph{Bash}:
 
 \texttt{alias\ apt-list-backports="aptitude\ search\ -t\ \$(lsb\_release\ -sc)-backports\ -F\ \textquotesingle{}\%p\ \%v\ -\textgreater{}\ \%V\textquotesingle{}\ \textquotesingle{}\textasciitilde{}U\ \textasciitilde{}Abackports\textquotesingle{}"}
 
+\hypertarget{instalamos-el-paquete-de-microcode}{%
+\subsection{Instalamos el paquete de
+microcode:}\label{instalamos-el-paquete-de-microcode}}
+
+\texttt{aptitude\ install\ intel-microcode}
+
+\hypertarget{configuramos-los-paruxe1metros-de-disco-duro}{%
+\subsection{Configuramos los parámetros de disco
+duro:}\label{configuramos-los-paruxe1metros-de-disco-duro}}
+
+\begin{verbatim}
+cp /usr/share/doc/util-linux/examples/fstrim.{service,timer} /etc/systemd/system
+systemctl enable fstrim.timer
+
+echo vm.swappiness=1 >> /etc/sysctl.d/80-local.conf
+\end{verbatim}
+
+Control de temperatura:
+
+\begin{verbatim}
+aptitude install lm-sensors
+aptitude install psensor
+aptitude install thermald
+\end{verbatim}
+
+\hypertarget{activamos-intel_pstate}{%
+\subsection{Activamos intel\_pstate}\label{activamos-intel_pstate}}
+
+Editamos el fichero \texttt{/etc/default/grub} y lo modificamos para que
+contenga la linea:
+
+\begin{verbatim}
+GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_pstate=enable"
+\end{verbatim}
+
+La activación de \texttt{intel\_pstate} ha tenido un efecto definitivo
+en la temperatura de mi portátil.
+
 \hypertarget{instalaciuxf3n-de-varios-paquetes-sueltos}{%
 \section{Instalación de varios paquetes
 sueltos}\label{instalaciuxf3n-de-varios-paquetes-sueltos}}
@@ -391,6 +429,13 @@ sudo aptitude install google-chrome-stable
 sudo aptitude install chromium
 \end{verbatim}
 
+\hypertarget{firefox-quantum}{%
+\subsubsection{Firefox Quantum}\label{firefox-quantum}}
+
+Bajamos las dos versiones: estable y de desarrollo. Descomprimimos en
+\texttt{\textasciitilde{}/apps} y cremos los lanzadores con
+\emph{Menulibre}.
+
 \hypertarget{tor}{%
 \subsubsection{Tor}\label{tor}}
 
@@ -414,7 +459,6 @@ El cliente torrent que uso habitualmente. Instalamos desde aptitude
 
 \begin{verbatim}
 sudo aptitude install deluge
-xdg-mime default deluge.desktop x-scheme-handler/magnet
 \end{verbatim}
 
 \hypertarget{tiddlydesktop}{%
@@ -480,6 +524,12 @@ Gimp ya estaba instalado, adicionalmente instalado el gimp data-extra
 \begin{verbatim}
 sudo aptitude install gimp-plugin-registry gimp-texturize gimp-data-extras gimp-gap
 \end{verbatim}
+
+\hypertarget{blender}{%
+\subsubsection{Blender}\label{blender}}
+
+Bajamos el paquete de la web, descomprimimos en `\textasciitilde{}/apps'
+y creamos lanzador con \emph{Menulibre}.
 
 \hypertarget{shutter}{%
 \subsubsection{Shutter}\label{shutter}}
@@ -1814,9 +1864,12 @@ cd ~/apps/arduino
 ln -s arduino-x.y.z current
 \end{verbatim}
 
-La primera ves que instalamos será necesario crear el desktop file con
-\textbf{Menulibre} con las actulizaciones no será necesario, siempre y
+La primera vez que instalamos será necesario crear el desktop file con
+\textbf{Menulibre} con las actualizaciones no será necesario, siempre y
 cuando apunte a \emph{\textasciitilde{}/apps/arduino/current}
+
+No hay que olvidar añadir nuestro usuario al grupo \emph{dialaout}:
+\texttt{sudo\ gpasswd\ -\/-add\ username\ dialtout}
 
 \hypertarget{auxf1adir-biblioteca-de-soporte-para-makeblock}{%
 \subsubsection{Añadir biblioteca de soporte para
@@ -2682,6 +2735,8 @@ capturamos una imagen cada 10 sg.
   vmware (no creo, virtualbox va genial)
 \item
   Astronomía
+\item
+  Borg backup
 \end{itemize}
 
 \hypertarget{links}{%

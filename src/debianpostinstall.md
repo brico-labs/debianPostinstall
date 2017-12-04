@@ -172,6 +172,17 @@ aptitude install psensor
 aptitude install thermald
 ~~~~
 
+## Activamos intel_pstate
+
+Editamos el fichero `/etc/default/grub` y lo modificamos para que contenga la linea:
+
+~~~~
+GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_pstate=enable"
+~~~~
+
+La activación de `intel_pstate` ha tenido un efecto definitivo en la
+temperatura de mi portátil.
+
 
 # Instalación de varios paquetes sueltos
 
@@ -314,7 +325,6 @@ El cliente torrent que uso habitualmente. Instalamos desde aptitude
 
 ~~~~
 sudo aptitude install deluge
-xdg-mime default deluge.desktop x-scheme-handler/magnet
 ~~~~
 
 ### TiddlyDesktop

@@ -99,6 +99,28 @@ Podemos dejar este último (o cualquier otro) en un alias de ''Bash'':
 
 <code>alias apt-list-backports=&quot;aptitude search -t $(lsb_release -sc)-backports -F '%p %v -&gt; %V' '~U ~Abackports'&quot;</code>
 
+== Instalamos el paquete de microcode: ==
+
+<code>aptitude install intel-microcode</code>
+
+== Configuramos los parámetros de disco duro: ==
+
+<pre>cp /usr/share/doc/util-linux/examples/fstrim.{service,timer} /etc/systemd/system
+systemctl enable fstrim.timer
+
+echo vm.swappiness=1 &gt;&gt; /etc/sysctl.d/80-local.conf</pre>
+Control de temperatura:
+
+<pre>aptitude install lm-sensors
+aptitude install psensor
+aptitude install thermald</pre>
+== Activamos intel_pstate ==
+
+Editamos el fichero <code>/etc/default/grub</code> y lo modificamos para que contenga la linea:
+
+<pre>GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet intel_pstate=enable&quot;</pre>
+La activación de <code>intel_pstate</code> ha tenido un efecto definitivo en la temperatura de mi portátil.
+
 = Instalación de varios paquetes sueltos =
 
 == Programas de utilidad y uso frecuente ==
@@ -172,6 +194,10 @@ Ejecutamos:
 
 <pre class="{bash}">sudo aptitude install google-chrome-stable
 sudo aptitude install chromium</pre>
+=== Firefox Quantum ===
+
+Bajamos las dos versiones: estable y de desarrollo. Descomprimimos en <code>~/apps</code> y cremos los lanzadores con ''Menulibre''.
+
 === Tor ===
 
 El navegador anónimo.
@@ -186,8 +212,7 @@ Basado en la web [https://nixbsd.wordpress.com/2017/04/01/freebsd-10-2-configure
 
 El cliente torrent que uso habitualmente. Instalamos desde aptitude
 
-<pre>sudo aptitude install deluge
-xdg-mime default deluge.desktop x-scheme-handler/magnet</pre>
+<pre>sudo aptitude install deluge</pre>
 === TiddlyDesktop ===
 
 ''Tiddly'' es una wiki auto-contenida y muy flexible, tiene un sinfin de versiones adaptadas para diferentes usos. Hace años que la uso como cuaderno de bitácora personal, pero no había seguido su evolución.
@@ -225,6 +250,10 @@ Gimp ya estaba instalado, adicionalmente instalado el gimp data-extra
 
 <pre>sudo aptitude install gimp-plugin-registry gimp-texturize gimp-data-extras gimp-gap
 </pre>
+=== Blender ===
+
+Bajamos el paquete de la web, descomprimimos en `~/apps’ y creamos lanzador con ''Menulibre''.
+
 === Shutter ===
 
 Un programa de captura de pantallas que permite editarlas rápida y fácilmente:
@@ -1091,7 +1120,9 @@ Creamos un link al directorio del software que hemos descargado:
 
 <pre>cd ~/apps/arduino
 ln -s arduino-x.y.z current</pre>
-La primera ves que instalamos será necesario crear el desktop file con '''Menulibre''' con las actulizaciones no será necesario, siempre y cuando apunte a ''~/apps/arduino/current''
+La primera vez que instalamos será necesario crear el desktop file con '''Menulibre''' con las actualizaciones no será necesario, siempre y cuando apunte a ''~/apps/arduino/current''
+
+No hay que olvidar añadir nuestro usuario al grupo ''dialaout'': <code>sudo gpasswd --add username dialtout</code>
 
 === Añadir biblioteca de soporte para Makeblock ===
 
@@ -1583,6 +1614,7 @@ El framerate son imágenes por segundo, así que aquí estamos diciendo que capt
 * rclone https://syncthing.net/
 * vmware (no creo, virtualbox va genial)
 * Astronomía
+* Borg backup
 
 = Links =
 
