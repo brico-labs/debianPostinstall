@@ -191,11 +191,15 @@ sudo apt-get -t jessie-backports install gnucash
 </code>
 ==== Herramientas sync ====
 
-La uso para hacer mis backups a discos externos.
+Las que uso para hacer mis backups a discos externos.
 
 <code>
 sudo apt-get install rsync grsync
 </code>
+=== rclone ===
+
+Descargamos el paquete desde [[https://rclone.org/|la página web]]
+
 ==== Dropbox ====
 
 Bajado el paquete Debian desde la página [[https://www.dropbox.com/install-linux|web de Dropbox]], instalado el paquete con //packageinstall//, es decir, simplemente pinchando desde el gestor de ficheros.
@@ -237,6 +241,8 @@ sudo aptitude install chromium
 ==== Firefox Quantum ====
 
 Bajamos las dos versiones: estable y de desarrollo. Descomprimimos en ''%%~/apps%%'' y cremos los lanzadores con //Menulibre//.
+
+En mi sistema hay instaladas fuentes adicionales (para programar por ejemplo) así que en las preferencias de Firefox, sección “//Idioma y Apariencia::Avanzadas//” hay que asegurarse de desmarcar la opción: “Permitir a las páginas elegir …” Por alguna razón interfiere y no se ve el texto en muchas páginas.
 
 ==== Tor ====
 

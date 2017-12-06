@@ -223,9 +223,13 @@ Finanzas en linux, para mi imprescindible.
 
 ### Herramientas *sync*
 
-La uso para hacer mis backups a discos externos.
+Las que uso para hacer mis backups a discos externos.
 
     sudo apt-get install rsync grsync
+
+#### rclone
+
+Descargamos el paquete desde [la página web](https://rclone.org/)
 
 ### Dropbox
 
@@ -282,6 +286,12 @@ sudo aptitude install chromium
 
 Bajamos las dos versiones: estable y de desarrollo. Descomprimimos en
 `~/apps` y cremos los lanzadores con *Menulibre*.
+
+En mi sistema hay instaladas fuentes adicionales (para programar por
+ejemplo) así que en las preferencias de Firefox, sección “*Idioma y
+Apariencia::Avanzadas*” hay que asegurarse de desmarcar la opción:
+“Permitir a las páginas elegir …” Por alguna razón interfiere y no se ve
+el texto en muchas páginas.
 
 ### Tor
 
