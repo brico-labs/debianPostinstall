@@ -256,6 +256,15 @@ Gimp ya estaba instalado, adicionalmente instalado el gimp data-extra
 
 <pre>sudo aptitude install gimp-plugin-registry gimp-texturize gimp-data-extras gimp-gap
 </pre>
+=== Krita ===
+
+Basta con descargar el ''Appimage'' desde la [https://krita.org página web]
+
+=== MyPaint ===
+
+Está disponible la última versión via ''Flatpak'':
+
+<pre>flatpak install --from https://raw.githubusercontent.com/mypaint/mypaint/master/flatpak/mypaint-stable.flatpakref</pre>
 === Blender ===
 
 Bajamos el paquete de la web, descomprimimos en `~/apps’ y creamos lanzador con ''Menulibre''.
@@ -937,11 +946,8 @@ Por último, si queremos tener utilidades parecidas en nuestro ''fish shell'' in
 
 ==== Instalar Jupyter en el Python del sistema ====
 
-Seguimos las instrucciones [https://gist.github.com/frgomes/24c1923f2c9f14a27b14 aquí]
+Ahora tenemos Jupyter en ''Backports'' así que basta con: ~~<s>{bash} aptitude install jupyter-notebook apt -t backports install python3-tornado</s>~~
 
-Si usamos el script descargado del github se instalará el '''Jupyter''' con el python3 del sistema. __Conviene asegurarse de que estamos apuntando al python del S.O. y no a cualquier otro Python que hayamos instalado:
-
-<pre class="{bash}">which python</pre>
 ==== Instalar Anaconda Python ====
 
 Teóricamente [https://www.continuum.io/downloads Anaconda], es la forma fácil de poder usar ''ipython notebook''. Así que la primera vez que instalé el iPython lo hice instalando ''Anaconda'' De hecho me he instalado dos versiones la que incluye el python2 y la que incluye el python3, aunque son completamente redundantes, basta con instalar una sola de ellas.
@@ -1198,6 +1204,9 @@ Y ya funciona.
 
 = Virtualización =
 
+== Flatpak ==
+
+<pre>aptitude install flatpak flatpak-builder</pre>
 == Docker ==
 
 <pre class="{bash}">apt-get install apt-transport-https ca-certificates
@@ -1387,6 +1396,8 @@ php5-snmp php5-sqlite php5-tidy php5-xmlrpc php5-xsl</pre>
 
 TODO
 
+[http://www.geektalks.org/deploy-web2py-server-with-nginx-in-debian]
+
 == Servidores de bases de datos ==
 
 === MySQL ===
@@ -1396,15 +1407,21 @@ Instalamos desde aptitude ''mysql-server.5.6''
 Opcionalmente (y muy recomendable)
 
 <pre>mysql_secure_instalallation</pre>
+Si queremos instalar las últimas versiones disponibles (es lo que yo hice) podemos hacer lo siguiente:
+
+<pre>wget http://dev.mysql.com/get/mysql-apt-config_0.7.3-1_all.deb
+dpkg -i mysql-apt-config_0.7.3-1_all.deb
+apt-get update
+apt-get install mysql-community-server</pre>
 ==== Actualización ====
 
-Cambiamos el fichero ''mysql.conf.d/mysqld.cnf''
+Cambiamos el fichero ''/etc/mysql.conf.d/mysqld.cnf''
 
 <pre># max_allowed_packet      = 16M
 max_allowed_packet  = 500M</pre>
 Reiniciamos el servicio:
 
-<pre>/etc/init.d/mysql restart</pre>
+<pre>systemctl restart mysql</pre>
 === Cliente SQL SQuirreL SQL ===
 
 Descargamos el paquete desde la página [http://squirrel-sql.sourceforge.net/ web] y lo descomprimimos en ''~/apps'', también tendremos que descargar el conector de mysql para java, por ejemplo desde [http://dev.mysql.com/downloads/connector/j/3.0.html aquí]
@@ -1417,6 +1434,16 @@ Una vez instalado, creamos el desktop-file con ''MenuLibre'' y configuramos el d
 
 = Recetas varias =
 
+== APT: Claves expiradas ==
+
+Para ver las claves: <code>apt-key list</code>, para ver las claves expiradas ejecutamos:
+
+<pre>root@rasalhague:~/tmp# apt-key list |grep expired
+pub   4096R/D2C19886 2015-05-28 [expired: 2017-11-22]
+pub   4096R/D2C19886 2015-05-28 [expired: 2017-11-22]</pre>
+Para renovar la clave:
+
+<pre>apt-key adv --keyserver keys.gnupg.net --recv-keys D2C19886</pre>
 == Orange Pi Zero ==
 
 Para usar la Orange Pi Zero tendremos que crear imágenes arrancables en tarjetas micro SD.

@@ -392,6 +392,18 @@ sudo aptitude install gimp-plugin-registry gimp-texturize gimp-data-extras gimp-
 
 ~~~~
 
+### Krita
+
+Basta con descargar el _Appimage_ desde la [página web](https://krita.org)
+
+### MyPaint
+
+Está disponible la última versión via _Flatpak_:
+
+~~~~
+flatpak install --from https://raw.githubusercontent.com/mypaint/mypaint/master/flatpak/mypaint-stable.flatpakref
+~~~~
+
 ### Blender
 
 Bajamos el paquete de la web, descomprimimos en `~/apps' y creamos
@@ -1300,15 +1312,12 @@ documentos muy complejos con programas embebidos.
 
 #### Instalar Jupyter en el Python del sistema
 
-Seguimos las instrucciones [aquí](https://gist.github.com/frgomes/24c1923f2c9f14a27b14)
-
-Si usamos el script descargado del github se instalará el __Jupyter__
-con el python3 del sistema. __Conviene asegurarse de que estamos
-apuntando al python del S.O. y no a cualquier otro Python que hayamos instalado:
-
+Ahora tenemos Jupyter en _Backports_ así que basta con:
 ~~~~{bash}
-which python
+aptitude install jupyter-notebook
+apt -t backports install python3-tornado
 ~~~~
+
 
 #### Instalar Anaconda Python
 
@@ -1727,6 +1736,12 @@ Y ya funciona.
 
 # Virtualización
 
+## Flatpak
+
+~~~~
+aptitude install flatpak flatpak-builder
+~~~~
+
 ## Docker
 
 ~~~~{bash}
@@ -1980,6 +1995,8 @@ php5-snmp php5-sqlite php5-tidy php5-xmlrpc php5-xsl
 
 TODO
 
+[http://www.geektalks.org/deploy-web2py-server-with-nginx-in-debian]
+
 ## Servidores de bases de datos
 
 ### MySQL
@@ -1992,9 +2009,19 @@ Opcionalmente (y muy recomendable)
 mysql_secure_instalallation
 ~~~~
 
+Si queremos instalar las últimas versiones disponibles (es lo que yo
+hice) podemos hacer lo siguiente:
+
+~~~~
+wget http://dev.mysql.com/get/mysql-apt-config_0.7.3-1_all.deb
+dpkg -i mysql-apt-config_0.7.3-1_all.deb
+apt-get update
+apt-get install mysql-community-server
+~~~~
+
 #### Actualización
 
-Cambiamos el fichero _mysql.conf.d/mysqld.cnf_
+Cambiamos el fichero _/etc/mysql.conf.d/mysqld.cnf_
 
 ~~~~
 # max_allowed_packet      = 16M
@@ -2004,7 +2031,7 @@ max_allowed_packet	= 500M
 Reiniciamos el servicio:
 
 ~~~~
-/etc/init.d/mysql restart
+systemctl restart mysql
 ~~~~
 
 ### Cliente SQL SQuirreL SQL
@@ -2024,6 +2051,24 @@ dejado el conector java.
 __PENDIENTE__
 
 # Recetas varias
+
+## APT: Claves expiradas
+
+Para ver las claves: `apt-key list`, para ver las claves expiradas ejecutamos:
+
+~~~~
+root@rasalhague:~/tmp# apt-key list |grep expired
+pub   4096R/D2C19886 2015-05-28 [expired: 2017-11-22]
+pub   4096R/D2C19886 2015-05-28 [expired: 2017-11-22]
+~~~~
+
+Para renovar la clave:
+
+~~~~
+apt-key adv --keyserver keys.gnupg.net --recv-keys D2C19886
+~~~~
+
+
 
 ## Orange Pi Zero
 

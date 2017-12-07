@@ -51,6 +51,9 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\usepackage[normalem]{ulem}
+% avoid problems with \sout in headers with hyperref:
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -534,6 +537,21 @@ Gimp ya estaba instalado, adicionalmente instalado el gimp data-extra
 
 \begin{verbatim}
 sudo aptitude install gimp-plugin-registry gimp-texturize gimp-data-extras gimp-gap
+\end{verbatim}
+
+\hypertarget{krita}{%
+\subsubsection{Krita}\label{krita}}
+
+Basta con descargar el \emph{Appimage} desde la
+\href{https://krita.org}{página web}
+
+\hypertarget{mypaint}{%
+\subsubsection{MyPaint}\label{mypaint}}
+
+Está disponible la última versión via \emph{Flatpak}:
+
+\begin{verbatim}
+flatpak install --from https://raw.githubusercontent.com/mypaint/mypaint/master/flatpak/mypaint-stable.flatpakref
 \end{verbatim}
 
 \hypertarget{blender}{%
@@ -1551,17 +1569,10 @@ complejos con programas embebidos.
 \paragraph{Instalar Jupyter en el Python del
 sistema}\label{instalar-jupyter-en-el-python-del-sistema}}
 
-Seguimos las instrucciones
-\href{https://gist.github.com/frgomes/24c1923f2c9f14a27b14}{aquí}
-
-Si usamos el script descargado del github se instalará el
-\textbf{Jupyter} con el python3 del sistema. \_\_Conviene asegurarse de
-que estamos apuntando al python del S.O. y no a cualquier otro Python
-que hayamos instalado:
-
-\begin{verbatim}
-which python
-\end{verbatim}
+Ahora tenemos Jupyter en \emph{Backports} así que basta con:
+\textasciitilde{}\textasciitilde{}\sout{\{bash\} aptitude install
+jupyter-notebook apt -t backports install
+python3-tornado}\textasciitilde{}\textasciitilde{}
 
 \hypertarget{instalar-anaconda-python}{%
 \paragraph{Instalar Anaconda Python}\label{instalar-anaconda-python}}
@@ -2011,6 +2022,13 @@ Y ya funciona.
 \hypertarget{virtualizaciuxf3n}{%
 \section{Virtualización}\label{virtualizaciuxf3n}}
 
+\hypertarget{flatpak}{%
+\subsection{Flatpak}\label{flatpak}}
+
+\begin{verbatim}
+aptitude install flatpak flatpak-builder
+\end{verbatim}
+
 \hypertarget{docker}{%
 \subsection{Docker}\label{docker}}
 
@@ -2313,6 +2331,8 @@ php5-snmp php5-sqlite php5-tidy php5-xmlrpc php5-xsl
 
 TODO
 
+{[}http://www.geektalks.org/deploy-web2py-server-with-nginx-in-debian{]}
+
 \hypertarget{servidores-de-bases-de-datos}{%
 \subsection{Servidores de bases de
 datos}\label{servidores-de-bases-de-datos}}
@@ -2328,10 +2348,20 @@ Opcionalmente (y muy recomendable)
 mysql_secure_instalallation
 \end{verbatim}
 
+Si queremos instalar las últimas versiones disponibles (es lo que yo
+hice) podemos hacer lo siguiente:
+
+\begin{verbatim}
+wget http://dev.mysql.com/get/mysql-apt-config_0.7.3-1_all.deb
+dpkg -i mysql-apt-config_0.7.3-1_all.deb
+apt-get update
+apt-get install mysql-community-server
+\end{verbatim}
+
 \hypertarget{actualizaciuxf3n}{%
 \paragraph{Actualización}\label{actualizaciuxf3n}}
 
-Cambiamos el fichero \emph{mysql.conf.d/mysqld.cnf}
+Cambiamos el fichero \emph{/etc/mysql.conf.d/mysqld.cnf}
 
 \begin{verbatim}
 # max_allowed_packet      = 16M
@@ -2341,7 +2371,7 @@ max_allowed_packet  = 500M
 Reiniciamos el servicio:
 
 \begin{verbatim}
-/etc/init.d/mysql restart
+systemctl restart mysql
 \end{verbatim}
 
 \hypertarget{cliente-sql-squirrel-sql}{%
@@ -2365,6 +2395,24 @@ dejado el conector java.
 
 \hypertarget{recetas-varias}{%
 \section{Recetas varias}\label{recetas-varias}}
+
+\hypertarget{apt-claves-expiradas}{%
+\subsection{APT: Claves expiradas}\label{apt-claves-expiradas}}
+
+Para ver las claves: \texttt{apt-key\ list}, para ver las claves
+expiradas ejecutamos:
+
+\begin{verbatim}
+root@rasalhague:~/tmp# apt-key list |grep expired
+pub   4096R/D2C19886 2015-05-28 [expired: 2017-11-22]
+pub   4096R/D2C19886 2015-05-28 [expired: 2017-11-22]
+\end{verbatim}
+
+Para renovar la clave:
+
+\begin{verbatim}
+apt-key adv --keyserver keys.gnupg.net --recv-keys D2C19886
+\end{verbatim}
 
 \hypertarget{orange-pi-zero}{%
 \subsection{Orange Pi Zero}\label{orange-pi-zero}}
