@@ -2068,6 +2068,23 @@ Para renovar la clave:
 apt-key adv --keyserver keys.gnupg.net --recv-keys D2C19886
 ~~~~
 
+## Flatpak
+
+Listar las aplicaciones disponibles en un hub:
+
+~~~~
+flatpak remote-ls --app flathub
+~~~~
+
+Listar las aplicaciones disponibles en local: `flatpak list`
+
+Ejecutar una aplicación en local: `flatpak run appname`
+
+Instalar una aplicación:
+
+~~~~
+flatpak install --from https://flathub.org/repo/appstream/com.skype.Client.flatpakref
+~~~~
 
 
 ## Orange Pi Zero

@@ -1706,6 +1706,22 @@ Para renovar la clave:
 <code>
 apt-key adv --keyserver keys.gnupg.net --recv-keys D2C19886
 </code>
+===== Flatpak =====
+
+Listar las aplicaciones disponibles en un hub:
+
+<code>
+flatpak remote-ls --app flathub
+</code>
+Listar las aplicaciones disponibles en local: ''%%flatpak list%%''
+
+Ejecutar una aplicación en local: ''%%flatpak run appname%%''
+
+Instalar una aplicación:
+
+<code>
+flatpak install --from https://flathub.org/repo/appstream/com.skype.Client.flatpakref
+</code>
 ===== Orange Pi Zero =====
 
 Para usar la Orange Pi Zero tendremos que crear imágenes arrancables en tarjetas micro SD.

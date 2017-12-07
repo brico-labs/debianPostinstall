@@ -2414,6 +2414,25 @@ Para renovar la clave:
 apt-key adv --keyserver keys.gnupg.net --recv-keys D2C19886
 \end{verbatim}
 
+\hypertarget{flatpak-1}{%
+\subsection{Flatpak}\label{flatpak-1}}
+
+Listar las aplicaciones disponibles en un hub:
+
+\begin{verbatim}
+flatpak remote-ls --app flathub
+\end{verbatim}
+
+Listar las aplicaciones disponibles en local: \texttt{flatpak\ list}
+
+Ejecutar una aplicación en local: \texttt{flatpak\ run\ appname}
+
+Instalar una aplicación:
+
+\begin{verbatim}
+flatpak install --from https://flathub.org/repo/appstream/com.skype.Client.flatpakref
+\end{verbatim}
+
 \hypertarget{orange-pi-zero}{%
 \subsection{Orange Pi Zero}\label{orange-pi-zero}}
 

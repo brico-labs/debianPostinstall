@@ -1444,6 +1444,18 @@ pub   4096R/D2C19886 2015-05-28 [expired: 2017-11-22]</pre>
 Para renovar la clave:
 
 <pre>apt-key adv --keyserver keys.gnupg.net --recv-keys D2C19886</pre>
+== Flatpak ==
+
+Listar las aplicaciones disponibles en un hub:
+
+<pre>flatpak remote-ls --app flathub</pre>
+Listar las aplicaciones disponibles en local: <code>flatpak list</code>
+
+Ejecutar una aplicación en local: <code>flatpak run appname</code>
+
+Instalar una aplicación:
+
+<pre>flatpak install --from https://flathub.org/repo/appstream/com.skype.Client.flatpakref</pre>
 == Orange Pi Zero ==
 
 Para usar la Orange Pi Zero tendremos que crear imágenes arrancables en tarjetas micro SD.
