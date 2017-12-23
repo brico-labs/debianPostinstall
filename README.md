@@ -238,6 +238,9 @@ Dropbox](https://www.dropbox.com/install-linux), instalado el paquete
 con *packageinstall*, es decir, simplemente pinchando desde el gestor de
 ficheros.
 
+    cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+    ~/.dropbox-dist/dropboxd &
+
 ### Compresores et al
 
 ``` {bash}
@@ -292,6 +295,8 @@ ejemplo) así que en las preferencias de Firefox, sección “*Idioma y
 Apariencia::Avanzadas*” hay que asegurarse de desmarcar la opción:
 “Permitir a las páginas elegir …” Por alguna razón interfiere y no se ve
 el texto en muchas páginas.
+
+(https://mundosubmundo.kaiux.com/2017/11/firefox-quantum-on-debian-jessie-stretch/)
 
 ### Tor
 
@@ -372,6 +377,14 @@ web](https://krita.org)
 Está disponible la última versión via *Flatpak*:
 
     flatpak install --from https://raw.githubusercontent.com/mypaint/mypaint/master/flatpak/mypaint-stable.flatpakref
+
+### Pencil2D
+
+No confundir con Pencil. Pencil2D es un software de animaciones 2D. Esta
+disponible como *AppImage*.
+
+Descargamos el fichero *AppImage* desde su página web, lo dejamos en
+`~/apps/pencil2d/` y creamos un lanzador con MenuLibre.
 
 ### Blender
 
@@ -1644,6 +1657,11 @@ Flatpak
 
     aptitude install flatpak flatpak-builder
 
+### Referencias
+
+<https://blogs.gnome.org/alexl/2017/02/10/maintaining-a-flatpak-repository/>
+<https://flatpak.org/hello-world>
+
 Docker
 ------
 
@@ -2270,6 +2288,7 @@ Links
 -   [zsh](http://blog.namangoel.com/zsh-with-antigen)
 -   <https://www.roaringpenguin.com/products/remind>
 -   <http://taskwarrior.org/>
+-   <https://protechgurus.com/download-juniper-junos-olive-image-gns3/>
 
 Licencia
 ========

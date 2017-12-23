@@ -385,6 +385,11 @@ Bajado el paquete Debian desde la página
 el paquete con \emph{packageinstall}, es decir, simplemente pinchando
 desde el gestor de ficheros.
 
+\begin{verbatim}
+cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+~/.dropbox-dist/dropboxd &
+\end{verbatim}
+
 \hypertarget{compresores-et-al}{%
 \subsubsection{Compresores et al}\label{compresores-et-al}}
 
@@ -449,6 +454,8 @@ ejemplo) así que en las preferencias de Firefox, sección ``\emph{Idioma
 y Apariencia::Avanzadas}'' hay que asegurarse de desmarcar la opción:
 ``Permitir a las páginas elegir \ldots{}'' Por alguna razón interfiere y
 no se ve el texto en muchas páginas.
+
+(https://mundosubmundo.kaiux.com/2017/11/firefox-quantum-on-debian-jessie-stretch/)
 
 \hypertarget{tor}{%
 \subsubsection{Tor}\label{tor}}
@@ -553,6 +560,16 @@ Está disponible la última versión via \emph{Flatpak}:
 \begin{verbatim}
 flatpak install --from https://raw.githubusercontent.com/mypaint/mypaint/master/flatpak/mypaint-stable.flatpakref
 \end{verbatim}
+
+\hypertarget{pencil2d}{%
+\subsubsection{Pencil2D}\label{pencil2d}}
+
+No confundir con Pencil. Pencil2D es un software de animaciones 2D. Esta
+disponible como \emph{AppImage}.
+
+Descargamos el fichero \emph{AppImage} desde su página web, lo dejamos
+en \texttt{\textasciitilde{}/apps/pencil2d/} y creamos un lanzador con
+MenuLibre.
 
 \hypertarget{blender}{%
 \subsubsection{Blender}\label{blender}}
@@ -2029,6 +2046,12 @@ Y ya funciona.
 aptitude install flatpak flatpak-builder
 \end{verbatim}
 
+\hypertarget{referencias-1}{%
+\subsubsection{Referencias}\label{referencias-1}}
+
+\url{https://blogs.gnome.org/alexl/2017/02/10/maintaining-a-flatpak-repository/}
+\url{https://flatpak.org/hello-world}
+
 \hypertarget{docker}{%
 \subsection{Docker}\label{docker}}
 
@@ -2636,8 +2659,8 @@ wlan0     Link encap:Ethernet  HWaddr a4:7c:f2:9a:97:7c
           RX bytes:328 (328.0 B)  TX bytes:852 (852.0 B)
 \end{verbatim}
 
-\hypertarget{referencias-1}{%
-\subsubsection{Referencias}\label{referencias-1}}
+\hypertarget{referencias-2}{%
+\subsubsection{Referencias}\label{referencias-2}}
 
 \begin{itemize}
 \tightlist
@@ -2841,6 +2864,8 @@ capturamos una imagen cada 10 sg.
   \url{https://www.roaringpenguin.com/products/remind}
 \item
   \url{http://taskwarrior.org/}
+\item
+  \url{https://protechgurus.com/download-juniper-junos-olive-image-gns3/}
 \end{itemize}
 
 \hypertarget{licencia}{%

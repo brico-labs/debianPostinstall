@@ -263,6 +263,11 @@ Bajado el paquete Debian desde la página
 paquete con _packageinstall_, es decir, simplemente pinchando desde el
 gestor de ficheros.
 
+~~~~
+cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+~/.dropbox-dist/dropboxd &
+~~~~
+
 ### Compresores et al
 
 ~~~~{bash}
@@ -317,6 +322,7 @@ Apariencia::Avanzadas_" hay que asegurarse de desmarcar la opción:
 "Permitir a las páginas elegir ..." Por alguna razón interfiere y no
 se ve el texto en muchas páginas.
 
+(https://mundosubmundo.kaiux.com/2017/11/firefox-quantum-on-debian-jessie-stretch/)
 
 ### Tor
 
@@ -403,6 +409,15 @@ Está disponible la última versión via _Flatpak_:
 ~~~~
 flatpak install --from https://raw.githubusercontent.com/mypaint/mypaint/master/flatpak/mypaint-stable.flatpakref
 ~~~~
+
+### Pencil2D
+
+No confundir con Pencil. Pencil2D es un software de animaciones
+2D. Esta disponible como _AppImage_.
+
+Descargamos el fichero _AppImage_ desde su página web, lo dejamos en
+`~/apps/pencil2d/` y creamos un lanzador con MenuLibre.
+
 
 ### Blender
 
@@ -1742,6 +1757,12 @@ Y ya funciona.
 aptitude install flatpak flatpak-builder
 ~~~~
 
+### Referencias
+
+<https://blogs.gnome.org/alexl/2017/02/10/maintaining-a-flatpak-repository/>
+<https://flatpak.org/hello-world>
+
+
 ## Docker
 
 ~~~~{bash}
@@ -2406,6 +2427,7 @@ El framerate son imágenes por segundo, así que aquí estamos diciendo que capt
 * [zsh](http://blog.namangoel.com/zsh-with-antigen)
 * <https://www.roaringpenguin.com/products/remind>
 * <http://taskwarrior.org/>
+* <https://protechgurus.com/download-juniper-junos-olive-image-gns3/>
 
 # Licencia
 

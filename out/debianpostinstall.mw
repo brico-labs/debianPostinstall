@@ -170,6 +170,8 @@ Descargamos el paquete desde [https://rclone.org/ la página web]
 
 Bajado el paquete Debian desde la página [https://www.dropbox.com/install-linux web de Dropbox], instalado el paquete con ''packageinstall'', es decir, simplemente pinchando desde el gestor de ficheros.
 
+<pre>cd ~ &amp;&amp; wget -O - &quot;https://www.dropbox.com/download?plat=lnx.x86_64&quot; | tar xzf -
+~/.dropbox-dist/dropboxd &amp;</pre>
 === Compresores et al ===
 
 <pre class="{bash}">sudo apt-get install rar unrar zip unzip unace bzip2 lzop p7zip p7zip-full p7zip-rar</pre>
@@ -203,6 +205,8 @@ sudo aptitude install chromium</pre>
 Bajamos las dos versiones: estable y de desarrollo. Descomprimimos en <code>~/apps</code> y cremos los lanzadores con ''Menulibre''.
 
 En mi sistema hay instaladas fuentes adicionales (para programar por ejemplo) así que en las preferencias de Firefox, sección “''Idioma y Apariencia::Avanzadas''” hay que asegurarse de desmarcar la opción: “Permitir a las páginas elegir …” Por alguna razón interfiere y no se ve el texto en muchas páginas.
+
+(https://mundosubmundo.kaiux.com/2017/11/firefox-quantum-on-debian-jessie-stretch/)
 
 === Tor ===
 
@@ -265,6 +269,12 @@ Basta con descargar el ''Appimage'' desde la [https://krita.org página web]
 Está disponible la última versión via ''Flatpak'':
 
 <pre>flatpak install --from https://raw.githubusercontent.com/mypaint/mypaint/master/flatpak/mypaint-stable.flatpakref</pre>
+=== Pencil2D ===
+
+No confundir con Pencil. Pencil2D es un software de animaciones 2D. Esta disponible como ''AppImage''.
+
+Descargamos el fichero ''AppImage'' desde su página web, lo dejamos en <code>~/apps/pencil2d/</code> y creamos un lanzador con MenuLibre.
+
 === Blender ===
 
 Bajamos el paquete de la web, descomprimimos en `~/apps’ y creamos lanzador con ''Menulibre''.
@@ -1207,6 +1217,10 @@ Y ya funciona.
 == Flatpak ==
 
 <pre>aptitude install flatpak flatpak-builder</pre>
+=== Referencias ===
+
+https://blogs.gnome.org/alexl/2017/02/10/maintaining-a-flatpak-repository/ https://flatpak.org/hello-world
+
 == Docker ==
 
 <pre class="{bash}">apt-get install apt-transport-https ca-certificates
@@ -1671,6 +1685,7 @@ El framerate son imágenes por segundo, así que aquí estamos diciendo que capt
 * [http://blog.namangoel.com/zsh-with-antigen zsh]
 * https://www.roaringpenguin.com/products/remind
 * http://taskwarrior.org/
+* https://protechgurus.com/download-juniper-junos-olive-image-gns3/
 
 = Licencia =
 
