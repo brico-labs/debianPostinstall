@@ -455,7 +455,7 @@ y Apariencia::Avanzadas}'' hay que asegurarse de desmarcar la opción:
 ``Permitir a las páginas elegir \ldots{}'' Por alguna razón interfiere y
 no se ve el texto en muchas páginas.
 
-(https://mundosubmundo.kaiux.com/2017/11/firefox-quantum-on-debian-jessie-stretch/)
+\url{https://wiki.debian.org/HOWTO/DefaultWebBrowser}
 
 \hypertarget{tor}{%
 \subsubsection{Tor}\label{tor}}
@@ -628,6 +628,13 @@ TODO: Probar qStopmotion
 \hypertarget{audio-y-video}{%
 \subsection{Audio y video}\label{audio-y-video}}
 
+\textbf{IMPORTANTE} Documentar el problema de ffmpeg, documentar la
+instalación
+
+\url{https://unix.stackexchange.com/questions/242399/why-was-ffmpeg-removed-from-debian}
+\url{https://superuser.com/questions/286675/how-to-install-ffmpeg-on-debian}
+\url{https://support.assetbank.co.uk/hc/en-gb/articles/115005343247-Installing-Ffmpeg-on-Debian-GNU-Linux-Version-8-0-Jessie-}
+
 \hypertarget{codecs}{%
 \subsubsection{Codecs}\label{codecs}}
 
@@ -768,7 +775,12 @@ sudo aptitude install wire-desktop
 
 Un cliente de mensajería seguro y descentralizado basado en Blockchain.
 
-En Debian 9
+No estará disponible hasta Debian 9, pero si que lo tenemos via
+\emph{flatpak}
+
+\begin{verbatim}
+flatpak install --from https://flathub.org/repo/appstream/cx.ring.Ring.flatpakref
+\end{verbatim}
 
 \hypertarget{probar}{%
 \subsubsection{Probar}\label{probar}}
@@ -2410,6 +2422,17 @@ conector de mysql para java, por ejemplo desde
 Una vez instalado, creamos el desktop-file con \emph{MenuLibre} y
 configuramos el driver \emph{MySQL} añadiendo el path a donde hayamos
 dejado el conector java.
+
+Para la última versión de Squirrel he tenido que hacer lo siguiente:
+
+\begin{verbatim}
+sudo apt-get install -t jessie-backports openjdk-8-jdk
+sudo update-java-alternatives --set java-1.8.0-openjdk-amd64
+\end{verbatim}
+
+Para activar el driver de MySQL dentro de Squirrel es \textbf{muy
+importante} escoger el driver apropiado en el menú gráfico:
+\texttt{com.mysql.jdbc.Driver}.
 
 \hypertarget{mariadb}{%
 \subsubsection{MariaDB}\label{mariadb}}

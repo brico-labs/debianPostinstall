@@ -296,7 +296,7 @@ Apariencia::Avanzadas*” hay que asegurarse de desmarcar la opción:
 “Permitir a las páginas elegir …” Por alguna razón interfiere y no se ve
 el texto en muchas páginas.
 
-(https://mundosubmundo.kaiux.com/2017/11/firefox-quantum-on-debian-jessie-stretch/)
+<https://wiki.debian.org/HOWTO/DefaultWebBrowser>
 
 ### Tor
 
@@ -430,6 +430,13 @@ TODO: Probar qStopmotion
 Audio y video
 -------------
 
+**IMPORTANTE** Documentar el problema de ffmpeg, documentar la
+instalación
+
+<https://unix.stackexchange.com/questions/242399/why-was-ffmpeg-removed-from-debian>
+<https://superuser.com/questions/286675/how-to-install-ffmpeg-on-debian>
+<https://support.assetbank.co.uk/hc/en-gb/articles/115005343247-Installing-Ffmpeg-on-Debian-GNU-Linux-Version-8-0-Jessie->
+
 ### Codecs
 
 Instalamos los codecs
@@ -543,7 +550,10 @@ Un cliente de mensajeria seguro.
 
 Un cliente de mensajería seguro y descentralizado basado en Blockchain.
 
-En Debian 9
+No estará disponible hasta Debian 9, pero si que lo tenemos via
+*flatpak*
+
+    flatpak install --from https://flathub.org/repo/appstream/cx.ring.Ring.flatpakref
 
 ### Probar
 
@@ -1955,6 +1965,14 @@ java, por ejemplo desde
 Una vez instalado, creamos el desktop-file con *MenuLibre* y
 configuramos el driver *MySQL* añadiendo el path a donde hayamos dejado
 el conector java.
+
+Para la última versión de Squirrel he tenido que hacer lo siguiente:
+
+    sudo apt-get install -t jessie-backports openjdk-8-jdk
+    sudo update-java-alternatives --set java-1.8.0-openjdk-amd64
+
+Para activar el driver de MySQL dentro de Squirrel es **muy importante**
+escoger el driver apropiado en el menú gráfico: `com.mysql.jdbc.Driver`.
 
 ### MariaDB
 

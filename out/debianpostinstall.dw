@@ -248,7 +248,7 @@ Bajamos las dos versiones: estable y de desarrollo. Descomprimimos en ''%%~/apps
 
 En mi sistema hay instaladas fuentes adicionales (para programar por ejemplo) así que en las preferencias de Firefox, sección “//Idioma y Apariencia::Avanzadas//” hay que asegurarse de desmarcar la opción: “Permitir a las páginas elegir …” Por alguna razón interfiere y no se ve el texto en muchas páginas.
 
-(https:%%//%%mundosubmundo.kaiux.com/2017/11/firefox-quantum-on-debian-jessie-stretch/)
+https://wiki.debian.org/HOWTO/DefaultWebBrowser
 
 ==== Tor ====
 
@@ -364,6 +364,10 @@ sudo aptitude install stopmotion vgrabbj dvgrab
 TODO: Probar qStopmotion
 
 ===== Audio y video =====
+
+**IMPORTANTE** Documentar el problema de ffmpeg, documentar la instalación
+
+https://unix.stackexchange.com/questions/242399/why-was-ffmpeg-removed-from-debian https://superuser.com/questions/286675/how-to-install-ffmpeg-on-debian https://support.assetbank.co.uk/hc/en-gb/articles/115005343247-Installing-Ffmpeg-on-Debian-GNU-Linux-Version-8-0-Jessie-
 
 ==== Codecs ====
 
@@ -481,8 +485,11 @@ sudo aptitude install wire-desktop
 
 Un cliente de mensajería seguro y descentralizado basado en Blockchain.
 
-En Debian 9
+No estará disponible hasta Debian 9, pero si que lo tenemos via //flatpak//
 
+<code>
+flatpak install --from https://flathub.org/repo/appstream/cx.ring.Ring.flatpakref
+</code>
 ==== Probar ====
 
   * [[https://tails.boum.org/index.en.html|Tails]]
@@ -1701,6 +1708,14 @@ systemctl restart mysql
 Descargamos el paquete desde la página [[http://squirrel-sql.sourceforge.net/|web]] y lo descomprimimos en //~/apps//, también tendremos que descargar el conector de mysql para java, por ejemplo desde [[http://dev.mysql.com/downloads/connector/j/3.0.html|aquí]]
 
 Una vez instalado, creamos el desktop-file con //MenuLibre// y configuramos el driver //MySQL// añadiendo el path a donde hayamos dejado el conector java.
+
+Para la última versión de Squirrel he tenido que hacer lo siguiente:
+
+<code>
+sudo apt-get install -t jessie-backports openjdk-8-jdk
+sudo update-java-alternatives --set java-1.8.0-openjdk-amd64
+</code>
+Para activar el driver de MySQL dentro de Squirrel es **muy importante** escoger el driver apropiado en el menú gráfico: ''%%com.mysql.jdbc.Driver%%''.
 
 ==== MariaDB ====
 
