@@ -87,7 +87,7 @@ $(output)/$(target).docx: $(sources)
 # github   -- buid github README.md file into repo root directory
 github: README.md $(sources)
 README.md: $(sources)
-	pandoc --from markdown --to markdown_github \
+	pandoc --from markdown --to gfm \
 	--output=README.md \
 	$(sources)
 
