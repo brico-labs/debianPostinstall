@@ -2393,6 +2393,40 @@ apt-get update
 apt-get install mysql-community-server
 \end{verbatim}
 
+\textbf{¡ATENCION!} La nueva versión 5.7 de MySQL (en mi caso la versión
+instalada es la 5.7.20) activa por defecto una serie de chequeos que en
+versiones anteriores no estaban activados. Esto provoca que programas
+que funcionaban sin problemas en versiones anteriores dejen de funcionar
+tras la actualización.
+
+Antes de pasarte un par de dias depurando tus programas, desactiva los
+nuevos chequeos y comprueba si funcionan:
+
+Creamos un fichero \texttt{/etc/mysql/conf.d/disable\_strict\_mode.cnf}
+con el siguiente contenido:
+
+\begin{verbatim}
+[mysqld]
+sql_mode=IGNORE_SPACE,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+\end{verbatim}
+
+Y rearrancamos el servidor \emph{MySQL}:
+\texttt{sudo\ service\ mysql\ restart}
+
+Un par de referencias interesantes con respecto a este tema:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://serverpilot.io/community/articles/how-to-disable-strict-mode-in-mysql-5-7.html}{La
+  receta que he seguido}
+\item
+  \href{https://www.digitalocean.com/community/tutorials/how-to-prepare-for-your-mysql-5-7-upgrade}{Una
+  explicación más completa}
+\item
+  \href{https://mariadb.com/kb/en/library/sql-mode/}{Para MariaDB}
+\end{itemize}
+
 \hypertarget{actualizaciuxf3n}{%
 \paragraph{Actualización}\label{actualizaciuxf3n}}
 

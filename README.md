@@ -1,16 +1,15 @@
-Introducción
-============
+# Introducción
 
 Mi portátil es un ordenador Acer 5755G con las siguientes
 características:
 
--   Core i5 2430M 2.4GHz
+  - Core i5 2430M 2.4GHz
 
--   NVIDIA Geforce GT 540M
+  - NVIDIA Geforce GT 540M
 
--   8Gb RAM
+  - 8Gb RAM
 
--   750Gb HD
+  - 750Gb HD
 
 Mi portátil equipa una tarjeta *Nvidia Geforce GT540M* que resulta
 pertenecer a una rama muerta en el árbol de desarrollo de Nvidia.
@@ -36,8 +35,7 @@ del Bumblebee para probar que funcionaba normalmente.
 
     sudo apt-get install firmware-linux-nonfree Bumblebee-nvidia primus
 
-Cambiar las opciones de idioma
-==============================
+# Cambiar las opciones de idioma
 
 Ejecutamos:
 
@@ -51,8 +49,7 @@ configuración de Gnome.
 Nos pedirá rearrancar Gnome y renombrará todos los directorios de
 sistema.
 
-Gestión de paquetes
-===================
+# Gestión de paquetes
 
 Instalamos *aptitude*, *synaptic* y *gdebi*
 
@@ -65,8 +62,7 @@ sudo apt-get install gdebi
 Cambiamos las opciones de *aptitude* para que **no instale** los
 paquetes recomendados.
 
-Quitamos el cdrom de los sources.list
--------------------------------------
+## Quitamos el cdrom de los sources.list
 
 Editamos el fichero */etc/apt/sources.list* y comentamos las lineas del
 cdrom.
@@ -76,21 +72,20 @@ así:
 
     # 
     # deb cdrom:[Debian GNU/Linux 8.9.0 _Jessie_ - Official amd64 NETINST Binary-1 20170723-11:47]/ jessie main
-
+    
     #deb cdrom:[Debian GNU/Linux 8.9.0 _Jessie_ - Official amd64 NETINST Binary-1 20170723-11:47]/ jessie main
-
+    
     deb http://debian.netcologne.de/debian/ jessie main contrib non-free
     #deb-src http://debian.netcologne.de/debian/ jessie main contrib non-free
-
+    
     deb http://security.debian.org/ jessie/updates main contrib non-free
     #deb-src http://security.debian.org/ jessie/updates main contrib non-free
-
+    
     # jessie-updates, previously known as 'volatile'
     deb http://debian.netcologne.de/debian/ jessie-updates main contrib non-free
     #deb-src http://debian.netcologne.de/debian/ jessie-updates main contrib non-free
 
-Habilitamos los backports y multimedia
---------------------------------------
+## Habilitamos los backports y multimedia
 
 ### Backports:
 
@@ -134,23 +129,24 @@ Listar los paquetes con updates pendientes en *Backports*:
 
 Lo mismo pero viendo la versión instalada y la candidata:
 
-`aptitude search -t $(lsb_release -sc)-backports -F '%p %v -> %V' '~U ~Abackports'`
+`aptitude search -t $(lsb_release -sc)-backports -F '%p %v -> %V' '~U
+~Abackports'`
 
 Podemos dejar este último (o cualquier otro) en un alias de *Bash*:
 
-`alias apt-list-backports="aptitude search -t $(lsb_release -sc)-backports -F '%p %v -> %V' '~U ~Abackports'"`
+`alias apt-list-backports="aptitude search -t $(lsb_release
+-sc)-backports -F '%p %v -> %V' '~U ~Abackports'"`
 
-Instalamos el paquete de microcode:
------------------------------------
+## Instalamos el paquete de microcode:
 
-`aptitude install intel-microcode`
+`aptitude install
+    intel-microcode`
 
-Configuramos los parámetros de disco duro:
-------------------------------------------
+## Configuramos los parámetros de disco duro:
 
     cp /usr/share/doc/util-linux/examples/fstrim.{service,timer} /etc/systemd/system
     systemctl enable fstrim.timer
-
+    
     echo vm.swappiness=1 >> /etc/sysctl.d/80-local.conf
 
 Control de temperatura:
@@ -159,8 +155,7 @@ Control de temperatura:
     aptitude install psensor
     aptitude install thermald
 
-Activamos intel\_pstate
------------------------
+## Activamos intel\_pstate
 
 Editamos el fichero `/etc/default/grub` y lo modificamos para que
 contenga la linea:
@@ -170,11 +165,9 @@ contenga la linea:
 La activación de `intel_pstate` ha tenido un efecto definitivo en la
 temperatura de mi portátil.
 
-Instalación de varios paquetes sueltos
-======================================
+# Instalación de varios paquetes sueltos
 
-Programas de utilidad y uso frecuente
--------------------------------------
+## Programas de utilidad y uso frecuente
 
 ### Menulibre
 
@@ -261,14 +254,14 @@ pueden usar directamente con *Freeplane*.
 El cliente de mensajeria de Telegram. Descargado desde la web, instalado
 en *~/apps*
 
-Internet
---------
+## Internet
 
 ### Chrome y Chromium
 
 Instalado chrome añadiendo fuentes a aptitude. No recuerdo como las
-añadí, pero en el fichero */etc/apt/sources.list.d/google-chrome.list*,
-tengo los siguientes contenidos:
+añadí, pero en el fichero
+*/etc/apt/sources.list.d/google-chrome.list*, tengo los siguientes
+contenidos:
 
     ###
     ###
@@ -293,8 +286,8 @@ Bajamos las dos versiones: estable y de desarrollo. Descomprimimos en
 En mi sistema hay instaladas fuentes adicionales (para programar por
 ejemplo) así que en las preferencias de Firefox, sección “*Idioma y
 Apariencia::Avanzadas*” hay que asegurarse de desmarcar la opción:
-“Permitir a las páginas elegir …” Por alguna razón interfiere y no se ve
-el texto en muchas páginas.
+“Permitir a las páginas elegir …” Por alguna razón interfiere y no se
+ve el texto en muchas páginas.
 
 <https://wiki.debian.org/HOWTO/DefaultWebBrowser>
 
@@ -325,10 +318,10 @@ cuaderno de bitácora personal, pero no había seguido su evolución.
 
 Me he descargado:
 
--   [Tiddlywiki](http://tiddlywiki.com/) y le he instalado los plugins
+  - [Tiddlywiki](http://tiddlywiki.com/) y le he instalado los plugins
     de *FontAwesome* y *WikiMap*, este será mi nuevo cuaderno de
     bitácora.
--   [GSD5](http://gsd5.tiddlyspot.com/) un *TiddlyWiki* adaptado a *GTD*
+  - [GSD5](http://gsd5.tiddlyspot.com/) un *TiddlyWiki* adaptado a *GTD*
 
 A mayores me he instalado la aplicación
 [TiddlyDesktop](https://github.com/Jermolene/TiddlyDesktop), basada en
@@ -337,8 +330,7 @@ A mayores me he instalado la aplicación
 Como siempre la instalamos en *~/apps* y creamos un lanzador con
 *MenuLibre*.
 
-Gráficos
---------
+## Gráficos
 
 ### Inkscape
 
@@ -356,14 +348,15 @@ Imprescindibles para el diseño de cacharros. Instalados desde repos con
 aptitude
 
     apt-get install librecad
-
+    
     apt-get -t jessie-backports install freecad
 
 ### Gimp
 
 El programa para edición y retocado de imágenes.
 
-Gimp ya estaba instalado, adicionalmente instalado el gimp data-extra
+Gimp ya estaba instalado, adicionalmente instalado el gimp
+    data-extra
 
     sudo aptitude install gimp-plugin-registry gimp-texturize gimp-data-extras gimp-gap
 
@@ -374,7 +367,8 @@ web](https://krita.org)
 
 ### MyPaint
 
-Está disponible la última versión via *Flatpak*:
+Está disponible la última versión via
+    *Flatpak*:
 
     flatpak install --from https://raw.githubusercontent.com/mypaint/mypaint/master/flatpak/mypaint-stable.flatpakref
 
@@ -408,8 +402,7 @@ web](http://pencil.evolus.vn/). Lo instalamos y listo. Puede dar
 problemas si usamos Iceweasel, ya que el paquete depende de Firefox. Más
 info [aquí](https://www.linuxwebzone.com/install-pencil-on-debian/)
 
-Fotografía
-----------
+## Fotografía
 
 ### Rawtherapee y Darktable: Tratamiento de imágenes fotogŕaficas
 
@@ -427,8 +420,7 @@ Para hacer pélis de animación Stopmotion.
 
 TODO: Probar qStopmotion
 
-Audio y video
--------------
+## Audio y video
 
 **IMPORTANTE** Documentar el problema de ffmpeg, documentar la
 instalación
@@ -472,7 +464,8 @@ Instalamos *gpodder* para gestionar nuestros podcast, aunque
 
 ### Spotify
 
-Cliente de *Spotify*
+Cliente de
+    *Spotify*
 
     sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
     echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
@@ -490,8 +483,7 @@ sudo aptitude install vokoscreen
 sudo aptitude install handbrake handbrake-cli handbrake-gtk
 ```
 
-Seguridad
----------
+## Seguridad
 
 ### Lector de DNIe
 
@@ -499,7 +491,7 @@ Instalamos:
 
     sudo aptitude libccid install pcscd pcsc-tools
 
-Como root ejecutamos *pcsc\_scan* [1]:
+Como root ejecutamos *pcsc\_scan* \[1\]:
 
     root@rasalhague:~# pcsc_scan 
     PC/SC device scanner
@@ -520,7 +512,7 @@ Si insertamos el lector veremos algo como esto:
     Waiting for the first reader...found one
     Scanning present readers...
     0: C3PO LTC31 v2 (11061005) 00 00
-
+    
     Wed Jan 25 01:17:20 2017
     Reader 0: C3PO LTC31 v2 (11061005) 00 00
       Card state: Card removed, 
@@ -557,43 +549,44 @@ No estará disponible hasta Debian 9, pero si que lo tenemos via
 
 ### Probar
 
--   [Tails](https://tails.boum.org/index.en.html)
--   [Qubes](https://www.qubes-os.org/)
+  - [Tails](https://tails.boum.org/index.en.html)
+  - [Qubes](https://www.qubes-os.org/)
 
-Documentos
-==========
+# Documentos
 
-Calibre
--------
+## Calibre
 
 La mejor utilidad para gestionar tu colección de libros electrónicos.
 
-Ejecutamos lo que manda la página web:
+Ejecutamos lo que manda la página
+    web:
 
     sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py \
     | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
 
 Para usar el calibre con el Kobo Glo:
 
--   Desactivamos todos los plugin de Kobo menos el *Kobo Touch Extended*
--   Creamos una columna *MyShelves* con identificativo *\#myshelves*
--   En las opciones del plugin:
+  - Desactivamos todos los plugin de Kobo menos el *Kobo Touch Extended*
 
-    -   En la opción *Collection columns* añadimos las columnas
+  - Creamos una columna *MyShelves* con identificativo *\#myshelves*
+
+  - En las opciones del plugin:
+    
+      - En la opción *Collection columns* añadimos las columnas
         *series,\#myshelves*
-    -   Marcamos las opciones *Create collections* y *Delete empy
+      - Marcamos las opciones *Create collections* y *Delete empy
         collections*
-    -   *Update metadata on device* y *Set series information*
+      - *Update metadata on device* y *Set series information*
 
-Algunos enlaces útiles:
+Algunos enlaces
+    útiles:
 
--   <https://github.com/jgoguen/calibre-kobo-driver>
--   <http://www.lectoreselectronicos.com/foro/showthread.php?15116-Manual-de-instalaci%C3%B3n-y-uso-del-plugin-Kobo-Touch-Extended-para-Calibre>
--   <http://www.redelijkheid.com/blog/2013/7/25/kobo-glo-ebook-library-management-with-calibre>
--   <https://www.netogram.com/kobo.htm>
+  - <https://github.com/jgoguen/calibre-kobo-driver>
+  - <http://www.lectoreselectronicos.com/foro/showthread.php?15116-Manual-de-instalaci%C3%B3n-y-uso-del-plugin-Kobo-Touch-Extended-para-Calibre>
+  - <http://www.redelijkheid.com/blog/2013/7/25/kobo-glo-ebook-library-management-with-calibre>
+  - <https://www.netogram.com/kobo.htm>
 
-Pandoc
-------
+## Pandoc
 
 Pandoc es un traductor entre formatos de documento. Está escrito en
 Python y es increiblemente útil. De hecho este documento está escrito
@@ -611,8 +604,7 @@ cd ~/.pandoc
 git clone https://github.com/jgm/pandoc-templates templates
 ```
 
-Zotero
-------
+## Zotero
 
 Zotero es un programa que te permite guardar una o varias bibliografías
 con referencias a libros, páginas web o documentos electrónicos.
@@ -620,8 +612,7 @@ con referencias a libros, páginas web o documentos electrónicos.
 Instalado el Zotero Standalone desde la [página web del
 programa](https://www.zotero.org/)
 
-Vanilla LaTeX
--------------
+## Vanilla LaTeX
 
 El LaTeX de Debian está un poquillo anticuado, si se quiere usar una
 versión reciente hay que aplicar [este
@@ -691,7 +682,8 @@ texlive
 ### Fuentes
 
 Para dejar disponibles las fuentes opentype y truetype que vienen con
-texlive para el resto de aplicaciones:
+texlive para el resto de
+aplicaciones:
 
 ``` {bash}
 sudo cp $(kpsewhich -var-value TEXMFSYSVAR)/fonts/conf/texlive-fontconfig.conf /etc/fonts/conf.d/09-texlive.conf
@@ -756,8 +748,7 @@ si sigues este doc)
 sudo aptitude install gksu
 ```
 
-Emacs
------
+## Emacs
 
 Instalado emacs desde los repos:
 
@@ -956,8 +947,7 @@ funciones útiles y añadimos orígenes extra de paquetes.
 (elpy-enable)
 ```
 
-Textadept
----------
+## Textadept
 
 Un potente editor de desarrollo, multiplataforma.
 
@@ -965,14 +955,14 @@ Viene incluido en el pack D-apt, por que es muy potente como IDE para
 **D**.
 
 De momento lo único que he configurado es la fuente, para ello editamos
-el fichero *~/.textadept/init.lua* y añadimos la linea:
+el fichero *~/.textadept/init.lua* y añadimos la
+linea:
 
 ``` {lua}
 ui.set_theme('light', {font = 'Meslo LG L Regular for Powerline', fontsize = 14})
 ```
 
-Scribus
--------
+## Scribus
 
 Scribus es un programa libre de composición de documentos. con Scribus
 puedes elaborar desde los folletos de una exposición hasta una revista o
@@ -982,8 +972,7 @@ Instalado con aptitude
 
     sudo aptitude install scribus
 
-Comix
------
+## Comix
 
 Mi lector de comics favorito.
 
@@ -991,19 +980,16 @@ Instalado con aptitude
 
     sudo aptitude install comix
 
-Desarrollo sw
-=============
+# Desarrollo sw
 
-Paquetes esenciales
--------------------
+## Paquetes esenciales
 
 Estos son los paquetes esenciales para empezar a desarrollar software en
 Linux.
 
     sudo apt-get install build-essential checkinstall make automake cmake autoconf git git-core dpkg wget
 
-Git
----
+## Git
 
 Control de versiones distribuido. Imprescindible.
 
@@ -1032,13 +1018,11 @@ git config --global alias.last  'log -1 HEAD'
 git config --global alias.ca 'commit -a'
 ```
 
-Open Java
----------
+## Open Java
 
     apt-get install openjdk-7-jre icedtea-7-plugin
 
-Lenguaje de programación D (D programming language)
----------------------------------------------------
+## Lenguaje de programación D (D programming language)
 
 [El lenguaje de programación D](https://dlang.org/) es un lenguaje de
 programación de sistemas con una sintaxis similar a la de C y con tipado
@@ -1048,7 +1032,8 @@ seguridad y productividad.
 ### D-apt e instalación de programas
 
 Configurado [d-apt](http://d-apt.sourceforge.net/), instalados todos los
-programas incluidos
+programas
+incluidos
 
 ``` {bash}
 sudo wget http://master.dl.sourceforge.net/project/d-apt/files/d-apt.list -O /etc/apt/sources.list.d/d-apt.list
@@ -1093,13 +1078,13 @@ necesitamos instalar:
 
 Instalados los siguientes paquetes desde *marmalade*
 
--   *d-mode*
--   *flymake-d*
--   *flycheck*
--   *flycheck-dmd-dub*
--   *flychek-d-unittest*
--   *auto-complete* (desde *melpa*)
--   *ac-dcd*
+  - *d-mode*
+  - *flymake-d*
+  - *flycheck*
+  - *flycheck-dmd-dub*
+  - *flychek-d-unittest*
+  - *auto-complete* (desde *melpa*)
+  - *ac-dcd*
 
 Se configura en el fichero **~/.emacs**:
 
@@ -1156,17 +1141,15 @@ Se configura en el fichero **~/.emacs**:
 
 #### Referencias
 
--   <https://github.com/atilaneves/ac-dcd>
--   <https://github.com/Hackerpilot/DCD>
+  - <https://github.com/atilaneves/ac-dcd>
+  - <https://github.com/Hackerpilot/DCD>
 
-Processing
-----------
+## Processing
 
 Bajamos los paquetes de las respectivas páginas web, descomprimimimos en
 *~/apps/* y creamos los desktop file con **Menulibre**
 
-Openframeworks
---------------
+## Openframeworks
 
 Bajamos el paquete comprimido de la página web del proyecto.
 
@@ -1176,14 +1159,14 @@ Bajamos al directorio de la aplicación y ejecutamos:
 
     sudo  scripts/linux/debian/install_dependencies.sh
     sudo  scripts/linux/debian/install_codecs.sh
-
+    
     cd scripts/linux
     ./compileOF.sh -j2
-
+    
     cd OF/examples/graphics/polygonExample
     make
     make Run
-
+    
     cd OF/scripts/linux
     ./compilePG.sh
 
@@ -1193,8 +1176,7 @@ Al final también va a añadir una linea al fichero *~/.profile*
 
     export PG_OF_PATH=/home/salvari/apps/of/of_v0.9.3_linux64_release
 
-Python
-------
+## Python
 
 De partida tenemos instalado dos versiones: *python* y *python3*
 
@@ -1251,7 +1233,8 @@ O añadir esa linea a nuestros ficheros *.bashrc* y/o *.zshrc*
 
 Yo he dejado la variable de entorno *WORKON\_HOME* sin definir, así que
 apunta al directorio por defecto, `~/.virtualenvs`. En ese directorio es
-donde se guardarán nuestros entornos virtuales.
+donde se guardarán nuestros entornos
+virtuales.
 
 [Aquí](http://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html)
 tenemos la referencia de comandos de *virtualenvwrapper*
@@ -1338,14 +1321,15 @@ Nos aseguramos de tener *pip* al dia:
 
 Instalamos la biblioteca [GraphLab
 Create](https://turi.com/products/create/). Esta biblioteca se supone
-que es fácil de usar pero está sujeta a licencia. [2]
+que es fácil de usar pero está sujeta a licencia. \[2\]
 
 Una vez registrado en la página web te pasan un número de registro que
-tienes que usar para instalar la biblioteca.
+tienes que usar para instalar la
+    biblioteca.
 
     pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
 
-Y para terminar instalamos iPython [3]:
+Y para terminar instalamos iPython \[3\]:
 
     conda install ipython-notebook
 
@@ -1353,29 +1337,29 @@ Desde ahora basta con activar el entorno que hemos creado para tener
 acceso al iPython.
 
     source activate gl-env
-
+    
     ipython notebook
-
+    
     source deactivate gl-env
 
 ##### Instalación alternativa con virtualenv
 
     # Create a virtual environment named e.g. gl-env
     virtualenv gl-env
-
+    
     # Activate the virtual environment
     source gl-env/bin/activate
-
+    
     # Make sure pip is up to date
     pip install --upgrade pip
-
+    
     # Install IPython Notebook (optional)
     pip install "ipython[notebook]"
-
+    
     # Install Jupyter Notebook (optional)
     pip install "jupyter"
-
-
+    
+    
     # Install your licensed copy of GraphLab Create
     pip install --upgrade --no-cache-dir https://get.graphlab.com/GraphLab-Create/2.1/your registered email address here/your product key here/GraphLab-Create-License.tar.gz
 
@@ -1419,7 +1403,7 @@ certificados:
 
     openssl genrsa -out server.key 2048
     openssl req -new -key server.key -out server.csr
-
+    
     Country Name (2 letter code) [AU]:ES
     State or Province Name (full name) [Some-State]:CORUNA
     Locality Name (eg, city) []:CORUNA
@@ -1427,19 +1411,21 @@ certificados:
     Organizational Unit Name (eg, section) []:salvari
     Common Name (e.g. server FQDN or YOUR name) []:salvari
     Email Address []:salvari@gmail.com
-
+    
     Please enter the following 'extra' attributes
     to be sent with your certificate request
     A challenge password []:secret1t05
     An optional company name []:Mikasa
 
-Ahora ejecutamos:
+Ahora
+    ejecutamos:
 
     openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
 Ahora deberíamos dejar los ficheros `server.key`, `server.csr` y
 `server.crt` en el directorio raiz de *web2py* y ya podremos arrancar el
-framework con los siguientes parámetros:
+framework con los siguientes
+    parámetros:
 
     python web2py.py -a 'admin_password' -c server.crt -k server.key -i 0.0.0.0 -p 8000
 
@@ -1452,7 +1438,7 @@ Tampoco está de más instalar las librerías de graphviz:
 
 ### Selenium
 
-Vamos a instalar *Selenium* para hacer TDD [4] de aplicaciones web con
+Vamos a instalar *Selenium* para hacer TDD \[4\] de aplicaciones web con
 Python. Lo haremos siguiendo [estas
 instrucciones](http://selenium-python.readthedocs.io/index.html).
 
@@ -1498,12 +1484,11 @@ sudo pip install -U networkx
 sudo python3 -m pip install -U networkx
 ```
 
-------------------------------------------------------------------------
+-----
 
 > **Nota**: Tengo que pensar bien como hacerlo.
 
-Go language
------------
+## Go language
 
 Nos bajamos los binarios desde la [página
 oficial](https://golang.org/dl/)
@@ -1517,21 +1502,19 @@ Deberíamos dejar configuradas las siguientes variables de entorno:
 
     # Point to the local installation of golang.
     export GOROOT=/opt/go
-
+    
     # Point to the location beneath which source and binaries are installed.
     export GOPATH=$HOME/go
-
+    
     # Ensure that the binary-release is on your PATH.
     export PATH=${PATH}:${GOROOT}/bin
-
+    
     # Ensure that compiled binaries are also on your PATH.
     export PATH=${PATH}:${GOPATH}/bin
 
-Desarrollo hardware
-===================
+# Desarrollo hardware
 
-Arduino IDE
------------
+## Arduino IDE
 
 Bajamos los paquetes de la página [web](https://www.arduino.cc),
 descomprimimimos en *~/apps/arduino*.
@@ -1545,8 +1528,8 @@ La primera vez que instalamos será necesario crear el desktop file con
 **Menulibre** con las actualizaciones no será necesario, siempre y
 cuando apunte a *~/apps/arduino/current*
 
-No hay que olvidar añadir nuestro usuario al grupo *dialaout*:
-`sudo gpasswd --add username dialtout`
+No hay que olvidar añadir nuestro usuario al grupo *dialaout*: `sudo
+gpasswd --add username dialtout`
 
 ### Añadir biblioteca de soporte para Makeblock
 
@@ -1565,8 +1548,7 @@ ver los ejemplos de *Makeblock*.
 Un detalle importante para programar el Auriga-Me es necesario
 seleccionar el micro Arduino Mega 2560 en el IDE Arduino.
 
-Pinguino IDE
-------------
+## Pinguino IDE
 
 Tenemos el paquete de instalación disponible en su página
 [web](http://pinguino.cc/download.php)
@@ -1582,8 +1564,7 @@ instalación y no lo crea automáticamente.
 El programa queda correctamente instalado en */opt* y arranca
 correctamente, habrá que probarlo con los micros.
 
-KiCAD
------
+## KiCAD
 
 Instalamos desde *backports*:
 
@@ -1592,9 +1573,10 @@ sudo aptitude install -t jessie-backports kicad
 ```
 
 Vamos a instalar a mayores algunas librerias de KiCAD, para poder crear
-Shields de Arduino.
+Shields de
+    Arduino.
 
--   [Freetronics](https://github.com/freetronics/freetronics_kicad_library)
+  - [Freetronics](https://github.com/freetronics/freetronics_kicad_library)
     una libreria que no solo incluye Shield para Arduino sino una
     completa colección de componentes que nos permitirá hacer proyectos
     completos. [Freetronics](http://www.freetronics.com) es una especie
@@ -1602,13 +1584,13 @@ Shields de Arduino.
     al parecer mantiene una biblioteca para KiCAD. La biblioteca de
     Freetronics se mantiene en un repo de github. Lo suyo es
     incorporarla a cada proyecto, por que si la actualizas se pueden
-    romper los proyectos que estes haciendo.
--   [eklablog](http://meta-blog.eklablog.com/kicad-librairie-arduino-pretty-p930786)
+    romper los proyectos que estes
+    haciendo.
+  - [eklablog](http://meta-blog.eklablog.com/kicad-librairie-arduino-pretty-p930786)
     Esta biblioteca de componentes está incluida en el github de KiCAD,
     así que teoricamente no habría que instalarla en nuestro disco duro.
 
-Analizador lógico
------------------
+## Analizador lógico
 
 Mi analizador es un OpenBench de Seedstudio, [aquí hay mas
 info](http://dangerousprototypes.com/docs/Open_Bench_Logic_Sniffer)
@@ -1649,7 +1631,7 @@ Editamos el fichero *~/apps/Logic Analyzer/client/run.sh* y lo dejamos
 así:
 
     #!/bin/bash
-
+    
     # java -jar analyzer.jar $*
     java -cp /usr/share/java/RXTXcomm.jar:analyzer.jar org.sump.analyzer.Loader
 
@@ -1657,13 +1639,12 @@ Y ya funciona.
 
 ### OLS
 
-[Página oficial](https://www.lxtreme.nl/ols/)
+[Página
+oficial](https://www.lxtreme.nl/ols/)
 
-Virtualización
-==============
+# Virtualización
 
-Flatpak
--------
+## Flatpak
 
     aptitude install flatpak flatpak-builder
 
@@ -1672,8 +1653,7 @@ Flatpak
 <https://blogs.gnome.org/alexl/2017/02/10/maintaining-a-flatpak-repository/>
 <https://flatpak.org/hello-world>
 
-Docker
-------
+## Docker
 
 ``` {bash}
 apt-get install apt-transport-https ca-certificates
@@ -1694,22 +1674,25 @@ sudo docker run hello-world   - todo bien
 sudo gpasswd -a salvari docker
 ```
 
-Virtualbox
-----------
+## Virtualbox
 
 Tenemos que:
 
--   Añadir el fichero *virtualbox.list* al directorio
+  - Añadir el fichero *virtualbox.list* al directorio
     */etc/apt/sources.list.d*
--   Bajarnos y añadir a nuestro llavero las claves públicas de Oracle
--   Actualizar la lista de paquetes
--   Instalar virtualbox
--   Añadir nuestro usuario al grupo vboxuser (no tengo claro que esto
-    sea necesario)
 
+  - Bajarnos y añadir a nuestro llavero las claves públicas de Oracle
+
+  - Actualizar la lista de paquetes
+
+  - Instalar virtualbox
+
+  - Añadir nuestro usuario al grupo vboxuser (no tengo claro que esto
+    sea necesario)
+    
     echo “deb http://download.virtualbox.org/virtualbox/debian jessie
-    contrib” \|sudo tee /etc/apt/sources.list.d/virtualbox.list wget -q
-    https://www.virtualbox.org/download/oracle\_vbox\_2016.asc -O- \|
+    contrib” |sudo tee /etc/apt/sources.list.d/virtualbox.list wget -q
+    https://www.virtualbox.org/download/oracle\_vbox\_2016.asc -O- |
     sudo apt-key add - sudo apt-get update sudo apt-get install
     virtualbox-5.1 sudo gpasswd -a salvari vboxusers
 
@@ -1722,27 +1705,24 @@ Sin más que hacer doble click en el fichero descargado lo instalaremos
 en nuestra instancia de *Virtualbox* (necesitamos la contraseña de
 administración).
 
-Virtualizando un Windows 7
---------------------------
+## Virtualizando un Windows 7
 
--   2 Gb de ram
--   Create virtual hard disk
--   10Gb dinamically allocated
--   Settings -&gt; System-&gt;Boot Order: Quitamos el floppy
--   Storage -&gt; Add IDE Controller-&gt;Add Optical Disk -&gt; Choose
-    Disk -&gt; ISO Image
--   Instalamos Windows en Inglés y con teclado en español
+  - 2 Gb de ram
+  - Create virtual hard disk
+  - 10Gb dinamically allocated
+  - Settings -\> System-\>Boot Order: Quitamos el floppy
+  - Storage -\> Add IDE Controller-\>Add Optical Disk -\> Choose Disk
+    -\> ISO Image
+  - Instalamos Windows en Inglés y con teclado en español
 
 Una vez instalado el SO Windows instalamos las Guest Additions.
 
-Shells alternativos: zsh y fish
-===============================
+# Shells alternativos: zsh y fish
 
 Los dos son muy interesantes. He usado zsh casi un año, ahora voy a
 probar **fish**.
 
-fish
-----
+## fish
 
 Instalamos **fish** desde aptitude con:
 
@@ -1750,7 +1730,8 @@ Instalamos **fish** desde aptitude con:
 sudo aptitude install fish
 ```
 
-Instalamos oh-my-fish
+Instalamos
+oh-my-fish
 
 ``` {bash}
 curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install > install
@@ -1762,8 +1743,7 @@ Si queremos que **fish** sea nuestro nuevo *shell*:
 
     chsh -s `which fish`
 
-zsh
----
+## zsh
 
 Igualmente instalamos **zsh**:
 
@@ -1781,10 +1761,10 @@ git clone https://github.com/zsh-users/antigen
 Y editamos el fichero *~/.zshrc* para que contenga:
 
     source ~/apps/antigen/antigen.zsh
-
+    
     # Load the oh-my-zsh's library.
     antigen use oh-my-zsh
-
+    
     # Bundles from the default repo (robbyrussell's oh-my-zsh).
     antigen bundle git
     antigen bundle command-not-found
@@ -1793,23 +1773,23 @@ Y editamos el fichero *~/.zshrc* para que contenga:
     # antigen bundle heroku
     # antigen bundle pip
     # antigen bundle lein
-
-
+    
+    
     # Syntax highlighting bundle.
     antigen bundle zsh-users/zsh-syntax-highlighting
-
+    
     # git
     antigen bundle arialdomartini/oh-my-git
     antigen theme arialdomartini/oh-my-git-themes oppa-lana-style
-
+    
     # autosuggestions
     antigen bundle tarruda/zsh-autosuggestions
-
+    
     #antigen theme agnoster
-
+    
     # Tell antigen that you're done.
     antigen apply
-
+    
     # append to path
     path+=('/home/salvari/apps/julia/current/bin/')
     # prepend
@@ -1821,8 +1801,7 @@ Antigen ya se encarga de descargar todo lo que queramos utilizar en zsh.
 Nos queda arreglar las fuentes para que funcione correctamente la linea
 de estado en los repos de git. Necesitamos una fuente *Awesome*
 
-Instalación de fuentes adicionales
-----------------------------------
+## Instalación de fuentes adicionales
 
 Nos bajamos unas cuantas fuentes que soporten los iconos *Awesome*.
 
@@ -1836,30 +1815,25 @@ cp someFontFile ~/.fonts/
 fc-cache -vf ~/.fonts/
 ```
 
-Reprap
-======
+# Reprap
 
-Sl1c3r
-------
+## Sl1c3r
 
 Descargamos el paquete binario desde la página web.
 
--   Cambiar permisos en directorio */lib/vrt/*
--   Instalado *lib-canberra-module* desde aptitude
--   Es necesario instalar *freeglut*
+  - Cambiar permisos en directorio */lib/vrt/*
+  - Instalado *lib-canberra-module* desde aptitude
+  - Es necesario instalar *freeglut*
 
-OpenScad
---------
+## OpenScad
 
 Instalado desde aptitude.
 
-Printrun
---------
+## Printrun
 
 Descargamos desde github
 
-Cura
-----
+## Cura
 
 Descargamos desde la pagina web
 
@@ -1873,11 +1847,9 @@ cython python-libxml2 python-gobject python-dbus python-psutil python-cairosvg g
 python setup.py build_ext --inplace
 ```
 
-Aplicaciones Web
-================
+# Aplicaciones Web
 
-Servidor Web
-------------
+## Servidor Web
 
 ### Apache
 
@@ -1893,9 +1865,9 @@ fichero de configuración principal es */etc/apache2/apache2.conf*. Hay
 ficheros de configuración adicionales en el directorio */etc/apache2* y
 sus subdirectorios. Por ejemplo:
 
--   /etc/apache2/mods-enabled
--   /etc/apache2/sites-enabled
--   /etc/apache2/conf-enabled
+  - /etc/apache2/mods-enabled
+  - /etc/apache2/sites-enabled
+  - /etc/apache2/conf-enabled
 
 Además del Apache vamos a dejar instalado el *php5*
 
@@ -1912,7 +1884,8 @@ Si creamos un fichero */var/www/html/info.php*, que contenga las lineas:
 Podemos ver en el siguiente enlace <http://localhost/info.php> si el php
 funciona correctamente.
 
-Módulos de php relacionados con mysql:
+Módulos de php relacionados con
+    mysql:
 
     sudo aptitude install php5-mysqlnd php5-curl php5-gd php5-intl php-pear \
     php5-imagick php5-imap php5-mcrypt php5-memcache php5-pspell php5-recode \
@@ -1924,8 +1897,7 @@ TODO
 
 \[http://www.geektalks.org/deploy-web2py-server-with-nginx-in-debian\]
 
-Servidores de bases de datos
-----------------------------
+## Servidores de bases de datos
 
 ### MySQL
 
@@ -1942,6 +1914,31 @@ hice) podemos hacer lo siguiente:
     dpkg -i mysql-apt-config_0.7.3-1_all.deb
     apt-get update
     apt-get install mysql-community-server
+
+**¡ATENCION\!** La nueva versión 5.7 de MySQL (en mi caso la versión
+instalada es la 5.7.20) activa por defecto una serie de chequeos que en
+versiones anteriores no estaban activados. Esto provoca que programas
+que funcionaban sin problemas en versiones anteriores dejen de funcionar
+tras la actualización.
+
+Antes de pasarte un par de dias depurando tus programas, desactiva los
+nuevos chequeos y comprueba si funcionan:
+
+Creamos un fichero `/etc/mysql/conf.d/disable_strict_mode.cnf` con el
+siguiente contenido:
+
+    [mysqld]
+    sql_mode=IGNORE_SPACE,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+
+Y rearrancamos el servidor *MySQL*: `sudo service mysql restart`
+
+Un par de referencias interesantes con respecto a este tema:
+
+  - [La receta que he
+    seguido](https://serverpilot.io/community/articles/how-to-disable-strict-mode-in-mysql-5-7.html)
+  - [Una explicación más
+    completa](https://www.digitalocean.com/community/tutorials/how-to-prepare-for-your-mysql-5-7-upgrade)
+  - [Para MariaDB](https://mariadb.com/kb/en/library/sql-mode/)
 
 #### Actualización
 
@@ -1978,11 +1975,9 @@ escoger el driver apropiado en el menú gráfico: `com.mysql.jdbc.Driver`.
 
 **PENDIENTE**
 
-Recetas varias
-==============
+# Recetas varias
 
-APT: Claves expiradas
----------------------
+## APT: Claves expiradas
 
 Para ver las claves: `apt-key list`, para ver las claves expiradas
 ejecutamos:
@@ -1995,8 +1990,7 @@ Para renovar la clave:
 
     apt-key adv --keyserver keys.gnupg.net --recv-keys D2C19886
 
-Flatpak
--------
+## Flatpak
 
 Listar las aplicaciones disponibles en un hub:
 
@@ -2006,12 +2000,12 @@ Listar las aplicaciones disponibles en local: `flatpak list`
 
 Ejecutar una aplicación en local: `flatpak run appname`
 
-Instalar una aplicación:
+Instalar una
+    aplicación:
 
     flatpak install --from https://flathub.org/repo/appstream/com.skype.Client.flatpakref
 
-Orange Pi Zero
---------------
+## Orange Pi Zero
 
 Para usar la Orange Pi Zero tendremos que crear imágenes arrancables en
 tarjetas micro SD.
@@ -2040,8 +2034,8 @@ partición creada en la memoria.
 
 Resumiendo:
 
--   `${card}` será `/dev/sdb` o `/dev/mmcblk0`
--   *c**a**r**d*{p} será `/dev/sdb1` o `/dev/mmcblk0p1`
+  - `${card}` será `/dev/sdb` o `/dev/mmcblk0`
+  - \({card}\){p} será `/dev/sdb1` o `/dev/mmcblk0p1`
 
 Antes de seguir adelante hay que estar completamente seguro del
 dispositivo asociado a nuestra memoria SD para no armar ningún
@@ -2069,13 +2063,16 @@ Disk identifier: 0x00000000
 `cat /proc/partitions` también nos dará una lista de particiones, en mi
 portátil las que interesan son:
 
-     179        0    7761920 mmcblk0
-     179        1    7757824 mmcblk0p1
+``` 
+ 179        0    7761920 mmcblk0
+ 179        1    7757824 mmcblk0p1
+```
 
 Descargamos la imagen de Jessie adaptada a la *Orange Pi Zero* desde la
 página <https://www.armbian.com/download/>
 
-Descomprimimos la imagen y la grabamos en la tarjeta SD con el comando:
+Descomprimimos la imagen y la grabamos en la tarjeta SD con el
+    comando:
 
     sudo dd if=./Armbian_5.24_Orangepizero_Debian_jessie_3.4.113.img of=/dev/mmcblk0
 
@@ -2103,7 +2100,7 @@ hacer login con:
 
     ssh root@192.168.0.109
 
-¡Y ya estamos!
+¡Y ya estamos\!
 
 ![Primer login en *Orange Pi*](src/img/OrangePiZero_FirstLogin.png)
 
@@ -2122,15 +2119,15 @@ Vamos a comprobar que todo va bien:
 
     root@orangepizero:~# iwconfig
     lo        no wireless extensions.
-
+    
     tunl0     no wireless extensions.
-
+    
     wlan0     IEEE 802.11bgn  ESSID:off/any
               Mode:Managed  Access Point: Not-Associated   Tx-Power=20 dBm
               Retry  long limit:7   RTS thr:off   Fragment thr:off
               Encryption key:off
               Power Management:on
-
+    
     eth0      no wireless extensions.
 
 Todo tiene buena pinta, vamos a ver si detecta WIFIs:
@@ -2165,7 +2162,7 @@ wifi (yo la prefiero con IP estática).
 Ejecutamos `ifconfig` y ya vemos nuestro nuevo interface configurado:
 
     ifconfig
-
+    
     wlan0     Link encap:Ethernet  HWaddr a4:7c:f2:9a:97:7c
               inet addr:192.168.0.120  Bcast:192.168.0.255  Mask:255.255.255.0
               inet6 addr: fe80::a67c:f2ff:fe9a:977c/64 Scope:Link
@@ -2177,22 +2174,21 @@ Ejecutamos `ifconfig` y ya vemos nuestro nuevo interface configurado:
 
 ### Referencias
 
--   [Página oficial](http://www.orangepi.org/)
--   [Recursos oficiales](http://www.orangepi.org/downloadresources/)
+  - [Página oficial](http://www.orangepi.org/)
+  - [Recursos oficiales](http://www.orangepi.org/downloadresources/)
     aquí hay imágenes y los esquemáticos
--   [Tienda en
+  - [Tienda en
     Aliexpress](https://www.aliexpress.com/store/1553371?spm=2114.8147860.0.0.F1q43C)
--   <http://linux-sunxi.org/Bootable_SD_card>
--   <https://www.armbian.com/orange-pi-zero/>
--   <https://docs.armbian.com/User-Guide_Getting-Started/>
--   <https://docs.armbian.com/Hardware_Allwinner/>
--   [GPIO](https://linux-sunxi.org/GPIO) Una explicación de como acceder
+  - <http://linux-sunxi.org/Bootable_SD_card>
+  - <https://www.armbian.com/orange-pi-zero/>
+  - <https://docs.armbian.com/User-Guide_Getting-Started/>
+  - <https://docs.armbian.com/Hardware_Allwinner/>
+  - [GPIO](https://linux-sunxi.org/GPIO) Una explicación de como acceder
     al gpio desde terminal
--   [Info variada](https://linux-sunxi.org/Orange_Pi_Zero) Aquí tenemos
+  - [Info variada](https://linux-sunxi.org/Orange_Pi_Zero) Aquí tenemos
     el esquema de pines
 
-Raspberry Pi Media Center
--------------------------
+## Raspberry Pi Media Center
 
 Bajamos la imagen con nuestro cliente torrent favorito desde
 [aquí](https://github.com/aikoncwd/aikoncwd-rpi-mediacenter), no os
@@ -2208,542 +2204,552 @@ tras averigurar la IP con `nmap` (ver *Orange Pi Zero*)
 Una vez instalado los pasos recomendados:
 
 1.  Cambiar la password de root: `passwd`
+
 2.  Fijar una IP estática: Editamos el fichero `/etc/dhcpcd.conf`, ya de
     paso configuramos la IP estática para la WIFI
-
-         interface eth0
-         static ip_address=192.168.0.125/24
-         static routers=192.168.0.1
-         static domain_name_servers=8.8.8.8
-
-         interface wlan0
-         static ip_address=192.168.0.126/24
-         static routers=192.168.0.1
-         static domain_name_servers=8.8.8.8
-
+    
+    ``` 
+     interface eth0
+     static ip_address=192.168.0.125/24
+     static routers=192.168.0.1
+     static domain_name_servers=8.8.8.8
+    
+     interface wlan0
+     static ip_address=192.168.0.126/24
+     static routers=192.168.0.1
+     static domain_name_servers=8.8.8.8
+    ```
+    
     Una vez cambiado el fichero hay que reiniciar con `shutdown -r now`
 
 3.  Configurar la WIFI, en esta parte damos por supuesto que tenemos la
     wifi con WPA activado.
-
+    
     Echamos un ojo a nuestro interfaz radio con `iwconfig`, si aparece
     el `wlan0` todo va bien.
-
-         wlan0     IEEE 802.11bgn  ESSID:off/any
-                   Mode:Managed  Access Point: Not-Associated   Tx-Power=31 dBm
-                   Retry short limit:7   RTS thr:off   Fragment thr:off
-                   Encryption key:off
-                   Power Management:on
-
+    
+    ``` 
+     wlan0     IEEE 802.11bgn  ESSID:off/any
+               Mode:Managed  Access Point: Not-Associated   Tx-Power=31 dBm
+               Retry short limit:7   RTS thr:off   Fragment thr:off
+               Encryption key:off
+               Power Management:on
+    ```
+    
     Tenemos que editar el fichero `/etc/network/interfaces` y
     asegurarnos de tener el `wlan0` como sigue:
-
-         allow-hotplug wlan0
-         iface wlan0 inet manual
-             wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
-
+    
+    ``` 
+     allow-hotplug wlan0
+     iface wlan0 inet manual
+         wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+    ```
+    
     Ahora vamos a editar el fichero de configuración de
     `wpa_supplicant`, es decir `/etc/wpa_supplicant/wpa_supplicant.conf`
     y añadir un bloque `network` que sea como el que va a continuación,
     de paso he cambiado el `country` a “ES”, asi que queda así:
-
-         country=ES
-         ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-         update_config=1
-         network={
-           ssid="YOURSSID"
-           psk="YOURPASSWORD"
-         }
-
+    
+    ``` 
+     country=ES
+     ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+     update_config=1
+     network={
+       ssid="YOURSSID"
+       psk="YOURPASSWORD"
+     }
+    ```
+    
     Un reinicio y listos: `shutdown -r now`
 
-Grabar time-lapse del escritorio
---------------------------------
+## Grabar time-lapse del escritorio
 
 ### Usando avconv
 
-Capturas periódicas de la pantalla:
+Capturas periódicas de la
+pantalla:
 
 ``` {bash}
 avconv -video_size 1366x768 -framerate 1/10 -f x11grab -i :0.0+0,0 -pix_fmt rgb24 ~/tmp/frames/frame_%05d.png
 ```
 
 El framerate son imágenes por segundo, así que aquí estamos diciendo que
-capturamos una imagen cada 10 sg.
+capturamos una imagen cada 10
+        sg.
 
-TODO
-====
+# TODO
 
--   cinelerra
--   playonlinux
--   krita
--   mypaint
--   qStopmotion
--   chibios
-    -   \[http://wiki.chibios.org/dokuwiki/doku.php?id=chibios:community:setup:openocd\_chibios\]
-    -   \[http://www.josho.org/blog/blog/2014/11/30/nucleo-gcc/\]
-    -   \[http://www.stevebate.net/chibios-rpi/GettingStarted.html\]
--   ICE Studio
--   Inkscape
-    -   <https://elizsarobhasa.makes.org/thimble/MTMwNDIzMjE5Mg==/3d-printing-from-a-2d-drawing>
-    -   Instalar tb jessyink
--   rclone <https://syncthing.net/>
--   vmware (no creo, virtualbox va genial)
--   Astronomía
--   Borg backup
+  - cinelerra
+  - playonlinux
+  - krita
+  - mypaint
+  - qStopmotion
+  - chibios
+      - \[http://wiki.chibios.org/dokuwiki/doku.php?id=chibios:community:setup:openocd\_chibios\]
+      - \[http://www.josho.org/blog/blog/2014/11/30/nucleo-gcc/\]
+      - \[http://www.stevebate.net/chibios-rpi/GettingStarted.html\]
+  - ICE
+        Studio
+  - Inkscape
+      - <https://elizsarobhasa.makes.org/thimble/MTMwNDIzMjE5Mg==/3d-printing-from-a-2d-drawing>
+      - Instalar tb jessyink
+  - rclone <https://syncthing.net/>
+  - vmware (no creo, virtualbox va genial)
+  - Astronomía
+  - Borg backup
 
-Links
-=====
+# Links
 
--   [Systemd](https://wiki.debian.org/systemd)
--   [Gnome
+  - [Systemd](https://wiki.debian.org/systemd)
+  - [Gnome
     shortcuts](https://wiki.gnome.org/Design/OS/KeyboardShortcuts)
--   [Gnome
+  - [Gnome
     optimizaciones](https://www.linux.com/learn/easy-steps-make-gnome-3-more-efficient)
--   [Instalación
+  - [Instalación
     Debian](https://diversidadyunpocodetodo.blogspot.com.es/2015/03/sensores-temperatura-hardware-discos-cpu-debian-ubuntu.html)
--   [zsh](http://joshldavis.com/2014/07/26/oh-my-zsh-is-a-disease-antigen-is-the-vaccine/)
--   [zsh](http://blog.namangoel.com/zsh-with-antigen)
--   <https://www.roaringpenguin.com/products/remind>
--   <http://taskwarrior.org/>
--   <https://protechgurus.com/download-juniper-junos-olive-image-gns3/>
-
-Licencia
-========
-
-
-    Attribution-ShareAlike 4.0 International
-
-    =======================================================================
-
-    Creative Commons Corporation ("Creative Commons") is not a law firm and
-    does not provide legal services or legal advice. Distribution of
-    Creative Commons public licenses does not create a lawyer-client or
-    other relationship. Creative Commons makes its licenses and related
-    information available on an "as-is" basis. Creative Commons gives no
-    warranties regarding its licenses, any material licensed under their
-    terms and conditions, or any related information. Creative Commons
-    disclaims all liability for damages resulting from their use to the
-    fullest extent possible.
-
-    Using Creative Commons Public Licenses
-
-    Creative Commons public licenses provide a standard set of terms and
-    conditions that creators and other rights holders may use to share
-    original works of authorship and other material subject to copyright
-    and certain other rights specified in the public license below. The
-    following considerations are for informational purposes only, are not
-    exhaustive, and do not form part of our licenses.
-
-         Considerations for licensors: Our public licenses are
-         intended for use by those authorized to give the public
-         permission to use material in ways otherwise restricted by
-         copyright and certain other rights. Our licenses are
-         irrevocable. Licensors should read and understand the terms
-         and conditions of the license they choose before applying it.
-         Licensors should also secure all rights necessary before
-         applying our licenses so that the public can reuse the
-         material as expected. Licensors should clearly mark any
-         material not subject to the license. This includes other CC-
-         licensed material, or material used under an exception or
-         limitation to copyright. More considerations for licensors:
-        wiki.creativecommons.org/Considerations_for_licensors
-
-         Considerations for the public: By using one of our public
-         licenses, a licensor grants the public permission to use the
-         licensed material under specified terms and conditions. If
-         the licensor's permission is not necessary for any reason--for
-         example, because of any applicable exception or limitation to
-         copyright--then that use is not regulated by the license. Our
-         licenses grant only permissions under copyright and certain
-         other rights that a licensor has authority to grant. Use of
-         the licensed material may still be restricted for other
-         reasons, including because others have copyright or other
-         rights in the material. A licensor may make special requests,
-         such as asking that all changes be marked or described.
-         Although not required by our licenses, you are encouraged to
-         respect those requests where reasonable. More_considerations
-         for the public:
-        wiki.creativecommons.org/Considerations_for_licensees
-
-    =======================================================================
-
-    Creative Commons Attribution-ShareAlike 4.0 International Public
-    License
-
-    By exercising the Licensed Rights (defined below), You accept and agree
-    to be bound by the terms and conditions of this Creative Commons
-    Attribution-ShareAlike 4.0 International Public License ("Public
-    License"). To the extent this Public License may be interpreted as a
-    contract, You are granted the Licensed Rights in consideration of Your
-    acceptance of these terms and conditions, and the Licensor grants You
-    such rights in consideration of benefits the Licensor receives from
-    making the Licensed Material available under these terms and
-    conditions.
-
-
-    Section 1 -- Definitions.
-
-      a. Adapted Material means material subject to Copyright and Similar
-         Rights that is derived from or based upon the Licensed Material
-         and in which the Licensed Material is translated, altered,
-         arranged, transformed, or otherwise modified in a manner requiring
-         permission under the Copyright and Similar Rights held by the
-         Licensor. For purposes of this Public License, where the Licensed
-         Material is a musical work, performance, or sound recording,
-         Adapted Material is always produced where the Licensed Material is
-         synched in timed relation with a moving image.
-
-      b. Adapter's License means the license You apply to Your Copyright
-         and Similar Rights in Your contributions to Adapted Material in
-         accordance with the terms and conditions of this Public License.
-
-      c. BY-SA Compatible License means a license listed at
-         creativecommons.org/compatiblelicenses, approved by Creative
-         Commons as essentially the equivalent of this Public License.
-
-      d. Copyright and Similar Rights means copyright and/or similar rights
-         closely related to copyright including, without limitation,
-         performance, broadcast, sound recording, and Sui Generis Database
-         Rights, without regard to how the rights are labeled or
-         categorized. For purposes of this Public License, the rights
-         specified in Section 2(b)(1)-(2) are not Copyright and Similar
-         Rights.
-
-      e. Effective Technological Measures means those measures that, in the
-         absence of proper authority, may not be circumvented under laws
-         fulfilling obligations under Article 11 of the WIPO Copyright
-         Treaty adopted on December 20, 1996, and/or similar international
-         agreements.
-
-      f. Exceptions and Limitations means fair use, fair dealing, and/or
-         any other exception or limitation to Copyright and Similar Rights
-         that applies to Your use of the Licensed Material.
-
-      g. License Elements means the license attributes listed in the name
-         of a Creative Commons Public License. The License Elements of this
-         Public License are Attribution and ShareAlike.
-
-      h. Licensed Material means the artistic or literary work, database,
-         or other material to which the Licensor applied this Public
-         License.
-
-      i. Licensed Rights means the rights granted to You subject to the
-         terms and conditions of this Public License, which are limited to
-         all Copyright and Similar Rights that apply to Your use of the
-         Licensed Material and that the Licensor has authority to license.
-
-      j. Licensor means the individual(s) or entity(ies) granting rights
-         under this Public License.
-
-      k. Share means to provide material to the public by any means or
-         process that requires permission under the Licensed Rights, such
-         as reproduction, public display, public performance, distribution,
-         dissemination, communication, or importation, and to make material
-         available to the public including in ways that members of the
-         public may access the material from a place and at a time
-         individually chosen by them.
-
-      l. Sui Generis Database Rights means rights other than copyright
-         resulting from Directive 96/9/EC of the European Parliament and of
-         the Council of 11 March 1996 on the legal protection of databases,
-         as amended and/or succeeded, as well as other essentially
-         equivalent rights anywhere in the world.
-
-      m. You means the individual or entity exercising the Licensed Rights
-         under this Public License. Your has a corresponding meaning.
-
-
-    Section 2 -- Scope.
-
-      a. License grant.
-
-           1. Subject to the terms and conditions of this Public License,
-              the Licensor hereby grants You a worldwide, royalty-free,
-              non-sublicensable, non-exclusive, irrevocable license to
-              exercise the Licensed Rights in the Licensed Material to:
-
-                a. reproduce and Share the Licensed Material, in whole or
-                   in part; and
-
-                b. produce, reproduce, and Share Adapted Material.
-
-           2. Exceptions and Limitations. For the avoidance of doubt, where
-              Exceptions and Limitations apply to Your use, this Public
-              License does not apply, and You do not need to comply with
-              its terms and conditions.
-
-           3. Term. The term of this Public License is specified in Section
-              6(a).
-
-           4. Media and formats; technical modifications allowed. The
-              Licensor authorizes You to exercise the Licensed Rights in
-              all media and formats whether now known or hereafter created,
-              and to make technical modifications necessary to do so. The
-              Licensor waives and/or agrees not to assert any right or
-              authority to forbid You from making technical modifications
-              necessary to exercise the Licensed Rights, including
-              technical modifications necessary to circumvent Effective
-              Technological Measures. For purposes of this Public License,
-              simply making modifications authorized by this Section 2(a)
-              (4) never produces Adapted Material.
-
-           5. Downstream recipients.
-
-                a. Offer from the Licensor -- Licensed Material. Every
-                   recipient of the Licensed Material automatically
-                   receives an offer from the Licensor to exercise the
-                   Licensed Rights under the terms and conditions of this
-                   Public License.
-
-                b. Additional offer from the Licensor -- Adapted Material.
-                   Every recipient of Adapted Material from You
-                   automatically receives an offer from the Licensor to
-                   exercise the Licensed Rights in the Adapted Material
-                   under the conditions of the Adapter's License You apply.
-
-                c. No downstream restrictions. You may not offer or impose
-                   any additional or different terms or conditions on, or
-                   apply any Effective Technological Measures to, the
-                   Licensed Material if doing so restricts exercise of the
-                   Licensed Rights by any recipient of the Licensed
-                   Material.
-
-           6. No endorsement. Nothing in this Public License constitutes or
-              may be construed as permission to assert or imply that You
-              are, or that Your use of the Licensed Material is, connected
-              with, or sponsored, endorsed, or granted official status by,
-              the Licensor or others designated to receive attribution as
-              provided in Section 3(a)(1)(A)(i).
-
-      b. Other rights.
-
-           1. Moral rights, such as the right of integrity, are not
-              licensed under this Public License, nor are publicity,
-              privacy, and/or other similar personality rights; however, to
-              the extent possible, the Licensor waives and/or agrees not to
-              assert any such rights held by the Licensor to the limited
-              extent necessary to allow You to exercise the Licensed
-              Rights, but not otherwise.
-
-           2. Patent and trademark rights are not licensed under this
-              Public License.
-
-           3. To the extent possible, the Licensor waives any right to
-              collect royalties from You for the exercise of the Licensed
-              Rights, whether directly or through a collecting society
-              under any voluntary or waivable statutory or compulsory
-              licensing scheme. In all other cases the Licensor expressly
-              reserves any right to collect such royalties.
-
-
-    Section 3 -- License Conditions.
-
-    Your exercise of the Licensed Rights is expressly made subject to the
-    following conditions.
-
-      a. Attribution.
-
-           1. If You Share the Licensed Material (including in modified
-              form), You must:
-
-                a. retain the following if it is supplied by the Licensor
-                   with the Licensed Material:
-
-                     i. identification of the creator(s) of the Licensed
-                        Material and any others designated to receive
-                        attribution, in any reasonable manner requested by
-                        the Licensor (including by pseudonym if
-                        designated);
-
-                    ii. a copyright notice;
-
-                   iii. a notice that refers to this Public License;
-
-                    iv. a notice that refers to the disclaimer of
-                        warranties;
-
-                     v. a URI or hyperlink to the Licensed Material to the
-                        extent reasonably practicable;
-
-                b. indicate if You modified the Licensed Material and
-                   retain an indication of any previous modifications; and
-
-                c. indicate the Licensed Material is licensed under this
-                   Public License, and include the text of, or the URI or
-                   hyperlink to, this Public License.
-
-           2. You may satisfy the conditions in Section 3(a)(1) in any
-              reasonable manner based on the medium, means, and context in
-              which You Share the Licensed Material. For example, it may be
-              reasonable to satisfy the conditions by providing a URI or
-              hyperlink to a resource that includes the required
-              information.
-
-           3. If requested by the Licensor, You must remove any of the
-              information required by Section 3(a)(1)(A) to the extent
-              reasonably practicable.
-
-      b. ShareAlike.
-
-         In addition to the conditions in Section 3(a), if You Share
-         Adapted Material You produce, the following conditions also apply.
-
-           1. The Adapter's License You apply must be a Creative Commons
-              license with the same License Elements, this version or
-              later, or a BY-SA Compatible License.
-
-           2. You must include the text of, or the URI or hyperlink to, the
-              Adapter's License You apply. You may satisfy this condition
-              in any reasonable manner based on the medium, means, and
-              context in which You Share Adapted Material.
+  - [zsh](http://joshldavis.com/2014/07/26/oh-my-zsh-is-a-disease-antigen-is-the-vaccine/)
+  - [zsh](http://blog.namangoel.com/zsh-with-antigen)
+  - <https://www.roaringpenguin.com/products/remind>
+  - <http://taskwarrior.org/>
+  - <https://protechgurus.com/download-juniper-junos-olive-image-gns3/>
+
+# Licencia
+
+``` 
+
+Attribution-ShareAlike 4.0 International
+
+=======================================================================
+
+Creative Commons Corporation ("Creative Commons") is not a law firm and
+does not provide legal services or legal advice. Distribution of
+Creative Commons public licenses does not create a lawyer-client or
+other relationship. Creative Commons makes its licenses and related
+information available on an "as-is" basis. Creative Commons gives no
+warranties regarding its licenses, any material licensed under their
+terms and conditions, or any related information. Creative Commons
+disclaims all liability for damages resulting from their use to the
+fullest extent possible.
+
+Using Creative Commons Public Licenses
+
+Creative Commons public licenses provide a standard set of terms and
+conditions that creators and other rights holders may use to share
+original works of authorship and other material subject to copyright
+and certain other rights specified in the public license below. The
+following considerations are for informational purposes only, are not
+exhaustive, and do not form part of our licenses.
+
+     Considerations for licensors: Our public licenses are
+     intended for use by those authorized to give the public
+     permission to use material in ways otherwise restricted by
+     copyright and certain other rights. Our licenses are
+     irrevocable. Licensors should read and understand the terms
+     and conditions of the license they choose before applying it.
+     Licensors should also secure all rights necessary before
+     applying our licenses so that the public can reuse the
+     material as expected. Licensors should clearly mark any
+     material not subject to the license. This includes other CC-
+     licensed material, or material used under an exception or
+     limitation to copyright. More considerations for licensors:
+    wiki.creativecommons.org/Considerations_for_licensors
+
+     Considerations for the public: By using one of our public
+     licenses, a licensor grants the public permission to use the
+     licensed material under specified terms and conditions. If
+     the licensor's permission is not necessary for any reason--for
+     example, because of any applicable exception or limitation to
+     copyright--then that use is not regulated by the license. Our
+     licenses grant only permissions under copyright and certain
+     other rights that a licensor has authority to grant. Use of
+     the licensed material may still be restricted for other
+     reasons, including because others have copyright or other
+     rights in the material. A licensor may make special requests,
+     such as asking that all changes be marked or described.
+     Although not required by our licenses, you are encouraged to
+     respect those requests where reasonable. More_considerations
+     for the public:
+    wiki.creativecommons.org/Considerations_for_licensees
+
+=======================================================================
+
+Creative Commons Attribution-ShareAlike 4.0 International Public
+License
+
+By exercising the Licensed Rights (defined below), You accept and agree
+to be bound by the terms and conditions of this Creative Commons
+Attribution-ShareAlike 4.0 International Public License ("Public
+License"). To the extent this Public License may be interpreted as a
+contract, You are granted the Licensed Rights in consideration of Your
+acceptance of these terms and conditions, and the Licensor grants You
+such rights in consideration of benefits the Licensor receives from
+making the Licensed Material available under these terms and
+conditions.
+
+
+Section 1 -- Definitions.
+
+  a. Adapted Material means material subject to Copyright and Similar
+     Rights that is derived from or based upon the Licensed Material
+     and in which the Licensed Material is translated, altered,
+     arranged, transformed, or otherwise modified in a manner requiring
+     permission under the Copyright and Similar Rights held by the
+     Licensor. For purposes of this Public License, where the Licensed
+     Material is a musical work, performance, or sound recording,
+     Adapted Material is always produced where the Licensed Material is
+     synched in timed relation with a moving image.
+
+  b. Adapter's License means the license You apply to Your Copyright
+     and Similar Rights in Your contributions to Adapted Material in
+     accordance with the terms and conditions of this Public License.
+
+  c. BY-SA Compatible License means a license listed at
+     creativecommons.org/compatiblelicenses, approved by Creative
+     Commons as essentially the equivalent of this Public License.
+
+  d. Copyright and Similar Rights means copyright and/or similar rights
+     closely related to copyright including, without limitation,
+     performance, broadcast, sound recording, and Sui Generis Database
+     Rights, without regard to how the rights are labeled or
+     categorized. For purposes of this Public License, the rights
+     specified in Section 2(b)(1)-(2) are not Copyright and Similar
+     Rights.
+
+  e. Effective Technological Measures means those measures that, in the
+     absence of proper authority, may not be circumvented under laws
+     fulfilling obligations under Article 11 of the WIPO Copyright
+     Treaty adopted on December 20, 1996, and/or similar international
+     agreements.
+
+  f. Exceptions and Limitations means fair use, fair dealing, and/or
+     any other exception or limitation to Copyright and Similar Rights
+     that applies to Your use of the Licensed Material.
+
+  g. License Elements means the license attributes listed in the name
+     of a Creative Commons Public License. The License Elements of this
+     Public License are Attribution and ShareAlike.
+
+  h. Licensed Material means the artistic or literary work, database,
+     or other material to which the Licensor applied this Public
+     License.
+
+  i. Licensed Rights means the rights granted to You subject to the
+     terms and conditions of this Public License, which are limited to
+     all Copyright and Similar Rights that apply to Your use of the
+     Licensed Material and that the Licensor has authority to license.
+
+  j. Licensor means the individual(s) or entity(ies) granting rights
+     under this Public License.
+
+  k. Share means to provide material to the public by any means or
+     process that requires permission under the Licensed Rights, such
+     as reproduction, public display, public performance, distribution,
+     dissemination, communication, or importation, and to make material
+     available to the public including in ways that members of the
+     public may access the material from a place and at a time
+     individually chosen by them.
+
+  l. Sui Generis Database Rights means rights other than copyright
+     resulting from Directive 96/9/EC of the European Parliament and of
+     the Council of 11 March 1996 on the legal protection of databases,
+     as amended and/or succeeded, as well as other essentially
+     equivalent rights anywhere in the world.
+
+  m. You means the individual or entity exercising the Licensed Rights
+     under this Public License. Your has a corresponding meaning.
+
+
+Section 2 -- Scope.
+
+  a. License grant.
+
+       1. Subject to the terms and conditions of this Public License,
+          the Licensor hereby grants You a worldwide, royalty-free,
+          non-sublicensable, non-exclusive, irrevocable license to
+          exercise the Licensed Rights in the Licensed Material to:
+
+            a. reproduce and Share the Licensed Material, in whole or
+               in part; and
+
+            b. produce, reproduce, and Share Adapted Material.
+
+       2. Exceptions and Limitations. For the avoidance of doubt, where
+          Exceptions and Limitations apply to Your use, this Public
+          License does not apply, and You do not need to comply with
+          its terms and conditions.
+
+       3. Term. The term of this Public License is specified in Section
+          6(a).
+
+       4. Media and formats; technical modifications allowed. The
+          Licensor authorizes You to exercise the Licensed Rights in
+          all media and formats whether now known or hereafter created,
+          and to make technical modifications necessary to do so. The
+          Licensor waives and/or agrees not to assert any right or
+          authority to forbid You from making technical modifications
+          necessary to exercise the Licensed Rights, including
+          technical modifications necessary to circumvent Effective
+          Technological Measures. For purposes of this Public License,
+          simply making modifications authorized by this Section 2(a)
+          (4) never produces Adapted Material.
+
+       5. Downstream recipients.
+
+            a. Offer from the Licensor -- Licensed Material. Every
+               recipient of the Licensed Material automatically
+               receives an offer from the Licensor to exercise the
+               Licensed Rights under the terms and conditions of this
+               Public License.
+
+            b. Additional offer from the Licensor -- Adapted Material.
+               Every recipient of Adapted Material from You
+               automatically receives an offer from the Licensor to
+               exercise the Licensed Rights in the Adapted Material
+               under the conditions of the Adapter's License You apply.
+
+            c. No downstream restrictions. You may not offer or impose
+               any additional or different terms or conditions on, or
+               apply any Effective Technological Measures to, the
+               Licensed Material if doing so restricts exercise of the
+               Licensed Rights by any recipient of the Licensed
+               Material.
+
+       6. No endorsement. Nothing in this Public License constitutes or
+          may be construed as permission to assert or imply that You
+          are, or that Your use of the Licensed Material is, connected
+          with, or sponsored, endorsed, or granted official status by,
+          the Licensor or others designated to receive attribution as
+          provided in Section 3(a)(1)(A)(i).
+
+  b. Other rights.
+
+       1. Moral rights, such as the right of integrity, are not
+          licensed under this Public License, nor are publicity,
+          privacy, and/or other similar personality rights; however, to
+          the extent possible, the Licensor waives and/or agrees not to
+          assert any such rights held by the Licensor to the limited
+          extent necessary to allow You to exercise the Licensed
+          Rights, but not otherwise.
+
+       2. Patent and trademark rights are not licensed under this
+          Public License.
+
+       3. To the extent possible, the Licensor waives any right to
+          collect royalties from You for the exercise of the Licensed
+          Rights, whether directly or through a collecting society
+          under any voluntary or waivable statutory or compulsory
+          licensing scheme. In all other cases the Licensor expressly
+          reserves any right to collect such royalties.
+
+
+Section 3 -- License Conditions.
+
+Your exercise of the Licensed Rights is expressly made subject to the
+following conditions.
+
+  a. Attribution.
+
+       1. If You Share the Licensed Material (including in modified
+          form), You must:
+
+            a. retain the following if it is supplied by the Licensor
+               with the Licensed Material:
+
+                 i. identification of the creator(s) of the Licensed
+                    Material and any others designated to receive
+                    attribution, in any reasonable manner requested by
+                    the Licensor (including by pseudonym if
+                    designated);
+
+                ii. a copyright notice;
+
+               iii. a notice that refers to this Public License;
+
+                iv. a notice that refers to the disclaimer of
+                    warranties;
+
+                 v. a URI or hyperlink to the Licensed Material to the
+                    extent reasonably practicable;
+
+            b. indicate if You modified the Licensed Material and
+               retain an indication of any previous modifications; and
+
+            c. indicate the Licensed Material is licensed under this
+               Public License, and include the text of, or the URI or
+               hyperlink to, this Public License.
+
+       2. You may satisfy the conditions in Section 3(a)(1) in any
+          reasonable manner based on the medium, means, and context in
+          which You Share the Licensed Material. For example, it may be
+          reasonable to satisfy the conditions by providing a URI or
+          hyperlink to a resource that includes the required
+          information.
+
+       3. If requested by the Licensor, You must remove any of the
+          information required by Section 3(a)(1)(A) to the extent
+          reasonably practicable.
+
+  b. ShareAlike.
+
+     In addition to the conditions in Section 3(a), if You Share
+     Adapted Material You produce, the following conditions also apply.
+
+       1. The Adapter's License You apply must be a Creative Commons
+          license with the same License Elements, this version or
+          later, or a BY-SA Compatible License.
+
+       2. You must include the text of, or the URI or hyperlink to, the
+          Adapter's License You apply. You may satisfy this condition
+          in any reasonable manner based on the medium, means, and
+          context in which You Share Adapted Material.
 
-           3. You may not offer or impose any additional or different terms
-              or conditions on, or apply any Effective Technological
-              Measures to, Adapted Material that restrict exercise of the
-              rights granted under the Adapter's License You apply.
+       3. You may not offer or impose any additional or different terms
+          or conditions on, or apply any Effective Technological
+          Measures to, Adapted Material that restrict exercise of the
+          rights granted under the Adapter's License You apply.
 
 
-    Section 4 -- Sui Generis Database Rights.
+Section 4 -- Sui Generis Database Rights.
 
-    Where the Licensed Rights include Sui Generis Database Rights that
-    apply to Your use of the Licensed Material:
-
-      a. for the avoidance of doubt, Section 2(a)(1) grants You the right
-         to extract, reuse, reproduce, and Share all or a substantial
-         portion of the contents of the database;
-
-      b. if You include all or a substantial portion of the database
-         contents in a database in which You have Sui Generis Database
-         Rights, then the database in which You have Sui Generis Database
-         Rights (but not its individual contents) is Adapted Material,
-
-         including for purposes of Section 3(b); and
-      c. You must comply with the conditions in Section 3(a) if You Share
-         all or a substantial portion of the contents of the database.
+Where the Licensed Rights include Sui Generis Database Rights that
+apply to Your use of the Licensed Material:
+
+  a. for the avoidance of doubt, Section 2(a)(1) grants You the right
+     to extract, reuse, reproduce, and Share all or a substantial
+     portion of the contents of the database;
+
+  b. if You include all or a substantial portion of the database
+     contents in a database in which You have Sui Generis Database
+     Rights, then the database in which You have Sui Generis Database
+     Rights (but not its individual contents) is Adapted Material,
+
+     including for purposes of Section 3(b); and
+  c. You must comply with the conditions in Section 3(a) if You Share
+     all or a substantial portion of the contents of the database.
 
-    For the avoidance of doubt, this Section 4 supplements and does not
-    replace Your obligations under this Public License where the Licensed
-    Rights include other Copyright and Similar Rights.
+For the avoidance of doubt, this Section 4 supplements and does not
+replace Your obligations under this Public License where the Licensed
+Rights include other Copyright and Similar Rights.
 
 
-    Section 5 -- Disclaimer of Warranties and Limitation of Liability.
-
-      a. UNLESS OTHERWISE SEPARATELY UNDERTAKEN BY THE LICENSOR, TO THE
-         EXTENT POSSIBLE, THE LICENSOR OFFERS THE LICENSED MATERIAL AS-IS
-         AND AS-AVAILABLE, AND MAKES NO REPRESENTATIONS OR WARRANTIES OF
-         ANY KIND CONCERNING THE LICENSED MATERIAL, WHETHER EXPRESS,
-         IMPLIED, STATUTORY, OR OTHER. THIS INCLUDES, WITHOUT LIMITATION,
-         WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR
-         PURPOSE, NON-INFRINGEMENT, ABSENCE OF LATENT OR OTHER DEFECTS,
-         ACCURACY, OR THE PRESENCE OR ABSENCE OF ERRORS, WHETHER OR NOT
-         KNOWN OR DISCOVERABLE. WHERE DISCLAIMERS OF WARRANTIES ARE NOT
-         ALLOWED IN FULL OR IN PART, THIS DISCLAIMER MAY NOT APPLY TO YOU.
-
-      b. TO THE EXTENT POSSIBLE, IN NO EVENT WILL THE LICENSOR BE LIABLE
-         TO YOU ON ANY LEGAL THEORY (INCLUDING, WITHOUT LIMITATION,
-         NEGLIGENCE) OR OTHERWISE FOR ANY DIRECT, SPECIAL, INDIRECT,
-         INCIDENTAL, CONSEQUENTIAL, PUNITIVE, EXEMPLARY, OR OTHER LOSSES,
-         COSTS, EXPENSES, OR DAMAGES ARISING OUT OF THIS PUBLIC LICENSE OR
-         USE OF THE LICENSED MATERIAL, EVEN IF THE LICENSOR HAS BEEN
-         ADVISED OF THE POSSIBILITY OF SUCH LOSSES, COSTS, EXPENSES, OR
-         DAMAGES. WHERE A LIMITATION OF LIABILITY IS NOT ALLOWED IN FULL OR
-         IN PART, THIS LIMITATION MAY NOT APPLY TO YOU.
-
-      c. The disclaimer of warranties and limitation of liability provided
-         above shall be interpreted in a manner that, to the extent
-         possible, most closely approximates an absolute disclaimer and
-         waiver of all liability.
-
-
-    Section 6 -- Term and Termination.
-
-      a. This Public License applies for the term of the Copyright and
-         Similar Rights licensed here. However, if You fail to comply with
-         this Public License, then Your rights under this Public License
-         terminate automatically.
-
-      b. Where Your right to use the Licensed Material has terminated under
-         Section 6(a), it reinstates:
-
-           1. automatically as of the date the violation is cured, provided
-              it is cured within 30 days of Your discovery of the
-              violation; or
-
-           2. upon express reinstatement by the Licensor.
-
-         For the avoidance of doubt, this Section 6(b) does not affect any
-         right the Licensor may have to seek remedies for Your violations
-         of this Public License.
-
-      c. For the avoidance of doubt, the Licensor may also offer the
-         Licensed Material under separate terms or conditions or stop
-         distributing the Licensed Material at any time; however, doing so
-         will not terminate this Public License.
-
-      d. Sections 1, 5, 6, 7, and 8 survive termination of this Public
-         License.
-
-
-    Section 7 -- Other Terms and Conditions.
-
-      a. The Licensor shall not be bound by any additional or different
-         terms or conditions communicated by You unless expressly agreed.
-
-      b. Any arrangements, understandings, or agreements regarding the
-         Licensed Material not stated herein are separate from and
-         independent of the terms and conditions of this Public License.
-
-
-    Section 8 -- Interpretation.
-
-      a. For the avoidance of doubt, this Public License does not, and
-         shall not be interpreted to, reduce, limit, restrict, or impose
-         conditions on any use of the Licensed Material that could lawfully
-         be made without permission under this Public License.
-
-      b. To the extent possible, if any provision of this Public License is
-         deemed unenforceable, it shall be automatically reformed to the
-         minimum extent necessary to make it enforceable. If the provision
-         cannot be reformed, it shall be severed from this Public License
-         without affecting the enforceability of the remaining terms and
-         conditions.
-
-      c. No term or condition of this Public License will be waived and no
-         failure to comply consented to unless expressly agreed to by the
-         Licensor.
-
-      d. Nothing in this Public License constitutes or may be interpreted
-         as a limitation upon, or waiver of, any privileges and immunities
-         that apply to the Licensor or You, including from the legal
-         processes of any jurisdiction or authority.
-
-
-    =======================================================================
-
-    Creative Commons is not a party to its public
-    licenses. Notwithstanding, Creative Commons may elect to apply one of
-    its public licenses to material it publishes and in those instances
-    will be considered the “Licensor.” The text of the Creative Commons
-    public licenses is dedicated to the public domain under the CC0 Public
-    Domain Dedication. Except for the limited purpose of indicating that
-    material is shared under a Creative Commons public license or as
-    otherwise permitted by the Creative Commons policies published at
-    creativecommons.org/policies, Creative Commons does not authorize the
-    use of the trademark "Creative Commons" or any other trademark or logo
-    of Creative Commons without its prior written consent including,
-    without limitation, in connection with any unauthorized modifications
-    to any of its public licenses or any other arrangements,
-    understandings, or agreements concerning use of licensed material. For
-    the avoidance of doubt, this paragraph does not form part of the
-    public licenses.
-
-    Creative Commons may be contacted at creativecommons.org.
-
-[1] Es posible que sean necesario reiniciar el pc antes de seguir
-
-[2] TODO: Pasarme a *scikit-learn*
-
-[3] TODO: conda install jupyter
-
-[4] Test Driven Development
+Section 5 -- Disclaimer of Warranties and Limitation of Liability.
+
+  a. UNLESS OTHERWISE SEPARATELY UNDERTAKEN BY THE LICENSOR, TO THE
+     EXTENT POSSIBLE, THE LICENSOR OFFERS THE LICENSED MATERIAL AS-IS
+     AND AS-AVAILABLE, AND MAKES NO REPRESENTATIONS OR WARRANTIES OF
+     ANY KIND CONCERNING THE LICENSED MATERIAL, WHETHER EXPRESS,
+     IMPLIED, STATUTORY, OR OTHER. THIS INCLUDES, WITHOUT LIMITATION,
+     WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR
+     PURPOSE, NON-INFRINGEMENT, ABSENCE OF LATENT OR OTHER DEFECTS,
+     ACCURACY, OR THE PRESENCE OR ABSENCE OF ERRORS, WHETHER OR NOT
+     KNOWN OR DISCOVERABLE. WHERE DISCLAIMERS OF WARRANTIES ARE NOT
+     ALLOWED IN FULL OR IN PART, THIS DISCLAIMER MAY NOT APPLY TO YOU.
+
+  b. TO THE EXTENT POSSIBLE, IN NO EVENT WILL THE LICENSOR BE LIABLE
+     TO YOU ON ANY LEGAL THEORY (INCLUDING, WITHOUT LIMITATION,
+     NEGLIGENCE) OR OTHERWISE FOR ANY DIRECT, SPECIAL, INDIRECT,
+     INCIDENTAL, CONSEQUENTIAL, PUNITIVE, EXEMPLARY, OR OTHER LOSSES,
+     COSTS, EXPENSES, OR DAMAGES ARISING OUT OF THIS PUBLIC LICENSE OR
+     USE OF THE LICENSED MATERIAL, EVEN IF THE LICENSOR HAS BEEN
+     ADVISED OF THE POSSIBILITY OF SUCH LOSSES, COSTS, EXPENSES, OR
+     DAMAGES. WHERE A LIMITATION OF LIABILITY IS NOT ALLOWED IN FULL OR
+     IN PART, THIS LIMITATION MAY NOT APPLY TO YOU.
+
+  c. The disclaimer of warranties and limitation of liability provided
+     above shall be interpreted in a manner that, to the extent
+     possible, most closely approximates an absolute disclaimer and
+     waiver of all liability.
+
+
+Section 6 -- Term and Termination.
+
+  a. This Public License applies for the term of the Copyright and
+     Similar Rights licensed here. However, if You fail to comply with
+     this Public License, then Your rights under this Public License
+     terminate automatically.
+
+  b. Where Your right to use the Licensed Material has terminated under
+     Section 6(a), it reinstates:
+
+       1. automatically as of the date the violation is cured, provided
+          it is cured within 30 days of Your discovery of the
+          violation; or
+
+       2. upon express reinstatement by the Licensor.
+
+     For the avoidance of doubt, this Section 6(b) does not affect any
+     right the Licensor may have to seek remedies for Your violations
+     of this Public License.
+
+  c. For the avoidance of doubt, the Licensor may also offer the
+     Licensed Material under separate terms or conditions or stop
+     distributing the Licensed Material at any time; however, doing so
+     will not terminate this Public License.
+
+  d. Sections 1, 5, 6, 7, and 8 survive termination of this Public
+     License.
+
+
+Section 7 -- Other Terms and Conditions.
+
+  a. The Licensor shall not be bound by any additional or different
+     terms or conditions communicated by You unless expressly agreed.
+
+  b. Any arrangements, understandings, or agreements regarding the
+     Licensed Material not stated herein are separate from and
+     independent of the terms and conditions of this Public License.
+
+
+Section 8 -- Interpretation.
+
+  a. For the avoidance of doubt, this Public License does not, and
+     shall not be interpreted to, reduce, limit, restrict, or impose
+     conditions on any use of the Licensed Material that could lawfully
+     be made without permission under this Public License.
+
+  b. To the extent possible, if any provision of this Public License is
+     deemed unenforceable, it shall be automatically reformed to the
+     minimum extent necessary to make it enforceable. If the provision
+     cannot be reformed, it shall be severed from this Public License
+     without affecting the enforceability of the remaining terms and
+     conditions.
+
+  c. No term or condition of this Public License will be waived and no
+     failure to comply consented to unless expressly agreed to by the
+     Licensor.
+
+  d. Nothing in this Public License constitutes or may be interpreted
+     as a limitation upon, or waiver of, any privileges and immunities
+     that apply to the Licensor or You, including from the legal
+     processes of any jurisdiction or authority.
+
+
+=======================================================================
+
+Creative Commons is not a party to its public
+licenses. Notwithstanding, Creative Commons may elect to apply one of
+its public licenses to material it publishes and in those instances
+will be considered the “Licensor.” The text of the Creative Commons
+public licenses is dedicated to the public domain under the CC0 Public
+Domain Dedication. Except for the limited purpose of indicating that
+material is shared under a Creative Commons public license or as
+otherwise permitted by the Creative Commons policies published at
+creativecommons.org/policies, Creative Commons does not authorize the
+use of the trademark "Creative Commons" or any other trademark or logo
+of Creative Commons without its prior written consent including,
+without limitation, in connection with any unauthorized modifications
+to any of its public licenses or any other arrangements,
+understandings, or agreements concerning use of licensed material. For
+the avoidance of doubt, this paragraph does not form part of the
+public licenses.
+
+Creative Commons may be contacted at creativecommons.org.
+```
+
+1.  Es posible que sean necesario reiniciar el pc antes de seguir
+
+2.  TODO: Pasarme a *scikit-learn*
+
+3.  TODO: conda install jupyter
+
+4.  Test Driven Development

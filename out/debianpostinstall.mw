@@ -1432,6 +1432,22 @@ Si queremos instalar las últimas versiones disponibles (es lo que yo hice) pode
 dpkg -i mysql-apt-config_0.7.3-1_all.deb
 apt-get update
 apt-get install mysql-community-server</pre>
+'''¡ATENCION!''' La nueva versión 5.7 de MySQL (en mi caso la versión instalada es la 5.7.20) activa por defecto una serie de chequeos que en versiones anteriores no estaban activados. Esto provoca que programas que funcionaban sin problemas en versiones anteriores dejen de funcionar tras la actualización.
+
+Antes de pasarte un par de dias depurando tus programas, desactiva los nuevos chequeos y comprueba si funcionan:
+
+Creamos un fichero <code>/etc/mysql/conf.d/disable_strict_mode.cnf</code> con el siguiente contenido:
+
+<pre>[mysqld]
+sql_mode=IGNORE_SPACE,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION</pre>
+Y rearrancamos el servidor ''MySQL'': <code>sudo service mysql restart</code>
+
+Un par de referencias interesantes con respecto a este tema:
+
+* [https://serverpilot.io/community/articles/how-to-disable-strict-mode-in-mysql-5-7.html La receta que he seguido]
+* [https://www.digitalocean.com/community/tutorials/how-to-prepare-for-your-mysql-5-7-upgrade Una explicación más completa]
+* [https://mariadb.com/kb/en/library/sql-mode/ Para MariaDB]
+
 ==== Actualización ====
 
 Cambiamos el fichero ''/etc/mysql.conf.d/mysqld.cnf''
